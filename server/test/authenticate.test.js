@@ -11,10 +11,13 @@ describe('testing user validation functionality', () => {
         const password = 'a1234';
         const testUser = {
             type: 'student',
+            accessToken: 'A12345',
+            studentId: 1234,
             firstname: 'John',
             lastname: 'Doe',
             email: 'johndoe@gmail.com',
-            accessToken: 'A12345'
+            phone: "5191234567",
+            schoolId: 1
         };
 
         // Act
