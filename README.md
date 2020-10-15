@@ -1,4 +1,4 @@
-# MSCI342-Term-Project
+# MSCI342-Term-Project (ConnectMe)
 Group project for MSCI 342: Principles of Software Engineering.
 
 The overall problem the team aims to address is the non-confidentiality and inefficient process of booking appointments with mental health support staff members. 
