@@ -1,6 +1,8 @@
 # MSCI342-Term-Project
 Group project for MSCI 342: Principles of Software Engineering.
 
+The overall problem the team aims to address is the non-confidentiality and inefficient process of booking appointments with mental health support staff members. 
+
 ## Backend Code File Structure (server)
 1. migrations: all the required database changes, such as creating a new table
 2. lib: general server methods, such as connecting to the database
