@@ -137,5 +137,20 @@ describe('testing valid appointment booking parameters', () => {
         // Assert
         expect(isSuccessfullyInserted).toBe(true);
     });
+
+    test('passing in valid values for all fields', async () => {
+        // Arrange
+        const testStudentId = 12345678;
+        const testWorkerTimeslotId = 1;
+        const testPurpose = "Mental Health Discussion";
+        const testStudentNotes = "I am having a really hard time balancing school and leisure time. Not sure if it is due to poor time management skills or another factor.";
+        const testWorkerComments = "Please prepare a list of upcoming assignments and tests. We can work to prioritize them during our session.";
+
+        // Act
+        const isSuccessfullyInserted = await appointmentHandler.bookAppointment(testStudentId, testWorkerTimeslotId, testPurpose, testStudentNotes, testWorkerComments);
+
+        // Assert
+        expect(isSuccessfullyInserted).toBe(true);
+    });
 });
 
