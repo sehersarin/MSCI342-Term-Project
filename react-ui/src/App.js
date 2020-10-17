@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import LogIn from "./components/Layouts/LogIn"
 import Dashboard from "./components/Layouts/Dashboard"
+import Signup from "./components/Layouts/Signup"
 import './App.css'
 import {
   BrowserRouter as Router,
@@ -24,12 +25,16 @@ class App extends Component {
         <Route path="/login" component={LogIn}>
           {/* <LogIn /> */}
         </Route>
+        <Route path="/signup" component={LogIn}>
+          {/* <LogIn /> */}
+        </Route>
         {/* <ProtectedRoute path="/dashboard/" component={Dashboard}> */}
           {/* <Dashboard /> */}
         {/* </ProtectedRoute> */}
         <Route exact path="/dashboard/:id" component={Dashboard}>
           {/* removed exact path  for both top and bottom*/}
           {/* <Redirect from="/" to="dashboard/" /> */}
+
         </Route>
         <Route path="/dashboard/" component={Dashboard}>
           {/* removed exact path  for both top and bottom*/}
