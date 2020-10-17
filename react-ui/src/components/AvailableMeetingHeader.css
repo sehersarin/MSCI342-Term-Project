@@ -1,0 +1,23 @@
+.appHeader {
+    height: 40px;
+    background-color: rgba(209, 134, 209, 0.918);
+}
+
+.HeaderText1 {
+   
+  position: absolute;
+  top: 8px;
+  right: 70px;
+  font-size: 18px;
+  display:block;
+  
+}
+
+.HeaderText2 { 
+    position: absolute;
+    font-size: 18px;
+    top: 8px;
+    right: 270px;
+    display:block;
+    
+  }

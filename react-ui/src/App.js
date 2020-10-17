@@ -8,6 +8,7 @@ import {
   Route,
   Redirect
 } from "react-router-dom";
+import AvailableMeetingHeader from './components/AvailableMeetingHeader';
 
 
 class App extends Component {
@@ -19,8 +20,10 @@ class App extends Component {
     
     return (
       <div className="App">
+        <AvailableMeetingHeader/>
         <Router>
       <Switch>
+        <Route path = "/AvailableMeetingHeader" Component = {AvailableMeetingHeader}></Route> {/* this is test code line*/}
         <Route path="/login" component={LogIn}>
           {/* <LogIn /> */}
         </Route>
@@ -38,6 +41,7 @@ class App extends Component {
         <Route path="/dashboard/" component={Dashboard}>
           {/* removed exact path  for both top and bottom*/}
           {/* <Redirect from="/" to="dashboard/" /> */}
+
         </Route>
         <Route path="*">
           <Redirect from="/" to="dashboard/" />
