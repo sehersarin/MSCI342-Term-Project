@@ -6,7 +6,8 @@ import "./SignupForm.css"
 import dashboard from "./Layouts/Dashboard"
 import { Link } from 'react-router-dom';
 
-
+//This class is used to create a Sign-up component where users enter their name, email and password to create an account.
+//If they have previously made an account they can click on "I already have an account" and be redirected to the sign-in page.
 class SignupForm extends Component {
   constructor(props) {
     super(props);
@@ -73,7 +74,7 @@ render() {
                 value="Submit!" />
             </form>
             <br></br>
-            <Link to="/login" className="Signout">I already have an account</Link>
+            <Link to="/login" className="Signout">I already have an account</Link> 
            
            </Col>
           </Row>
