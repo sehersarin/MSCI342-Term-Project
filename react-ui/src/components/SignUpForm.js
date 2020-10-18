@@ -46,7 +46,18 @@ render() {
                   className ="InputFields" 
                   type="text" 
                   name="user_name"
-                  placeholder= "Enter Full Name" 
+                  size ="40"
+                  placeholder= "Enter First Name" 
+                  onChange={this.handleFormChange} />
+                </label>
+                <br></br>
+                <label>
+                <input 
+                  className ="InputFields" 
+                  type="text" 
+                  name="user_name_last"
+                  size ="40"
+                  placeholder= "Enter Last Name" 
                   onChange={this.handleFormChange} />
                 </label>
                 <br></br>
@@ -55,7 +66,18 @@ render() {
                   className ="InputFields" 
                   type="text" 
                   name="user_id"
+                  size ="320"
                   placeholder= "Enter Email Address" 
+                  onChange={this.handleFormChange} />
+                </label>
+                <br></br>
+                <label>
+                  <input 
+                  className ="InputFields" 
+                  type="text" 
+                  name="user_phone"
+                  size ="20"
+                  placeholder= "Enter Phone Number" 
                   onChange={this.handleFormChange} />
                 </label>
                 <br></br>
@@ -64,6 +86,7 @@ render() {
                   className ="InputFields" 
                   name="user_password"
                   type="password" 
+                  size ="40"
                   placeholder= "Enter Password" 
                   onChange={this.handleFormChange} />
                 </label>
