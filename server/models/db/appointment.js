@@ -3,7 +3,7 @@ const _ = require('lodash');
 const { db } = require('../../lib/connection');
 
 const Tables = require('../../constants/tables.json');
-const AppointmentStatus = require('../../constants/appointment-status.json');
+const AppointmentStatus = require('../../constants/appointmentStatus.json');
 
 // This method inserts an appointment entry given specific information.
 async function insertAppointment(studentId, workerTimeslotId, purpose, studentNotes, workerComments) {
