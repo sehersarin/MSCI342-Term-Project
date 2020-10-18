@@ -1,5 +1,5 @@
 {
-    "appointment": "Appointment"
+    "appointment": "Appointment",
     "student": "Student", 
     "worker": "Service_Worker"
 }
