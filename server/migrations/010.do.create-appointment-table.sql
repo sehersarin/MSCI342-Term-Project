@@ -2,7 +2,7 @@ CREATE TABLE Appointment (
     appointment_id SERIAL NOT NULL,
     student_id INT NOT NULL,
     worker_timeslot_id INT NOT NULL, 
-    purpose VARCHAR(300),
+    purpose VARCHAR(300) NOT NULL CHECK (char_length(purpose) > 0),
     student_notes VARCHAR(300),
     worker_comments VARCHAR(300),
     status VARCHAR(300),

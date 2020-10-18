@@ -25,7 +25,7 @@ router.post('/api/book-appointment', async (req, res) => {
     const paramSchema = Joi.object({
         studentId: Joi.number().integer().required(),
         workerTimeslotId: Joi.number().integer().required(),
-        purpose: Joi.string().allow(null).max(300),
+        purpose: Joi.string().max(300).required(),
         studentNotes: Joi.string().allow(null).max(300),
         workerComments: Joi.string().allow(null).max(300)
     });
