@@ -5,13 +5,25 @@ describe('testing invalid appointment booking parameters', () => {
         jest.resetModules(); // Clears any cache between tests.
     });
 
+    test('rejection of no parameters', async () => {
+        // Arrange
+        // No test variables need to be initialized.
+
+        // Act
+        const isSuccessfullyInserted = await appointmentHandler.bookAppointment();
+
+        // Assert
+        expect(isSuccessfullyInserted).toBe(false);
+    });
+
     test('rejection of null value for required studentId parameter', async () => {
         // Arrange
         const testStudentId = null;
         const testWorkerTimeslotId = 1;
+        const testPurpose = "Mental Health Discussion";
 
         // Act
-        const isSuccessfullyInserted = await appointmentHandler.bookAppointment(testStudentId, testWorkerTimeslotId);
+        const isSuccessfullyInserted = await appointmentHandler.bookAppointment(testStudentId, testWorkerTimeslotId, testPurpose);
 
         // Assert
         expect(isSuccessfullyInserted).toBe(false);
@@ -21,9 +33,23 @@ describe('testing invalid appointment booking parameters', () => {
         // Arrange
         const testStudentId = 12345678;
         const testWorkerTimeslotId = null;
+        const testPurpose = "Mental Health Discussion";
 
         // Act
-        const isSuccessfullyInserted = await appointmentHandler.bookAppointment(testStudentId, testWorkerTimeslotId);
+        const isSuccessfullyInserted = await appointmentHandler.bookAppointment(testStudentId, testWorkerTimeslotId, testPurpose);
+
+        // Assert
+        expect(isSuccessfullyInserted).toBe(false);
+    });
+
+    test('rejection of null value for required purpose parameter', async () => {
+        // Arrange
+        const testStudentId = 12345678;
+        const testWorkerTimeslotId = 1;
+        const testPurpose = null;
+
+        // Act
+        const isSuccessfullyInserted = await appointmentHandler.bookAppointment(testStudentId, testWorkerTimeslotId, testPurpose);
 
         // Assert
         expect(isSuccessfullyInserted).toBe(false);
@@ -33,9 +59,10 @@ describe('testing invalid appointment booking parameters', () => {
         // Arrange
         const testStudentId = '';
         const testWorkerTimeslotId = 1;
+        const testPurpose = "Mental Health Discussion";
 
         // Act
-        const isSuccessfullyInserted = await appointmentHandler.bookAppointment(testStudentId, testWorkerTimeslotId);
+        const isSuccessfullyInserted = await appointmentHandler.bookAppointment(testStudentId, testWorkerTimeslotId, testPurpose);
 
         // Assert
         expect(isSuccessfullyInserted).toBe(false);
@@ -45,9 +72,23 @@ describe('testing invalid appointment booking parameters', () => {
         // Arrange
         const testStudentId = 12345678;
         const testWorkerTimeslotId = '';
+        const testPurpose = "Mental Health Discussion";
 
         // Act
-        const isSuccessfullyInserted = await appointmentHandler.bookAppointment(testStudentId, testWorkerTimeslotId);
+        const isSuccessfullyInserted = await appointmentHandler.bookAppointment(testStudentId, testWorkerTimeslotId, testPurpose);
+
+        // Assert
+        expect(isSuccessfullyInserted).toBe(false);
+    });
+
+    test('rejection of empty string value for required purpose parameter', async () => {
+        // Arrange
+        const testStudentId = 12345678;
+        const testWorkerTimeslotId = 1;
+        const testPurpose = "";
+
+        // Act
+        const isSuccessfullyInserted = await appointmentHandler.bookAppointment(testStudentId, testWorkerTimeslotId, testPurpose);
 
         // Assert
         expect(isSuccessfullyInserted).toBe(false);
@@ -57,9 +98,10 @@ describe('testing invalid appointment booking parameters', () => {
         // Arrange
         const testStudentId = 0;
         const testWorkerTimeslotId = 1;
+        const testPurpose = "Mental Health Discussion";
 
         // Act
-        const isSuccessfullyInserted = await appointmentHandler.bookAppointment(testStudentId, testWorkerTimeslotId);
+        const isSuccessfullyInserted = await appointmentHandler.bookAppointment(testStudentId, testWorkerTimeslotId, testPurpose);
 
         // Assert
         expect(isSuccessfullyInserted).toBe(false);
@@ -69,9 +111,10 @@ describe('testing invalid appointment booking parameters', () => {
         // Arrange
         const testStudentId = 12345678;
         const testWorkerTimeslotId = 0;
+        const testPurpose = "Mental Health Discussion";
 
         // Act
-        const isSuccessfullyInserted = await appointmentHandler.bookAppointment(testStudentId, testWorkerTimeslotId);
+        const isSuccessfullyInserted = await appointmentHandler.bookAppointment(testStudentId, testWorkerTimeslotId, testPurpose);
 
         // Assert
         expect(isSuccessfullyInserted).toBe(false);
@@ -88,7 +131,7 @@ describe('testing valid appointment booking parameters', () => {
         // Arrange
         const testStudentId = 12345678;
         const testWorkerTimeslotId = 1;
-        const testPurpose = "";
+        const testPurpose = "Mental Health Discussion";
         const testStudentNotes = "";
         const testWorkerComments = "";
 
@@ -103,7 +146,7 @@ describe('testing valid appointment booking parameters', () => {
         // Arrange
         const testStudentId = 12345678;
         const testWorkerTimeslotId = 1;
-        const testPurpose = null;
+        const testPurpose = "Mental Health Discussion";
         const testStudentNotes = null;
         const testWorkerComments = null;
 
@@ -118,9 +161,10 @@ describe('testing valid appointment booking parameters', () => {
         // Arrange
         const testStudentId = 12345678;
         const testWorkerTimeslotId = 1;
+        const testPurpose = "Mental Health Discussion";
 
         // Act
-        const isSuccessfullyInserted = await appointmentHandler.bookAppointment(testStudentId, testWorkerTimeslotId);
+        const isSuccessfullyInserted = await appointmentHandler.bookAppointment(testStudentId, testWorkerTimeslotId, testPurpose);
 
         // Assert
         expect(isSuccessfullyInserted).toBe(true);
@@ -130,9 +174,10 @@ describe('testing valid appointment booking parameters', () => {
         // Arrange
         const testStudentId = "12345678";
         const testWorkerTimeslotId = "1";
+        const testPurpose = "Mental Health Discussion";
 
         // Act
-        const isSuccessfullyInserted = await appointmentHandler.bookAppointment(testStudentId, testWorkerTimeslotId);
+        const isSuccessfullyInserted = await appointmentHandler.bookAppointment(testStudentId, testWorkerTimeslotId, testPurpose);
 
         // Assert
         expect(isSuccessfullyInserted).toBe(true);
