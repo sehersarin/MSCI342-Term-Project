@@ -41,16 +41,7 @@ render() {
           <Row>
            <Col sm={12} align="center">
            <form onSubmit={this.login}>
-           <label for="role"> Select Role: </label>
-          <select name="role" id="type">
-            <option value="student">Student</option>
-            <option value="worker">Guidance Counselor</option>
-            <option value="worker">Master of Social Work</option>
-            <option value="worker">Psychologist</option>
-            <option value="worker">Other</option>
-          </select>
-              <br></br>
-              <br></br>
+           
                 <label>
                 <input 
                   className ="InputFields" 
@@ -71,6 +62,26 @@ render() {
                   onChange={this.handleFormChange} />
                 </label>
                 <br></br>
+                <br></br>
+                <label for="role" className ="Title-Style2"> Select Role: </label>
+                <select name="role" className ="InputFields2" id="type">
+                  <option value="student">Student</option>
+                  <option value="worker1">Guidance Counselor</option>
+                  <option value="worker2">Master of Social Work</option>
+                  <option value="worker3">Psychologist</option>
+                  <option value="other">Other</option>
+                </select>
+                <br></br>
+                {/* <br></br> */}
+                  <label>
+                    <input 
+                      className ="InputFields" 
+                      type="text" 
+                      name="optional_role"
+                      placeholder= "Enter Role, If 'Other' Selected" 
+                      onChange={this.handleFormChange} />
+                    </label>
+                  <br></br>
                 <label>
                 <input 
                   className ="InputFields" 
@@ -109,6 +120,7 @@ render() {
                   placeholder= "Enter Password" 
                   onChange={this.handleFormChange} />
                 </label>
+                <br></br>
                 <br></br>
                 <input 
                 className ="SubmitButton" 
