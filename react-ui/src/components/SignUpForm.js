@@ -41,8 +41,18 @@ render() {
           <Row>
            <Col sm={12} align="center">
            <form onSubmit={this.login}>
-           <label>
-                  <input 
+           <label for="role"> Select Role: </label>
+          <select name="role" id="type">
+            <option value="student">Student</option>
+            <option value="worker">Guidance Counselor</option>
+            <option value="worker">Master of Social Work</option>
+            <option value="worker">Psychologist</option>
+            <option value="worker">Other</option>
+          </select>
+              <br></br>
+              <br></br>
+                <label>
+                <input 
                   className ="InputFields" 
                   type="text" 
                   name="user_name"
@@ -58,6 +68,15 @@ render() {
                   name="user_name_last"
                   size ="40"
                   placeholder= "Enter Last Name" 
+                  onChange={this.handleFormChange} />
+                </label>
+                <br></br>
+                <label>
+                <input 
+                  className ="InputFields" 
+                  type="text" 
+                  name="id_value"
+                  placeholder= "Enter Student or Worker ID" 
                   onChange={this.handleFormChange} />
                 </label>
                 <br></br>
