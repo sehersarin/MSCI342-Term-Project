@@ -1,7 +1,6 @@
 CREATE TABLE Service_Worker_School (
- school_id			INT NOT NULL,
- worker_id			INT NOT NULL,
- UNIQUE(school_id, worker_id),
+ school_id			INT NOT NULL UNIQUE,
+ worker_id			INT NOT NULL UNIQUE,
 
  PRIMARY KEY (school_id, worker_id),
 
