@@ -14,7 +14,7 @@ The overall problem the team aims to address is the non-confidentiality and inef
 
 5. tests: contains all the test code
 
-* Special Notes: 
+### Special Notes: 
 1. For naming the migrations, it needs to follow [version].[action].[optional-description].sql. Refer to [Postgrator documentation](https://www.npmjs.com/package/postgrator) for more details.
 2. Do NOT touch past migrations to avoid checksum errors. If corrections need to be made, create a new sql statement.
 3. Use single quotes for strings in the sql statements. 
@@ -26,11 +26,14 @@ The overall problem the team aims to address is the non-confidentiality and inef
 
 ```shell
 DATABASE_URL=postgres://<SUPERUSER>:<PASSWORD>@127.0.0.1:<PORT>/<DATABASENAME>
+NODE_PG_FORCE_NATIVE=1
 ```
+
 4. Add a folder named `.jest`. Inside this folder, create a file `setEnvVars.js`. Add the following in this file (and replace the capitalized values in <> when your values):
 
 ```js
 process.env.DATABASE_URL = "postgres://<SUPERUSER>:<PASSWORD>@127.0.0.1:<PORT>/<DATABASENAME>"
+process.env.NODE_PG_FORCE_NATIVE=1
 ```
 
 5. Run locally using either option a or b. The frontend code will run on port 3000 and the backend code will run on port 4000.
