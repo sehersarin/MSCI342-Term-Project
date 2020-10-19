@@ -23,8 +23,5 @@
     "url": "https://github.com/sehersarin/MSCI342-Term-Project/issues"
   },
   "homepage": "https://github.com/sehersarin/MSCI342-Term-Project#readme",
-  "dependencies": {
-    "joi": "^17.2.1",
-    "pg-native": "^3.0.0"
-  }
+  "dependencies": {}
 }

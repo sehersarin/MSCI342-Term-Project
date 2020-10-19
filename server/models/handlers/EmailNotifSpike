@@ -1,0 +1,23 @@
+Story 16 refers to sending an email to the student when the appointment is cancelled.
+This Spike Task demonstrates options for how to send emails as well as resources for assistance with implementation.
+
+Current Situation:
+- React JS apps are run on the client-side (in a browser) and the SMTP server needs to be set up on the server-side. 
+- In theory, you could provide your SMTP credentials on the client-side, directly in the code but will be exposing sensitive data
+which is not appropriate.
+
+Alternative:
+- External tool called: EmailJS to handle sending emails
+    - Lets you connect your email client in the browser, build a template and send it with the EmailJS API.
+    - There are lots of email services you can use it with, including Gmail and Outlook. 
+    - Pricings for each differ and most come with a free, limited tier.
+        - With emailJS you can send 200 free emails per month.
+
+Steps:
+    1. To get started, create an EmailJS account 
+    2. Start building your first templates with the built-in email template editor. 
+    3. Add EmailJS to your React project.
+    4. Setup email sending. 
+
+Great resource to look at before implementing:
+- https://blog.mailtrap.io/react-send-email/
