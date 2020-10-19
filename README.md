@@ -3,6 +3,16 @@ Group project for MSCI 342: Principles of Software Engineering.
 
 The overall problem the team aims to address is the non-confidentiality and inefficient process of booking appointments with mental health support staff members. 
 
+The link to access the system on a web browser: https://connectme-msci342.herokuapp.com/ 
+
+## Front-end Code File Structure
+1. components folder contain reusable components, and a Layouts folder for the layout of each page
+2. App.js contains the routing work at the basic level -you can nest routing within your components or Layouts page 
+3. each component should have it's own .css file and .test file 
+
+### Special Notes: 
+follow the following local set-up to run it locally
+
 ## Backend Code File Structure (server)
 1. migrations: all the required database changes, such as creating a new table
 2. lib: general server methods, such as connecting to the database
