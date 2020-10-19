@@ -24,6 +24,11 @@
   },
   "homepage": "https://github.com/sehersarin/MSCI342-Term-Project#readme",
   "dependencies": {
-    "pg-native": "^3.0.0"
+    "mssql": "^6.2.3",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.2.5",
+    "pg": "^8.4.1",
+    "pg-native": "^3.0.0",
+    "postgrator": "^4.1.0"
   }
 }
