@@ -1,0 +1,1 @@
+INSERT INTO Service_Worker_School (school_id, worker_id) VALUES (1, 8000000),  (1, 8000001), (1, 8000002),  (1, 8000003);

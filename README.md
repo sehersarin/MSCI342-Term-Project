@@ -3,6 +3,16 @@ Group project for MSCI 342: Principles of Software Engineering.
 
 The overall problem the team aims to address is the non-confidentiality and inefficient process of booking appointments with mental health support staff members. 
 
+The link to access the system on a web browser: https://connectme-msci342.herokuapp.com/ 
+
+## Front-end Code File Structure
+1. components folder contain reusable components, and a Layouts folder for the layout of each page
+2. App.js contains the routing work at the basic level -you can nest routing within your components or Layouts page 
+3. each component should have it's own .css file and .test file 
+
+### Special Notes: 
+follow the following local set-up to run it locally
+
 ## Backend Code File Structure (server)
 1. migrations: all the required database changes, such as creating a new table
 2. lib: general server methods, such as connecting to the database
@@ -14,7 +24,7 @@ The overall problem the team aims to address is the non-confidentiality and inef
 
 5. tests: contains all the test code
 
-* Special Notes: 
+### Special Notes: 
 1. For naming the migrations, it needs to follow [version].[action].[optional-description].sql. Refer to [Postgrator documentation](https://www.npmjs.com/package/postgrator) for more details.
 2. Do NOT touch past migrations to avoid checksum errors. If corrections need to be made, create a new sql statement.
 3. Use single quotes for strings in the sql statements. 
@@ -26,11 +36,14 @@ The overall problem the team aims to address is the non-confidentiality and inef
 
 ```shell
 DATABASE_URL=postgres://<SUPERUSER>:<PASSWORD>@127.0.0.1:<PORT>/<DATABASENAME>
+NODE_PG_FORCE_NATIVE=1
 ```
+
 4. Add a folder named `.jest`. Inside this folder, create a file `setEnvVars.js`. Add the following in this file (and replace the capitalized values in <> when your values):
 
 ```js
 process.env.DATABASE_URL = "postgres://<SUPERUSER>:<PASSWORD>@127.0.0.1:<PORT>/<DATABASENAME>"
+process.env.NODE_PG_FORCE_NATIVE=1
 ```
 
 5. Run locally using either option a or b. The frontend code will run on port 3000 and the backend code will run on port 4000.
