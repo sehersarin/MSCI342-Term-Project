@@ -13,8 +13,13 @@ class SignupForm extends Component {
     super(props);
     this.state = {
       
-        name:"",
+        first_name:"",
+        last_name:"",
+        role:"",
+        optional_role:"",
+        id_value:"",
         email: "",
+        phone:"",
         password: "",
      
     };
@@ -46,7 +51,7 @@ render() {
                 <input 
                   className ="InputFields" 
                   type="text" 
-                  name="user_name"
+                  name="first_name"
                   size ="40"
                   placeholder= "Enter First Name" 
                   onChange={this.handleFormChange} />
@@ -56,7 +61,7 @@ render() {
                 <input 
                   className ="InputFields" 
                   type="text" 
-                  name="user_name_last"
+                  name="last_name"
                   size ="40"
                   placeholder= "Enter Last Name" 
                   onChange={this.handleFormChange} />
@@ -95,7 +100,7 @@ render() {
                   <input 
                   className ="InputFields" 
                   type="text" 
-                  name="user_id"
+                  name="email"
                   size ="320"
                   placeholder= "Enter Email Address" 
                   onChange={this.handleFormChange} />
@@ -105,7 +110,7 @@ render() {
                   <input 
                   className ="InputFields" 
                   type="text" 
-                  name="user_phone"
+                  name="phone"
                   size ="20"
                   placeholder= "Enter Phone Number" 
                   onChange={this.handleFormChange} />

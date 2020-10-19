@@ -25,8 +25,8 @@ class App extends Component {
         <Route path="/login" component={LogIn}>
           {/* <LogIn /> */}
         </Route>
-        <Route path="/signup" component={LogIn}>
-          {/* <LogIn /> */}
+        <Route path="/signup" component={Signup}>
+          {/* <SignUp /> */}
         </Route>
         {/* <ProtectedRoute path="/dashboard/" component={Dashboard}> */}
           {/* <Dashboard /> */}
