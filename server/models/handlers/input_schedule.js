@@ -10,6 +10,6 @@ async function inputSchedule(schoolID, workerID, slotID, status, daysAvailable) 
         //* insert (day, time, worker_id)
  var did_it_work = true;
         
- return did_it_work;
+ return;
 };
 
