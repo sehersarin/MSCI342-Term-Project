@@ -11,16 +11,19 @@ describe('testing fetching of worker availability functionality', () => {
         const schoolId = 1;
         const testAvailabileTimes = [
             {
+                workerTimeslotId: 1,
                 startTime: '08:00:00', 
                 endTime: '08:30:00',
                 date: '2020-10-20'
             },
             {
+                workerTimeslotId: 2,
                 startTime: '08:30:00', 
                 endTime: '09:00:00',
                 date: '2020-10-20'
             },
             {
+                workerTimeslotId: 3,
                 startTime: '09:00:00', 
                 endTime: '09:30:00',
                 date: '2020-10-20'
