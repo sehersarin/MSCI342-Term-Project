@@ -16,11 +16,12 @@ import java.util.ArrayList;
 
             Scanner input = new Scanner(System.in); 
 
-            String email, password, schoolName;
+            String email, accessToken
+            , schoolName;
 
             //The main account creation page
-            
-            System.out.println("<<WELCOME TO THE ACCOUNT CREATION PAGE>>");
+
+            System.out.println("<<<WELCOME TO THE ACCOUNT CREATION PAGE>>>");
             
             /*There are different sign up experiences for students and service staff. 
             The following asks the user to specify if they are a student or a service staff*/
@@ -37,12 +38,14 @@ or case 2 for a service staff user*/
             firstName
             lastName
             email
-            password
+            accessToken
+            
             phone
             schoolID.*/
 
 switch (userTypeSelection) {
-case 1:
+
+    case 1:
     System.out.println("<<Student Sign Up>>");
 
     System.out.print("firstName : "); 
@@ -54,18 +57,21 @@ case 1:
     System.out.print("email : "); 
     email = input.next();
 
-    System.out.print("password : "); 
+    System.out.print("accessToken
+     : "); 
     email = input.next();
     
     System.out.print("phone : "); 
     email = input.next();
 
     System.out.print("schoolID : ");
-    password = input.next();
+    accessToken
+     = input.next();
 
 
     //We make an account for the student based on the credentials they provided:
-    student.add(new userType(firstName, lastName, email, password, phone, schoolID));
+    student.add(new userType(firstName, lastName, email, accessToken
+        , phone, schoolID));
     break;
 
 
@@ -75,7 +81,8 @@ case 1:
             firstName
             lastName
             email
-            password
+            accessToken
+            
             phone
             specialization.*/
 case 2:
@@ -93,17 +100,19 @@ case 2:
     System.out.print("email : "); 
     email = input.next();
 
-    System.out.print("password : "); 
+    System.out.print("accessToken : "); 
     email = input.next();
     
     System.out.print("phone : "); 
     email = input.next();
 
     System.out.print("specialization : ");
-    password = input.next();
+    accessToken
+     = input.next();
 
     //We make an account for the service staff based on the credentials they provided:
-    serviceStaff.add(new userType(workerID, firstName, lastName, email, password, phone, specialization));
+    serviceStaff.add(new userType(workerID, firstName, lastName, email, accessToken
+        , phone, specialization));
     break;
 
     //If neither case 1 or case 2 is executed, we default to requesting the user to make a selection:
