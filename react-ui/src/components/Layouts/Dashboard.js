@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import { Redirect, Switch, Route, Link } from "react-router-dom";
 import { withRouter } from "react-router";
 import Page2 from "./Page2";
+import Signup from "./Signup";
 import IndexDashboard from "./IndexDashboard";
 import NotFound from "./404";
 import Header from "../Header"
@@ -48,6 +49,9 @@ class Dashboard extends Component {
           <li>
             <Link to={`${match.path}/page2`}>Page 2</Link>
           </li>
+          <li>
+            <Link to={`${match.path}/Signup`}>Sign-up</Link>
+          </li>
           <li className="push-right">
             <button onClick={this.signOut} href="#">
               Sign Out
@@ -59,6 +63,9 @@ class Dashboard extends Component {
             <Switch>
               <Route path={`${match.path}/page2`}>
                 <Page2 name={this.state.personId}/>
+              </Route>
+              <Route path={`${match.path}/Signup`}>
+                <Signup name={this.state.personId}/>
               </Route>
               <Route exact path={`${match.path}`}>
                 <IndexDashboard/>

@@ -22,5 +22,6 @@
   "bugs": {
     "url": "https://github.com/sehersarin/MSCI342-Term-Project/issues"
   },
-  "homepage": "https://github.com/sehersarin/MSCI342-Term-Project#readme"
+  "homepage": "https://github.com/sehersarin/MSCI342-Term-Project#readme",
+  "dependencies": {}
 }
