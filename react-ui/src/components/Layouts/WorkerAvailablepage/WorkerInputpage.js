@@ -4,29 +4,24 @@ import React from 'react'
 import Check from './CheckboxApplication';
 import AvailableMeetingHeader from './AvailableMeetingHeader';
  import TimeSlot from './TimeSlot'; 
- import Dropdown from 'react-bootstrap/Dropdown'
+import DropDown from './DropDown';
+ 
+const items = [
+    {id:1, value: "Value1"},
+    {id:2, value: "Value2"}
+]
 
 
 class WorkerInputpage extends React.Component {   
+
+
 
     render() {
         
 
         return (
             <div>
-                <Dropdown>
-                    <Dropdown.Toggle variant="success" id="dropdown-basic">
-                        Dropdown Button
-                    </Dropdown.Toggle>
-
-                    <Dropdown.Menu>
-                        <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                        <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                        <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-                    </Dropdown.Menu>
-                </Dropdown>
-            
-
+                <DropDown title = "Select stuff" items = {items}/>
                 <AvailableMeetingHeader/>
                 <Check/>
                  <TimeSlot/>  
