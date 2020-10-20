@@ -7,11 +7,11 @@ describe('testing invalid user schedule input', () => {
 
     test('rejection of null values for worker and school ID', async () => {
         // Arrange
-        const testworkerId = null;
-        const testschoolId = null;
+        const testWorkerId = null;
+        const testSchoolId = null;
 
         // Act
-        const user = await workerTimeslotHandler.addWorkerTimeslot(testworkerID, testschoolID);
+        const user = await workerTimeslotHandler.addWorkerTimeslot(testWorkerId, testschoolId);
 
         // Assert
         expect(user).toBe(null);
@@ -19,11 +19,11 @@ describe('testing invalid user schedule input', () => {
 
     test('rejection of empty values for worker and school ID', async () => {
         // Arrange
-        const testworkerId = '';
-        const testschoolId = '';
+        const testWorkerId = '';
+        const testSchoolId = '';
     
         // Act
-        const user = await authenticateHandler.addWorkerTimeslot(testworkerID, testschoolID);
+        const user = await authenticateHandler.addWorkerTimeslot(testWorkerId, testSchoolId);
 
         // Assert
         expect(user).toBe(null);
@@ -31,10 +31,10 @@ describe('testing invalid user schedule input', () => {
 
     test('rejection of invalid worker and school ID', async () => {
         // Arrange
-        const testworkerID = 'Invalid Worker ID';
-        const testschoolID = 'Invalid School ID';
+        const testWorkerId = 'Invalid Worker ID';
+        const testSchoolId = 'Invalid School ID';
         // Act
-        const user = await authenticateHandler.addWorkerTimeslot(testworkerID, testschoolID);
+        const user = await authenticateHandler.addWorkerTimeslot(testWorkerId, testSchoolId);
 
         // Assert
         expect(user).toBe(null);
@@ -42,11 +42,11 @@ describe('testing invalid user schedule input', () => {
 
     test('rejection of worker ID', async () => {
         // Arrange
-        const testworkerID = 'Invalid Worker ID';
-        const testschoolID = '001';
+        const testWorkerId = 'Invalid Worker ID';
+        const testSchoolId = '001';
 
         // Act
-        const user = await authenticateHandler.addWorkerTimeslot(testworkerID, testschoolID);
+        const user = await authenticateHandler.addWorkerTimeslot(testWorkerId, testSchoolId);
 
         // Assert
         expect(user).toBe(null);
@@ -54,11 +54,11 @@ describe('testing invalid user schedule input', () => {
 
     test('rejection of school ID', async () => {
         // Arrange
-        const testworkerID = '100789';
-        const testschoolID = 'Invalid School ID';
+        const testWorkerId = '100789';
+        const testSchoolId = 'Invalid School ID';
 
         // Act
-        const user = await authenticateHandler.addWorkerTimeslot(testworkerID, testschoolID);
+        const user = await authenticateHandler.addWorkerTimeslot(testWorkerId, testSchoolId);
         // Assert
         expect(user).toBe(null);
     });
