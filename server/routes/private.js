@@ -6,6 +6,7 @@ const router = express.Router();
 
 const authenticateHandler = require('../models/handlers/authenticate');
 const appointmentHandler = require('../models/handlers/appointment');
+const availabilityHandler = require('../models/handlers/availability');
 
 // Binds a middleware to check access tokens for all private requests.
 router.use(async function (req, res, next) {
@@ -46,6 +47,27 @@ router.post('/api/book-appointment', async (req, res) => {
     const isSuccessfullyInserted = await appointmentHandler.bookAppointment(studentId, workerTimeslotId, purpose, studentNotes, workerComments);
 
     res.send(isSuccessfullyInserted);
+
+});
+
+router.post('/api/worker-availability', async (req, res) => {
+    const paramSchema = Joi.object({
+        workerId: Joi.number().integer().required(),
+        schoolId: Joi.number().integer().required()
+    });
+
+    const query = req.query ? req.query : {};
+
+    const workerId = query.workerId ? query.workerId : null;
+    const schoolId = query.schoolId ? query.schoolId : null;
+
+    const { error } = paramSchema.validate({workerId, schoolId});
+
+    if (!_.isNil(error)) res.send(error);
+
+    const availableTimes = await availabilityHandler.getWorkerAvailability(workerId, schoolId);
+
+    res.send(availableTimes);
 
 });
 
