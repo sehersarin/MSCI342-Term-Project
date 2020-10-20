@@ -9,7 +9,10 @@ describe('testing fetching of worker availability functionality', () => {
         // Arrange
         const workerId = 8000000;
         const schoolId = 1;
-        const testAvailabileTimes = [
+        const startTime = '2020-10-20';
+        const endTime = '2020-10-20';
+
+        const testAvailableTimes = [
             {
                 workerTimeslotId: 1,
                 startTime: '08:00:00', 
@@ -31,10 +34,10 @@ describe('testing fetching of worker availability functionality', () => {
         ];
 
         // Act
-        const availableTimes = await availabilityHandler.getWorkerAvailability(workerId, schoolId);
+        const availableTimes = await availabilityHandler.getWorkerAvailability(workerId, schoolId, startTime, endTime);
 
         // Assert
-        expect(availableTimes).toMatchObject(testAvailabileTimes);
+        expect(availableTimes).toMatchObject(testAvailableTimes);
     });
 
 })

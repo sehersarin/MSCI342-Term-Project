@@ -39,7 +39,7 @@ router.post('/api/book-appointment', async (req, res) => {
     const studentNotes = query.studentNotes ? query.studentNotes : null;
     const workerComments = query.workerComments ? query.workerComments : null;
 
-    const { error } = paramSchema.validate({studentId, workerTimeslotId, purpose, studentNotes, workerComments});
+    const { error } = paramSchema.validate({ studentId, workerTimeslotId, purpose, studentNotes, workerComments });
 
     if (!_.isNil(error)) res.send(error);
 
@@ -53,19 +53,23 @@ router.post('/api/book-appointment', async (req, res) => {
 router.post('/api/worker-availability', async (req, res) => {
     const paramSchema = Joi.object({
         workerId: Joi.number().integer().required(),
-        schoolId: Joi.number().integer().required()
+        schoolId: Joi.number().integer().allow(null),
+        startTime: Joi.date().iso(),
+        endTime: Joi.date().iso().greater(Joi.ref('startTime'))
     });
 
     const query = req.query ? req.query : {};
 
     const workerId = query.workerId ? query.workerId : null;
     const schoolId = query.schoolId ? query.schoolId : null;
+    const startTime = query.startTime ? query.startTime : null;
+    const endTime = query.endTime ? query.endTime : null;
 
-    const { error } = paramSchema.validate({workerId, schoolId});
+    const { error } = paramSchema.validate({ workerId, schoolId, startTime, endTime });
 
     if (!_.isNil(error)) res.send(error);
 
-    const availableTimes = await availabilityHandler.getWorkerAvailability(workerId, schoolId);
+    const availableTimes = await availabilityHandler.getWorkerAvailability(workerId, schoolId, startTime, endTime);
 
     res.send(availableTimes);
 

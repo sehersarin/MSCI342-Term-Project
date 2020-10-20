@@ -1,6 +1,6 @@
 // Gets the time availabilities for a specific worker for a specific school.
-async function getWorkerAvailability(workerId, schoolId) {
-    const sampleAvailabileTimes = [
+async function getWorkerAvailability(workerId, schoolId, startTime, endTime) {
+    const sampleAvailableTimes = [
         {
             workerTimeslotId: 1,
             startTime: '08:00:00', 
@@ -21,7 +21,7 @@ async function getWorkerAvailability(workerId, schoolId) {
         }
     ];
 
-    return sampleAvailabileTimes;
+    return sampleAvailableTimes;
 };
 
 module.exports = {
