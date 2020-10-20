@@ -6,26 +6,33 @@ import AvailableMeetingHeader from './AvailableMeetingHeader';
  import { Link } from 'react-router-dom';
  import { Container, Row, Col } from 'react-grid-system';
 import { Redirect, Route, withRouter } from "react-router-dom";
+import Calendar from './Calendar';
+import ReactDOM from "react-dom";
 
 
 
 
-class WorkerInputpage extends React.Component {   
+
+class WorkerInputpage extends React.Component {    // this class component would be putting together other components into one page
 
     render() {
 
         return (
             <div>
-
+                
                 <AvailableMeetingHeader/>
                 <Check/>
-                 <TimeSlot/> 
-                 
+                 <TimeSlot/>
 
-                 <select name="role" className ="InputFields" id="type">
-                  <option value="student">School 1</option>
-                  <option value="worker1">School 2</option>
-                  <option value="worker2">School 3</option> 
+                 <Calendar/>
+                
+                <br></br>
+
+                <label for ="school"> Select School:</label>
+                 <select name="school" className ="InputFields" id="school">   
+                  <option value="School1">School 1</option>
+                  <option value="School2">School 2</option>
+                  <option value="School3">School 3</option> 
                 </select>
                  
                 <br></br>
@@ -36,4 +43,7 @@ class WorkerInputpage extends React.Component {
 }
 
 export default WorkerInputpage
+
+const rootElement = document.getElementById("root");
+ReactDOM.render(<WorkerInputpage />, rootElement);
 

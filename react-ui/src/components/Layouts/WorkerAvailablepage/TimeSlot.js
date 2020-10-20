@@ -1,7 +1,11 @@
 import React  from 'react';
 import { render } from 'react-dom';
+import './TimeSlot.css'; 
+import moment from 'moment';
+
+
 /* import {Container, Row, Col} from 'react-grid-system'; */
-       
+
 class TimeSlot extends React.Component { // this is a class component for the checkbox feature of selecting recurring days
   constructor() {
     super();
@@ -25,8 +29,9 @@ class TimeSlot extends React.Component { // this is a class component for the ch
         {id: 16, value: "16:30"},
         {id: 17, value: "17:00"},
       ],
-      checkedTimes: new Map()
-    };
+      checkedTimes: new Map(),
+
+    }
   
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -43,23 +48,26 @@ class TimeSlot extends React.Component { // this is a class component for the ch
     console.log(this.state); // edit this for future functions
     event.preventDefault();
   }
-     
+
+
   render() {
+
     return (
-      <div>
-          
+      <div className = 'Wrapper'>
+      
         <form onSubmit={this.handleSubmit}>
-        <h1>WED</h1>
+           
           {
             this.state.Times.map(item => (
               <div >
-                <label>
+                <label className = "CheckBox">
                 {item.value}
-                  <input
+                  <input className = "Box"
                   value={item.id}
                     type="checkbox"
                     onChange={this.handleChange}
                   /> 
+                  <span className="checkmark"></span>
                 </label>
               </div>
             ))

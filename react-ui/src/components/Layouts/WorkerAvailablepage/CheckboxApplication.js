@@ -45,7 +45,7 @@ class Check extends React.Component { // this is a class component for the check
             this.state.Days.map(item => (
               <div className = {"checkboxes"}>
                 <label>
-                  <input
+                  <input className = "DayBox"
                     type="checkbox"
                     value={item.id}
                     onChange={this.handleChange}

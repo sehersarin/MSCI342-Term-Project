@@ -1,20 +1,19 @@
-.Container{
-    position: absolute;
-    bottom: 8px;
-    right: 70px;
-    font-size: 14px;
-  
+.Wrapper{
+    position : absolute;
+    right: 300px;
+    top: 200px;
 }
 
-input[Class= "DayBox"] {
+
+input[Class= "Box"] {
     position: relative;
       cursor: pointer;
 }
-input[Class = "DayBox"]:before {
+input[Class = "Box"]:before {
     content: "";
     display: block;
     position: absolute;
-    width: 15px;
+    width: 76px;
     height: 16px;
     top: 0;
     left: 0;
@@ -24,7 +23,7 @@ input[Class = "DayBox"]:before {
 }
 
 
-input[Class= "DayBox"]:checked:after {
+input[Class= "Box"]:checked:after {
     content: "";
     display: block;
     width: 5px;
@@ -40,4 +39,3 @@ input[Class= "DayBox"]:checked:after {
     
 }
  
-

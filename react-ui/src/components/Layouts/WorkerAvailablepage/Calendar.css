@@ -1,4 +1,5 @@
 :root {
+
     --weekend: rgba(0, 0, 0, 0);
     --date-light: #f8f9fa;
     --date-primary: #5644c1;
@@ -8,14 +9,15 @@
     --date-hover: #262769;
     --date-highlight: #f83854;
     --date-disabled:#c2c1cc;
-    --date-width: 260px;
-    --date-height: 280px;
+    --date-width: 560px;
+    --date-height: 380px;
     --date-rangebg:#8072d0;
     --date-rangetext:#f8f9fa;
     --date-rangeDateBg:#5644c1;
-    
-    
-    position: absolute;
-    top: 100px;
-    left: 40px;
+  }
+
+  .Date{
+      position: absolute;
+      right: 100px;
+      border: black;
   }
