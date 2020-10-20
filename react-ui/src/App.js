@@ -27,7 +27,7 @@ class App extends Component {
         {/* <ProtectedRoute path="/dashboard/" component={Dashboard}> */}
           {/* <Dashboard /> */}
         {/* </ProtectedRoute> */}
-        <Route exact path="/dashboard/:id" component={Dashboard}>
+        <Route exact path="/dashboard/:name/:type" component={Dashboard}>
           {/* removed exact path  for both top and bottom*/}
           {/* <Redirect from="/" to="dashboard/" /> */}
         </Route>

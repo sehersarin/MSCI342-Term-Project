@@ -12,12 +12,13 @@ class Dashboard extends Component {
     super(props);
     this.state = {
       islogout: false,
-      personId: this.props.match.params.id
+      name: this.props.match.params.name,
+      type : this.props.match.params.type
     };
   }
 
   componentDidMount() {
-    console.log(this.state.personId);
+    console.log(this.state.name);
   }
 
   signOut = () => {
@@ -26,14 +27,26 @@ class Dashboard extends Component {
       islogout: true
     });
   };
+  //conditional rendering for the win
+ 
+
+
+
   render() {
     if (this.state.islogout) {
       return <Redirect to="/login" />;
     }
+    let header;
+    if(this.state.type ==="student"){
+      header = <Header color="red"/>
+    } else {
+      header = <Header color="purple"/>
+    }
+   
     const { match } = this.props;
     return (
       <Fragment>
-        <Header/>
+        {header}
         <br>
         </br>
         <br>
@@ -58,7 +71,7 @@ class Dashboard extends Component {
           <div className="main">
             <Switch>
               <Route path={`${match.path}/page2`}>
-                <Page2 name={this.state.personId}/>
+                <Page2 name={this.state.name}/>
               </Route>
               <Route exact path={`${match.path}`}>
                 <IndexDashboard/>
