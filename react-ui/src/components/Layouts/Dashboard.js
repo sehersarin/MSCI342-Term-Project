@@ -48,6 +48,9 @@ class Dashboard extends Component {
           <li>
             <Link to={`${match.path}/page2`}>Page 2</Link>
           </li>
+          <li>
+            <Link to={`/WorkerAvailableInputPage`}>WorkAvailableInputPage</Link>
+          </li>
           <li className="push-right">
             <button onClick={this.signOut} href="#">
               Sign Out
