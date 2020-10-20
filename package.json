@@ -24,7 +24,9 @@
   },
   "homepage": "https://github.com/sehersarin/MSCI342-Term-Project#readme",
   "dependencies": {
+    "moment": "^2.29.1",
     "react-grid-system": "^7.1.1",
+    "react-moment": "^1.0.0",
     "react-single-calendar": "^1.2.9"
   },
   "devDependencies": {
