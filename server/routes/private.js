@@ -50,23 +50,20 @@ router.post('/api/book-appointment', async (req, res) => {
 
 });
 
-router.post('/api/recurring_schedule', async (req, res) => {
+router.post('/api/add_recurring_schedule', async (req, res) => {
     // Validate appropriate parameters are passed into the book appointment endpoint.
     // Verification to make sure appointments are only made for future dates and that the worker is available during that time will be handled by the front end.
     const paramSchema = Joi.object({
-        
         workerTimeslotId: Joi.number().integer().required(),
         slotId: Joi.number().integer().required(),
         schoolId: Joi.number().integer().required(),
         workerId: Joi.number().integer().required(), 
         status:Joi.string().max(300).required(),
         date: Joi.string().allow(null).max(300)
-
-        
-    });
+})
 
     const query = req.query ? req.query : {};
-
+    
     const workerTimeslotId = query.workerTimeslotId ? query.workerTimeslotId : null;
     const slotId = query.slotId ? query.slotId : null;
     const schoolId = query.schoolID ? query.schoolID : null;
@@ -78,11 +75,10 @@ router.post('/api/recurring_schedule', async (req, res) => {
 
     if (!_.isNil(error)) res.send(error);
 
-    // Attempts to insert the appointment into the database.
+    // Attempts to insert the worker availability into the database 
     const isSuccessfullyInserted = await workerTimeslotHandler.addWorkerTimeslot(workerTimeslotId, slotId, schoolId, workerId, status, date);
 
     res.send(isSuccessfullyInserted);
-
 });
 
 router.get('/test', async (req, res) => {
