@@ -1,6 +1,6 @@
 const UserTypes = require('../../constants/userTypes.json');
 
-class workerTimeslot {
+class WorkerTimeslot {
     // The password field will NOT be stored outside of the database for security purposes.
     constructor(workerTimeslotData) {
         this.workerTimeslotId = workerTimeslotData.worker_timeslot_id;
