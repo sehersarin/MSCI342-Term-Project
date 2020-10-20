@@ -13,7 +13,9 @@
     --date-rangebg:#8072d0;
     --date-rangetext:#f8f9fa;
     --date-rangeDateBg:#5644c1;
+    
+    
     position: absolute;
-    top: 200px;
-    left: 100px;
+    top: 100px;
+    left: 40px;
   }

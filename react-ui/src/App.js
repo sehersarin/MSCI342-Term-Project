@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
 import LogIn from "./components/Layouts/LogIn"
 import Dashboard from "./components/Layouts/Dashboard"
+/* import Signup from "./components/Layouts/Signup" */ 
 import './App.css'
+import WorkerInputpage from './components/Layouts/WorkerAvailablepage/WorkerInputpage'
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Redirect
 } from "react-router-dom";
-import WorkerInputpage from './components/Layouts/WorkerAvailablepage/WorkerInputpage';
-
 
 
 
@@ -22,34 +22,39 @@ class App extends Component {
     
     return (
       <div className="App">
-          <WorkerInputpage/>
-        {/* <Router>
-      <Switch> */}
-        
-        {/* <Route path="/login" component={LogIn}> */}
+        <Router>
+      <Switch>
+        <Route path="/login" component={LogIn}>
           {/* <LogIn /> */}
-        {/* </Route> */}
+        </Route>
         {/* <ProtectedRoute path="/dashboard/" component={Dashboard}> */}
           {/* <Dashboard /> */}
         {/* </ProtectedRoute> */}
-      {/*   <Route exact path="/dashboard/:id" component={Dashboard}> */}
+        <Route exact path="/dashboard/:id" component={Dashboard}>
           {/* removed exact path  for both top and bottom*/}
           {/* <Redirect from="/" to="dashboard/" /> */}
-        {/* </Route>
-        <Route path="/dashboard/" component={Dashboard}> */}
+        </Route>
+        <Route path="/dashboard/" component={Dashboard}>
           {/* removed exact path  for both top and bottom*/}
           {/* <Redirect from="/" to="dashboard/" /> */}
-       {/*  </Route>
-        <Route path="/dashboard/" component={Dashboard}> */}
+        </Route>
+        <Route path="/dashboard/" component={Dashboard}>
           {/* removed exact path  for both top and bottom*/}
           {/* <Redirect from="/" to="dashboard/" /> */}
+        </Route>
 
-      {/*   </Route>
+        <Route path="/WorkerAvailableInputPage" component={WorkerInputpage}>
+          {/* <WorkerInputpage/> */}
+        </Route>
+        <Route path="/WorkerAvailableInputPage" component={WorkerInputpage}>
+          {/* <WorkerInputpage/> */}
+        </Route>
+        
         <Route path="*">
           <Redirect from="/" to="dashboard/" />
         </Route>
       </Switch>
-    </Router> */}
+    </Router>
       </div>
     )
   }
