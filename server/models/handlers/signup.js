@@ -33,21 +33,40 @@ or case 2 for a service staff user*/
 
 
             /* In case 1, The system asks the student users to input their credentials 
-            which are their email, password, and schoolName.*/
+            which are their 
+            firstName
+            lastName
+            email
+            password
+            phone
+            schoolID.*/
 
 switch (userTypeSelection) {
 case 1:
     System.out.println("<<Student Sign Up>>");
 
-    System.out.print("email : "); // input userType information (email, password ...)
+    System.out.print("firstName : "); 
     email = input.next();
-    System.out.print("password : ");
+
+    System.out.print("lastName : "); 
+    email = input.next();
+
+    System.out.print("email : "); 
+    email = input.next();
+
+    System.out.print("password : "); 
+    email = input.next();
+    
+    System.out.print("phone : "); 
+    email = input.next();
+
+    System.out.print("schoolID : ");
     password = input.next();
-    System.out.print("schoolName : ");
-    schoolName = input.next();
+
+
 
     //We make an account for the student based on the credentials they provided:
-    student.add(new userType(email, password, schoolName));
+    student.add(new userType(firstName, lastName, email, password, phone, schoolID));
     break;
 
 
@@ -56,7 +75,7 @@ case 1:
 case 2:
     System.out.println("<<Service Staff Sign Up >>");
 
-    System.out.print("email : "); // input userType information (email, password ...)
+    System.out.print("email : "); 
     email = input.next();
     System.out.print("password : ");
     password = input.next();
