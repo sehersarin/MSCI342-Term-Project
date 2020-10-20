@@ -8,7 +8,9 @@ import {
   Route,
   Redirect
 } from "react-router-dom";
-import AvailableMeetingHeader from './components/AvailableMeetingHeader';
+import WorkerInputpage from './components/Layouts/WorkerAvailablepage/WorkerInputpage';
+
+
 
 
 class App extends Component {
@@ -20,34 +22,34 @@ class App extends Component {
     
     return (
       <div className="App">
-        <AvailableMeetingHeader/>
-        <Router>
-      <Switch>
-        <Route path = "/AvailableMeetingHeader" Component = {AvailableMeetingHeader}></Route> {/* this is test code line*/}
-        <Route path="/login" component={LogIn}>
+          <WorkerInputpage/>
+        {/* <Router>
+      <Switch> */}
+        
+        {/* <Route path="/login" component={LogIn}> */}
           {/* <LogIn /> */}
-        </Route>
+        {/* </Route> */}
         {/* <ProtectedRoute path="/dashboard/" component={Dashboard}> */}
           {/* <Dashboard /> */}
         {/* </ProtectedRoute> */}
-        <Route exact path="/dashboard/:id" component={Dashboard}>
+      {/*   <Route exact path="/dashboard/:id" component={Dashboard}> */}
           {/* removed exact path  for both top and bottom*/}
           {/* <Redirect from="/" to="dashboard/" /> */}
-        </Route>
-        <Route path="/dashboard/" component={Dashboard}>
+        {/* </Route>
+        <Route path="/dashboard/" component={Dashboard}> */}
           {/* removed exact path  for both top and bottom*/}
           {/* <Redirect from="/" to="dashboard/" /> */}
-        </Route>
-        <Route path="/dashboard/" component={Dashboard}>
+       {/*  </Route>
+        <Route path="/dashboard/" component={Dashboard}> */}
           {/* removed exact path  for both top and bottom*/}
           {/* <Redirect from="/" to="dashboard/" /> */}
 
-        </Route>
+      {/*   </Route>
         <Route path="*">
           <Redirect from="/" to="dashboard/" />
         </Route>
       </Switch>
-    </Router>
+    </Router> */}
       </div>
     )
   }

@@ -1,0 +1,19 @@
+:root {
+    --weekend: rgba(0, 0, 0, 0);
+    --date-light: #f8f9fa;
+    --date-primary: #5644c1;
+    --date-success: #37d37d;
+    --date-primaryLight: #eceaf5;
+    --date-primaryTitle: #dbd8f0;
+    --date-hover: #262769;
+    --date-highlight: #f83854;
+    --date-disabled:#c2c1cc;
+    --date-width: 260px;
+    --date-height: 280px;
+    --date-rangebg:#8072d0;
+    --date-rangetext:#f8f9fa;
+    --date-rangeDateBg:#5644c1;
+    position: absolute;
+    top: 200px;
+    left: 100px;
+  }
