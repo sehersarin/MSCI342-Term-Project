@@ -12,4 +12,4 @@ class WorkerTimeslot {
     }
 }
 
-module.exports = Timeslot;
+module.exports = WorkerTimeslot;
