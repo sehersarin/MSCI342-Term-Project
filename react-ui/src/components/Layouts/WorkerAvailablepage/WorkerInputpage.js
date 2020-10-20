@@ -4,13 +4,9 @@ import React from 'react'
 import Check from './CheckboxApplication';
 import AvailableMeetingHeader from './AvailableMeetingHeader';
  import TimeSlot from './TimeSlot'; 
-import DropDown from './DropDown';
- 
-const items = [
-    {id:1, value: "Value1"},
-    {id:2, value: "Value2"}
-]
+ import './WorkerInputpage.css'
 
+ 
 
 class WorkerInputpage extends React.Component {   
 
@@ -21,10 +17,17 @@ class WorkerInputpage extends React.Component {
 
         return (
             <div>
-                <DropDown title = "Select stuff" items = {items}/>
+                {/* <DropDown title = "Select stuff" items = {items}/> */}
                 <AvailableMeetingHeader/>
                 <Check/>
-                 <TimeSlot/>  
+                 <TimeSlot/> 
+
+
+                 <select name="role" className ="InputFields" id="type">
+                  <option value="student">School 1</option>
+                  <option value="worker1">School 2</option>
+                  <option value="worker2">School 3</option> 
+                </select>
                 {/* <temcalendar/> */}
             </div>
         )
