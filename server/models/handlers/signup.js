@@ -76,7 +76,7 @@ switch (userTypeSelection) {
     is generated randomly using the npm library randomstring*/
      
     var accessToken = require("accessToken");
-    accessToken.generate(6);
+    randomstring.generate(6);
     // Eg. 4h62fw
 
 
