@@ -10,7 +10,10 @@ async function insertWorkerTimeslot(workerTimeslotId, slotId, schoolId, workerId
     // Added conditional statements to prevent status and date from storing "null" instead of null. 
     // Date is currently being input as a string. Unsure of correct format for date data type. 
     // Opportunity to add the "recurring" functionality not taken yet. Unsure if this will come from the front end or not. 
-    return db.any(`insert into ${Tables.worker_timeslot} (worker_timeslot_id, slot_id, school_id, worker_id, status, date) values (${workerTimeslotId}, ${slotId}, ${schoolId}, ${workerId}, ${status ? `'${status}'` : null}, ${date ? `'${date}'` : null}, '${TimeslotStatus .available}');`);
+    var date_format = moment(date).format('YYYY MM DD');
+    console.log(date_format); 
+
+    return db.any(`insert into ${Tables.worker_timeslot} (worker_timeslot_id, slot_id, school_id, worker_id, status, date) values (${workerTimeslotId}, ${slotId}, ${schoolId}, ${workerId}, ${status ? `'${status}'` : null}, ${date_format}, '${TimeslotStatus .available}');`);
 }
 
 module.exports = {
