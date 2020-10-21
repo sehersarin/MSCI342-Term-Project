@@ -17,26 +17,40 @@
     "type": "git",
     "url": "git+https://github.com/sehersarin/MSCI342-Term-Project.git"
   },
-  "author": "Amy Tai",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/sehersarin/MSCI342-Term-Project/issues"
   },
   "homepage": "https://github.com/sehersarin/MSCI342-Term-Project#readme",
+  
   "dependencies": {
-<<<<<<< Updated upstream
+
     "moment": "^2.29.1",
     "react-grid-system": "^7.1.1",
     "react-moment": "^1.0.0",
-    "react-single-calendar": "^1.2.9"
+    "react-single-calendar": "^1.2.9",
+    "dotenv": "^4.0.0",
+    "express": "^4.16.2",
+    "joi": "^17.2.1",
+    "lodash": "^4.17.20",
+    "morgan": "^1.9.0",
+    "pg": "^7.3.0",
+    "pg-monitor": "^0.8.3",
+    "pg-native": "^3.0.0",
+    "pg-promise": "^7.0.3",
+    "postgrator": "^2.10.3"
   },
   "devDependencies": {
-    "eslint-plugin-react-hooks": "^4.1.2"
-=======
-    "axios": "^0.20.0"
+    "eslint-plugin-react-hooks": "^4.1.2",
+    "axios": "^0.20.0",
+    "jest": "^26.6.0",
+    "nodemon": "^1.12.1"
   },
-  "devDependencies": {
-    "jest": "^26.6.0"
->>>>>>> Stashed changes
-  }
+  "jest": {
+    "setupFiles": [
+      "<rootDir>/.jest/setEnvVars.js"
+    ]
+  },
+  "author": "Amy Tai",
+  "license": "ISC"
 }
+
