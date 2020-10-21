@@ -72,20 +72,16 @@ switch (userTypeSelection) {
      = input.next();
 
      /* Create an access token for the student. 
-    The access token (with default length of 6 characters)
+    The access token (with default length of 6 alphanumeric characters)
     is generated randomly using the npm library randomstring*/
      
-    var randomstring = require("randomstring");
-
- 
-    randomstring.generate(6);
-    // >> "xqm5wXX"
+    var accessToken = require("accessToken");
+    accessToken.generate(6);
+    // Eg. 4h62fw
 
 
     //We make an account for the student based on the credentials they provided:
-    student.add(new userType(firstName, lastName, email, password
-        
-        , phone, schoolID));
+    student.add(new userType(firstName, lastName, email, password, phone, schoolID, accessToken));
     break;
 
 
@@ -128,9 +124,7 @@ case 2:
      = input.next();
 
     //We make an account for the service staff based on the credentials they provided:
-    serviceStaff.add(new userType(workerID, firstName, lastName, email, password
-        
-        , phone, specialization));
+    serviceStaff.add(new userType(workerID, firstName, lastName, email, password, phone, specialization, accessToken));
     break;
 
     //If neither case 1 or case 2 is executed, we default to requesting the user to make a selection:
