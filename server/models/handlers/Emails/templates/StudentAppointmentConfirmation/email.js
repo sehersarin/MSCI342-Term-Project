@@ -42,8 +42,11 @@ function loadTemplate (StudentAppointmentConfirmation, contexts) {
     let template = new EmailTemplate(path.join(__diruserNam, 'templates', StudentAppointmentConfirmation));
     return Promise.all(contexts.map((context) => {
         return new Promise((resolve, reject) => {
+           /* Render the template with a context, which has a callback that includes an error and result */
             template.render(context, (err, result) => {
+               //If error, reject
                 if (err) reject(err);
+                //If no error, then resolve with a result
                 else resolve({
                     email: result,
                     context,
@@ -54,15 +57,5 @@ function loadTemplate (StudentAppointmentConfirmation, contexts) {
 }
 
 loadTemplate('StudentAppointmentConfirmation', users).then((results) => {
-    return Promise.all(results.map((result) => {
-        sendEmail({
-            to: result.context.email,
-            from: 'AppointmentServer',
-            subject: result.email.subject,
-            html: result.email.html,
-            text: result.email.text,
-        });
-    }));
-}).then(() => {
-    console.log('Sucessfully sent!');
+   console.log(JSON.stringify(results,null,4));
 });
