@@ -6,6 +6,7 @@ const router = express.Router();
 
 const authenticateHandler = require('../models/handlers/authenticate');
 const appointmentHandler = require('../models/handlers/appointment');
+const availabilityHandler = require('../models/handlers/availability');
 
 // Binds a middleware to check access tokens for all private requests.
 router.use(async function (req, res, next) {
@@ -38,7 +39,7 @@ router.post('/api/book-appointment', async (req, res) => {
     const studentNotes = query.studentNotes ? query.studentNotes : null;
     const workerComments = query.workerComments ? query.workerComments : null;
 
-    const { error } = paramSchema.validate({studentId, workerTimeslotId, purpose, studentNotes, workerComments});
+    const { error } = paramSchema.validate({ studentId, workerTimeslotId, purpose, studentNotes, workerComments });
 
     if (!_.isNil(error)) res.send(error);
 
@@ -46,6 +47,31 @@ router.post('/api/book-appointment', async (req, res) => {
     const isSuccessfullyInserted = await appointmentHandler.bookAppointment(studentId, workerTimeslotId, purpose, studentNotes, workerComments);
 
     res.send(isSuccessfullyInserted);
+
+});
+
+router.post('/api/worker-availability', async (req, res) => {
+    const paramSchema = Joi.object({
+        workerId: Joi.number().integer().required(),
+        schoolId: Joi.number().integer().allow(null),
+        startTime: Joi.date().iso(),
+        endTime: Joi.date().iso().greater(Joi.ref('startTime'))
+    });
+
+    const query = req.query ? req.query : {};
+
+    const workerId = query.workerId ? query.workerId : null;
+    const schoolId = query.schoolId ? query.schoolId : null;
+    const startTime = query.startTime ? query.startTime : null;
+    const endTime = query.endTime ? query.endTime : null;
+
+    const { error } = paramSchema.validate({ workerId, schoolId, startTime, endTime });
+
+    if (!_.isNil(error)) res.send(error);
+
+    const availableTimes = await availabilityHandler.getWorkerAvailability(workerId, schoolId, startTime, endTime);
+
+    res.send(availableTimes);
 
 });
 
