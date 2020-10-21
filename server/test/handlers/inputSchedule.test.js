@@ -14,7 +14,7 @@ describe('testing invalid user schedule input', () => {
         const isSuccessfullyInserted = await workerTimeslotHandler.addWorkerTimeslot(testWorkerId, testschoolId);
 
         // Assert
-        expect(isSuccessfullyInserted).toBe(null);
+        expect(isSuccessfullyInserted).toBe(false);
     });
 
     test('rejection of empty values for worker and school ID', async () => {
