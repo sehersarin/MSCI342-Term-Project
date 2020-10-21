@@ -1,4 +1,4 @@
-const accountCreationHandler = require('../models/handlers/account');
+const accountHandler = require('../models/handlers/account');
 
  describe('Test to check valid account creation', () => {
      beforeEach(() => {
@@ -21,7 +21,7 @@ const accountCreationHandler = require('../models/handlers/account');
          };
 
          // Act
-         const user = await accountCreationHandler.createUserAccount(firstName, lastName, type, studentID, email, password, phone);
+         const user = await accountHandler.createUserAccount(firstName, lastName, type, studentID, email, password, phone);
 
          // Assert
          expect(user).toMatchObject(testUser);
