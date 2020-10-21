@@ -1,6 +1,6 @@
 const router = express.Router();
 
- const accountCreationHandler = require('../models/handlers/account');
+ const accountHandler = require('../models/handlers/account');
 
  router.get('/api/create-user', async(req, res) => {
     const firstName = req.query.firstName;
@@ -11,7 +11,7 @@ const router = express.Router();
     const password = req.query.password;
     const phone = req.query.phone;
 
-     const user = await accountCreationHandler.createUserAccount(firstName, lastName, type, studentID, email, password, phone);
+     const user = await accountHandler.createUserAccount(firstName, lastName, type, studentID, email, password, phone);
 
      res.send(user);
  });

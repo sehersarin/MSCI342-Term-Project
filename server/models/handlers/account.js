@@ -19,9 +19,9 @@ async function createUserAccount(firstName, lastName, type, studentID, email, pa
     return user;
 };
 
-//export the createAccountUser
+//export the createUserAccount
 module.exports = {
-    createAccountUser
+    createUserAccount
 ,
     isAccessTokenValid,
 } 
