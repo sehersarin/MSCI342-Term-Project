@@ -5,7 +5,7 @@ const accountCreationHandler = require('../models/handlers/accountCreation');
          jest.resetModules();
      });
 //Create a test using Arrange, Act, Assert format
-     test('Checking if the account creation details are correct', async() => {
+     test('Initial set up: Checking if the account creation details are correct', async() => {
          // Arrange
          
          /* In order to test, the tester should input these credentials*/
@@ -21,7 +21,7 @@ const accountCreationHandler = require('../models/handlers/accountCreation');
          };
 
          // Act
-         const user = await accountCreationHandler.userAccount(firstName, lastName, type, studentID, email, password, phone);
+         const user = await accountCreationHandler.createUserAccount(firstName, lastName, type, studentID, email, password, phone);
 
          // Assert
          expect(user).toMatchObject(testUser);
