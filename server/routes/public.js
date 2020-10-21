@@ -5,6 +5,7 @@ const Joi = require('joi');
 const router = express.Router();
 
 const authenticateHandler = require('../models/handlers/authenticate');
+const accountCreationHandler = require('../models/handlers/account');
 
 router.get('/api/login', async(req, res) => {
     // Validate appropriate parameters are passed into the login endpoint.
@@ -27,13 +28,7 @@ router.get('/api/login', async(req, res) => {
     res.send(user);
 });
 
-module.exports = router 
-
-const router = express.Router();
-
- const accountCreationHandler = require('../models/handlers/account');
-
- router.get('/api/create-user', async(req, res) => {
+router.get('/api/create-user', async(req, res) => {
     const firstName = req.query.firstName;
     const lastName = req.query.lastName;
     const type = req.query.type; //note: 'type' is called 'role' in the UI, but refers to either a worker or a student.
@@ -45,4 +40,11 @@ const router = express.Router();
      const user = await accountCreationHandler.createUserAccount(firstName, lastName, type, studentID, email, password, phone);
 
      res.send(user);
+
+module.exports = router 
+
+const router = express.Router();
+
+ const accountCreationHandler = require('../models/handlers/account');
+
  });
