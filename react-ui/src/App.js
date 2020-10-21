@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import LogIn from "./components/Layouts/LogIn"
 import Dashboard from "./components/Layouts/Dashboard"
 import Signup from "./components/Layouts/Signup"  
-import WorkerInputpage from './components/Layouts/WorkerAvailablepage/WorkerInputpage'
+import WorkerInputpage from './components/Layouts/WorkerAvailablepage/WorkerInputpage' 
 import './App.css'
 
 import {
@@ -48,9 +48,9 @@ class App extends Component {
           {/* <Redirect from="/" to="dashboard/" /> */}
         </Route>
         
-        <Route path="/WorkerAvailableInputPage" component={WorkerInputpage}>
+         <Route path="/WorkerAvailableInputPage" component={WorkerInputpage}> 
           {/* <WorkerInputpage/> */}
-        </Route>
+         </Route> 
         
         <Route path="*">
           <Redirect from="/" to="dashboard/" />
