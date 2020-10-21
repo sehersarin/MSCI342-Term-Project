@@ -10,7 +10,30 @@ const nodemailer = require('nodemailer'),
             password: credentials.password,
         },
     }),
-    
+    EmailTemplate = require('email-templates').EmailTemplate,
+    path = require('path'),
+    Promise = require('bluebird');
+
+
+/* Create a function to send emails with an obj*/
+function sendEmail (obj) {
+    return transporter.sendMail(obj);
+}
+/* Create a function for template emails*/
+function loadTemplate (StudentAppointmentConfirmation, contexts) {
+    let template = new EmailTemplate(path.join(__dirname, 'templates', StudentAppointmentConfirmation));
+    return Promise.all(contexts.map((context) => {
+        return new Promise((resolve, reject) => {
+            template.render(context, (err, result) => {
+                if (err) reject(err);
+                else resolve({
+                    email: result,
+                    context,
+                });
+            });
+        });
+    }));
+}
 
 loadTemplate('StudentAppointmentConfirmation', users).then((results) => {
     return Promise.all(results.map((result) => {
