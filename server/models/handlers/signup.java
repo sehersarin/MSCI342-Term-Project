@@ -59,8 +59,7 @@ switch (userTypeSelection) {
     email = input.next();
 
     System.out.print("password
-    
-     : "); 
+: "); 
     email = input.next();
     
     System.out.print("phone : "); 
@@ -148,4 +147,5 @@ case 2:
     //If neither case 1 or case 2 is executed, we default to requesting the user to make a selection:
 default:
     System.out.println("Please specify if you are a student (type '1') or a service staff (type '2')");
-}
+}}}
+
