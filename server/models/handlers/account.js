@@ -5,7 +5,7 @@ async function createUserAccount(firstName, lastName, type, studentID, email, pa
     
     const user = {
         type: 'student', //note: 'type' is called 'role' in the UI, but refers to either a worker or a student.
-        studentId: 20764242,
+        studentId: '20764242',
         firstname: 'Victor',
         lastname: 'Hugo',
         email: 'victorhugo@gmail.com',
