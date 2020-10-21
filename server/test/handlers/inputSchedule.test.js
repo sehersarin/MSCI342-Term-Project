@@ -1,4 +1,4 @@
-const appointmentHandler = require('../../models/handlers/workerTimeslot');
+const workerTimeslotHandler = require('../../models/handlers/workerTimeslot');
 
 describe('testing invalid user schedule input', () => {
     beforeEach(() => {
