@@ -2,7 +2,6 @@ import React, { Component, Fragment } from "react";
 import { Redirect, Switch, Route, Link } from "react-router-dom";
 import { withRouter } from "react-router";
 import Page2 from "./Page2";
-import Signup from "./Signup";
 import IndexDashboard from "./IndexDashboard";
 import NotFound from "./404";
 import Header from "../Header"
@@ -13,13 +12,14 @@ class Dashboard extends Component {
     super(props);
     this.state = {
       islogout: false,
-      name: this.props.match.params.name,
-      type : this.props.match.params.type
+      email: this.props.match.params.email,
+      type : this.props.match.params.type,
+      name : this.props.match.params.name,
     };
   }
 
   componentDidMount() {
-    console.log(this.state.name);
+    console.log(this.state.email);
   }
 
   signOut = () => {
@@ -28,10 +28,6 @@ class Dashboard extends Component {
       islogout: true
     });
   };
-  //conditional rendering for the win
- 
-
-
 
   render() {
     if (this.state.islogout) {
@@ -77,9 +73,10 @@ class Dashboard extends Component {
               <Route path={`${match.path}/page2`}>
                 <Page2 name={this.state.name}/>
               </Route>
-              <Route path={`${match.path}/Signup`}>
-                <Signup name={this.state.personId}/>
-              </Route>
+              {/* there should not be a Route path to sign up here */}
+              {/* <Route path={`${match.path}/Signup`}>
+                <Signup name={this.state.email}/>
+              </Route> */}
               <Route exact path={`${match.path}`}>
                 <IndexDashboard/>
               </Route>

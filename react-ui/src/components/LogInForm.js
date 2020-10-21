@@ -13,8 +13,8 @@ class logInForm extends Component {
     super(props);
     this.state = {
       islogged: false,
-      firstName: "",
       type: "",
+      name: "",
       loginParams: {
         email: "",
         password: "",
@@ -41,9 +41,9 @@ class logInForm extends Component {
       console.log(res.data)
       if(res.data){
         this.setState({
-          firstName : res.data.firstName,
+          email : res.data.email,
           type: res.data.type,
-          email: email,
+          name: res.data.firstName,
           islogged: true
         })
         // localStorage.setItem("token", "T");
@@ -54,7 +54,7 @@ class logInForm extends Component {
   } 
 
   render() {
-    let newRoute= <Route exact path="/login" render={props => ( <Redirect to={`/dashboard/${this.state.firstName}/${this.state.type}`} Component={dashboard}/>)}></Route> 
+    let newRoute= <Route exact path="/login" render={props => ( <Redirect to={`/dashboard/${this.state.loginParams.email}/${this.state.type}/${this.state.name}`} Component={dashboard}/>)}></Route> 
   
     if (this.state.islogged) {
       return newRoute;
