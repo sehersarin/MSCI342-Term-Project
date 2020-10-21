@@ -1,6 +1,6 @@
 const router = express.Router();
 
- const accountCreationHandler = require('../models/handlers/accountCreation');
+ const accountCreationHandler = require('../models/handlers/account');
 
  router.get('/api/create-user', async(req, res) => {
     const firstName = req.query.firstName;

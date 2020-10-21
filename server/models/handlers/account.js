@@ -1,7 +1,7 @@
 /* The goal: Take in the user input from the Account Creation form in 
 the front end UI in order to create a user account in the backend*/
 
-async function createAccountUser(firstName, lastName, type, studentID, email, password, phone) {
+async function createUserAccount(firstName, lastName, type, studentID, email, password, phone) {
     
     const user = {
         type: 'student', //note: 'type' is called 'role' in the UI, but refers to either a worker or a student.
