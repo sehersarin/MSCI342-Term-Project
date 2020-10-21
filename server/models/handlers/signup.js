@@ -67,6 +67,16 @@ switch (userTypeSelection) {
     accessToken
      = input.next();
 
+     /* Create an access token for the student. 
+    The access token (with default length of 6 characters)
+    is generated randomly using the npm library randomstring*/
+     
+    var randomstring = require("randomstring");
+
+ 
+    randomstring.generate(6);
+    // >> "xqm5wXX"
+
 
     //We make an account for the student based on the credentials they provided:
     student.add(new userType(firstName, lastName, email, accessToken
