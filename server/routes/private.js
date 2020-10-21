@@ -51,28 +51,25 @@ router.post('/api/book-appointment', async (req, res) => {
 
 });
 
-router.post('/api/add_recurring_schedule', async (req, res) => {
-    // Validate appropriate parameters are passed into the book appointment endpoint.
-    // Verification to make sure appointments are only made for future dates and that the worker is available during that time will be handled by the front end.
+router.post('/api/add-recurring-schedule', async (req, res) => {
+    // Validate appropriate parameters are passed into add recurring schedule. 
     const paramSchema = Joi.object({
-        workerTimeslotId: Joi.number().integer().required(),
         slotId: Joi.number().integer().required(),
         schoolId: Joi.number().integer().required(),
-        workerId: Joi.number().integer().required(), 
-        status:Joi.string().max(300).required(),
-        date: Joi.string().allow(null).max(300)
-})
+        workerId: Joi.number().integer().required(),
+        status: Joi.string().max(30), // The default value is available which is handled by the database Create Table logic. 
+        date: Joi.date().iso(),
+    });
 
     const query = req.query ? req.query : {};
-    
-    const workerTimeslotId = query.workerTimeslotId ? query.workerTimeslotId : null;
+
     const slotId = query.slotId ? query.slotId : null;
     const schoolId = query.schoolID ? query.schoolID : null;
     const workerId = query.workerID ? query.workerID : null;
     const status = query.status ? query.status : null;
-    const date = query.date ? query.date: null; 
+    const date = query.date ? query.date : null;
 
-    const { error } = paramSchema.validate({workerTimeslotId, slotId, schoolId, workerId, status, date});
+    const { error } = paramSchema.validate({ workerTimeslotId, slotId, schoolId, workerId, status, date });
 
     if (!_.isNil(error)) res.send(error);
 
@@ -80,6 +77,8 @@ router.post('/api/add_recurring_schedule', async (req, res) => {
     const isSuccessfullyInserted = await workerTimeslotHandler.addWorkerTimeslot(workerTimeslotId, slotId, schoolId, workerId, status, date);
 
     res.send(isSuccessfullyInserted);
+});
+
 router.post('/api/worker-availability', async (req, res) => {
     const paramSchema = Joi.object({
         workerId: Joi.number().integer().required(),
@@ -109,5 +108,5 @@ router.get('/test', async (req, res) => {
     res.send(true);
 });
 
-module.exports = router 
-});
+module.exports = router
+
