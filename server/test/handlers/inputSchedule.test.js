@@ -11,10 +11,10 @@ describe('testing invalid user schedule input', () => {
         const testSchoolId = null;
 
         // Act
-        const user = await workerTimeslotHandler.addWorkerTimeslot(testWorkerId, testschoolId);
+        const isSuccessfullyInserted = await workerTimeslotHandler.addWorkerTimeslot(testWorkerId, testschoolId);
 
         // Assert
-        expect(user).toBe(null);
+        expect(isSuccessfullyInserted).toBe(null);
     });
 
     test('rejection of empty values for worker and school ID', async () => {
@@ -23,7 +23,7 @@ describe('testing invalid user schedule input', () => {
         const testSchoolId = '';
     
         // Act
-        const user = await authenticateHandler.addWorkerTimeslot(testWorkerId, testSchoolId);
+        const user = await workerTimeslotHandler.addWorkerTimeslot(testWorkerId, testSchoolId);
 
         // Assert
         expect(user).toBe(null);
@@ -34,7 +34,7 @@ describe('testing invalid user schedule input', () => {
         const testWorkerId = 'Invalid Worker ID';
         const testSchoolId = 'Invalid School ID';
         // Act
-        const user = await authenticateHandler.addWorkerTimeslot(testWorkerId, testSchoolId);
+        const user = await workerTimeslotHandler.addWorkerTimeslot(testWorkerId, testSchoolId);
 
         // Assert
         expect(user).toBe(null);
@@ -46,7 +46,7 @@ describe('testing invalid user schedule input', () => {
         const testSchoolId = '001';
 
         // Act
-        const user = await authenticateHandler.addWorkerTimeslot(testWorkerId, testSchoolId);
+        const user = await workerTimeslotHandler.addWorkerTimeslot(testWorkerId, testSchoolId);
 
         // Assert
         expect(user).toBe(null);
@@ -58,7 +58,7 @@ describe('testing invalid user schedule input', () => {
         const testSchoolId = 'Invalid School ID';
 
         // Act
-        const user = await authenticateHandler.addWorkerTimeslot(testWorkerId, testSchoolId);
+        const user = await workerTimeslotHandler.addWorkerTimeslot(testWorkerId, testSchoolId);
         // Assert
         expect(user).toBe(null);
     });
