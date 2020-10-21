@@ -39,7 +39,6 @@ or case 2 for a service staff user*/
             lastName
             email
             accessToken
-            
             phone
             schoolID.*/
 
@@ -82,7 +81,7 @@ switch (userTypeSelection) {
             lastName
             email
             accessToken
-            
+
             phone
             specialization.*/
 case 2:
