@@ -9,7 +9,8 @@ function AvailableMeetingHeader() { // This is a header for the service worker p
         <div>
            <header className = 'appHeader'></header> 
             <l1 className = 'HeaderText1'> 
-                <a href = "https://www.google.com/" target="_blank"> Available</a>  
+                <a href = "#" > Available</a>  
+                {/* <a href = "https://www.google.com/" target="_blank"> Available</a>   */}
             </l1>
             <l2 className = 'HeaderText2'> 
                 <a href = "#">MeetingHistory</a>
