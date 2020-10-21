@@ -5,12 +5,11 @@ async function userAccount(firstName, lastName, type, studentID, email, password
     
     const user = {
         type: 'student', //note: 'type' is called 'role' in the UI, but refers to either a worker or a student.
-        accessToken: '2wA4s6t',
         studentId: 20764242,
         firstname: 'Victor',
         lastname: 'Hugo',
         email: 'victorhugo@gmail.com',
-        phone: "6476442200",
+        phone: "6476442200"
 
          /*  Please note: When returning user object, 
         I have omitted the 'password'. 
