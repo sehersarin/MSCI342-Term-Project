@@ -76,8 +76,12 @@ switch (userTypeSelection) {
     is generated randomly using the npm library randomstring*/
      
     var accessToken = require("accessToken");
-    randomstring.generate(6);
-    // Eg. 4h62fw
+    randomstring.generate({
+        length: 6,
+        charset: 'alphanumeric' // eg. all numeric digits, all alphabets lowercase and uppercase.
+        readable: 'true' //exclude difficult to read characters like o and 0.
+      });
+    // Eg. 4H62fw
 
 
     //We make an account for the student based on the credentials they provided:
@@ -122,6 +126,20 @@ case 2:
     password
     
      = input.next();
+
+
+        /* Create an access token for the worker. 
+    The access token (with default length of 6 alphanumeric characters)
+    is generated randomly using the npm library randomstring*/
+     
+    var accessToken = require("accessToken");
+    randomstring.generate({
+        length: 6,
+        charset: 'alphanumeric' // eg. all numeric digits, all alphabets lowercase and uppercase.
+        readable: 'true' //exclude difficult to read characters like o and 0.
+      });
+    // Eg. 4H62fw
+
 
     //We make an account for the service staff based on the credentials they provided:
     serviceStaff.add(new userType(workerID, firstName, lastName, email, password, phone, specialization, accessToken));
