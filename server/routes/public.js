@@ -5,9 +5,9 @@ const Joi = require('joi');
 const router = express.Router();
 
 const authenticateHandler = require('../models/handlers/authenticate');
-const accountCreationHandler = require('../models/handlers/account');
+const accountHandler = require('../models/handlers/account');
 
-router.get('/api/login', async(req, res) => {
+router.get('/api/login', async (req, res) => {
     // Validate appropriate parameters are passed into the login endpoint.
     const paramSchema = Joi.object({
         email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net', 'ca'] } }).max(320).required(),
@@ -17,9 +17,9 @@ router.get('/api/login', async(req, res) => {
     const paramEmail = req.query.email ? req.query.email : null;
     const paramPassword = req.query.password ? req.query.password : null;
 
-    const {error, value} = paramSchema.validate({email: paramEmail, password: paramPassword});
+    const { error, value } = paramSchema.validate({ email: paramEmail, password: paramPassword });
 
-    if(!_.isNil(error)) res.send(error);
+    if (!_.isNil(error)) res.send(error);
 
     // New access tokens will only be generated upon sign up and user logout. 
     // The login event should not change the access token to prevent undesired logout from other devices.
@@ -28,7 +28,7 @@ router.get('/api/login', async(req, res) => {
     res.send(user);
 });
 
-router.get('/api/create-user', async(req, res) => {
+router.get('/api/create-user', async (req, res) => {
     const firstName = req.query.firstName;
     const lastName = req.query.lastName;
     const type = req.query.type; //note: 'type' is called 'role' in the UI, but refers to either a worker or a student.
@@ -37,14 +37,9 @@ router.get('/api/create-user', async(req, res) => {
     const password = req.query.password;
     const phone = req.query.phone;
 
-     const user = await accountCreationHandler.createUserAccount(firstName, lastName, type, studentID, email, password, phone);
+    const user = await accountHandler.createUserAccount(firstName, lastName, type, studentID, email, password, phone);
 
-     res.send(user);
+    res.send(user);
+});
 
 module.exports = router 
-
-const router = express.Router();
-
- const accountCreationHandler = require('../models/handlers/account');
-
- });
