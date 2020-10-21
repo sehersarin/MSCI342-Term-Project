@@ -15,13 +15,31 @@ const nodemailer = require('nodemailer'),
     Promise = require('bluebird');
 
 
+    let users = [
+        {
+            userName: 'Flora',
+            email: 'neelakshiprabhakar@gmail.com',
+        },
+        {
+            userName: 'Fauna',
+            email: 'neelakshiprabhakar@gmail.com',
+        },
+        {
+            userName: 'Victor',
+            email: 'neelakshiprabhakar@gmail.com',
+        },
+        {
+            userName: 'Hugo',
+            email: 'neelakshiprabhakar@gmail.com',
+        },
+    ];
 /* Create a function to send emails with an obj*/
 function sendEmail (obj) {
     return transporter.sendMail(obj);
 }
 /* Create a function for template emails*/
 function loadTemplate (StudentAppointmentConfirmation, contexts) {
-    let template = new EmailTemplate(path.join(__dirname, 'templates', StudentAppointmentConfirmation));
+    let template = new EmailTemplate(path.join(__diruserNam, 'templates', StudentAppointmentConfirmation));
     return Promise.all(contexts.map((context) => {
         return new Promise((resolve, reject) => {
             template.render(context, (err, result) => {
