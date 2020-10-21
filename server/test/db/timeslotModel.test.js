@@ -1,55 +1,56 @@
 const timeslotModel = require('../../models/db/timeslot');
 
-describe('testing parameters for getWorker method', () => {
+describe('testing parameters for insertWorkerTimeslot method', () => {
     beforeEach(() => {
         jest.resetModules(); // Clears any cache between tests.
     });
 
-    test('null value for email and valid password', async () => {
+    test('null value for all parameters', async () => {
         // Arrange
-        const testEmail = null;
-        const testPassword = 'j1234';
+        const workerTimeslotId = null;
+        const slotId = null;
+        const schoolId = null;
+        const workerId = null;
+        const status = null;
+        const date = null;
 
         // Act
-        const isTimelslotInserted = await timeslotModel.insertWorkerTimeslot(testEmail, testPassword);
+        const isTimelslotInserted = await timeslotModel.insertWorkerTimeslot(workerTimeslotId, slotId, schoolId, workerId, status, date);
 
         // Assert
-        expect(isTimelslotInserted).toBe(null);
+        expect(isTimelslotInserted).toBe(false);
     });
 
-    test('null value for password and valid email', async () => {
+    test('valid sample values for all parameters', async () => {
         // Arrange
-        const testEmail = 'joshuabrooks@gmail.com';
-        const testPassword = null;
+        const workerTimeslotId = 0050;
+        const slotId = 0010;
+        const schoolId = 1000;
+        const workerId = 9100;
+        const status = available;
+        const date = new Date(2020, 10, 22, 00, 00, 00, 0);
 
         // Act
-        const user = await timeslotModel.insertWorkerTimeslot(testEmail, testPassword);
+        const isTimelslotInserted = await timeslotModel.insertWorkerTimeslot(workerTimeslotId, slotId, schoolId, workerId, status, date);
 
         // Assert
-        expect(user).toBe(null);
+        expect(isTimelslotInserted).toBe(true);
     });
 
-    test('valid parameter values', async () => {
+    test('valid sample values for all parameters except one', async () => {
         // Arrange
-        const workerEmail = 'joshuabrooks@gmail.com';
-        const workerPassword = 'j1234';
-        const workerUser = {
-            workerId: 8000000,
-            firstName: 'Joshua',
-            lastName: 'Brooks',
-            email: workerEmail,
-            type: 'worker',
-            accessToken: 'eeJAQr3wEC6CJZROFJTY',
-            phone: '+15191234567',
-            specialization: 'Masters in Social Work',
-            type: 'Guidance Counselor'
-        };
+        const workerTimeslotId = null;
+        const slotId = 0010;
+        const schoolId = 1000;
+        const workerId = 9100;
+        const status = available;
+        const date = new Date(2020, 10, 22, 00, 00, 00, 0);
 
-         // Act
-         const user = await timeslotModel.insertWorkerTimeslot(workerEmail, workerPassword);
+        // Act
+        const isTimelslotInserted = await timeslotModel.insertWorkerTimeslot(workerTimeslotId, slotId, schoolId, workerId, status, date);
 
-         // Assert
-         expect(user).toMatchObject(workerUser);
+        // Assert
+        expect(isTimelslotInserted).toBe(false);
     });
 
 });
