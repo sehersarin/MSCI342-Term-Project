@@ -1,37 +1,18 @@
-/*const _ = require('lodash');
+const _ = require('lodash');
 
 const { db } = require('../../lib/connection');
 
-const UserTypes = require('../../constants/userTypes.json');
 const Tables = require('../../constants/tables.json');
+const TimeslotStatus  = require('../../constants/timeslot-status.json');
 
-// This method returns the corresponding user given the email and password. If the email and/or password are incorrect or undefined, it will return null. 
-// If either the tableName or Object are null or undefined, an error will be thrown.
-// Default values for the parameters not assigned as either student or worker user types are equally likely (prevent issues).
-async function getUser(email, password, tableName, Object) {
-    if (_.isNil(email) || _.isNil(password)) return null;
-    if (_.isNil(tableName) || _.isNil(Object)) throw new Error('InvalidParametersError', 'Invalid parameters. Make sure to specify tablename and Object arguments when calling the getUser method.');
-    
-    const data = await db.any(`select * from ${tableName} where email='${email}' and password='${password}';`);
-
-    if (_.isEmpty(data)) return null;
-
-    return new Object(data[0]);
-}
-
-async function isValidUserAccessToken(accessToken, userType) {
-    if (_.isNil(accessToken) || _.isNil(userType)) return false;
-
-    const tableName = (userType === UserTypes.student) ? Tables.student : Tables.worker;
-
-    const data = await db.any(`select * from ${tableName} where access_token='${accessToken}';`);
-
-    if (_.isEmpty(data)) return false;
-
-    return true;
+// This method inserts an appointment entry given specific information.
+async function insertWorkerTimeslot(workerTimeslotId, slotId, schoolId, workerId, status, date) {
+    // Added conditional statements to prevent status and date from storing "null" instead of null. 
+    // Date is currently being input as a string. Unsure of correct format for date data type. 
+    // Opportunity to add the "recurring" functionality not taken yet. Unsure if this will come from the front end or not. 
+    return db.any(`insert into ${Tables.worker_timeslot} (worker_timeslot_id, slot_id, school_id, worker_id, status, date) values (${workerTimeslotId}, ${slotId}, ${schoolId}, ${workerId}, ${status ? `'${status}'` : null}, ${date ? `'${date}'` : null}, '${TimeslotStatus .available}');`);
 }
 
 module.exports = {
-    getUser,
-    isValidUserAccessToken,
-}*/
+    insertWorkerTimeslot,
+} 
