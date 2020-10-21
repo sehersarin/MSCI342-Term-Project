@@ -103,7 +103,6 @@ class CreateAppointmentForm extends Component {
                   2020-10-20, 08:30 - 09:00
                   </div> 
                   </label>
-
                   <label>
                   <input type="checkbox" id="timeSlot" name="timeSlot" value="3" onChange={this.handleCheckbox}/>
                   </label>
@@ -125,6 +124,9 @@ class CreateAppointmentForm extends Component {
                       </label>
                     <br></br>
                   <label>
+                  <div>
+                     (300 Character limit)
+                  </div>
                   <br></br>
                   <input
                   className ="SubmitButton" 
