@@ -16,7 +16,8 @@ import java.util.ArrayList;
 
             Scanner input = new Scanner(System.in); 
 
-            String email, accessToken
+            String email, password
+            
             , schoolName;
 
             //The main account creation page
@@ -38,7 +39,8 @@ or case 2 for a service staff user*/
             firstName
             lastName
             email
-            accessToken
+            password
+            
             phone
             schoolID.*/
 
@@ -56,7 +58,8 @@ switch (userTypeSelection) {
     System.out.print("email : "); 
     email = input.next();
 
-    System.out.print("accessToken
+    System.out.print("password
+    
      : "); 
     email = input.next();
     
@@ -64,7 +67,8 @@ switch (userTypeSelection) {
     email = input.next();
 
     System.out.print("schoolID : ");
-    accessToken
+    password
+    
      = input.next();
 
      /* Create an access token for the student. 
@@ -79,7 +83,8 @@ switch (userTypeSelection) {
 
 
     //We make an account for the student based on the credentials they provided:
-    student.add(new userType(firstName, lastName, email, accessToken
+    student.add(new userType(firstName, lastName, email, password
+        
         , phone, schoolID));
     break;
 
@@ -90,7 +95,8 @@ switch (userTypeSelection) {
             firstName
             lastName
             email
-            accessToken
+            password
+            
 
             phone
             specialization.*/
@@ -109,18 +115,21 @@ case 2:
     System.out.print("email : "); 
     email = input.next();
 
-    System.out.print("accessToken : "); 
+    System.out.print("password
+     : "); 
     email = input.next();
     
     System.out.print("phone : "); 
     email = input.next();
 
     System.out.print("specialization : ");
-    accessToken
+    password
+    
      = input.next();
 
     //We make an account for the service staff based on the credentials they provided:
-    serviceStaff.add(new userType(workerID, firstName, lastName, email, accessToken
+    serviceStaff.add(new userType(workerID, firstName, lastName, email, password
+        
         , phone, specialization));
     break;
 
