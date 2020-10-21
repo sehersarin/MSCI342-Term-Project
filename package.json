@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/sehersarin/MSCI342-Term-Project#readme",
   "dependencies": {
+<<<<<<< Updated upstream
     "moment": "^2.29.1",
     "react-grid-system": "^7.1.1",
     "react-moment": "^1.0.0",
@@ -31,5 +32,11 @@
   },
   "devDependencies": {
     "eslint-plugin-react-hooks": "^4.1.2"
+=======
+    "axios": "^0.20.0"
+  },
+  "devDependencies": {
+    "jest": "^26.6.0"
+>>>>>>> Stashed changes
   }
 }
