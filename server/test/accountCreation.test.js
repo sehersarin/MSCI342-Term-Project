@@ -1,4 +1,4 @@
-const accountCreationHandler = require('../models/handlers/accountCreation');
+const accountCreationHandler = require('../models/handlers/account');
 
  describe('Test to check valid account creation', () => {
      beforeEach(() => {
@@ -17,7 +17,7 @@ const accountCreationHandler = require('../models/handlers/accountCreation');
             firstname: 'Victor',
             lastname: 'Hugo',
             email: 'victorhugo@gmail.com',
-            phone: "6476442200"
+            phone: '6476442200'
          };
 
          // Act

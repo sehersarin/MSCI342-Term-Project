@@ -9,7 +9,7 @@ async function createUserAccount(firstName, lastName, type, studentID, email, pa
         firstname: 'Victor',
         lastname: 'Hugo',
         email: 'victorhugo@gmail.com',
-        phone: "6476442200"
+        phone: '6476442200'
 
          /*  Please note: When returning user object, 
         I have omitted the 'password'. 
