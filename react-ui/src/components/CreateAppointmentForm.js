@@ -17,6 +17,8 @@ class CreateAppointmentForm extends Component {
     constructor(props) {
       super(props);
       this.state = {
+        workerId: 8000000, // taken from Amy's test for the api
+        schoolId: 1,       //will need to implement a page before this to pass these values through
         studentId: 0, // check with Melissa if already stored in props
         workerTimeslotId : 0, 
         purpose: "", // Max 300 => input size is 300
@@ -68,7 +70,8 @@ class CreateAppointmentForm extends Component {
         });
       });
   }
-  
+  //add an else if statement for successful form submissiom but unsuccessful appointment submission (api backend)
+  //have the user redo the book appointment process
   render() {
     if (this.state.successfulAppointment && this.state.formSubmission)
       return (
@@ -82,30 +85,35 @@ class CreateAppointmentForm extends Component {
              <Title name= "Book Appointment. (Still needs to be implemented)"></Title>
             <Row>
              <Col sm={12} align="center">
-             <form onSubmit={this.handleSubmit}>
+             <form onSubmit={this.handleSubmit}> 
                   <label>
-                  <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" onChange={this.handleCheckbox}/>
+                  <input type="checkbox" id="timeSlot" name="timeSlot" value="1" onChange={this.handleCheckbox}/>
                   </label>
-             
                   <label>
-                  <input 
-                    className ="InputFields" 
-                    type="text" 
-                    name="date" //worker time slot id
-                    size ="40"
-                    placeholder= "Select a Date" 
-                    onChange={this.handleFormChange} /> 
+                  <div>
+                  2020-10-20, 08:00 - 08:30
+                  </div> 
                   </label>
+
+                  <label>
+                  <input type="checkbox" id="timeSlot" name="timeSlot" value="2" onChange={this.handleCheckbox}/>
+                  </label>
+                  <label>
+                  <div>
+                  2020-10-20, 08:30 - 09:00
+                  </div> 
+                  </label>
+
+                  <label>
+                  <input type="checkbox" id="timeSlot" name="timeSlot" value="3" onChange={this.handleCheckbox}/>
+                  </label>
+                  <label>
+                  <div>
+                  2020-10-20, 09:00 - 09:30
+                  </div> 
+                  </label>
+
                   <br></br>
-                  <label>
-                  <input 
-                    className ="InputFields" 
-                    type="text" 
-                    name="time_slot"
-                    size ="40"
-                    placeholder= "Select a Time" 
-                    onChange={this.handleFormChange} />
-                  </label>
                   <br></br>
                   <label>
                   <input 
@@ -131,7 +139,28 @@ class CreateAppointmentForm extends Component {
           </Container>
         );
   }
-  }
+
+  /*
+  componentDidMount() {
+    <div>
+      Success!
+    </div>
+    let workerId = this.state.workerId;
+    let schoolId = this.state.workerId;
+
+    var params = {workerId: workerId, schoolId: schoolId}
+
+    axios.post(`/api/worker-availability?${queryString.stringify(params)}`)
+    .then(res => {
+    console.log(res.data);
+    let availableTimeArray = res.data;
+    this.setState({
+      availableTime: availableTimeArray
+    });
+  });
+}
+*/
+}
   
   export default CreateAppointmentForm;
   
