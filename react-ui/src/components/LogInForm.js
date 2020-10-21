@@ -14,7 +14,7 @@ class logInForm extends Component {
     this.state = {
       islogged: false,
       type: "",
-      name: "",
+      firstName: "",
       loginParams: {
         email: "",
         password: "",
@@ -38,12 +38,11 @@ class logInForm extends Component {
     var params = {email: email, password: password}
     axios.get(`/api/login/?${queryString.stringify(params)}`)
     .then(res => {
-      console.log(res.data)
-      if(res.data){
+      if(res.data!==""){
         this.setState({
           email : res.data.email,
           type: res.data.type,
-          name: res.data.firstName,
+          firstName: res.data.firstName,
           islogged: true
         })
         // localStorage.setItem("token", "T");
@@ -54,7 +53,7 @@ class logInForm extends Component {
   } 
 
   render() {
-    let newRoute= <Route exact path="/login" render={props => ( <Redirect to={`/dashboard/${this.state.loginParams.email}/${this.state.type}/${this.state.name}`} Component={dashboard}/>)}></Route> 
+    let newRoute= <Route exact path="/login" render={props => ( <Redirect to={`/dashboard/${this.state.loginParams.email}/${this.state.type}/${this.state.firstName}`} Component={dashboard}/>)}></Route> 
   
     if (this.state.islogged) {
       return newRoute;

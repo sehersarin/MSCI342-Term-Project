@@ -14,12 +14,12 @@ class Dashboard extends Component {
       islogout: false,
       email: this.props.match.params.email,
       type : this.props.match.params.type,
-      name : this.props.match.params.name,
+      firstName : this.props.match.params.name,
     };
   }
 
   componentDidMount() {
-    console.log(this.state.email);
+    console.log(this.state.firstName);
   }
 
   signOut = () => {
@@ -71,7 +71,7 @@ class Dashboard extends Component {
           <div className="main">
             <Switch>
               <Route path={`${match.path}/page2`}>
-                <Page2 name={this.state.name}/>
+                <Page2 name={this.state.firstName}/>
               </Route>
               {/* there should not be a Route path to sign up here */}
               {/* <Route path={`${match.path}/Signup`}>
