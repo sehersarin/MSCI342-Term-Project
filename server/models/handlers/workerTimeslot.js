@@ -1,6 +1,6 @@
 const timeslotModel = require('../db/add-worker-timeslot');
 
-// Adds an appointment to the database and returns true upon successful completion.
+// Adds a timeslot into the database and returns true upon successful completion. 
 async function addWorkerTimeslot(workerTimeslotId, slotId, schoolId, workerId, status, date) {
     try {
         await timeslotModel.insertWorkerTimeslot(workerTimeslotId, slotId, schoolId, workerId, status, date);
