@@ -23,5 +23,10 @@
     "url": "https://github.com/sehersarin/MSCI342-Term-Project/issues"
   },
   "homepage": "https://github.com/sehersarin/MSCI342-Term-Project#readme",
-  "dependencies": {}
+  "dependencies": {
+    "bluebird": "^3.7.2",
+    "email-templates": "^7.1.2",
+    "handlebars": "^4.7.6",
+    "nodemailer": "^6.4.14"
+  }
 }
