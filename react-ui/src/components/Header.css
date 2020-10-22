@@ -4,8 +4,14 @@
     height: 80px;
   }
   
-  .App-header {
+  .App-header-blue {
     background-color: #eae8ff;
+    height: 40px;
+    /* padding: 5px; */
+    /* color: white; */
+  }
+  .App-header-red {
+    background-color: #FF0000;
     height: 40px;
     /* padding: 5px; */
     /* color: white; */
