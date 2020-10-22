@@ -4,15 +4,20 @@ import { Redirect, Route, withRouter } from "react-router-dom";
 import Title from "./Title"
 import "./LogInForm.css"
 import dashboard from "./Layouts/Dashboard"
+import queryString from 'query-string'
+
+const axios = require('axios').default;
 
 class logInForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
       islogged: false,
+      type: "",
+      firstName: "",
       loginParams: {
-        user_id: "",
-        user_password: "",
+        email: "",
+        password: "",
       }
     };
   }
@@ -28,21 +33,29 @@ class logInForm extends Component {
 
 
   login = event => {
-    let user_id = this.state.loginParams.user_id;
-    let user_password = this.state.loginParams.user_password;
-    if (user_id === "admin" && user_password === "123") {
-      localStorage.setItem("token", "T");
-      this.setState({
-        islogged: true
-      });
-    }
+    let email = this.state.loginParams.email;
+    let password = this.state.loginParams.password;
+    var params = {email: email, password: password}
+    axios.get(`/api/login/?${queryString.stringify(params)}`)
+    .then(res => {
+      if(res.data!==""){
+        this.setState({
+          email : res.data.email,
+          type: res.data.type,
+          firstName: res.data.firstName,
+          islogged: true
+        })
+        // localStorage.setItem("token", "T");
+        console.log(this.state.type)
+      }
+    })
     event.preventDefault();
-  };
+  } 
 
   render() {
-    let newRoute= <Route exact path="/login" render={props => ( <Redirect to={`/dashboard/${this.state.loginParams.user_id}`} Component={dashboard}/>)}></Route> 
+    let newRoute= <Route exact path="/login" render={props => ( <Redirect to={`/dashboard/${this.state.loginParams.email}/${this.state.type}/${this.state.firstName}`} Component={dashboard}/>)}></Route> 
   
-    if (localStorage.getItem("token")) {
+    if (this.state.islogged) {
       return newRoute;
     }
       return (
@@ -55,15 +68,15 @@ class logInForm extends Component {
                   <input 
                   className ="InputFields" 
                   type="text" 
-                  name="user_id"
-                  placeholder= "ID" 
+                  name="email"
+                  placeholder= "email" 
                   onChange={this.handleFormChange} />
                 </label>
                 <br></br>
                 <label>
                   <input 
                   className ="InputFields" 
-                  name="user_password"
+                  name="password"
                   type="password" 
                   placeholder= "password" 
                   onChange={this.handleFormChange} />
