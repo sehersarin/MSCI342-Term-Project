@@ -54,11 +54,11 @@ router.post('/api/book-appointment', async (req, res) => {
 router.post('/api/add-recurring-schedule', async (req, res) => {
     // Validate appropriate parameters are passed into add recurring schedule. 
     const paramSchema = Joi.object({
-        slotId: Joi.number().integer().required(),
-        schoolId: Joi.number().integer().required(),
-        workerId: Joi.number().integer().required(),
+        slotId: Joi.number().integer().required(), //The worker must specify the slot(s) they are available 
+        schoolId: Joi.number().integer().required(), //The worker must specify the corresponding school they are working at with an ID 
+        workerId: Joi.number().integer().required(), //The worker must specify their ID 
         status: Joi.string().max(30), // The default value is available which is handled by the database Create Table logic. 
-        date: Joi.date().iso(),
+        date: Joi.date().iso().required(), //Enables the worker to select weekdays (Monday to Friday) and add in schedule for each corresponding day of the week
     });
 
     const query = req.query ? req.query : {};
