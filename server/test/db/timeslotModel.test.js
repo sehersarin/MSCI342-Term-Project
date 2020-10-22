@@ -1,4 +1,5 @@
 const timeslotModel = require('../../models/db/timeslot');
+const moment= require('moment');
 
 describe('testing parameters for insertWorkerTimeslot method', () => {
     beforeEach(() => {
