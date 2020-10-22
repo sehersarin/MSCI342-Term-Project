@@ -1,4 +1,4 @@
-const timeslotHandler = require('../../models/handlers/workerTimeslot');
+const timeslotHandler = require('../../models/handlers/timeslot');
 
 describe('testing inputting of worker schedule functionality', () => {
     beforeEach(() => {
