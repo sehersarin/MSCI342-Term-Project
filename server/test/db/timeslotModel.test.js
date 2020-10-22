@@ -29,7 +29,7 @@ describe('testing parameters for insertWorkerTimeslot method', () => {
         const schoolId = '1000';
         const workerId = '9100';
         const status = 'available';
-        const date = new Date(1776, 6, 4, 12, 30, 0, 0);
+        const date = new Date(2019, 5, 11, 5, 23, 59);
 
         // Act
         const isTimelslotInserted = await timeslotModel.insertWorkerTimeslot(workerTimeslotId, slotId, schoolId, workerId, status, date);
@@ -45,7 +45,7 @@ describe('testing parameters for insertWorkerTimeslot method', () => {
         const schoolId = '1000';
         const workerId = '9100';
         const status = 'available';
-        const date = new Date(1776, 6, 4, 12, 30, 0, 0);
+        const date = new Date(2019, 5, 11, 5, 23, 59);
 
         // Act
         const isTimelslotInserted = await timeslotModel.insertWorkerTimeslot(workerTimeslotId, slotId, schoolId, workerId, status, date);
