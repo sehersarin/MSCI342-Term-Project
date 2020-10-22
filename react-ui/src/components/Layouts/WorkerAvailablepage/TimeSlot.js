@@ -1,7 +1,7 @@
 import React  from 'react';
 import { render } from 'react-dom';
 import './TimeSlot.css'; 
-import moment from 'moment';
+import {moment} from 'moment';
 
 
 /* import {Container, Row, Col} from 'react-grid-system'; */
