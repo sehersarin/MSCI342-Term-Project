@@ -5,6 +5,7 @@ import Page2 from "./Page2";
 import IndexDashboard from "./IndexDashboard";
 import NotFound from "./404";
 import Header from "../Header"
+import CreateAppointment from "./CreateAppointment"
 
 
 class Dashboard extends Component {
@@ -61,6 +62,9 @@ class Dashboard extends Component {
           <li>
             <Link to={`${match.path}/Signup`}>Sign-up</Link>
           </li>
+          <li>
+            <Link to={`${match.path}/CreateAppointment`}>Create Appointment</Link>
+          </li>
           <li className="push-right">
             <button onClick={this.signOut} href="#">
               Sign Out
@@ -73,6 +77,11 @@ class Dashboard extends Component {
               <Route path={`${match.path}/page2`}>
                 <Page2 name={this.state.firstName}/>
               </Route>
+      
+              <Route path={`${match.path}/CreateAppointment`}>
+                <CreateAppointment name={this.state.personId}/>
+              </Route>
+      
               {/* there should not be a Route path to sign up here */}
               {/* <Route path={`${match.path}/Signup`}>
                 <Signup name={this.state.email}/>
