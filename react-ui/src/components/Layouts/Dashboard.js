@@ -2,7 +2,6 @@ import React, { Component, Fragment } from "react";
 import { Redirect, Switch, Route, Link } from "react-router-dom";
 import { withRouter } from "react-router";
 import Page2 from "./Page2";
-import Signup from "./Signup";
 import IndexDashboard from "./IndexDashboard";
 import NotFound from "./404";
 import Header from "../Header"
@@ -14,12 +13,14 @@ class Dashboard extends Component {
     super(props);
     this.state = {
       islogout: false,
-      personId: this.props.match.params.id
+      email: this.props.match.params.email,
+      type : this.props.match.params.type,
+      firstName : this.props.match.params.name,
     };
   }
 
   componentDidMount() {
-    console.log(this.state.personId);
+    console.log(this.state.firstName);
   }
 
   signOut = () => {
@@ -28,14 +29,22 @@ class Dashboard extends Component {
       islogout: true
     });
   };
+
   render() {
     if (this.state.islogout) {
       return <Redirect to="/login" />;
     }
+    let header;
+    if(this.state.type ==="student"){
+      header = <Header color="red"/>
+    } else {
+      header = <Header color="purple"/>
+    }
+   
     const { match } = this.props;
     return (
       <Fragment>
-        <Header/>
+        {header}
         <br>
         </br>
         <br>
@@ -66,14 +75,17 @@ class Dashboard extends Component {
           <div className="main">
             <Switch>
               <Route path={`${match.path}/page2`}>
-                <Page2 name={this.state.personId}/>
+                <Page2 name={this.state.firstName}/>
               </Route>
-              <Route path={`${match.path}/Signup`}>
-                <Signup name={this.state.personId}/>
-              </Route>
+      
               <Route path={`${match.path}/CreateAppointment`}>
                 <CreateAppointment name={this.state.personId}/>
               </Route>
+      
+              {/* there should not be a Route path to sign up here */}
+              {/* <Route path={`${match.path}/Signup`}>
+                <Signup name={this.state.email}/>
+              </Route> */}
               <Route exact path={`${match.path}`}>
                 <IndexDashboard/>
               </Route>
