@@ -23,10 +23,10 @@ describe('testing parameters for insertWorkerTimeslot method', () => {
 
     test('valid sample values for all parameters', async () => {
         // Arrange
-        const workerTimeslotId = 0050;
-        const slotId = 0010;
-        const schoolId = 1000;
-        const workerId = 9100;
+        const workerTimeslotId = '0050';
+        const slotId = '0010';
+        const schoolId = '1000';
+        const workerId = '9100';
         const status = available;
         const date = new Date(2020, 10, 22, 00, 00, 00, 0);
 
@@ -40,9 +40,9 @@ describe('testing parameters for insertWorkerTimeslot method', () => {
     test('valid sample values for all parameters except one', async () => {
         // Arrange
         const workerTimeslotId = null;
-        const slotId = 0010;
-        const schoolId = 1000;
-        const workerId = 9100;
+        const slotId = '0010';
+        const schoolId = '1000';
+        const workerId = '9100';
         const status = available;
         const date = new Date(2020, 10, 22, 00, 00, 00, 0);
 
