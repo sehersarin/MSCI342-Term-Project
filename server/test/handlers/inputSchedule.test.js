@@ -19,6 +19,7 @@ describe('testing inputting of worker schedule functionality', () => {
     });
 });
 
+//This is a test code for when the logic of the backend has been successfully implemented for this functionality 
 
 // describe('testing invalid user schedule input', () => {
 //     beforeEach(() => {
