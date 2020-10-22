@@ -1,4 +1,4 @@
-const workerTimeslotHandler = require('../../models/handlers/workerTimeslot');
+const timeslotHandler = require('../../models/handlers/workerTimeslot');
 
 describe('testing inputting of worker schedule functionality', () => {
     beforeEach(() => {
@@ -12,7 +12,7 @@ describe('testing inputting of worker schedule functionality', () => {
         const testSlotId = 1;
 
         // Act
-        const isSuccessfullyInserted = await workerTimeslotHandler.addWorkerTimeslot(testWorkerId, testSchoolId, testSlotId);
+        const isSuccessfullyInserted = await timeslotHandler.addWorkerTimeslot(testWorkerId, testSchoolId, testSlotId);
 
         // Assert
         expect(isSuccessfullyInserted).toBe(true);
@@ -33,7 +33,7 @@ describe('testing inputting of worker schedule functionality', () => {
 //         const testStatus=null;
 
 //         // Act
-//         const isSuccessfullyInserted = await workerTimeslotHandler.addWorkerTimeslot(testWorkerId, testschoolId, testSlotId, testStatus);
+//         const isSuccessfullyInserted = await timeslotHandler.addWorkerTimeslot(testWorkerId, testschoolId, testSlotId, testStatus);
 
 //         // Assert
 //         expect(isSuccessfullyInserted).toBe(false);
@@ -47,7 +47,7 @@ describe('testing inputting of worker schedule functionality', () => {
 //         const testStatus='';
 
 //         // Act
-//         const user = await workerTimeslotHandler.addWorkerTimeslot(testWorkerId, testSchoolId,testSlotId, testStatus);
+//         const user = await timeslotHandler.addWorkerTimeslot(testWorkerId, testSchoolId,testSlotId, testStatus);
 
 //         // Assert
 //         expect(user).toBe(null);
@@ -74,7 +74,7 @@ describe('testing inputting of worker schedule functionality', () => {
 //         const testStatus='Invalid Status';
 
 //         // Act
-//         const user = await workerTimeslotHandler.addWorkerTimeslot(testWorkerId, testSchoolId);
+//         const user = await timeslotHandler.addWorkerTimeslot(testWorkerId, testSchoolId);
 
 //         // Assert
 //         expect(user).toBe(null);
@@ -86,7 +86,7 @@ describe('testing inputting of worker schedule functionality', () => {
 //         const testSchoolId = 'Invalid School ID';
 
 //         // Act
-//         const user = await workerTimeslotHandler.addWorkerTimeslot(testWorkerId, testSchoolId);
+//         const user = await timeslotHandler.addWorkerTimeslot(testWorkerId, testSchoolId);
 //         // Assert
 //         expect(user).toBe(null);
 //     });
