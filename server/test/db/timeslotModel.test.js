@@ -43,7 +43,7 @@ describe('testing parameters for insertWorkerTimeslot method', () => {
         const slotId = '0010';
         const schoolId = '1000';
         const workerId = '9100';
-        const status = available;
+        const status = 'available';
         const date = new Date(2020, 10, 22, 00, 00, 00, 0);
 
         // Act
