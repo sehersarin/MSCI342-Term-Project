@@ -15,7 +15,7 @@ async function getWorker(email, password) {
 async function insertWorkerAccount(firstName, lastName, type, workerID, email, password, phone) {
    //Data recieved from the front end sign up form
 
-    return db.any(`insert into ${Tables.student} (firstName, lastName, type, studentID, email, password, phone) values 
+    return db.any(`insert into ${Tables.worker} (firstName, lastName, type, studentID, email, password, phone) values 
     (${firstName}, ${lastName}, ${type}, ${workerID}, ${email}, ${password}, ${phone});
 }
 
