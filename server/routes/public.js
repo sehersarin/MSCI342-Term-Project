@@ -44,6 +44,9 @@ router.get('/api/create-user', async (req, res) => {
     const email = req.query.email;
     const password = req.query.password;
     const phone = req.query.phone;
+    const school_id = req.query.school_id; //to add everywhere else in parameters
+    const specialization = req.query.specialization;//to add everywhere else in parameters
+
     //accept worker create worker and student table in migrations
 
     //error check
