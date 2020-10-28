@@ -11,6 +11,14 @@ async function getWorker(email, password) {
     return userModel.getUser(email, password, Tables.worker, Worker);
 }
 
+// This method inserts a worker account given specific information.
+async function insertWorkerAccount(firstName, lastName, type, workerID, email, password, phone) {
+   //Data recieved from the front end sign up form
+
+    return db.any(`insert into ${Tables.student} (firstName, lastName, type, studentID, email, password, phone) values 
+    (${firstName}, ${lastName}, ${type}, ${workerID}, ${email}, ${password}, ${phone});
+}
+
 module.exports = {
     getWorker,
 }
