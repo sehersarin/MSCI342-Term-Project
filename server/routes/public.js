@@ -29,15 +29,27 @@ router.get('/api/login', async (req, res) => {
 });
 
 router.get('/api/create-user', async (req, res) => {
-    //insert joi verification
+    // joi verification
+    // Validate appropriate parameters are passed into the create account endpoint.
+    const paramSchema = Joi.object({
+        email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net', 'ca'] } }).max(320).required(),
+        password: Joi.string().min(3).max(40).required()
+        //insert joi verification for firstname,lastname, type,studentID,workerID,phone
+    });
     const firstName = req.query.firstName;
     const lastName = req.query.lastName;
     const type = req.query.type; //note: 'type' is called 'role' in the UI, but refers to either a worker or a student.
     const studentID = req.query.studentID;
+    const workerID = req.query.workerID;
     const email = req.query.email;
     const password = req.query.password;
     const phone = req.query.phone;
     //accept worker create worker and student table in migrations
+
+    //error check
+    const { error, value } = paramSchema.validate({ email: paramEmail, password: paramPassword });
+    if (!_.isNil(error)) res.send(error);
+
 
     const user = await accountHandler.createUserAccount(firstName, lastName, type, studentID, email, password, phone);
 
