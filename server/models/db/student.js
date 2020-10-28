@@ -22,6 +22,9 @@ async function insertStudentAccount(firstName, lastName, type, studentID, email,
            //get the last insert id
            console.log(`A row has been inserted with rowid ${this.lastID}`);
      });
+    }
+
 module.exports = {
     getStudent,
-}}
+    insertStudentAccount,
+}
