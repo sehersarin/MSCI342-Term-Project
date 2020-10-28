@@ -15,7 +15,7 @@ async function getWorker(email, password) {
 async function insertWorkerAccount(firstName, lastName, type, workerID, email, password, phone) {
    //Data recieved from the front end sign up form
 //Insert one row into a table
-    return db.run(`insert into ${Tables.worker}(firstName, lastName, type, studentID, email, password, phone) values 
+    return db.run(`insert into ${Tables.worker}(firstName, lastName, type, workerID, email, password, phone) values 
     (${firstName}, ${lastName}, ${type}, ${workerID}, ${email}, ${password}, ${phone})`,['C'], function(err){
         if (err) {
             return console.log(err.message);
