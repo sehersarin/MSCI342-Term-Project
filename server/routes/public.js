@@ -35,9 +35,17 @@ router.get('/api/create-user', async (req, res) => {
        
        //The following joi verifications make sure the values inputted adhere to the format requirements
        //specified in the migrations> create-worker-table and migrations> create-student-table.
-       
+
         email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net', 'ca'] } }).max(320).required(),
         password: Joi.string().min(3).max(40).required()
+        phone: Joi.string().max(20).phoneNumber()
+        firstName: Joi.string().min(1).max(20).required()
+        lastName: Joi.string().min(1).max(20).required()
+        studentID: Joi.number().positive().integer()
+        workerID: Joi.number().positive().integer()
+        type: Joi.string().valid(['student', 'worker'])
+        specialization: Joi.string().valid(['social worker', 'guidance councellor'])//verify options
+        accessToken: Joi.string().alphanum().min(3).max(30).required(), 
         //insert joi verification for firstname,lastname, type,studentID,workerID,phone
     });
     // the endpoint `/api/create-user` accepts ALL parameters for both user types, 
@@ -53,6 +61,7 @@ router.get('/api/create-user', async (req, res) => {
     const phone = req.query.phone;
     const school_id = req.query.school_id; //Students only
     const specialization = req.query.specialization; //Workers only
+    const accessToken = req.query.accessToken; //is this needed? If yes, add to worker.js line 18 and student.js line 17
 
    
 
@@ -61,7 +70,7 @@ router.get('/api/create-user', async (req, res) => {
     if (!_.isNil(error)) res.send(error);
 
 
-    const user = await accountHandler.createUserAccount(firstName, lastName, type, studentID, email, password, phone,workerID,school_id,specialization);
+    const user = await accountHandler.createUserAccount(firstName, lastName, type, studentID, email, password, phone,workerID,school_id,specialization,accessToken);
 
     res.send(user);
 });
