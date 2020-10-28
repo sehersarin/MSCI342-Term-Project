@@ -1,5 +1,5 @@
-const timeslotHandler = require('../../models/handlers/timeslot');
 
+const timeslotHandler = require('../models/handlers/timeslot');
 describe('testing inputting of worker schedule functionality', () => {
     beforeEach(() => {
         jest.resetModules(); // Clears any cache between tests.
