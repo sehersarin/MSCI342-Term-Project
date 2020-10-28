@@ -32,22 +32,29 @@ router.get('/api/create-user', async (req, res) => {
     // joi verification
     // Validate appropriate parameters are passed into the create account endpoint.
     const paramSchema = Joi.object({
+       
+       //The following joi verifications make sure the values inputted adhere to the format requirements
+       //specified in the migrations> create-worker-table and migrations> create-student-table.
+       
         email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net', 'ca'] } }).max(320).required(),
         password: Joi.string().min(3).max(40).required()
         //insert joi verification for firstname,lastname, type,studentID,workerID,phone
     });
+    // the endpoint `/api/create-user` accepts ALL parameters for both user types, 
+    //as listed in the migrations> create-worker-table and migrations> create-student-table
+
     const firstName = req.query.firstName;
     const lastName = req.query.lastName;
     const type = req.query.type; //note: 'type' is called 'role' in the UI, but refers to either a worker or a student.
-    const studentID = req.query.studentID;
-    const workerID = req.query.workerID;
+    const studentID = req.query.studentID;//Students only
+    const workerID = req.query.workerID;//Workers only
     const email = req.query.email;
     const password = req.query.password;
     const phone = req.query.phone;
-    const school_id = req.query.school_id; //to add everywhere else in parameters
-    const specialization = req.query.specialization;//to add everywhere else in parameters
+    const school_id = req.query.school_id; //Students only
+    const specialization = req.query.specialization; //Workers only
 
-    //accept worker create worker and student table in migrations
+   
 
     //error check
     const { error, value } = paramSchema.validate({ email: paramEmail, password: paramPassword });
