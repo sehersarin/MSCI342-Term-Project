@@ -11,7 +11,7 @@ async function getStudent(email, password) {
     return userModel.getUser(email, password, Tables.student, Student);
 }
 // This method inserts a student account given specific information.
-async function insertStudentAccount(parameters) {
+async function insertStudentAccount(firstName, lastName, type, studentID, email, password, phone) {
     // Added conditional statements to prevent purpose, studentNotes, and workerComments from storing "null" instead of null.    
    //Data recieved from the front end sign up form
    //to edit line 18
