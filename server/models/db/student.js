@@ -14,8 +14,9 @@ async function getStudent(email, password) {
 async function insertStudentAccount(firstName, lastName, type, studentID, email, password, phone) {
     // Added conditional statements to prevent purpose, studentNotes, and workerComments from storing "null" instead of null.    
    //Data recieved from the front end sign up form
-   //to edit line 18
-    return db.any(`insert into ${Tables.student} (firstName, lastName, type, studentID, email, password, phone) values (${studentId}, ${workerTimeslotId}, ${purpose ? `'${purpose}'` : null}, ${studentNotes ? `'${studentNotes}'` : null}, ${workerComments ? `'${workerComments}'` : null}, '${AppointmentStatus.upcoming}');`);
+
+    return db.any(`insert into ${Tables.student} (firstName, lastName, type, studentID, email, password, phone) values 
+    (${firstName}, ${lastName}, ${type}, ${studentID}, ${email}, ${password}, ${phone} );
 }
 
 module.exports = {
