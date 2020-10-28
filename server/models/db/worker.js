@@ -13,17 +13,19 @@ async function getWorker(email, password) {
 
 // This method inserts a worker account given specific information.
 async function insertWorkerAccount(firstName, lastName, type, workerID, email, password, phone) {
-   //Data recieved from the front end sign up form
-//Insert one row into a table
+    //Data recieved from the front end sign up form
+    //Insert one row into a table
     return db.run(`insert into ${Tables.worker}(firstName, lastName, type, workerID, email, password, phone) values 
-    (${firstName}, ${lastName}, ${type}, ${workerID}, ${email}, ${password}, ${phone})`,['C'], function(err){
+    (${firstName}, ${lastName}, ${type}, ${workerID}, ${email}, ${password}, ${phone})`, ['C'], function (err) {
         if (err) {
             return console.log(err.message);
-          }
-          //get the last insert id
-          console.log(`A row has been inserted with rowid ${this.lastID}`);
+        }
+        //get the last insert id
+        console.log(`A row has been inserted with rowid ${this.lastID}`);
     });
+}
 
 module.exports = {
-    getWorker,
-}}
+    getWorker, 
+    insertWorkerAccount,
+}

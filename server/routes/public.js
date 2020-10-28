@@ -29,6 +29,7 @@ router.get('/api/login', async (req, res) => {
 });
 
 router.get('/api/create-user', async (req, res) => {
+    //insert joi verification
     const firstName = req.query.firstName;
     const lastName = req.query.lastName;
     const type = req.query.type; //note: 'type' is called 'role' in the UI, but refers to either a worker or a student.
@@ -36,6 +37,7 @@ router.get('/api/create-user', async (req, res) => {
     const email = req.query.email;
     const password = req.query.password;
     const phone = req.query.phone;
+    //accept worker create worker and student table in migrations
 
     const user = await accountHandler.createUserAccount(firstName, lastName, type, studentID, email, password, phone);
 
