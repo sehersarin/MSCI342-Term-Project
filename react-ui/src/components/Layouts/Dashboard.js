@@ -6,7 +6,7 @@ import IndexDashboard from "./IndexDashboard";
 import NotFound from "./404";
 import Header from "../Header"
 import CreateAppointment from "./CreateAppointment"
-import WorkerTimeInput from "./WorkerTimeInput";
+
 
 
 
@@ -71,7 +71,7 @@ class Dashboard extends Component {
           </li>
 
           <li>
-            <Link to ={`/WorkerInputpage`}>Worker Input Time Page</Link>
+            <Link to ={`/WorkerAvailableInputPage`}>Worker Input Time Page</Link>
 
           </li>
     

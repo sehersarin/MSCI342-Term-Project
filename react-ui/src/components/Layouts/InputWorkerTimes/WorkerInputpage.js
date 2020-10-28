@@ -24,8 +24,8 @@ class WorkerInputpage extends React.Component {    // this class component would
 
 
                 <Container className = "wraper">
-                    <label for ="school" > Select School:</label>
-                    <select name="school" className ="SelectSchools" id="school">   
+                    <label for ="school" className = "SelectSchoolsLabel" > Select School:</label>
+                    <select name="school" className ="SelectSchools"  id="school">   
                     <option value="School1">School 1</option>
                     <option value="School2">School 2</option>
                     <option value="School3">School 3</option> 

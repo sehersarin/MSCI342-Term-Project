@@ -9,6 +9,9 @@ import {
   Route,
   Redirect
 } from "react-router-dom";
+import WorkerInputpage from './components/Layouts/InputWorkerTimes/WorkerInputpage'
+
+
 
 
 class App extends Component {
@@ -44,6 +47,11 @@ class App extends Component {
           {/* removed exact path  for both top and bottom*/}
           {/* <Redirect from="/" to="dashboard/" /> */}
         </Route>
+
+        <Route path="/WorkerAvailableInputPage" component={WorkerInputpage}> 
+         {/*  <WorkerInputpage/> */}
+         </Route> 
+
         <Route path="*">
           <Redirect from="/" to="dashboard/" />
         </Route>
