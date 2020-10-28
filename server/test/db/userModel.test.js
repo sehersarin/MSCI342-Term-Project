@@ -104,3 +104,57 @@ describe('testing valid parameters for getUser method', () => {
     });
 
 });
+
+describe('testing valid and invalid parameters for the isValidUserAccessToken method', () => {
+    beforeEach(() => {
+        jest.resetModules(); // Clears any cache between tests.
+    });
+
+    test('null access token parameter', async () => {
+        // Arrange
+        const accessToken = null;
+        const userType = 'student';
+
+        // Act
+        const isValid = await userModel.isValidUserAccessToken(accessToken, userType);
+
+        // Assert
+        expect(isValid).toBe(false);
+    });
+
+    test('null user type parameter', async () => {
+        // Arrange
+        const accessToken = 'XcCa92ZvOnQKZsGtOKOa';
+        const userType = null;
+
+        // Act
+        const isValid = await userModel.isValidUserAccessToken(accessToken, userType);
+
+        // Assert
+        expect(isValid).toBe(false);
+    });
+
+    test('all parameters are null', async () => {
+        const accessToken = null;
+        const userType = null;
+
+        // Act
+        const isValid = await userModel.isValidUserAccessToken(accessToken, userType);
+
+        // Assert
+        expect(isValid).toBe(false);
+    });
+
+    test('all valid parameter values', async () => {
+        // Arrange
+        const accessToken = 'XcCa92ZvOnQKZsGtOKOa';
+        const userType = 'student';
+
+        // Act
+        const isValid = await userModel.isValidUserAccessToken(accessToken, userType);
+
+        // Assert
+        expect(isValid).toBe(true);
+    });
+
+});

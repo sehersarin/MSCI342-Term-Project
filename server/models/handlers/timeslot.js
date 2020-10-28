@@ -16,4 +16,3 @@ async function addWorkerTimeslot(schoolID, workerID, slotID, status, daysAvailab
 module.exports = {
   addWorkerTimeslot,
 }
-
