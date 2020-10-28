@@ -1,6 +1,10 @@
+const timeslotHandler = require('../../models/handlers/timeslot');
 
+<<<<<<< HEAD
 const timeslotHandler = require('../models/handlers/timeslot');
 
+=======
+>>>>>>> parent of cac2003... edited test code to try to resolve "is not a function" issue
 describe('testing inputting of worker schedule functionality', () => {
     beforeEach(() => {
         jest.resetModules(); // Clears any cache between tests.
