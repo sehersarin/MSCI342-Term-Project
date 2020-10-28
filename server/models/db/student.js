@@ -10,6 +10,13 @@ const Tables = require('../../constants/tables.json');
 async function getStudent(email, password) {
     return userModel.getUser(email, password, Tables.student, Student);
 }
+// This method inserts a student account given specific information.
+async function insertStudentAccount(parameters) {
+    // Added conditional statements to prevent purpose, studentNotes, and workerComments from storing "null" instead of null.    
+   //Data recieved from the front end sign up form
+   //to edit line 18
+    return db.any(`insert into ${Tables.student} (parameters) values (${studentId}, ${workerTimeslotId}, ${purpose ? `'${purpose}'` : null}, ${studentNotes ? `'${studentNotes}'` : null}, ${workerComments ? `'${workerComments}'` : null}, '${AppointmentStatus.upcoming}');`);
+}
 
 module.exports = {
     getStudent,
