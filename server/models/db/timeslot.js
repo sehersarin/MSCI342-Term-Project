@@ -13,7 +13,7 @@ async function insertWorkerTimeslot(workerTimeslotId, slotId, schoolId, workerId
     //var date_format = moment(date).format('YYYY MM DD');
     //console.log(date_format); 
 
-    return db.any(`insert into ${Tables.worker_timeslot} (worker_timeslot_id, slot_id, school_id, worker_id, status, date) values (${workerTimeslotId}, ${slotId}, ${schoolId}, ${workerId}, ${status ? `'${status}'` : null}, ${date}, '${TimeslotStatus .available}');`);
+    return db.any(`insert into ${Tables.worker_timeslot} (worker_timeslot_id, slot_id, school_id, worker_id, status, date) values (${workerTimeslotId}, ${slotId}, ${schoolId}, ${workerId}, '${TimeslotStatus .available}', ${date});`);
 }
 
 module.exports = {
