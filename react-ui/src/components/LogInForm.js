@@ -1,10 +1,11 @@
 import React, {Component} from "react";
 import { Container, Row, Col } from 'react-grid-system';
-import { Redirect, Route, withRouter } from "react-router-dom";
+import { Redirect, Route, withRouter, Link} from "react-router-dom";
 import Title from "./Title"
 import "./LogInForm.css"
 import dashboard from "./Layouts/Dashboard"
 import queryString from 'query-string'
+import Signup from "./Layouts/Signup"
 
 const axios = require('axios').default;
 
@@ -60,7 +61,7 @@ class logInForm extends Component {
     }
       return (
         <Container className="Form-container">
-           <Title name= "Sign In."></Title>
+           <Title name= "Log In."></Title>
           <Row>
            <Col sm={12} align="center">
            <form onSubmit={this.login}>
@@ -85,10 +86,13 @@ class logInForm extends Component {
                 <input 
                 className ="SubmitButton" 
                 type="submit" 
-                value="Sign In!" />
+                value="Log In!" />
             </form>
-           </Col>
-          </Row>
+            <br></br>
+            <Link to={`/signup`}>Don't have an account?</Link>
+            <Route path="/signup" component={Signup}></Route>
+            </Col>
+           </Row>
         </Container>
       );
     }
