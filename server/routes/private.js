@@ -12,13 +12,12 @@ const availabilityHandler = require('../models/handlers/availability');
 // Binds a middleware to check access tokens for all private requests.
 router.use(async function (req, res, next) {
     const isValid = await authenticateHandler.isAccessTokenValid(req.query.accessToken);
-    next();
-    // try {
-    //     if (!isValid) throw new Error('Invalid Access Token!');
-    //     next();
-    // } catch (err) {
-    //     next(err);
-    // }
+    try {
+        if (!isValid) throw new Error('Invalid Access Token!');
+        next();
+    } catch (err) {
+        next(err);
+    }
 });
 
 router.post('/api/book-appointment', async (req, res) => {
