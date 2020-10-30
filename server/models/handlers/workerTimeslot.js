@@ -1,4 +1,4 @@
-const timeslotModel = require('../db/add-worker-timeslot');
+const timeslotModel = require('../db/timeslot');
 
 // Adds a timeslot into the database and returns true upon successful completion. 
 async function addWorkerTimeslot(workerTimeslotId, slotId, schoolId, workerId, status, date) {
