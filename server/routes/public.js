@@ -37,14 +37,14 @@ router.get('/api/create-user', async (req, res) => {
        //specified in the migrations> create-worker-table and migrations> create-student-table.
 
         email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net', 'ca'] } }).max(320).required(),
-        password: Joi.string().min(3).max(40).required()
-        phone: Joi.string().max(20).phoneNumber()
-        firstName: Joi.string().min(1).max(20).required()
-        lastName: Joi.string().min(1).max(20).required()
-        studentID: Joi.number().positive().integer()
-        workerID: Joi.number().positive().integer()
-        type: Joi.string().valid(['student', 'worker'])
-        specialization: Joi.string().valid(['social worker', 'guidance councellor'])//verify options
+        password: Joi.string().min(3).max(40).required(),
+        phone: Joi.string().max(20).phoneNumber(),
+        firstName: Joi.string().min(1).max(20).required(),
+        lastName: Joi.string().min(1).max(20).required(),
+        studentID: Joi.number().positive().integer(),
+        workerID: Joi.number().positive().integer(),
+        type: Joi.string().valid(['student', 'worker']),
+        specialization: Joi.string().valid(['social worker', 'guidance councellor']),//verify options
         accessToken: Joi.string().alphanum().min(3).max(30).required(), 
         //insert joi verification for firstname,lastname, type,studentID,workerID,phone
     });
