@@ -110,7 +110,7 @@ router.get('/api/appointments', async (req, res) => {
     const paramSchema = Joi.object({
         studentId: Joi.number().integer(),
         workerId: Joi.number().integer(), 
-        status: Joi.array().items(Joi.string()) // Optional parameter and will default to only upcoming if not specified.
+        status: Joi.array().items(Joi.string().min(1).max(300)) // Optional parameter and will default to only upcoming if not specified.
     }).xor('studentId', 'workerId'); // Either the studentId or the workerId must be specified (they both cannot be specified).
 
     const query = req.query ? req.query : {};
