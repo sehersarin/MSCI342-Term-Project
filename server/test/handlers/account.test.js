@@ -10,7 +10,8 @@ describe('Test to check valid account creation', () => {
         // Arrange
 
         const testStudentID = null;
-        /*
+        
+        /* These are hard-coded values to test the stub.
         // In order to test, the tester should input these credentials
         const email = 'victorhugo@gmail.com';
         const password = 'victorlovespoetry';
@@ -38,9 +39,9 @@ describe('Test to check valid account creation', () => {
         expect(user).toMatchObject(null);
 
         //if the user object ceated during account creation matches the test user, the account has been created sucessfully.
+   
+
     });
-
-
 
     test('rejection of invalid StudentID', async () => {
         // Arrange
@@ -66,7 +67,6 @@ describe('Test to check valid account creation', () => {
             // Arrange
             const mystudentID = '20764242';
 
-            const mystudentID = '20764242';
             const studentUser = {
                 email: 'victorhugo@gmail.com',
                 password: 'victorlovespoetry',
