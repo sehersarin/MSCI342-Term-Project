@@ -62,18 +62,19 @@ router.post('/add-recurring-schedule', async (req, res) => {
 
     const query = req.query ? req.query : {};
 
+    
     const slotId = query.slotId ? query.slotId : null;
-    const schoolId = query.schoolID ? query.schoolID : null;
-    const workerId = query.workerID ? query.workerID : null;
+    const schoolId = query.schoolId ? query.schoolId : null;
+    const workerId = query.workerId ? query.workerId : null;
     const status = query.status ? query.status : null;
     const date = query.date ? query.date : null;
 
-    const { error } = paramSchema.validate({ workerTimeslotId, slotId, schoolId, workerId, status, date });
+    const { error } = paramSchema.validate({ slotId, schoolId, workerId, status, date });
 
     if (!_.isNil(error)) res.send(error);
 
     // Attempts to insert the worker availability into the database 
-    const isSuccessfullyInserted = await workerTimeslotHandler.addWorkerTimeslot(workerTimeslotId, slotId, schoolId, workerId, status, date);
+    const isSuccessfullyInserted = await workerTimeslotHandler.addWorkerTimeslot(slotId, schoolId, workerId, status, date);
 
     res.send(isSuccessfullyInserted);
 });
