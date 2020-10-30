@@ -37,7 +37,7 @@ class logInForm extends Component {
     let email = this.state.loginParams.email;
     let password = this.state.loginParams.password;
     var params = {email: email, password: password}
-    axios.get(`/api/login/?${queryString.stringify(params)}`)
+    axios.get(`public/login/?${queryString.stringify(params)}`)
     .then(res => {
       if(res.data!==""){
         this.setState({
