@@ -54,16 +54,13 @@ class Dashboard extends Component {
         <div>
         <ul>
           <li>
-            <Link to={`${match.path}`}>Dashboard</Link>
+            <Link to={`/Dashboard/`}>Home</Link>
           </li>
           <li>
-            <Link to={`${match.path}/page2`}>Page 2</Link>
+            <Link to={`/Dashboard/page2/${this.state.email}`}>Page 2</Link>
           </li>
           <li>
-            <Link to={`${match.path}/Signup`}>Sign-up</Link>
-          </li>
-          <li>
-            <Link to={`${match.path}/CreateAppointment`}>Create Appointment</Link>
+            <Link to={`/Dashboard/CreateAppointment/${this.state.email}`}>Create Appointment</Link>
           </li>
           <li className="push-right">
             <button onClick={this.signOut} href="#">
@@ -74,18 +71,13 @@ class Dashboard extends Component {
         <main role="main">
           <div className="main">
             <Switch>
-              <Route path={`${match.path}/page2`}>
+              <Route path={`/Dashboard/page2`}>
                 <Page2 name={this.state.firstName}/>
               </Route>
       
-              <Route path={`${match.path}/CreateAppointment`}>
+              <Route path={`/Dashboard/CreateAppointment`}>
                 <CreateAppointment name={this.state.personId}/>
               </Route>
-      
-              {/* there should not be a Route path to sign up here */}
-              {/* <Route path={`${match.path}/Signup`}>
-                <Signup name={this.state.email}/>
-              </Route> */}
               <Route exact path={`${match.path}`}>
                 <IndexDashboard/>
               </Route>
