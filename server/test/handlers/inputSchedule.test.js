@@ -1,4 +1,4 @@
-const timeslotHandler = require('../../models/handlers/timeslot');
+const timeslotHandler = require('../../models/handlers/workerTimeslot');
 
 //const timeslotHandler = require('../models/handlers/timeslot');
 
