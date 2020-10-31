@@ -7,7 +7,7 @@ const router = express.Router();
 const authenticateHandler = require('../models/handlers/authenticate');
 const accountHandler = require('../models/handlers/account');
 
-router.get('/api/login', async (req, res) => {
+router.get('/public/login', async (req, res) => {
     // Validate appropriate parameters are passed into the login endpoint.
     const paramSchema = Joi.object({
         email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net', 'ca'] } }).max(320).required(),
@@ -28,7 +28,7 @@ router.get('/api/login', async (req, res) => {
     res.send(user);
 });
 
-router.get('/api/create-user', async (req, res) => {
+router.get('/public/create-user', async (req, res) => {
     const firstName = req.query.firstName;
     const lastName = req.query.lastName;
     const type = req.query.type; //note: 'type' is called 'role' in the UI, but refers to either a worker or a student.
