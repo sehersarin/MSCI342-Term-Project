@@ -57,7 +57,7 @@ class Check extends React.Component { // this is a class component for the check
     let DaySelected = false; // variable for if checkboxes are checked or not
 
     if(startDay.format("DD-MM-YYYY") === "Invalid date"){
-        alert("No day has been checked, please selected a day")
+        alert("No date has been selected, please selected a day")
         event.preventDefault();
     }
     else{
@@ -92,9 +92,7 @@ class Check extends React.Component { // this is a class component for the check
   }  
 
   render() {
-    let startDay = moment();
-    let weeksAway = moment(startDay).add(1, 'months');
-
+   
     return (
       <div>
           
