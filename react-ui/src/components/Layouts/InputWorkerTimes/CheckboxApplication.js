@@ -1,7 +1,9 @@
 import React  from 'react';
 import { render } from 'react-dom';
 import './CheckboxApplication.css';
-import {Container, Row, Col,Redirect} from 'react-grid-system';
+import {Container, Row, Col} from 'react-grid-system';
+import { Redirect, Route, withRouter, Link, Router } from "react-router-dom";
+
 import moment from 'moment'
        
 class Check extends React.Component { // this is a class component for the checkbox feature of selecting recurring days
@@ -47,15 +49,22 @@ class Check extends React.Component { // this is a class component for the check
     /* console.log(this.state);  */ //test line
    /*  const startDay = moment("9-5-2020");  */ 
    const startDay = moment(document.getElementById("DATE").value)
+   console.log(startDay.format("DD-MM-YYYY"));
 
     let AvailableDates = [];
     let currentDayNumber = moment(startDay).day();
-    console.log(currentDayNumber);
-    
+    /* console.log(currentDayNumber); */ //test line
+    let DaySelected = false; // variable for if checkboxes are checked or not
 
+    if(startDay.format("DD-MM-YYYY") === "Invalid date"){
+        alert("No day has been checked, please selected a day")
+        event.preventDefault();
+    }
+    else{
     for(let i =1; i<= 7; i++){
        let startofweek = moment(startDay).isoWeekday(0); // sets beginning of week to sunday
        if(this.state.checkedDays.get(String(i)) === true){
+         DaySelected = true;
         var AddDayCounter = i;
 
         if(AddDayCounter<currentDayNumber){
@@ -70,22 +79,27 @@ class Check extends React.Component { // this is a class component for the check
           AvailableDates.push(StartingDay.format("DD-MM-YYYY")); // adjust formatting if needed
           NextWeek = moment(StartingDay).add(7,"days");
           StartingDay= NextWeek; 
-        
         }
-
-        /* console.log(AvailableDates);   */ // test line
-       
+         console.log(AvailableDates);    // test line
     } 
   } 
+
+  if(DaySelected === false){
+    alert("No day has been checked, please selected a day");
+  }
     event.preventDefault();
   }
-     
-  render() {
+  }  
 
+
+
+  render() {
+    let startDay = moment();
+    let weeksAway = moment(startDay).add(1, 'months');
 
     return (
       <div>
-           {/* <h1>Date Range is :{startDay} to {weeksAway}</h1> */}
+            <h1>Date Range is :{startDay.format("DD-MM-YYYY")} to {weeksAway.format("DD-MM-YYYY")}</h1> 
         <form className = {"Container"} onSubmit={this.handleSubmit}>
         <h1>Recurring on</h1>
         
@@ -109,6 +123,7 @@ class Check extends React.Component { // this is a class component for the check
           <br/>
           <input type="submit" value="Done" />
         </form>
+       
       </div>
     );
   }
