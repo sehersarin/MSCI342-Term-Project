@@ -7,6 +7,7 @@ import './WorkerInputpage.css';
  import { Container, Row, Col } from 'react-grid-system';
 import { Redirect, Route, withRouter } from "react-router-dom";
 import ReactDOM from "react-dom";
+import moment from 'moment';
 
 
 
@@ -15,13 +16,14 @@ import ReactDOM from "react-dom";
 class WorkerInputpage extends React.Component {    // this class component would be putting together other components into one page
 
     render() {
+        const weeksAway = moment().add(1, 'month').calendar()
 
         return (
             <div>
                 <AvailableMeetingHeader/>
                 <Check/>
-                 <TimeSlot/>
-
+                 {/* <TimeSlot/> */}
+        <h1>Date Range is :{moment().format("MMM Do YYYY")} to {moment(weeksAway).format("MMM Do YYYY")}</h1>
 
                 <Container className = "wraper">
                     <label for ="school" className = "SelectSchoolsLabel" > Select School:</label>
