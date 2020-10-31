@@ -49,7 +49,7 @@ class Check extends React.Component { // this is a class component for the check
     /* console.log(this.state);  */ //test line
    /*  const startDay = moment("9-5-2020");  */ 
    const startDay = moment(document.getElementById("DATE").value)
-   console.log(startDay.format("DD-MM-YYYY"));
+  /*  console.log(startDay.format("DD-MM-YYYY")); */ // Test line
 
     let AvailableDates = [];
     let currentDayNumber = moment(startDay).day();
@@ -68,7 +68,7 @@ class Check extends React.Component { // this is a class component for the check
         var AddDayCounter = i;
 
         if(AddDayCounter<currentDayNumber){
-          AddDayCounter= AddDayCounter + 7; // to ensure that users are not adding recurring schedule to passed days
+          AddDayCounter= AddDayCounter + 7; // to ensure that users are not adding recurring schedule to days before the selected date
         }
         
         let StartingDay = startofweek.add(AddDayCounter,'day');
