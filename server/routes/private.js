@@ -104,6 +104,37 @@ router.post('/api/worker-availability', async (req, res) => {
 
 });
 
+// Returns all the appointments/meetings for a given student or worker.
+// Note that appointments/meetings are synonymous, but only appointments will be used in the backend to maintain consistency.
+router.get('/api/appointments', async (req, res) => {
+    const paramSchema = Joi.object({
+        studentId: Joi.number().integer(),
+        workerId: Joi.number().integer(), 
+        status: Joi.array().items(Joi.string().min(1).max(300)) // Optional parameter and will default to only upcoming if not specified.
+    }).xor('studentId', 'workerId'); // Either the studentId or the workerId must be specified (they both cannot be specified).
+
+    const query = req.query ? req.query : {};
+
+    const studentId = query.studentId;
+    const workerId = query.workerId;
+    // Should leave the status as is if it is null/undefined/already an array. Else, converts it to an array 
+    // Due to Postman limitations to work around passing in an array in the query params.
+    const status = (_.isNil(query.status) || _.isArray(query.status)) ? query.status : [query.status];
+
+    const { error } = paramSchema.validate({ studentId, workerId, status });
+
+    if (!_.isNil(error)) res.send(error);
+
+    let appointmentDetails = [];
+
+    // Separate methods for the student and worker appointments as they return different parameters in the object (to reduce redundancy and size of response).
+    // Additionally these methods return details beyond the bare appointment details and thus were not named as only getAppointments to avoid confusion.
+    if (!_.isNil(studentId)) appointmentDetails = await appointmentHandler.getAppointmentDetailsForStudent(studentId, status);
+    else appointmentDetails = await appointmentHandler.getAppointmentDetailsForWorker(workerId, status);
+
+    res.send(appointmentDetails);
+});
+
 router.get('/test', async (req, res) => {
     res.send(true);
 });
