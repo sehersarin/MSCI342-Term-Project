@@ -1,7 +1,7 @@
 import React  from 'react';
 import { render } from 'react-dom';
 import './CheckboxApplication.css';
-import {Container, Row, Col} from 'react-grid-system';
+import {Container, Row, Col,Redirect} from 'react-grid-system';
 import moment from 'moment'
        
 class Check extends React.Component { // this is a class component for the checkbox feature of selecting recurring days
@@ -74,6 +74,7 @@ class Check extends React.Component { // this is a class component for the check
         }
 
         /* console.log(AvailableDates);   */ // test line
+       
     } 
   } 
     event.preventDefault();

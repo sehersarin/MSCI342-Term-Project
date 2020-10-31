@@ -25,20 +25,19 @@ class App extends Component {
       <div className="App">
         <Router>
       <Switch>
+        <Route path="/signup" component={Signup}>
+          {/* <Signup /> */}
+        </Route>
         <Route path="/login" component={LogIn}>
           {/* <LogIn /> */}
         </Route>
-        <Route path="/signup" component={Signup}>
-          {/* <Signup /> */}
+        <Route exact path="/dashboard/:email/:type/:name" component={Dashboard}>
+          {/* removed exact path  for both top and bottom*/}
+          {/* <Redirect from="/" to="dashboard/" /> */}
         </Route>
         {/* <ProtectedRoute path="/dashboard/" component={Dashboard}> */}
           {/* <Dashboard /> */}
         {/* </ProtectedRoute> */}
-        <Route exact path="/dashboard/:email/:type/:name" component={Dashboard}>
-          {/* removed exact path  for both top and bottom*/}
-          {/* <Redirect from="/" to="dashboard/" /> */}
-
-        </Route>
         <Route path="/dashboard/" component={Dashboard}>
           {/* removed exact path  for both top and bottom*/}
           {/* <Redirect from="/" to="dashboard/" /> */}
@@ -53,7 +52,7 @@ class App extends Component {
          </Route> 
 
         <Route path="*">
-          <Redirect from="/" to="dashboard/" />
+          <Redirect from="/" to="/login" component={LogIn} />
         </Route>
       </Switch>
     </Router>

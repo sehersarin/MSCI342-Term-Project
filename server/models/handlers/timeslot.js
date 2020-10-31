@@ -4,7 +4,7 @@
 // Days Available - Monday = 1; Tuesday = 2; Wednesday = 3; Thursday = 4; Friday = 5
 //Input: School ID, Service Worker ID, Schedule with dates and times 
 //Output: Boolean Variable 
-async function timeslot(schoolID, workerID, slotID, status, daysAvailable) {
+async function addWorkerTimeslot(schoolID, workerID, slotID, status, daysAvailable) {
     
   var did_it_work = false;
         //* insert (day, time, worker_id)
@@ -13,3 +13,6 @@ async function timeslot(schoolID, workerID, slotID, status, daysAvailable) {
   return did_it_work;
 };
 
+module.exports = {
+  addWorkerTimeslot,
+}

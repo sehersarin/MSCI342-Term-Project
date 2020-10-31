@@ -16,14 +16,14 @@ import moment from 'moment';
 class WorkerInputpage extends React.Component {    // this class component would be putting together other components into one page
 
     render() {
-        const weeksAway = moment().add(1, 'month').calendar()
+        
 
         return (
             <div>
                 <AvailableMeetingHeader/>
                 <Check/>
                  {/* <TimeSlot/> */}
-        <h1>Date Range is :{moment().format("MMM Do YYYY")} to {moment(weeksAway).format("MMM Do YYYY")}</h1>
+       
 
                 <Container className = "wraper">
                     <label for ="school" className = "SelectSchoolsLabel" > Select School:</label>
