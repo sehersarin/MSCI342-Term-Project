@@ -33,6 +33,8 @@ class WorkerInputpage extends React.Component {    // this class component would
                     <option value="School3">School 3</option> 
                     </select>
                 </Container> 
+
+                <Link to="/dashboard" >Go back</Link>  
             
             </div>
         )

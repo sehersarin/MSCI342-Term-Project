@@ -87,11 +87,9 @@ class Check extends React.Component { // this is a class component for the check
   if(DaySelected === false){
     alert("No day has been checked, please selected a day");
   }
-    event.preventDefault();
+    event.preventDefault();  
   }
   }  
-
-
 
   render() {
     let startDay = moment();
@@ -99,7 +97,7 @@ class Check extends React.Component { // this is a class component for the check
 
     return (
       <div>
-            <h1>Date Range is :{startDay.format("DD-MM-YYYY")} to {weeksAway.format("DD-MM-YYYY")}</h1> 
+          
         <form className = {"Container"} onSubmit={this.handleSubmit}>
         <h1>Recurring on</h1>
         
@@ -123,7 +121,7 @@ class Check extends React.Component { // this is a class component for the check
           <br/>
           <input type="submit" value="Done" />
         </form>
-       
+         
       </div>
     );
   }
