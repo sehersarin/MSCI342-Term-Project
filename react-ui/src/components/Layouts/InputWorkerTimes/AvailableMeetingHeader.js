@@ -3,7 +3,7 @@ import './AvailableMeetingHeader.css'
 // header with links to other pages
 
 
-function AvailableMeetingHeader() { // This is a header for the service worker pages
+function AvailableMeetingHeader() { // This is a header for the service worker pages - 
     // Href for google was used for testing
     return (
         <div>

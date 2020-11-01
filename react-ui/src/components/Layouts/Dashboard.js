@@ -65,7 +65,7 @@ class Dashboard extends Component {
           </li>
 
           <li>
-            <Link to ={`/inputWorkerAvailability`}>Input Worker Availability</Link>
+            <Link to ={`/workerinputavailability`}>Worker Input Time Page</Link>
 
           </li>
     
