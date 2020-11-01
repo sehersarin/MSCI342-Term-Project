@@ -1,6 +1,6 @@
-const appointmentHandler = require('../../models/handlers/appointment');
+const appointmentHandler = require('../../models/handlers/timeslot');
 
-describe('testing getting appointment details functionality', () => {
+describe('testing getting possible timeslots functionality', () => {
     beforeEach(() => {
         jest.resetModules();
     });
