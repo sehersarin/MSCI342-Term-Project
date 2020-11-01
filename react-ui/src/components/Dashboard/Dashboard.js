@@ -10,17 +10,21 @@ import Home from "../Layouts/Home";
 import NotFound from "../Layouts/404";
 import CreateAppointment from "../Layouts/CreateAppointment";
 
+import UserTypes from '../../constants/userTypes.json';
+
 class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      islogout: false,
+      isLogout: false,
       email: this.props.match.params.email,
-      userType : this.props.match.params.userType,
-      firstName : this.props.match.params.name,
+      userType: this.props.match.params.userType,
+      firstName: this.props.match.params.name,
+      personId: this.props.match.params.personId,
+      accessToken: this.props.match.params.accessToken,
     };
   }
-  
+
   signOut = () => {
     localStorage.removeItem("token");
     this.setState({
@@ -33,11 +37,11 @@ class Dashboard extends Component {
     if (this.state.isLogout) return <Redirect to="/login" />;
 
     // Else it will display the appropriate header based on the user type.
-    // const { email, firstName, personId, userType } = this.props.params.params;
+    const { email, firstName, personId, userType, accessToken } = this.state;
 
     return (
       <Fragment>
-        <header className={this.state.userType}>
+        <header className={userType}>
           <div className="column left">
             <img src={logo} className="App-logo" alt="logo" />
           </div>
@@ -48,11 +52,14 @@ class Dashboard extends Component {
                 <Link to={`/dashboard`}>Home</Link>
               </li>
               <li>
-                <Link to={`/dashboard/Profile/${this.state.email}`}>Profile</Link>
+                <Link to={`/dashboard/Profile/${email}`}>Profile</Link>
               </li>
-              <li>
-                <Link to={`/dashboard/CreateAppointment/${this.state.email}`}>Create Appointment</Link>
-              </li>
+              {/* Only display the book appointment form if the user is a student. */}
+              {userType === UserTypes.student &&
+                <li>
+                  <Link to={`/dashboard/CreateAppointment/${email}`}>Create Appointment</Link>
+                </li>
+              }
               <li className="push-right">
                 <button onClick={this.signOut} href="#">Sign Out</button>
               </li>
@@ -65,13 +72,13 @@ class Dashboard extends Component {
             <div className="main">
               <Switch>
                 <Route path={`/dashboard/Profile`}>
-                  <Profile name={this.state.firstName} />
+                  <Profile name={firstName} />
                 </Route>
                 <Route path={`/dashboard/CreateAppointment`}>
-                  <CreateAppointment name={this.state.personId} />
+                  <CreateAppointment name={personId} />
                 </Route>
                 <Route exact path={`${this.props.match.path}`}>
-                  <Home />
+                  <Home userType={userType} personId={personId} accessToken={accessToken} />
                 </Route>
                 <Route path="*">
                   <NotFound />
