@@ -119,10 +119,10 @@ router.post('/api/add-recurring-schedule', async (req, res) => {
 
     const query = req.query ? req.query : {};
 
-    const schoolId = query.schoolID ? query.schoolID : null;
-    const schoolName = query.status ? query.status : null;
+    const schoolId = query.schoolId ? query.schoolId : null;
+    const schoolName = query.schoolName ? query.schoolName : null;
 
-    const { error } = paramSchema.validate({schoolId, workerId, schoolName});
+    const { error } = paramSchema.validate({schoolId, schoolName});
 
     if (!_.isNil(error)) res.send(error);
 
@@ -141,8 +141,8 @@ router.post('/api/worker-availability', async (req, res) => {
 
     const query = req.query ? req.query : {};
 
-    const schoolId = query.schoolID ? query.schoolID : null;
-    const schoolName = query.status ? query.status : null;
+    const schoolId = query.schoolId ? query.schoolId : null;
+    const schoolName = query.schoolName ? query.schoolName : null;
 
     const { error } = paramSchema.validate({ schoolId,schoolName });
 
