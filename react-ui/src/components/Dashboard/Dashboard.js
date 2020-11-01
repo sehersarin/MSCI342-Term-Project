@@ -5,8 +5,8 @@ import { Redirect, Switch, Route, Link } from "react-router-dom";
 import "./Dashboard.scss";
 
 import logo from '../../logo.svg'
-import Page2 from "../Layouts/Page2";
-import IndexDashboard from "../Layouts/Home";
+import Profile from "../Layouts/Profile";
+import Home from "../Layouts/Home";
 import NotFound from "../Layouts/404";
 import CreateAppointment from "../Layouts/CreateAppointment";
 
@@ -65,13 +65,13 @@ class Dashboard extends Component {
             <div className="main">
               <Switch>
                 <Route path={`/dashboard/Profile`}>
-                  <Page2 name={this.state.firstName} />
+                  <Profile name={this.state.firstName} />
                 </Route>
                 <Route path={`/dashboard/CreateAppointment`}>
                   <CreateAppointment name={this.state.personId} />
                 </Route>
                 <Route exact path={`${this.props.match.path}`}>
-                  <IndexDashboard />
+                  <Home />
                 </Route>
                 <Route path="*">
                   <NotFound />
