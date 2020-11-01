@@ -7,7 +7,7 @@ class Student {
         this.firstName = studentData.first_name;
         this.lastName = studentData.last_name;
         this.email = studentData.email;
-        this.type = UserTypes.student;
+        this.userType = UserTypes.student;
         this.accessToken = studentData.access_token;
         this.phone = studentData.phone;
         this.schoolId = studentData.school_id;

@@ -3,7 +3,7 @@ import { Container, Row, Col } from 'react-grid-system';
 import { Redirect, Route, withRouter, Link} from "react-router-dom";
 import Title from "./Title"
 import "./LogInForm.css"
-import dashboard from "./Layouts/Dashboard"
+import Dashboard from "./Dashboard/Dashboard"
 import queryString from 'query-string'
 import Signup from "./Layouts/Signup"
 
@@ -14,7 +14,7 @@ class logInForm extends Component {
     super(props);
     this.state = {
       islogged: false,
-      type: "",
+      userType: "",
       firstName: "",
       loginParams: {
         email: "",
@@ -42,19 +42,19 @@ class logInForm extends Component {
       if(res.data!==""){
         this.setState({
           email : res.data.email,
-          type: res.data.type,
+          userType: res.data.userType,
           firstName: res.data.firstName,
           islogged: true
         })
         // localStorage.setItem("token", "T");
-        console.log(this.state.type)
+        console.log(this.state.userType)
       }
     })
     event.preventDefault();
   } 
 
   render() {
-    let newRoute= <Route exact path="/login" render={props => ( <Redirect to={`/dashboard/${this.state.loginParams.email}/${this.state.type}/${this.state.firstName}`} Component={dashboard}/>)}></Route> 
+    let newRoute= <Route exact path="/login" render={props => ( <Redirect to={`/dashboard/${this.state.loginParams.email}/${this.state.userType}/${this.state.firstName}`} Component={Dashboard}/>)}></Route> 
   
     if (this.state.islogged) {
       return newRoute;
