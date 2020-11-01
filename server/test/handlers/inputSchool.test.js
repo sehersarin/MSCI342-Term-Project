@@ -22,7 +22,7 @@ describe('testing invalid schoolId or schoolName parameters', () => {
         const testSchoolName = "Bluevale Collegiate Institute";
 
         // Act
-        const isSuccessfullyInserted = await schoolHandler.inputSchool(testSchoolID, testSchoolName);
+        const isSuccessfullyInserted = await schoolHandler.inputSchool(testSchoolId, testSchoolName);
 
         // Assert
         expect(isSuccessfullyInserted).toBe(false);
@@ -34,7 +34,7 @@ describe('testing invalid schoolId or schoolName parameters', () => {
         const testSchoolName = "Bluevale Collegiate Institute";
 
         // Act
-        const isSuccessfullyInserted = await schoolHandler.inputSchool(testSchoolID, testSchoolName);
+        const isSuccessfullyInserted = await schoolHandler.inputSchool(testSchoolId, testSchoolName);
 
         // Assert
         expect(isSuccessfullyInserted).toBe(false);
@@ -46,7 +46,7 @@ describe('testing invalid schoolId or schoolName parameters', () => {
         const testSchoolName = "Bluevale Collegiate Institute";
 
         // Act
-        const isSuccessfullyInserted = await schoolHandler.inputSchool(testSchoolID, testSchoolName);
+        const isSuccessfullyInserted = await schoolHandler.inputSchool(testSchoolId, testSchoolName);
 
         // Assert
         expect(isSuccessfullyInserted).toBe(false);
@@ -65,7 +65,7 @@ describe('testing valid school ID parameters', () => {
 
 
         // Act
-        const isSuccessfullyInserted = await schoolHandler.inputSchool(testSchoolID, testSchoolName);
+        const isSuccessfullyInserted = await schoolHandler.inputSchool(testSchoolId, testSchoolName);
 
         // Assert
         expect(isSuccessfullyInserted).toBe(true);
@@ -77,7 +77,7 @@ describe('testing valid school ID parameters', () => {
         const testSchoolName = null;
 
         // Act
-        const isSuccessfullyInserted = await schoolHandler.inputSchool(testSchoolID, testSchoolName);
+        const isSuccessfullyInserted = await schoolHandler.inputSchool(testSchoolId, testSchoolName);
 
         // Assert
         expect(isSuccessfullyInserted).toBe(true);
