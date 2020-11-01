@@ -63,7 +63,6 @@ describe('testing valid school ID parameters', () => {
         const testSchoolId = 1;
         const testSchoolName = "";
 
-
         // Act
         const isSuccessfullyInserted = await schoolHandler.inputSchool(testSchoolId, testSchoolName);
 
@@ -109,7 +108,6 @@ describe('testing valid school ID parameters', () => {
         const testSchoolId = 1;
         const testSchoolName = "Bluevale Collegiate Institute";
    
-
         // Act
         const isSuccessfullyInserted = await schoolHandler.inputSchool(testSchoolId, testSchoolName);
 
