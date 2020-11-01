@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import LogIn from "./components/Layouts/LogIn"
 import Dashboard from "./components/Layouts/Dashboard"
 import Signup from "./components/Layouts/Signup"
+import WorkerInputpage from './components/Layouts/InputWorkerTimes/WorkerInputpage'
 import './App.css'
 import {
   BrowserRouter as Router,
@@ -9,9 +10,6 @@ import {
   Route,
   Redirect
 } from "react-router-dom";
-import WorkerInputpage from './components/Layouts/InputWorkerTimes/WorkerInputpage'
-
-
 
 
 class App extends Component {
