@@ -45,7 +45,7 @@ class App extends Component {
           {/* <Redirect from="/" to="dashboard/" /> */}
         </Route>
 
-        <Route path="/workerinputavailability" component={WorkerInputpage}> 
+        <Route path="/inputWorkerAvailability" component={WorkerInputpage}> 
          {/*  <WorkerInputpage/> */}
          </Route> 
 
