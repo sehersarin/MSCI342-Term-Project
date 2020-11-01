@@ -38,7 +38,7 @@ describe('testing parameters for getStudent method', () => {
             firstName: 'John',
             lastName: 'Doe',
             email: studentEmail,
-            type: 'student',
+            userType: 'student',
             accessToken: 'XcCa92ZvOnQKZsGtOKOa',
             phone: null,
             schoolId: 1

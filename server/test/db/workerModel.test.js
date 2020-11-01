@@ -38,7 +38,7 @@ describe('testing parameters for getWorker method', () => {
             firstName: 'Joshua',
             lastName: 'Brooks',
             email: workerEmail,
-            type: 'worker',
+            userType: 'worker',
             accessToken: 'eeJAQr3wEC6CJZROFJTY',
             phone: '+15191234567',
             specialization: 'Masters in Social Work',

@@ -90,7 +90,7 @@ describe('testing valid parameters for getUser method', () => {
             firstName: 'John',
             lastName: 'Doe',
             email: studentEmail,
-            type: 'student',
+            userType: 'student',
             accessToken: 'XcCa92ZvOnQKZsGtOKOa',
             phone: null,
             schoolId: 1

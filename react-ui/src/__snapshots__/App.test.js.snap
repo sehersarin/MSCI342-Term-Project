@@ -1,0 +1,119 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App snapshot renders 1`] = `
+<div
+  className="App"
+>
+  <header
+    className="App-header-blue"
+  >
+    <img
+      alt="logo"
+      className="App-logo"
+      src="logo.svg"
+    />
+  </header>
+  <div
+    className="Form-container"
+    style={
+      Object {
+        "boxSizing": "border-box",
+        "marginLeft": "auto",
+        "marginRight": "auto",
+        "maxWidth": 1540,
+        "paddingLeft": 15,
+        "paddingRight": 15,
+        "position": "relative",
+      }
+    }
+  >
+    <div>
+      <p
+        className="Title-Style"
+      >
+        Log In.
+      </p>
+    </div>
+    <div
+      style={
+        Object {
+          "alignItems": "normal",
+          "display": "flex",
+          "flexGrow": 0,
+          "flexShrink": 0,
+          "flexWrap": "wrap",
+          "justifyContent": "flex-start",
+          "marginLeft": -15,
+          "marginRight": -15,
+        }
+      }
+    >
+      <div
+        align="center"
+        style={
+          Object {
+            "boxSizing": "border-box",
+            "flexBasis": "100%",
+            "flexGrow": 0,
+            "flexShrink": 0,
+            "left": "auto",
+            "marginLeft": "0%",
+            "maxWidth": "100%",
+            "minHeight": 1,
+            "paddingLeft": 15,
+            "paddingRight": 15,
+            "position": "relative",
+            "right": "auto",
+            "width": "100%",
+          }
+        }
+      >
+        <form
+          onSubmit={[Function]}
+        >
+          <label>
+            <input
+              className="InputFields"
+              name="email"
+              onChange={[Function]}
+              placeholder="email"
+              type="text"
+            />
+          </label>
+          <br />
+          <label>
+            <input
+              className="InputFields"
+              name="password"
+              onChange={[Function]}
+              placeholder="password"
+              type="password"
+            />
+          </label>
+          <br />
+          <input
+            className="SubmitButton"
+            type="submit"
+            value="Log In!"
+          />
+        </form>
+        <br />
+        <a
+          href="/signup"
+          onClick={[Function]}
+        >
+          Don't have an account?
+        </a>
+      </div>
+    </div>
+    <span
+      style={
+        Object {
+          "clear": "both",
+          "display": "table",
+        }
+      }
+    />
+  </div>
+</div>
+`;
