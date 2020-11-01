@@ -68,6 +68,13 @@ render() {
                 </label>
                 <br></br>
                 <br></br>
+                <label for="role" className ="Title-Style2"> Select User Role: </label>
+                <select name="role" className ="InputFields3" id="type">
+                  <option value="student">Student</option>
+                  <option value="worker1">Service Worker</option>
+                </select>
+                {/* <br></br> */}
+                <br></br>
                 <label for="role" className ="Title-Style2"> Select Role: </label>
                 <select name="role" className ="InputFields2" id="type">
                   <option value="student">Student</option>
