@@ -110,3 +110,52 @@ router.get('/test', async (req, res) => {
 
 module.exports = router
 
+router.post('/api/add-recurring-schedule', async (req, res) => {
+    // Validate appropriate parameters are passed to view workers at each school 
+    const paramSchema = Joi.object({
+        schoolId: Joi.number().integer().required(), //The student must specify their school ID in order to view the workers
+        schoolName: Joi.string().max(30), // The default value is available which is handled by the database Create Table logic 
+    });
+
+    const query = req.query ? req.query : {};
+
+    const schoolId = query.schoolID ? query.schoolID : null;
+    const schoolName = query.status ? query.status : null;
+
+    const { error } = paramSchema.validate({schoolId, workerId, schoolName});
+
+    if (!_.isNil(error)) res.send(error);
+
+    // Attempts to insert the available workers at each school 
+    const isSuccessfullyInserted = await schoolHandler.inputSchool(schoolId,schoolName);
+
+    res.send(isSuccessfullyInserted);
+});
+
+router.post('/api/worker-availability', async (req, res) => {
+    const paramSchema = Joi.object({
+        schoolId: Joi.number().integer().required(),
+        schoolName: Joi.string().string().allow(null)
+        
+    });
+
+    const query = req.query ? req.query : {};
+
+    const schoolId = query.schoolID ? query.schoolID : null;
+    const schoolName = query.status ? query.status : null;
+
+    const { error } = paramSchema.validate({ schoolId,schoolName });
+
+    if (!_.isNil(error)) res.send(error);
+
+    const availableTimes = await schoolHandler.inputSchool(schoolId, schoolName);
+
+    res.send(availableTimes);
+
+});
+
+router.get('/test', async (req, res) => {
+    res.send(true);
+});
+
+module.exports = router
