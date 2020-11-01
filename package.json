@@ -23,5 +23,8 @@
     "url": "https://github.com/sehersarin/MSCI342-Term-Project/issues"
   },
   "homepage": "https://github.com/sehersarin/MSCI342-Term-Project#readme",
-  "dependencies": {}
+  "dependencies": {
+    "lodash": "^4.17.20",
+    "moment": "^2.29.1"
+  }
 }
