@@ -71,17 +71,17 @@ render() {
                 <label for="role" className ="Title-Style2"> Select User Role: </label>
                 <select name="role" className ="InputFields3" id="type">
                   <option value="student">Student</option>
-                  <option value="worker1">Service Worker</option>
+                  <option value="worker1">Worker</option>
                 </select>
-                {/* <br></br> */}
                 <br></br>
-                <label for="role" className ="Title-Style2"> Select Role: </label>
+                <br></br>
+                <label for="role" className ="Title-Style2"> Select Worker Type (or N/A otherwise): </label>
+                <br></br>
                 <select name="role" className ="InputFields2" id="type">
-                  <option value="student">Student</option>
+                  <option value="student">Social Worker</option>
                   <option value="worker1">Guidance Counselor</option>
-                  <option value="worker2">Master of Social Work</option>
-                  <option value="worker3">Psychologist</option>
                   <option value="other">Other</option>
+                  <option value="other">N/A</option>
                 </select>
                 <br></br>
                 {/* <br></br> */}
@@ -90,7 +90,7 @@ render() {
                       className ="InputFields" 
                       type="text" 
                       name="optional_role"
-                      placeholder= "Enter Role, If 'Other' Selected" 
+                      placeholder= "Enter Type, If 'Other' Selected" 
                       onChange={this.handleFormChange} />
                     </label>
                   <br></br>
