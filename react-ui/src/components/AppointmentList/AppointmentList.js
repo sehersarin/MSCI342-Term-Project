@@ -3,7 +3,7 @@ import queryString from 'query-string'
 import _ from 'lodash';
 
 import "./AppointmentList.scss";
-import UserTypes from '../constants/userTypes.json';
+import UserTypes from '../../constants/userTypes.json';
 
 const axios = require('axios').default;
 var moment = require('moment');
@@ -20,19 +20,22 @@ export default class AppointmentList extends Component {
   componentDidMount() {
     var params = { accessToken: this.props.user.accessToken };
 
-    // TO DO: Should make a constants file for this.
+    // Passes in the appropriate parameter depending on the type of user.
     if (this.props.user.userType === UserTypes.student) params.studentId = this.props.user.personId;
     else params.workerId = this.props.user.personId;
 
     axios.get(`/api/appointments/?${queryString.stringify(params)}`)
       .then(res => {
-        if (res.data !== "") {
+        // Only stores the appointment data if no error occured and the data is not null.
+        // Else, shows no upcoming appointments and logs the error.
+        if (_.isNil(res.error) && !_.isNil(res.data)) {
           this.setState({
             appointments: res.data,
           });
-          console.log('appointments', this.state.appointments);
+        } else {
+          console.log('Error occurred when mounting the AppointmentList ', res.error);
         }
-      })
+      });
   }
 
   render() {
@@ -51,7 +54,7 @@ export default class AppointmentList extends Component {
                   <div className="first-row">
                     <div className="specific-date">{moment(appointment.date).format('dddd, MMM D, YYYY')}</div>
                     {/* Display either the student name or worker name depending on the specific user. */}
-                    {this.props.user.userType === UserTypes.student?
+                    {this.props.user.userType === UserTypes.student ?
                       <div className="person-name">{appointment.worker.firstName} {appointment.worker.lastName}</div>
                       :
                       <div className="person-name">{appointment.student.firstName} {appointment.student.lastName}</div>

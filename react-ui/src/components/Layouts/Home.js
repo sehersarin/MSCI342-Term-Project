@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 
 import Title from "../Title"
-import AppointmentList from "../AppointmentList";
+import AppointmentList from "../AppointmentList/AppointmentList";
 
 class Home extends Component {
   render() {
