@@ -1,5 +1,4 @@
 const timeslotModel = require('../../models/db/timeslot');
-const moment= require('moment');
 
 describe('testing parameters for insertWorkerTimeslot method', () => {
     beforeEach(() => {
@@ -8,15 +7,13 @@ describe('testing parameters for insertWorkerTimeslot method', () => {
 
     test('null value for all parameters', async () => {
         // Arrange
-        const workerTimeslotId = null;
         const slotId = null;
         const schoolId = null;
         const workerId = null;
-        const status = null;
         const date = null;
 
         // Act
-        const isTimelslotInserted = await timeslotModel.insertWorkerTimeslot(workerTimeslotId, slotId, schoolId, workerId, status, date);
+        const isTimelslotInserted = await timeslotModel.insertWorkerTimeslot(slotId, schoolId, workerId, date);
 
         // Assert
         expect(isTimelslotInserted).toBe(false);
@@ -24,15 +21,13 @@ describe('testing parameters for insertWorkerTimeslot method', () => {
 
     test('valid sample values for all parameters', async () => {
         // Arrange
-        const workerTimeslotId = '0050';
-        const slotId = '0010';
-        const schoolId = '1000';
-        const workerId = '9100';
-        const status = 'available';
-        const date = new Date(2019, 5, 11, 5, 23, 59);
+        const slotId = '1';
+        const schoolId = '1';
+        const workerId = '8000000';
+        const date = '2020-12-24';
 
         // Act
-        const isTimelslotInserted = await timeslotModel.insertWorkerTimeslot(workerTimeslotId, slotId, schoolId, workerId, status, date);
+        const isTimelslotInserted = await timeslotModel.insertWorkerTimeslot(slotId, schoolId, workerId, date);
 
         // Assert
         expect(isTimelslotInserted).toBe(true);
@@ -40,15 +35,13 @@ describe('testing parameters for insertWorkerTimeslot method', () => {
 
     test('valid sample values for all parameters except one', async () => {
         // Arrange
-        const workerTimeslotId = null;
-        const slotId = '0010';
-        const schoolId = '1000';
-        const workerId = '9100';
-        const status = 'available';
-        const date = new Date(2019, 5, 11, 5, 23, 59);
+        const slotId = '1';
+        const schoolId = null;
+        const workerId = '8000000';
+        const date = '2020-12-24';
 
         // Act
-        const isTimelslotInserted = await timeslotModel.insertWorkerTimeslot(workerTimeslotId, slotId, schoolId, workerId, status, date);
+        const isTimelslotInserted = await timeslotModel.insertWorkerTimeslot(slotId, schoolId, workerId,date);
 
         // Assert
         expect(isTimelslotInserted).toBe(false);
