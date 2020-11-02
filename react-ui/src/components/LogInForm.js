@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import { Container, Row, Col } from 'react-grid-system';
 import { Redirect, Route, withRouter, Link} from "react-router-dom";
 import Title from "./Title"
-import "./LogInForm.css"
+import "./LogInForm.scss"
 import Dashboard from "./Dashboard/Dashboard"
 import queryString from 'query-string'
 import Signup from "./Layouts/Signup"
