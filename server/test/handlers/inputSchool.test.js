@@ -1,6 +1,6 @@
 const appointmentHandler = require('../../models/handlers/appointment');
 
-describe('testing invalid schoolId or schoolName parameters', () => {
+describe('testing invalid schoolId parameters', () => {
     beforeEach(() => {
         jest.resetModules(); // Clears any cache between tests.
     });
@@ -10,7 +10,7 @@ describe('testing invalid schoolId or schoolName parameters', () => {
         // No test variables need to be initialized.
 
         // Act
-        const isSuccessfullyInserted = await schoolHandler.inputSchool();
+        const isSuccessfullyInserted = await schoolHandler.getWorkerIdsForSchool();
 
         // Assert
         expect(isSuccessfullyInserted).toBe(false);
@@ -19,10 +19,9 @@ describe('testing invalid schoolId or schoolName parameters', () => {
     test('rejection of null value for required schoolId parameter', async () => {
         // Arrange
         const testSchoolId = null;
-        const testSchoolName = "Bluevale Collegiate Institute";
-
+        
         // Act
-        const isSuccessfullyInserted = await schoolHandler.inputSchool(testSchoolId, testSchoolName);
+        const isSuccessfullyInserted = await schoolHandler.getWorkerIdsForSchool(testSchoolId);
 
         // Assert
         expect(isSuccessfullyInserted).toBe(false);
@@ -31,10 +30,9 @@ describe('testing invalid schoolId or schoolName parameters', () => {
     test('rejection of empty string value for required schoolId parameter', async () => {
         // Arrange
         const testStudentId = '';
-        const testSchoolName = "Bluevale Collegiate Institute";
 
         // Act
-        const isSuccessfullyInserted = await schoolHandler.inputSchool(testSchoolId, testSchoolName);
+        const isSuccessfullyInserted = await schoolHandler.getWorkerIdsForSchool(testSchoolId);
 
         // Assert
         expect(isSuccessfullyInserted).toBe(false);
@@ -43,10 +41,9 @@ describe('testing invalid schoolId or schoolName parameters', () => {
     test('rejection of invalid school id', async () => {
         // Arrange
         const testStudentId = 0;
-        const testSchoolName = "Bluevale Collegiate Institute";
-
+        
         // Act
-        const isSuccessfullyInserted = await schoolHandler.inputSchool(testSchoolId, testSchoolName);
+        const isSuccessfullyInserted = await schoolHandler.getWorkerIdsForSchool(testSchoolId);
 
         // Assert
         expect(isSuccessfullyInserted).toBe(false);
@@ -61,10 +58,9 @@ describe('testing valid school ID parameters', () => {
     test('empty strings for optional fields', async () => {
         // Arrange
         const testSchoolId = 1;
-        const testSchoolName = "";
-
+    
         // Act
-        const isSuccessfullyInserted = await schoolHandler.inputSchool(testSchoolId, testSchoolName);
+        const isSuccessfullyInserted = await schoolHandler.getWorkerIdsForSchool(testSchoolId);
 
         // Assert
         expect(isSuccessfullyInserted).toBe(true);
@@ -73,10 +69,9 @@ describe('testing valid school ID parameters', () => {
     test('null values for optional fields', async () => {
         // Arrange
         const testSchoolId = 1;
-        const testSchoolName = null;
 
         // Act
-        const isSuccessfullyInserted = await schoolHandler.inputSchool(testSchoolId, testSchoolName);
+        const isSuccessfullyInserted = await schoolHandler.getWorkerIdsForSchool(testSchoolId);
 
         // Assert
         expect(isSuccessfullyInserted).toBe(true);
@@ -87,7 +82,7 @@ describe('testing valid school ID parameters', () => {
         const testSchoolId = 1;
 
         // Act
-        const isSuccessfullyInserted = await schoolHandler.inputSchool(testSschoolId);
+        const isSuccessfullyInserted = await schoolHandler.getWorkerIdsForSchool(testSschoolId);
 
         // Assert
         expect(isSuccessfullyInserted).toBe(true);
@@ -98,7 +93,7 @@ describe('testing valid school ID parameters', () => {
         const testStudentId = "1";
 
         // Act
-        const isSuccessfullyInserted = await schoolHandler.inputSchool(testSchoolId);
+        const isSuccessfullyInserted = await schoolHandler.getWorkerIdsForSchool(testSchoolId);
         // Assert
         expect(isSuccessfullyInserted).toBe(true);
     });
@@ -106,10 +101,9 @@ describe('testing valid school ID parameters', () => {
     test('passing in valid values for all fields', async () => {
         // Arrange
         const testSchoolId = 1;
-        const testSchoolName = "Bluevale Collegiate Institute";
    
         // Act
-        const isSuccessfullyInserted = await schoolHandler.inputSchool(testSchoolId, testSchoolName);
+        const isSuccessfullyInserted = await schoolHandler.getWorkerIdsForSchool(testSchoolId);
 
         // Assert
         expect(isSuccessfullyInserted).toBe(true);
