@@ -2,7 +2,7 @@ import React from 'react'
 import Check from './CheckboxApplication';
 import AvailableMeetingHeader from './AvailableMeetingHeader';
  import TimeSlot from './TimeSlot'; 
-import './WorkerInputpage.css';
+import './WorkerInputpage.scss';
  import { Link } from 'react-router-dom';
  import { Container, Row, Col } from 'react-grid-system';
 import { Redirect, Route, withRouter } from "react-router-dom";
