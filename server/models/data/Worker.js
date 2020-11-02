@@ -7,7 +7,7 @@ class Worker {
         this.firstName = workerData.first_name;
         this.lastName = workerData.last_name;
         this.email = workerData.email;
-        this.type = UserTypes.worker;
+        this.userType = UserTypes.worker;
         this.accessToken = workerData.access_token;
         this.phone = workerData.phone;
         this.specialization = workerData.specialization;

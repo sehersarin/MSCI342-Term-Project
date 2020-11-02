@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import LogIn from "./components/Layouts/LogIn"
-import Dashboard from "./components/Layouts/Dashboard"
+import Dashboard from "./components/Dashboard/Dashboard"
 import Signup from "./components/Layouts/Signup"
 import WorkerInputpage from './components/Layouts/InputWorkerTimes/WorkerInputpage'
-import './App.css'
+import './App.scss'
 import {
   BrowserRouter as Router,
   Switch,
@@ -29,7 +29,7 @@ class App extends Component {
         <Route path="/login" component={LogIn}>
           {/* <LogIn /> */}
         </Route>
-        <Route exact path="/dashboard/:email/:type/:name" component={Dashboard}>
+        <Route exact path="/dashboard/:email/:userType/:firstName/:personId/:accessToken" component={Dashboard}>
           {/* removed exact path  for both top and bottom*/}
           {/* <Redirect from="/" to="dashboard/" /> */}
         </Route>
