@@ -84,13 +84,31 @@ render() {
                   <option value="other">N/A</option>
                 </select>
                 <br></br>
-                {/* <br></br> */}
                   <label>
                     <input 
                       className ="InputFields" 
                       type="text" 
                       name="optional_role"
-                      placeholder= "Enter Type, If 'Other' Selected" 
+                      placeholder= "Enter Worker Type, If 'Other'" 
+                      onChange={this.handleFormChange} />
+                    </label>
+                  <br></br>
+                  <br></br>
+                <label for="role" className ="Title-Style2"> Select Worker Specialization (or N/A): </label>
+                <br></br>
+                <select name="role" className ="InputFields2" id="type">
+                  <option value="student">Masters in Social Work</option>
+                  <option value="worker1">Psychologist</option>
+                  <option value="other">Other</option>
+                  <option value="other">N/A</option>
+                </select>
+                <br></br>
+                <label>
+                    <input 
+                      className ="InputFields" 
+                      type="text" 
+                      name="optional_role"
+                      placeholder= "Enter Specialization, If 'Other'" 
                       onChange={this.handleFormChange} />
                     </label>
                   <br></br>
