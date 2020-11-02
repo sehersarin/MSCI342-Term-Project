@@ -1,4 +1,4 @@
-const appointmentHandler = require('../../models/handlers/appointment');
+const schoolHandler = require('../../models/handlers/workerAvailability');
 
 describe('testing invalid schoolId parameters', () => {
     beforeEach(() => {
