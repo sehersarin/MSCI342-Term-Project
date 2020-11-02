@@ -10,9 +10,14 @@ describe('testing inputting of worker schedule functionality', () => {
         const testWorkerId = 8000000;
         const testSchoolId = 1;
         const testSlotId = 1;
+        const testDate = '2020-12-25';
+        //const slotId = '1';
+        //const schoolId = '1';
+        //const workerId = '8000000';
+        //const date = '2020-12-25';
 
         // Act
-        const isSuccessfullyInserted = await timeslotHandler.addWorkerTimeslot(testWorkerId, testSchoolId, testSlotId);
+        const isSuccessfullyInserted = await timeslotHandler.addWorkerTimeslot(testSlotId, testSchoolId, testWorkerId, testDate);
 
         // Assert
         expect(isSuccessfullyInserted).toBe(true);
