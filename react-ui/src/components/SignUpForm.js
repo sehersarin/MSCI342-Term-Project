@@ -16,7 +16,10 @@ class SignupForm extends Component {
         first_name:"",
         last_name:"",
         role:"",
-        optional_role:"",
+        worker_type:"",
+        optional_type:"",
+        specialization:"",
+        optional_specialization:"",
         id_value:"",
         email: "",
         phone:"",
@@ -75,9 +78,9 @@ render() {
                 </select>
                 <br></br>
                 <br></br>
-                <label for="role" className ="Title-Style2"> Select Worker Type (or N/A otherwise): </label>
+                <label for="worker_type" className ="Title-Style2"> Select Worker Type (or N/A otherwise): </label>
                 <br></br>
-                <select name="role" className ="InputFields2" id="type">
+                <select name="worker_type" className ="InputFields2" id="type">
                   <option value="student">Social Worker</option>
                   <option value="worker1">Guidance Counselor</option>
                   <option value="other">Other</option>
@@ -88,15 +91,15 @@ render() {
                     <input 
                       className ="InputFields" 
                       type="text" 
-                      name="optional_role"
+                      name="optional_type"
                       placeholder= "Enter Worker Type, If 'Other'" 
                       onChange={this.handleFormChange} />
                     </label>
                   <br></br>
                   <br></br>
-                <label for="role" className ="Title-Style2"> Select Worker Specialization (or N/A): </label>
+                <label for="specialization" className ="Title-Style2"> Select Worker Specialization (or N/A): </label>
                 <br></br>
-                <select name="role" className ="InputFields2" id="type">
+                <select name="specialization" className ="InputFields2" id="type">
                   <option value="student">Masters in Social Work</option>
                   <option value="worker1">Psychologist</option>
                   <option value="other">Other</option>
@@ -107,7 +110,7 @@ render() {
                     <input 
                       className ="InputFields" 
                       type="text" 
-                      name="optional_role"
+                      name="optional_specialization"
                       placeholder= "Enter Specialization, If 'Other'" 
                       onChange={this.handleFormChange} />
                     </label>
