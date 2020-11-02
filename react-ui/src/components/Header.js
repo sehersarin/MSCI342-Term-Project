@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from "react";
 import logo from '../logo.svg'
-import "./Header.css"
+import "./Header.scss"
 
 export default class Header extends Component {
     render() {
