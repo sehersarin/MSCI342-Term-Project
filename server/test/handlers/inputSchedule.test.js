@@ -7,9 +7,9 @@ describe('testing inputting of worker schedule functionality', () => {
 
     test('testing initial stub for inputting worker schedule', async () => {
         // Arrange
-        const testWorkerId = 8000000;
-        const testSchoolId = 1;
-        const testSlotId = 1;
+        const testWorkerId = '8000000';
+        const testSchoolId = '1';
+        const testSlotId = '1';
         const testDate = '2020-12-25';
         //const slotId = '1';
         //const schoolId = '1';
