@@ -130,7 +130,7 @@ router.post('/api/add-recurring-schedule', async (req, res) => {
     res.send(isSuccessfullyInserted);
 });
 
-router.post('/api/worker-availability', async (req, res) => {
+router.post('/worker-availability', async (req, res) => {
     const paramSchema = Joi.object({
         schoolId: Joi.number().integer().required(),
         
