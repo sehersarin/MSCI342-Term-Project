@@ -5,6 +5,7 @@ import {moment} from 'moment';
 
 
 /* import {Container, Row, Col} from 'react-grid-system'; */
+// this a termporary measure, this code will be replaced with endpoint onnections in the future to load the start and end times
 
 class TimeSlot extends React.Component { // this is a class component for the checkbox feature of selecting recurring days
   constructor() {
@@ -30,20 +31,16 @@ class TimeSlot extends React.Component { // this is a class component for the ch
         {id: 17, value: "17:00",endtime: "17:30"},
       ],
       checkedTimes: new Map(),
-
     }
-  
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-  }
-     
+  }    
   handleChange(event) {
         var isChecked = event.target.checked;
         var item = event.target.value;
          
         this.setState(prevState => ({ checkedTimes: prevState.checkedTimes.set(item, isChecked) }));
   }
-     
   handleSubmit(event) {
     console.log("this button works"); // edit this for future functions
     event.preventDefault();
@@ -51,12 +48,9 @@ class TimeSlot extends React.Component { // this is a class component for the ch
 
 
   render() {
-
     return (
       <div className = 'Wrapper'>
-      
         <form onSubmit={this.handleSubmit}>
-           
           {
             this.state.Times.map(item => (
               <div >

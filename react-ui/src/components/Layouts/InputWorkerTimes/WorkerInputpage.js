@@ -17,22 +17,20 @@ class WorkerInputpage extends React.Component {    // this class component would
 
     render() {
         
-
         return (
             <div>
                 <AvailableMeetingHeader/>
                 <Check/>
-                 {/* <TimeSlot/> */}
+                 {/* <TimeSlot/> */}                        {/*  No functionaility implmeented with timeslots yet */}
        
-
-                {/* <Container className = "wraper">
+                {/* { <Container className = "wraper">
                     <label for ="school" className = "SelectSchoolsLabel" > Select School:</label>
                     <select name="school" className ="SelectSchools"  id="school">   
                     <option value="School1">School 1</option>
                     <option value="School2">School 2</option>
                     <option value="School3">School 3</option> 
                     </select>
-                </Container>  */}
+                </Container>  } */} {/* commented out as school selection functionality isn't implemented yet */}
 
                 <Link to="/dashboard" >Go back</Link>  
             
