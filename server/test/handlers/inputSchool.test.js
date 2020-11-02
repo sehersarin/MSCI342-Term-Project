@@ -10,11 +10,7 @@ describe('testing invalid schoolId parameters', () => {
         // No test variables need to be initialized.
 
         // Act
-<<<<<<< Updated upstream
         const isSuccessfullyInserted = await schoolHandler.getWorkerIdsForSchool();
-=======
-        const isSuccessfullyInserted = await schoolHandler.getWorkerIdsForSchooll();
->>>>>>> Stashed changes
 
         // Assert
         expect(isSuccessfullyInserted).toBe(false);
@@ -45,11 +41,7 @@ describe('testing invalid schoolId parameters', () => {
     test('rejection of invalid school id', async () => {
         // Arrange
         const testStudentId = 0;
-<<<<<<< Updated upstream
         
-=======
-
->>>>>>> Stashed changes
         // Act
         const isSuccessfullyInserted = await schoolHandler.getWorkerIdsForSchool(testSchoolId);
 
@@ -66,11 +58,7 @@ describe('testing valid school ID parameters', () => {
     test('empty strings for optional fields', async () => {
         // Arrange
         const testSchoolId = 1;
-<<<<<<< Updated upstream
     
-=======
-
->>>>>>> Stashed changes
         // Act
         const isSuccessfullyInserted = await schoolHandler.getWorkerIdsForSchool(testSchoolId);
 
@@ -81,11 +69,6 @@ describe('testing valid school ID parameters', () => {
     test('null values for optional fields', async () => {
         // Arrange
         const testSchoolId = 1;
-<<<<<<< Updated upstream
-
-=======
-       
->>>>>>> Stashed changes
         // Act
         const isSuccessfullyInserted = await schoolHandler.getWorkerIdsForSchool(testSchoolId);
 
@@ -110,10 +93,6 @@ describe('testing valid school ID parameters', () => {
 
         // Act
         const isSuccessfullyInserted = await schoolHandler.getWorkerIdsForSchool(testSchoolId);
-<<<<<<< Updated upstream
-=======
-        
->>>>>>> Stashed changes
         // Assert
         expect(isSuccessfullyInserted).toBe(true);
     });
