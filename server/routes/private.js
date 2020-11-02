@@ -108,9 +108,9 @@ router.get('/test', async (req, res) => {
     res.send(true);
 });
 
+router.post('/api/add-recurring-schedule', async (req, res) => {
 module.exports = router
 
-router.post('/api/add-recurring-schedule', async (req, res) => {
     // Validate appropriate parameters are passed to view workers at each school 
     const getWorkersForSchool = Joi.object({
         schoolId: Joi.number().integer().required(), //The student must specify their school ID in order to view the workers
@@ -130,28 +130,3 @@ router.post('/api/add-recurring-schedule', async (req, res) => {
     res.send(isSuccessfullyInserted);
 });
 
-router.post('/worker-availability', async (req, res) => {
-    const paramSchema = Joi.object({
-        schoolId: Joi.number().integer().required(),
-        
-    });
-
-    const query = req.query ? req.query : {};
-
-    const schoolId = query.schoolId ? query.schoolId : null;
-
-    const { error } = paramSchema.validate({schoolId});
-
-    if (!_.isNil(error)) res.send(error);
-
-    const availableTimes = await schoolHandler.getWorkerIdsForSchool(schoolId);
-
-    res.send(availableTimes);
-
-});
-
-router.get('/test', async (req, res) => {
-    res.send(true);
-});
-
-module.exports = router
