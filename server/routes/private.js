@@ -112,22 +112,20 @@ module.exports = router
 
 router.post('/api/add-recurring-schedule', async (req, res) => {
     // Validate appropriate parameters are passed to view workers at each school 
-    const paramSchema = Joi.object({
+    const getWorkersForSchool = Joi.object({
         schoolId: Joi.number().integer().required(), //The student must specify their school ID in order to view the workers
-        schoolName: Joi.string().max(30), // The default value is available which is handled by the database Create Table logic 
     });
 
     const query = req.query ? req.query : {};
 
     const schoolId = query.schoolId ? query.schoolId : null;
-    const schoolName = query.schoolName ? query.schoolName : null;
 
-    const { error } = paramSchema.validate({schoolId, schoolName});
+    const { error } = paramSchema.validate({schoolId});
 
     if (!_.isNil(error)) res.send(error);
 
     // Attempts to insert the available workers at each school 
-    const isSuccessfullyInserted = await schoolHandler.inputSchool(schoolId,schoolName);
+    const isSuccessfullyInserted = await schoolHandler.getWorkerIdsForSchool(schoolId);
 
     res.send(isSuccessfullyInserted);
 });
@@ -135,20 +133,18 @@ router.post('/api/add-recurring-schedule', async (req, res) => {
 router.post('/api/worker-availability', async (req, res) => {
     const paramSchema = Joi.object({
         schoolId: Joi.number().integer().required(),
-        schoolName: Joi.string().string().allow(null)
         
     });
 
     const query = req.query ? req.query : {};
 
     const schoolId = query.schoolId ? query.schoolId : null;
-    const schoolName = query.schoolName ? query.schoolName : null;
 
-    const { error } = paramSchema.validate({ schoolId,schoolName });
+    const { error } = paramSchema.validate({schoolId});
 
     if (!_.isNil(error)) res.send(error);
 
-    const availableTimes = await schoolHandler.inputSchool(schoolId, schoolName);
+    const availableTimes = await schoolHandler.getWorkerIdsForSchool(schoolId);
 
     res.send(availableTimes);
 
