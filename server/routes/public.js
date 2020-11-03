@@ -39,38 +39,38 @@ router.get('/api/create-user', async (req, res) => {
         email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net', 'ca'] } }).max(320).required(),
         password: Joi.string().min(3).max(40).required(),
         phone: Joi.string().max(20).phoneNumber(),
-        firstName: Joi.string().min(1).max(20).required(),
-        lastName: Joi.string().min(1).max(20).required(),
-        studentId: Joi.number().positive().integer(),
-        workerId: Joi.number().positive().integer(),
+        first_name: Joi.string().min(1).max(20).required(),
+        last_name: Joi.string().min(1).max(20).required(),
+        student_id: Joi.number().positive().integer(),
+        worker_id: Joi.number().positive().integer(),
         userType: Joi.string().min(1).valid(['student', 'worker']),
         specialization: Joi.string().valid(['social worker', 'guidance councellor']),//verify options
-        accessToken: Joi.string().alphanum().min(3).max(30).required(), 
-        //insert joi verification for firstname,lastname, type,studentID,workerID,phone
+        access_token: Joi.string().alphanum().min(3).max(30).required(), 
+        //insert joi verification for first_name,last_name, type,student_id,workerID,phone
     });
     // the endpoint `/api/create-user` accepts ALL parameters for both user types, 
     //as listed in the migrations> create-worker-table and migrations> create-student-table
 
-    const firstName = req.query.firstName;
-    const lastName = req.query.lastName;
+    const first_name = req.query.first_name;
+    const last_name = req.query.last_name;
     const type = req.query.type; //note: 'type' is called 'role' in the UI, but refers to either a worker or a student.
-    const studentId = req.query.studentID;//Students only
+    const student_id = req.query.student_id;//Students only
     const workerId = req.query.workerID;//Workers only
     const email = req.query.email;
     const password = req.query.password;
     const phone = req.query.phone;
     const school_id = req.query.school_id; //Students only
     const specialization = req.query.specialization; //Workers only
-    const accessToken = req.query.accessToken; //is this needed? If yes, add to worker.js line 18 and student.js line 17
+    const access_token = req.query.access_token; //is this needed? If yes, add to worker.js line 18 and student.js line 17
 
    
 
     //error check
-    const { error, value } = paramSchema.validate({ email: paramEmail, password: paramPassword, firstName: paramFirstName,lastName: paramLastName, });
+    const { error, value } = paramSchema.validate({ email: paramEmail, password: paramPassword, first_name: paramfirst_name,last_name: paramlast_name, });
     if (!_.isNil(error)) res.send(error);
 
 
-    const user = await accountHandler.createUserAccount(firstName, lastName, type, studentId, email, password, phone,workerId,school_id,specialization,accessToken);
+    const user = await accountHandler.createUserAccount(first_name, last_name, type, student_id, email, password, phone,workerId,school_id,specialization,access_token);
 
     res.send(user);
 });
