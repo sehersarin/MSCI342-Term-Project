@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import Title from "../Title"
 
-class Page2 extends Component {
+class Profile extends Component {
   
   // do some api calls and querying here.
   render() {
@@ -12,5 +12,5 @@ class Page2 extends Component {
     );
   }
 }
-export default Page2;
+export default Profile;
 

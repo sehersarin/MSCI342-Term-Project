@@ -80,7 +80,7 @@ describe('testing valid user validation', () => {
             firstName: 'John',
             lastName: 'Doe',
             email: studentEmail,
-            type: 'student',
+            userType: 'student',
             accessToken: 'XcCa92ZvOnQKZsGtOKOa',
             phone: null,
             schoolId: 1
@@ -102,7 +102,7 @@ describe('testing valid user validation', () => {
             firstName: 'Joshua',
             lastName: 'Brooks',
             email: workerEmail,
-            type: 'worker',
+            userType: 'worker',
             accessToken: 'eeJAQr3wEC6CJZROFJTY',
             phone: '+15191234567',
             specialization: 'Masters in Social Work',
