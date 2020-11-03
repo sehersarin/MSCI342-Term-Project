@@ -3,12 +3,15 @@ the front end UI in order to create a user account in the backend*/
 
 async function createUserAccount(firstName, lastName, type, studentID, email, password, phone) {
      // Searches the student table to see if a student account exists for the given data.
+
+     If userType = userType.student {
      const user = await studentModel.insertStudentAccount(firstName, lastName, type, studentID, email, password, phone);
      if  (!_.isNil(student)) return student;
-     
+     } else if userType = userType.worker {
      // Searches the worker table to see if a student account exists for the given data.
      const worker = await workerModel.insertWorkerAccount(firstName, lastName, type, workerID, email, password, phone);
      if  (!_.isNil(worker)) return worker;
+     }
  
      // Returns the user
      return user;
