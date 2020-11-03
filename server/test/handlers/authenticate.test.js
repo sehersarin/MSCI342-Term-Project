@@ -80,7 +80,7 @@ describe('testing valid user validation', () => {
             firstName: 'John',
             lastName: 'Doe',
             email: studentEmail,
-            type: 'student',
+            userType: 'student',
             accessToken: 'XcCa92ZvOnQKZsGtOKOa',
             phone: null,
             schoolId: 1
@@ -102,7 +102,7 @@ describe('testing valid user validation', () => {
             firstName: 'Joshua',
             lastName: 'Brooks',
             email: workerEmail,
-            type: 'worker',
+            userType: 'worker',
             accessToken: 'eeJAQr3wEC6CJZROFJTY',
             phone: '+15191234567',
             specialization: 'Masters in Social Work',
@@ -117,14 +117,47 @@ describe('testing valid user validation', () => {
     });
 });
 
-describe('testing initial user validation setup', () => {
+describe('testing access token validation', () => {
     beforeEach(() => {
         jest.resetModules(); // Clears any cache between tests.
     });
 
-    test('initial setup of access token verification', async () => {
+    test('invalid access token value', async () => {
         // Arrange
         const accessToken = 'A12345';
+
+        // Act
+        const isValid = await authenticateHandler.isAccessTokenValid(accessToken);
+
+        // Assert
+        expect(isValid).toBe(false);
+    });
+
+    test('null access token value', async () => {
+        // Arrange
+        const accessToken = null;
+
+        // Act
+        const isValid = await authenticateHandler.isAccessTokenValid(accessToken);
+
+        // Assert
+        expect(isValid).toBe(false);
+    });
+
+    test('valid student access token value', async () => {
+        // Arrange
+        const accessToken = 'XcCa92ZvOnQKZsGtOKOa';
+
+        // Act
+        const isValid = await authenticateHandler.isAccessTokenValid(accessToken);
+
+        // Assert
+        expect(isValid).toBe(true);
+    });
+
+    test('valid worker access token value', async () => {
+        // Arrange
+        const accessToken = 'eeJAQr3wEC6CJZROFJTY';
 
         // Act
         const isValid = await authenticateHandler.isAccessTokenValid(accessToken);

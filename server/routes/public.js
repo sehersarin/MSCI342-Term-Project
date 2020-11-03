@@ -7,7 +7,7 @@ const router = express.Router();
 const authenticateHandler = require('../models/handlers/authenticate');
 const accountHandler = require('../models/handlers/account');
 
-router.get('/api/login', async (req, res) => {
+router.get('/login', async (req, res) => {
     // Validate appropriate parameters are passed into the login endpoint.
     const paramSchema = Joi.object({
         email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net', 'ca'] } }).max(320).required(),
@@ -28,6 +28,7 @@ router.get('/api/login', async (req, res) => {
     res.send(user);
 });
 
+<<<<<<< HEAD
 router.get('/api/create-user', async (req, res) => {
     // joi verification
     // Validate appropriate parameters are passed into the create account endpoint.
@@ -71,6 +72,18 @@ router.get('/api/create-user', async (req, res) => {
 
 
     const user = await accountHandler.createUserAccount(first_name, last_name, type, student_id, email, password, phone,worker_id,school_id,specialization);
+=======
+router.get('/create-user', async (req, res) => {
+    const firstName = req.query.firstName;
+    const lastName = req.query.lastName;
+    const type = req.query.type; //note: 'type' is called 'role' in the UI, but refers to either a worker or a student.
+    const studentID = req.query.studentID;
+    const email = req.query.email;
+    const password = req.query.password;
+    const phone = req.query.phone;
+
+    const user = await accountHandler.createUserAccount(firstName, lastName, type, studentID, email, password, phone);
+>>>>>>> master
 
     res.send(user);
 });

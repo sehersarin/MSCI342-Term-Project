@@ -1,4 +1,4 @@
-const _ = require('lodash');
+/*const _ = require('lodash');
 
 const { db } = require('../../lib/connection');
 
@@ -34,4 +34,4 @@ async function isValidUserAccessToken(accessToken, userType) {
 module.exports = {
     getUser,
     isValidUserAccessToken,
-}
+}*/
