@@ -18,10 +18,10 @@ describe('testing invalid schoolId parameters', () => {
 
     test('rejection of null value for required schoolId parameter', async () => {
         // Arrange
-        const testSchoolId = null;
+        const testschoolId= null;
         
         // Act
-        const isSuccessfullyInserted = await schoolHandler.getWorkerIdsForSchool(testSchoolId);
+        const isSuccessfullyInserted = await schoolHandler.getWorkerIdsForSchool(testschoolId);
 
         // Assert
         expect(isSuccessfullyInserted).toBe(workerIds);
@@ -29,10 +29,10 @@ describe('testing invalid schoolId parameters', () => {
 
     test('rejection of empty string value for required schoolId parameter', async () => {
         // Arrange
-        const testStudentId = '';
+        const testschoolId = '';
 
         // Act
-        const isSuccessfullyInserted = await schoolHandler.getWorkerIdsForSchool(testSchoolId);
+        const isSuccessfullyInserted = await schoolHandler.getWorkerIdsForSchool(testschoolId);
 
         // Assert
         expect(isSuccessfullyInserted).toBe(workerIds);
@@ -40,10 +40,10 @@ describe('testing invalid schoolId parameters', () => {
 
     test('rejection of invalid school id', async () => {
         // Arrange
-        const testStudentId = 0;
+        const testschoolId = 0;
         
         // Act
-        const isSuccessfullyInserted = await schoolHandler.getWorkerIdsForSchool(testSchoolId);
+        const isSuccessfullyInserted = await schoolHandler.getWorkerIdsForSchool(testschoolId);
 
         // Assert
         expect(isSuccessfullyInserted).toBe(workerIds);
@@ -57,10 +57,10 @@ describe('testing valid school ID parameters', () => {
 
     test('empty strings for optional fields', async () => {
         // Arrange
-        const testSchoolId = 1;
+        const testschoolId = 1;
     
         // Act
-        const isSuccessfullyInserted = await schoolHandler.getWorkerIdsForSchool(testSchoolId);
+        const isSuccessfullyInserted = await schoolHandler.getWorkerIdsForSchool(testschoolId);
 
         // Assert
         expect(isSuccessfullyInserted).toBe(workerIds);
@@ -68,9 +68,9 @@ describe('testing valid school ID parameters', () => {
 
     test('null values for optional fields', async () => {
         // Arrange
-        const testSchoolId = 1;
+        const testschoolId = 1;
         // Act
-        const isSuccessfullyInserted = await schoolHandler.getWorkerIdsForSchool(testSchoolId);
+        const isSuccessfullyInserted = await schoolHandler.getWorkerIdsForSchool(testschoolId);
 
         // Assert
         expect(isSuccessfullyInserted).toBe(workerIds);
@@ -78,10 +78,10 @@ describe('testing valid school ID parameters', () => {
 
     test('only passing in values for required fields', async () => {
         // Arrange
-        const testSchoolId = 1;
+        const testschoolId = 1;
 
         // Act
-        const isSuccessfullyInserted = await schoolHandler.getWorkerIdsForSchool(testSschoolId);
+        const isSuccessfullyInserted = await schoolHandler.getWorkerIdsForSchool(testschoolId);
 
         // Assert
         expect(isSuccessfullyInserted).toBe(workerIds);
@@ -89,20 +89,20 @@ describe('testing valid school ID parameters', () => {
 
     test('passing in valid string values for required fields', async () => {
         // Arrange
-        const testStudentId = "1";
+        const testschoolId = "1";
 
         // Act
-        const isSuccessfullyInserted = await schoolHandler.getWorkerIdsForSchool(testSchoolId);
+        const isSuccessfullyInserted = await schoolHandler.getWorkerIdsForSchool(testschoolId);
         // Assert
         expect(isSuccessfullyInserted).toBe(workerIds);
     });
 
     test('passing in valid values for all fields', async () => {
         // Arrange
-        const testSchoolId = 1;
+        const testschoolId = 1;
    
         // Act
-        const isSuccessfullyInserted = await schoolHandler.getWorkerIdsForSchool(testSchoolId);
+        const isSuccessfullyInserted = await schoolHandler.getWorkerIdsForSchool(testschoolId);
 
         // Assert
         expect(isSuccessfullyInserted).toBe(workerIds);
