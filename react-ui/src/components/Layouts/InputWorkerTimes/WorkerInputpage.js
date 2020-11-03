@@ -20,7 +20,6 @@ class WorkerInputpage extends React.Component {    // this class component would
             <div>
                 <Check/>
                  {/* <TimeSlot/> */}                        {/*  No functionaility implmeented with timeslots yet */}
-       
                 {/* { <Container className = "wraper">
                     <label for ="school" className = "SelectSchoolsLabel" > Select School:</label>
                     <select name="school" className ="SelectSchools"  id="school">   

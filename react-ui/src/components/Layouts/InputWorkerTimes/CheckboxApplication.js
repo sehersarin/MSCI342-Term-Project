@@ -3,7 +3,6 @@ import { render } from 'react-dom';
 import './CheckboxApplication.scss';
 import { Container, Row, Col } from 'react-grid-system';
 import { Redirect, Route, withRouter, Link, Router } from "react-router-dom";
-
 import moment from 'moment'
 
 class Check extends React.Component { // this is a class component for the checkbox feature of selecting recurring days
@@ -21,27 +20,13 @@ class Check extends React.Component { // this is a class component for the check
       ],
       checkedDays: new Map()
     };
-
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-
-  daysInMonth = () => {
-    return this.state.dateContext.daysInMonth();
-  }
-
-  firstDayofMonth = () => {
-    let dateContext = this.state.dateContext;//calling in current dateContext, then passing it to get first day of month
-    let firstDay = moment(dateContext).startOf('month').format('d') // day of week 0 ...1..2..6, 0 is sunday, 6 is saturday
-    return firstDay;
-  }
-
-
   handleChange(event) {
     var isChecked = event.target.checked;
     var item = event.target.value;
-
     this.setState(prevState => ({ checkedDays: prevState.checkedDays.set(item, isChecked) }));
   }
 
@@ -69,7 +54,6 @@ class Check extends React.Component { // this is a class component for the check
           let StartingDay = startofweek.add(AddDayCounter, 'day');
           let NextWeek = "";
 
-
           for (let k = 0; k <= 4; k++) {
             AvailableDates.push(StartingDay.format("DD-MM-YYYY")); // adjust formatting if needed
             NextWeek = moment(StartingDay).add(7, "days");
@@ -78,7 +62,6 @@ class Check extends React.Component { // this is a class component for the check
           console.log(AvailableDates);    // test line
         }
       }
-
       if (DaySelected === false) {
         alert("No day has been checked, please selected a day");
       }
@@ -90,10 +73,8 @@ class Check extends React.Component { // this is a class component for the check
 
     return (
       <div>
-
         <form className={"Container"} onSubmit={this.handleSubmit}>
           <h1>Recurring on</h1>
-
           {
             this.state.Days.map(item => (
               <div className={"checkboxes"}>
@@ -107,14 +88,11 @@ class Check extends React.Component { // this is a class component for the check
               </div>
             ))
           }
-
           <br />
           <input type="date" id="DATE" />
-
           <br />
           <input type="submit" value="Done" />
         </form>
-
       </div>
     );
   }
