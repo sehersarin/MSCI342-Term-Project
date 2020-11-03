@@ -64,8 +64,8 @@ class Check extends React.Component { // this is a class component for the check
       }
       if (DaySelected === false) {
         alert("No day has been checked, please selected a day");
-      } else{
-      alert("Days has been selected");
+      } else {
+        alert("Days has been selected");
       }
       event.preventDefault();
     }

@@ -108,17 +108,19 @@ describe('Checkbox component', () => {
     expect(checkbox.checked).toEqual(false)
   })
 
-  test("Date input is initally set to nothing", () => {
+ /*  test("Date input is initally set to nothing", () => {
     //Arrange
-    const { getByTestId} = render(<Check />);
-    const DateBox = getByTestId("DATE");
-
-    //Act
-
-    //Assert
-    expect(DateBox.toBe(" "));
-  })
-
+    const { container } = render(
+      <div>
+        <Check />
+      </div>,
+    );
+    const testValue = '03/29/2019';
+    const input = getByTestId(container, 'date-input');
+    fireEvent.change(input, { target: { value: testValue } });
+    expect(input.value).toEqual(testValue);
+  }) */
+ 
 
 
 
