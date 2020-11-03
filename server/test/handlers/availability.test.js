@@ -66,6 +66,20 @@ test('rejection of null value for required startTime parameter', async () => {
 
 //TEST 5
 
+test('rejection of null value for required endTime parameter', async () => {
+    // Arrange
+    const testWorkerId = 8000000;
+    const testSchoolId = 1;
+    const testStartTime = '2020-10-20';
+    const testEndTime = null;
+
+    // Act
+    const availableTimes = await availabilityHandler.getWorkerAvailability(testWorkerId, testSchoolId, testStartTime, testEndTime);
+
+    // Assert
+    expect(availableTimes).tobe(null);
+});
+
     //stub
     test('initial setup of worker availability fetching', async () => {
         // Arrange
