@@ -1,4 +1,4 @@
-const timeslotHandler = require('../../models/handlers/workerTimeslot');
+const workerTimeslotHandler = require('../../models/handlers/workerTimeslot');
 
 describe('testing inputting of worker schedule functionality', () => {
     beforeEach(() => {
@@ -14,7 +14,7 @@ describe('testing inputting of worker schedule functionality', () => {
         const testStatus = 'available';    
 
         // Act
-        const isSuccessfullyInserted = await timeslotHandler.addWorkerTimeslot(testSlotId, testSchoolId, testWorkerId, testStatus, testDate);
+        const isSuccessfullyInserted = await workerTimeslotHandler.addWorkerTimeslot(testSlotId, testSchoolId, testWorkerId, testStatus, testDate);
 
         // Assert
         expect(isSuccessfullyInserted).toBe(true);
@@ -29,7 +29,7 @@ describe('testing inputting of worker schedule functionality', () => {
         const testStatus = 'available';       
 
         // Act
-        const isSuccessfullyInserted = await timeslotHandler.addWorkerTimeslot(testSlotId, testSchoolId, testWorkerId, testStatus, testDate);
+        const isSuccessfullyInserted = await workerTimeslotHandler.addWorkerTimeslot(testSlotId, testSchoolId, testWorkerId, testStatus, testDate);
 
         // Assert
         expect(isSuccessfullyInserted).toBe(false);
@@ -44,7 +44,7 @@ describe('testing inputting of worker schedule functionality', () => {
         const testStatus = '';       
 
         // Act
-        const isSuccessfullyInserted = await timeslotHandler.addWorkerTimeslot(testSlotId, testSchoolId, testWorkerId, testStatus, testDate);
+        const isSuccessfullyInserted = await workerTimeslotHandler.addWorkerTimeslot(testSlotId, testSchoolId, testWorkerId, testStatus, testDate);
 
         // Assert
         expect(isSuccessfullyInserted).toBe(false);
