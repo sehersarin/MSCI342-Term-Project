@@ -94,6 +94,7 @@ describe('testing valid school ID parameters', () => {
 
         // Act
         const isSuccessfullyInserted = await schoolHandler.getWorkerIdsForSchool(testschoolId);
+       
         // Assert
         expect(isSuccessfullyInserted).toBe(workerIds);
     });
