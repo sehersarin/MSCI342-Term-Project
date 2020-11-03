@@ -16,7 +16,7 @@ describe('testing parameters for insertWorkerTimeslot method', () => {
         const isTimelslotInserted = await timeslotModel.insertWorkerTimeslot(slotId, schoolId, workerId, date);
 
         // Assert
-        expect(isTimelslotInserted).toBe(null);
+        expect(isTimelslotInserted).toMatchObject(studentUser);
     });
 
     test('valid sample values for all parameters', async () => {
@@ -24,14 +24,14 @@ describe('testing parameters for insertWorkerTimeslot method', () => {
         const slotId = '1';
         const schoolId = '1';
         const workerId = '8000000';
-        const date = '2020-11-27';
+        const date = '2020-12-26';
         
 
         // Act
         const isTimelslotInserted = await timeslotModel.insertWorkerTimeslot(slotId, schoolId, workerId, date);
 
         // Assert
-        expect(isTimelslotInserted).toBe(true);
+        expect(isTimelslotInserted).toBe(none);
     });
 
     test('valid sample values for all parameters except one', async () => {
@@ -39,13 +39,13 @@ describe('testing parameters for insertWorkerTimeslot method', () => {
         const slotId = '1';
         const schoolId = null;
         const workerId = '8000000';
-        const date = '2020-11-27';
+        const date = '2020-12-24';
 
         // Act
         const isTimelslotInserted = await timeslotModel.insertWorkerTimeslot(slotId, schoolId, workerId,date);
 
         // Assert
-        expect(isTimelslotInserted).toBe(null);
+        expect(isTimelslotInserted).toBe(false);
     });
 
 });
