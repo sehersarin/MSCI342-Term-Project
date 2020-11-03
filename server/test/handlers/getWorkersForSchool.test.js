@@ -14,7 +14,7 @@ describe('testing invalid schoolId parameters', () => {
         const workerIds = await schoolHandler.getWorkerIdsForSchool();
         
         // Assert
-        expect(isSuccessfullyInserted).toBe(workerIds);
+        expect(isSuccessfullyInserted).toStrictEqual(workerIds);
     });
 
     test('rejection of null value for required schoolId parameter', async () => {
@@ -26,7 +26,7 @@ describe('testing invalid schoolId parameters', () => {
         const workerIds = await schoolHandler.getWorkerIdsForSchool();
         
         // Assert
-        expect(isSuccessfullyInserted).toBe(workerIds);
+        expect(isSuccessfullyInserted).toStrictEqual(workerIds);
     });
 
     test('rejection of empty string value for required schoolId parameter', async () => {
@@ -38,7 +38,7 @@ describe('testing invalid schoolId parameters', () => {
         const workerIds = await schoolHandler.getWorkerIdsForSchool();
        
         // Assert
-        expect(isSuccessfullyInserted).toBe(workerIds);
+        expect(isSuccessfullyInserted).toStrictEqual(workerIds);
     });
 
     test('rejection of invalid school id', async () => {
@@ -50,7 +50,7 @@ describe('testing invalid schoolId parameters', () => {
         const workerIds = await schoolHandler.getWorkerIdsForSchool();
         
         // Assert
-        expect(isSuccessfullyInserted).toBe(workerIds);
+        expect(isSuccessfullyInserted).toStrictEqual(workerIds);
     });
 });
 
@@ -68,7 +68,7 @@ describe('testing valid school ID parameters', () => {
         const workerIds = await schoolHandler.getWorkerIdsForSchool();
        
         // Assert
-        expect(isSuccessfullyInserted).toBe(workerIds);
+        expect(isSuccessfullyInserted).toStrictEqual(workerIds);
     });
 
     test('null values for optional fields', async () => {
@@ -80,7 +80,7 @@ describe('testing valid school ID parameters', () => {
         const workerIds = await schoolHandler.getWorkerIdsForSchool();
         
         // Assert
-        expect(isSuccessfullyInserted).toBe(workerIds);
+        expect(isSuccessfullyInserted).toStrictEqual(workerIds);
     });
 
     test('only passing in values for required fields', async () => {
@@ -92,7 +92,7 @@ describe('testing valid school ID parameters', () => {
         const workerIds = await schoolHandler.getWorkerIdsForSchool();
         
         // Assert
-        expect(isSuccessfullyInserted).toBe(workerIds);
+        expect(isSuccessfullyInserted).toStrictEqual(workerIds);
     });
 
     test('passing in valid string values for required fields', async () => {
@@ -104,7 +104,7 @@ describe('testing valid school ID parameters', () => {
         const workerIds = await schoolHandler.getWorkerIdsForSchool();
         
         // Assert
-        expect(isSuccessfullyInserted).toBe(workerIds);
+        expect(isSuccessfullyInserted).toStrictEqual(workerIds);
     });
 
     test('passing in valid values for all fields', async () => {
@@ -116,6 +116,6 @@ describe('testing valid school ID parameters', () => {
         const workerIds = await schoolHandler.getWorkerIdsForSchool();
        
         // Assert
-        expect(isSuccessfullyInserted).toBe(workerIds);
+        expect(isSuccessfullyInserted).toStrictEqual(workerIds);
     });
 });
