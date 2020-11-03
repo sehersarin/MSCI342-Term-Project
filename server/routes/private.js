@@ -134,6 +134,16 @@ router.get('/appointments', async (req, res) => {
     res.send(appointmentDetails);
 });
 
+
+//Returns all possible timeslots
+// Returns all the appointments/meetings for a given student or worker.
+// Note that appointments/meetings are synonymous, but only appointments will be used in the backend to maintain consistency.
+router.get('/possible-timeslots', async (req, res) => {
+timeslots = await workerTimeslotHandler.getPossibleTimeslots();
+
+    res.send(timeslots);
+});
+
 router.get('/test', async (req, res) => {
     res.send(true);
 });

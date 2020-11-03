@@ -13,6 +13,27 @@ async function addWorkerTimeslot(schoolID, workerID, slotID, status, daysAvailab
   return did_it_work;
 };
 
+// Fetches all the essential timeslot details from timeslot table. 
+//currently stub format 
+async function getPossibleTimeslots() {
+  const timeslotDetails = [
+      {
+          timeslotId: 1,
+          startTime: '08:00:00',
+          endTime: '08:30:00',
+      },
+      {
+        timeslotId: 2,
+        startTime: '09:00:00',
+        endTime: '09:30:00',
+    },
+  ];
+
+  return timeslotDetails;
+}
+
+
 module.exports = {
   addWorkerTimeslot,
+  getPossibleTimeslots,
 }
