@@ -45,6 +45,7 @@ router.get('/api/create-user', async (req, res) => {
         studentId: Joi.number().positive().integer(),
         workerId: Joi.number().positive().integer(),
         userType: Joi.string().min(1).valid(['student', 'worker']),
+        type: Joi.string(),
         specialization: Joi.string().valid(['social worker', 'guidance councellor']),//verify options
         //access_token: Joi.string().alphanum().min(3).max(30).required(), 
         //insert joi verification for first_name,last_name, type,student_id,workerID,phone
@@ -60,6 +61,7 @@ router.get('/api/create-user', async (req, res) => {
     const paramEmail = req.query.email;
     const paramPassword = req.query.password;
     const paramPhone = req.query.phone;
+    const paramType = req.query.type;
     const paramSchoolId = req.query.schoolId; //Students only
     const paramSpecialization = req.query.specialization; //Workers only
    //const access_token = req.query.access_token; //is this needed? If yes, add to worker.js line 18 and student.js line 17
@@ -67,7 +69,7 @@ router.get('/api/create-user', async (req, res) => {
    
 
     //error check
-    const { error, value } = paramSchema.validate({ email: paramEmail, password: paramPassword, firstName: paramFirstName,lastName: paramLastName, type: paramType, studentId: paramStudentId, workerId: paramWorkerId, phone: paramPhone, schoolId: paramSchoolId, specialization: paramSpecialization});
+    const { error, value } = paramSchema.validate({ email: paramEmail, password: paramPassword, firstName: paramFirstName,lastName: paramLastName, type: paramType, studentId: paramStudentId, workerId: paramWorkerId, phone: paramPhone, schoolId: paramSchoolId, specialization: paramSpecialization, type: paramType});
     if (!_.isNil(error)) res.send(error);
 
 
