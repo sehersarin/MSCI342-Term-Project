@@ -50,6 +50,22 @@ describe('testing fetching of worker availability functionality', () => {
 
 //TEST 4
 
+test('rejection of null value for required startTime parameter', async () => {
+    // Arrange
+    const testWorkerId = 8000000;
+    const testSchoolId = 1;
+    const testStartTime = null;
+    const testEndTime = '2020-10-20';
+
+    // Act
+    const availableTimes = await availabilityHandler.getWorkerAvailability(testWorkerId, testSchoolId, testStartTime, testEndTime);
+
+    // Assert
+    expect(availableTimes).tobe(null);
+});
+
+//TEST 5
+
     //stub
     test('initial setup of worker availability fetching', async () => {
         // Arrange
