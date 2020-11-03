@@ -109,7 +109,7 @@ router.get('/test', async (req, res) => {
 });
 
 router.post('/api/add-recurring-schedule', async (req, res) => {
-module.exports = router
+
 
     // Validate appropriate parameters are passed to view workers at each school 
     const getWorkersForSchool = Joi.object({
@@ -130,3 +130,4 @@ module.exports = router
     res.send(isSuccessfullyInserted);
 });
 
+module.exports = router
