@@ -10,8 +10,9 @@ test('workerIds for school match array', async () => {
     const testschoolId = '';
 
     // Act
-    const workerIds = await schoolHandler.getWorkerIdsForSchool(testschoolId);
-
+    //const workerIds = await schoolHandler.getWorkerIdsForSchool(testschoolId);
+    const workerIds = await schoolHandler.getWorkerIdsForSchool();
+    
     // Assert
     expect(workerIds).toStrictEqual(workerIds);
 });
