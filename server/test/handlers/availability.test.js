@@ -140,6 +140,20 @@ test('rejection of empty string value for required endTime parameter', async () 
     expect(availableTimes).tobe(null);
 });
 
+//TEST 10
+test('rejection of invalid workerId', async () => {
+ // Arrange
+ const testWorkerId = 0;
+ const testSchoolId = 1;
+ const testStartTime = '2020-10-20';
+ const testEndTime = '2020-10-20';
+
+ // Act
+ const availableTimes = await availabilityHandler.getWorkerAvailability(testWorkerId, testSchoolId, testStartTime, testEndTime);
+
+ // Assert
+ expect(availableTimes).tobe(null);
+});
 
     //stub
     test('initial setup of worker availability fetching', async () => {
