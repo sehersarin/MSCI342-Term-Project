@@ -6,18 +6,18 @@ describe('Test to check valid account creation', () => {
     });
     //TEST 1
     //Create a test using Arrange, Act, Assert format
-    test('rejection of null values for student_id, first_name, last_name, email, type, phone, school_id', async () => {
+    test('rejection of null values for studentID, firstName, lastName, email, type, phone, schoolId', async () => {
         // Arrange
-        const testStudent_id = null;
-        const testFirst_name = null;
-        const testLast_name = null;
+        const testStudentId = null;
+        const testFirstName = null;
+        const testLastName = null;
         const testEmail = null;
         const testType = null;
         const testPhone = null;
-        const testSchool_id = null;
+        const testSchoolId = null;
 
         // Act
-        const user = await accountHandler.createUserAccount(testStudent_id, testFirst_name, testLast_name, testEmail, testType, testPhone, testSchool_id);
+        const user = await accountHandler.createUserAccount(testStudentId, testFirstName, testLastName, testEmail, testType, testPhone, testSchoolId);
 
         // Assert
         expect(user).toBe(null);
@@ -25,36 +25,36 @@ describe('Test to check valid account creation', () => {
 
     });
     //TEST 2
-    test('rejection of empty values for student_id, first_name, last_name, email, type, phone, school_id', async () => {
+    test('rejection of empty values for studentID, firstName, lastName, email, type, phone, schoolId', async () => {
         // Arrange
-        const testStudent_id = '';
-        const testFirst_name = '';
-        const testLast_name = '';
+        const testStudentId = '';
+        const testFirstName = '';
+        const testLastName = '';
         const testEmail = '';
         const testType = '';
         const testPhone = '';
-        const testSchool_id = '';
+        const testSchoolId = '';
 
 
         // Act
-        const user = await authenticateHandler.createUserAccount(testStudent_id, testFirst_name, testLast_name, testEmail, testType, testPhone, testSchool_id);
+        const user = await authenticateHandler.createUserAccount(testStudentId, testFirstName, testLastName, testEmail, testType, testPhone, testSchoolId);
 
         // Assert
         expect(user).toBe(null);
         //all values should return null
 
         //TEST 3
-        test('rejection of invalid student_id', async () => {
+        test('rejection of invalid studentID', async () => {
             // Arrange
-            const teststudent_id = 'invalidstudent_id';
+            const testStudentId = 'invalidstudent_id';
 
 
             // Act
-            const user = await accountHandler.createUserAccount(teststudent_id);
+            const user = await accountHandler.createUserAccount(testStudentId);
 
             // Assert
             expect(user).toBe(null);
-            //student_id should be null
+            //studentID should be null
         });
 
 
@@ -68,14 +68,14 @@ describe('Test to check valid account creation', () => {
                 // Arrange
                 const mystudent_id = '12345678';
                 const studentUser = {
-                    student_id: mystudent_id,
-                    first_name: 'John',
-                    last_name: 'Doe',
+                    studentID: mystudent_id,
+                    firstName: 'John',
+                    lastName: 'Doe',
                     email: 'johndoe@gmail.com',
                     type: 'student',
-                    access_token: 'XcCa92ZvOnQKZsGtOKOa',
+                    accessToken: 'XcCa92ZvOnQKZsGtOKOa',
                     phone: null,
-                    school_id: 1
+                    schoolId: 1
                 };
 
             // Act
@@ -89,12 +89,12 @@ describe('Test to check valid account creation', () => {
             // Arrange
             const myworkerID = 8000000;
             const workerUser = {
-                worker_id: myworkerID,
-                first_name: 'Joshua',
-                last_name: 'Brooks',
+                workerId: myworkerID,
+                firstName: 'Joshua',
+                lastName: 'Brooks',
                 email: 'joshuabrooks@gmail.com',
                 type: 'worker',
-                access_token: 'eeJAQr3wEC6CJZROFJTY',
+                accessToken: 'eeJAQr3wEC6CJZROFJTY',
                 phone: '+15191234567',
                 specialization: 'Masters in Social Work',
                 type: 'Guidance Counselor'
