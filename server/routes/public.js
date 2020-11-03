@@ -28,10 +28,6 @@ router.get('/login', async (req, res) => {
     res.send(user);
 });
 
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-=======
->>>>>>> Stashed changes
 router.get('/api/create-user', async (req, res) => {
     // joi verification
     // Validate appropriate parameters are passed into the create account endpoint.
