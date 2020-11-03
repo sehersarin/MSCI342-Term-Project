@@ -30,7 +30,7 @@ class Check extends React.Component { // this is a class component for the check
     this.setState(prevState => ({ checkedDays: prevState.checkedDays.set(item, isChecked) }));
   }
 
-  handleSubmit(event) { // submits selected days and assign recurrenting dates based off boxes checked
+  handleSubmit(event) { // submits selected days and assigns recurrenting dates based off boxes checked
     const startDay = moment(document.getElementById("DATE").value)
     let AvailableDates = [];
     let currentDayNumber = moment(startDay).day();
@@ -79,7 +79,7 @@ class Check extends React.Component { // this is a class component for the check
           <h1>Recurring on</h1>
           {
             this.state.Days.map(item => (
-              <div className={"checkboxes"}>
+              <div>
                 <label>
                   <input className="DayBox"
                     type="checkbox"
@@ -99,8 +99,9 @@ class Check extends React.Component { // this is a class component for the check
     );
   }
 }
+/* render(<Check />, document.getElementById('root')); */
 export default Check
-render(<Check />, document.getElementById('root'));
+
 
 
 
