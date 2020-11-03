@@ -70,7 +70,7 @@ router.get('/api/create-user', async (req, res) => {
     if (!_.isNil(error)) res.send(error);
 
 
-    const user = await accountHandler.createUserAccount(first_name, last_name, type, student_id, email, password, phone,workerId,school_id,specialization,access_token);
+    const user = await accountHandler.createUserAccount(first_name, last_name, type, student_id, email, password, phone,worker_id,school_id,specialization);
 
     res.send(user);
 });
