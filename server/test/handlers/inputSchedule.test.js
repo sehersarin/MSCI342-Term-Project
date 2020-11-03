@@ -40,13 +40,13 @@ describe('testing inputting of worker schedule functionality', () => {
         const testWorkerId = '8000000';
         const testSchoolId = '1';
         const testSlotId = '1';
-        const testDate = '2020-12-29'; 
+        const testDate = '2020-12-30'; 
         const testStatus = '';       
 
         // Act
         const isSuccessfullyInserted = await workerTimeslotHandler.addWorkerTimeslot(testSlotId, testSchoolId, testWorkerId, testStatus, testDate);
 
         // Assert
-        expect(isSuccessfullyInserted).toBe(false);
+        expect(isSuccessfullyInserted).toBe(true);
     });
 });
