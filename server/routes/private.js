@@ -9,7 +9,7 @@ const appointmentHandler = require('../models/handlers/appointment');
 const workerTimeslotHandler = require('../models/handlers/workerTimeslot');
 const availabilityHandler = require('../models/handlers/availability');
 
-const TimeslotStatus  = require('../../constants/timeslot-status.json');
+const TimeslotStatus  = require('../constants/timeslot-status.json');
 
 // Binds a middleware to check access tokens for all private requests.
 router.use(async function (req, res, next) {
