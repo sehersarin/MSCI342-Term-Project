@@ -10,7 +10,7 @@ describe('testing parameters for insertWorkerTimeslot method', () => {
         const slotId = null;
         const schoolId = null;
         const workerId = null;
-        const date = null;
+        const date = '2020-01-01';
 
         // Act
         const isTimelslotInserted = await timeslotModel.insertWorkerTimeslot(slotId, schoolId, workerId, date);
@@ -28,16 +28,21 @@ describe('testing parameters for insertWorkerTimeslot method', () => {
         
 
         // Act
-        const isTimelslotInserted = await timeslotModel.insertWorkerTimeslot(slotId, schoolId, workerId, date);
+        try {const isTimelslotInserted = await timeslotModel.insertWorkerTimeslot(slotId, schoolId, workerId, date);
+            
+        } catch (error) {
+            
+                // Assert
+                expect(isTimelslotInserted).toStrictEqual([]);}
+        
 
-        // Assert
-        expect(isTimelslotInserted).toStrictEqual([]);
+
     });
 
     test('valid sample values for all parameters except one', async () => {
         // Arrange
         const slotId = '1';
-        const schoolId = null;
+        const schoolId = '27';
         const workerId = '8000000';
         const date = '2020-11-27';
 
