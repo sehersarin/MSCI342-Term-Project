@@ -10,7 +10,7 @@ describe('testing inputting of worker schedule functionality', () => {
         const testWorkerId = '8000000';
         const testSchoolId = '1';
         const testSlotId = '1';
-        const testDate = '2020-12-28';  
+        const testDate = '2020-12-21';  
         const testStatus = 'available';    
 
         // Act
@@ -25,7 +25,7 @@ describe('testing inputting of worker schedule functionality', () => {
         const testWorkerId = null ;
         const testSchoolId = '1';
         const testSlotId = '1';
-        const testDate = '2020-12-28'; 
+        const testDate = '2020-12-21'; 
         const testStatus = 'available';       
 
         // Act
@@ -40,8 +40,8 @@ describe('testing inputting of worker schedule functionality', () => {
         const testWorkerId = '8000000';
         const testSchoolId = '1';
         const testSlotId = '1';
-        const testDate = '2020-12-30'; 
-        const testStatus = '';       
+        const testDate = '2020-12-20'; 
+        const testStatus = null;       
 
         // Act
         const isSuccessfullyInserted = await workerTimeslotHandler.addWorkerTimeslot(testSlotId, testSchoolId, testWorkerId, testStatus, testDate);
