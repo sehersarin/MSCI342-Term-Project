@@ -1,7 +1,6 @@
 const _ = require('lodash');
 
 const { db } = require('../../lib/connection');
-const moment= require('moment');
 const Tables = require('../../constants/tables.json');
 const TimeslotStatus  = require('../../constants/timeslot-status.json');
 
@@ -13,7 +12,7 @@ async function insertWorkerTimeslot(slotId, schoolId, workerId, date) {
     //var date_format = moment(date).format('YYYY MM DD');
     //console.log(date_format); 
 
-    return db.any(`insert into ${Tables.worker_timeslot} (slot_id, school_id, worker_id, status, date) values (${slotId}, ${schoolId}, ${workerId}, '${TimeslotStatus.available}', '${date}');`);
+    return db.any(`insert into ${Tables.workerTimeslot} (slot_id, school_id, worker_id, status, date) values (${slotId}, ${schoolId}, ${workerId}, '${TimeslotStatus.available}', '${date}');`);
 }
 
 module.exports = {
