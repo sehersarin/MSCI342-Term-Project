@@ -1,15 +1,15 @@
 /* The goal: Take in the user input from the Account Creation form in 
 the front end UI in order to create a user account in the backend*/
 
-async function createUserAccount(firstName, lastName, type, studentID, email, password, phone) {
+async function createUserAccount(first_name, last_name, type, student_id, email, password, phone) {
      // Searches the student table to see if a student account exists for the given data.
 
      If userType = userType.student {
-     const user = await studentModel.insertStudentAccount(firstName, lastName, type, studentID, email, password, phone);
+     const user = await studentModel.insertStudentAccount(first_name, last_name, type, student_id, email, password, phone);
      if  (!_.isNil(student)) return student;
      } else if userType = userType.worker {
      // Searches the worker table to see if a student account exists for the given data.
-     const worker = await workerModel.insertWorkerAccount(firstName, lastName, type, workerID, email, password, phone);
+     const worker = await workerModel.insertWorkerAccount(first_name, last_name, type, worker_id, email, password, phone);
      if  (!_.isNil(worker)) return worker;
      }
  
