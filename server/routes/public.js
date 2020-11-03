@@ -63,7 +63,7 @@ router.get('/api/create-user', async (req, res) => {
     const paramUserType = req.query.userType;
     const paramSchoolId = req.query.schoolId; //Students only
     const paramSpecialization = req.query.specialization; //Workers only
-   //const access_token = req.query.access_token; //is this needed? If yes, add to worker.js line 18 and student.js line 17
+   
 
    
 
