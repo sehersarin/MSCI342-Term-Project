@@ -32,9 +32,9 @@ router.get('/api/create-user', async (req, res) => {
     // joi verification
     // Validate appropriate parameters are passed into the create account endpoint.
     const paramSchema = Joi.object({
-       
-       //The following joi verifications make sure the values inputted adhere to the format requirements
-       //specified in the migrations> create-worker-table and migrations> create-student-table.
+
+        //The following joi verifications make sure the values inputted adhere to the format requirements
+        //specified in the migrations> create-worker-table and migrations> create-student-table.
 
         email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net', 'ca'] } }).max(320).required(),
         password: Joi.string().min(3).max(40).required(),
@@ -63,18 +63,13 @@ router.get('/api/create-user', async (req, res) => {
     const paramUserType = req.query.userType;
     const paramSchoolId = req.query.schoolId; //Students only
     const paramSpecialization = req.query.specialization; //Workers only
-   
-
-   
 
     //error check
-    const { error, value } = paramSchema.validate({ email: paramEmail, password: paramPassword, firstName: paramFirstName,lastName: paramLastName, type: paramType, studentId: paramStudentId, workerId: paramWorkerId, phone: paramPhone, schoolId: paramSchoolId, specialization: paramSpecialization, userType: paramUserType});
+    const { error, value } = paramSchema.validate({ email: paramEmail, password: paramPassword, firstName: paramFirstName, lastName: paramLastName, type: paramType, studentId: paramStudentId, workerId: paramWorkerId, phone: paramPhone, schoolId: paramSchoolId, specialization: paramSpecialization, userType: paramUserType });
     if (!_.isNil(error)) res.send(error);
 
+    const user = await accountHandler.createUserAccount(firstName, lastName, type, studentId, email, password, phone, workerId, schoolId, specialization);
 
-    const user = await accountHandler.createUserAccount(firstName, lastName, type, studentId, email, password, phone,workerId,schoolId,specialization);
-<<<<<<< Updated upstream
-=======
 router.get('/create-user', async (req, res) => {
     const firstName = req.query.firstName;
     const lastName = req.query.lastName;
@@ -85,9 +80,7 @@ router.get('/create-user', async (req, res) => {
     const phone = req.query.phone;
 
     const user = await accountHandler.createUserAccount(firstName, lastName, type, studentID, email, password, phone);
->>>>>>> master
-=======
->>>>>>> Stashed changes
+
 
     res.send(user);
 });
