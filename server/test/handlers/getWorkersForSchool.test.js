@@ -11,7 +11,8 @@ describe('testing invalid schoolId parameters', () => {
 
         // Act
         const isSuccessfullyInserted = await schoolHandler.getWorkerIdsForSchool();
-
+        const workerIds = await schoolHandler.getWorkerIdsForSchool();
+        
         // Assert
         expect(isSuccessfullyInserted).toBe(workerIds);
     });
@@ -22,7 +23,8 @@ describe('testing invalid schoolId parameters', () => {
         
         // Act
         const isSuccessfullyInserted = await schoolHandler.getWorkerIdsForSchool(testschoolId);
-
+        const workerIds = await schoolHandler.getWorkerIdsForSchool();
+        
         // Assert
         expect(isSuccessfullyInserted).toBe(workerIds);
     });
@@ -33,7 +35,8 @@ describe('testing invalid schoolId parameters', () => {
 
         // Act
         const isSuccessfullyInserted = await schoolHandler.getWorkerIdsForSchool(testschoolId);
-
+        const workerIds = await schoolHandler.getWorkerIdsForSchool();
+       
         // Assert
         expect(isSuccessfullyInserted).toBe(workerIds);
     });
@@ -44,7 +47,8 @@ describe('testing invalid schoolId parameters', () => {
         
         // Act
         const isSuccessfullyInserted = await schoolHandler.getWorkerIdsForSchool(testschoolId);
-
+        const workerIds = await schoolHandler.getWorkerIdsForSchool();
+        
         // Assert
         expect(isSuccessfullyInserted).toBe(workerIds);
     });
@@ -61,7 +65,8 @@ describe('testing valid school ID parameters', () => {
     
         // Act
         const isSuccessfullyInserted = await schoolHandler.getWorkerIdsForSchool(testschoolId);
-
+        const workerIds = await schoolHandler.getWorkerIdsForSchool();
+       
         // Assert
         expect(isSuccessfullyInserted).toBe(workerIds);
     });
@@ -72,7 +77,8 @@ describe('testing valid school ID parameters', () => {
         
         // Act
         const isSuccessfullyInserted = await schoolHandler.getWorkerIdsForSchool(testschoolId);
-
+        const workerIds = await schoolHandler.getWorkerIdsForSchool();
+        
         // Assert
         expect(isSuccessfullyInserted).toBe(workerIds);
     });
@@ -83,7 +89,8 @@ describe('testing valid school ID parameters', () => {
 
         // Act
         const isSuccessfullyInserted = await schoolHandler.getWorkerIdsForSchool(testschoolId);
-
+        const workerIds = await schoolHandler.getWorkerIdsForSchool();
+        
         // Assert
         expect(isSuccessfullyInserted).toBe(workerIds);
     });
@@ -94,7 +101,8 @@ describe('testing valid school ID parameters', () => {
 
         // Act
         const isSuccessfullyInserted = await schoolHandler.getWorkerIdsForSchool(testschoolId);
-       
+        const workerIds = await schoolHandler.getWorkerIdsForSchool();
+        
         // Assert
         expect(isSuccessfullyInserted).toBe(workerIds);
     });
@@ -105,7 +113,8 @@ describe('testing valid school ID parameters', () => {
    
         // Act
         const isSuccessfullyInserted = await schoolHandler.getWorkerIdsForSchool(testschoolId);
-
+        const workerIds = await schoolHandler.getWorkerIdsForSchool();
+       
         // Assert
         expect(isSuccessfullyInserted).toBe(workerIds);
     });
