@@ -4,6 +4,5 @@
     "worker": "Service_Worker", 
     "timeslot": "Timeslot", 
     "workerTimeslot": "Worker_Timeslot",
-    "school": "School", 
-    "schoolWorker": "School_Worker"     
+    "school": "School"    
 }
