@@ -10,15 +10,15 @@ var user;
        const accessToken =  new UIDGenerator(UIDGenerator.BASE16).20; 
 
         user = await studentModel.insertStudentAccount(firstName, lastName, type, studentId, email, password, phone);
-        if (!_.isNil(student)) return student;
+        if (!_.isNil(user)) return student;
     } else if userType = userType.worker {
         // Searches the worker table to see if a student account exists for the given data.
         user = await workerModel.insertWorkerAccount(firstName, lastName, type, workerId, email, password, phone);
-        if (!_.isNil(worker)) return worker;
+        if (!_.isNil(user)) return worker;
     }
 
     // Returns the user
-    return user;
+    return null;
 };
 
 //code on lines 18-28 is not needed (hard-coded for the previous iteration). I will delete this once I know that the lines 5-15 run properly.
