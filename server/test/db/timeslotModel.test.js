@@ -31,7 +31,7 @@ describe('testing parameters for insertWorkerTimeslot method', () => {
         const isTimelslotInserted = await timeslotModel.insertWorkerTimeslot(slotId, schoolId, workerId, date);
 
         // Assert
-        expect(isTimelslotInserted).toBe(true);
+        expect(isTimelslotInserted).toStrictEqual([]);
     });
 
     test('valid sample values for all parameters except one', async () => {
@@ -47,5 +47,7 @@ describe('testing parameters for insertWorkerTimeslot method', () => {
         // Assert
         expect(isTimelslotInserted).toBe(null);
     });
+
+    
 
 });
