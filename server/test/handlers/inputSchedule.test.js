@@ -35,7 +35,7 @@ describe('testing inputting of worker schedule functionality', () => {
         expect(isSuccessfullyInserted).toBe(false);
     });
 
-    test('testing valid + status default value for inputting worker schedule ', async () => {
+    test('testing valid values for inputting worker schedule with default for status', async () => {
         // Arrange
         const testWorkerId = '8000000';
         const testSchoolId = '1';
