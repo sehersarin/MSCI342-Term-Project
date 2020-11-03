@@ -10,13 +10,13 @@ describe('Test to check valid account creation', () => {
         // Arrange
 
         const testStudentID = null;
-        
+
         /* These are hard-coded values to test the stub.
         // In order to test, the tester should input these credentials
         const email = 'victorhugo@gmail.com';
         const password = 'victorlovespoetry';
-        const firstName = 'Victor';
-        const lastName = 'Hugo';
+        const first_name = 'Victor';
+        const last_name = 'Hugo';
         const phone = '6476442200';
         const type = 'student';
         const studentID = '20764242';
@@ -24,7 +24,7 @@ describe('Test to check valid account creation', () => {
 
         const testUser = {
             type: 'student', //note: 'type' is called 'role' in the UI, but refers to either a worker or a student.
-            studentId: '20764242',
+            student_id: '20764242',
             firstname: 'Victor',
             lastname: 'Hugo',
             email: 'victorhugo@gmail.com',
@@ -33,13 +33,13 @@ describe('Test to check valid account creation', () => {
 */
 
         // Act
-        const user = await accountHandler.createUserAccount(firstName, lastName, type, studentID, email, password, phone, school_id);
+        const user = await accountHandler.createUserAccount(first_name, last_name, type, studentID, email, password, phone, school_id);
 
         // Assert
         expect(user).toMatchObject(null);
 
         //if the user object ceated during account creation matches the test user, the account has been created sucessfully.
-   
+
 
     });
 
@@ -49,7 +49,7 @@ describe('Test to check valid account creation', () => {
 
 
         // Act
-        const user = await accountHandler.createUserAccount(firstName, lastName, type, studentID, email, password, phone, school_id);
+        const user = await accountHandler.createUserAccount(first_name, last_name, type, studentID, email, password, phone, school_id);
 
 
         // Assert
@@ -65,43 +65,46 @@ describe('Test to check valid account creation', () => {
 
         test('acceptance of valid student user', async () => {
             // Arrange
-            const mystudentID = '20764242';
+            const mystudentID = '12345678';
 
             const studentUser = {
-                email: 'victorhugo@gmail.com',
-                password: 'victorlovespoetry',
-                firstName: 'Victor',
-                lastName: 'Hugo',
-                phone: '6476442200',
-                type: 'student',
-                studentID: mystudentID,
-                schoolId: 1
+                    student_id: mystudentID ,
+                    first_name: 'John',
+                    last_name: 'Doe',
+                    email: 'johndoe@gmail.com',
+                    type: 'student',
+                    access_token: 'XcCa92ZvOnQKZsGtOKOa',
+                    phone: null,
+                    school_id: 1
+                };
 
-            };
+            });
 
             // Act
-            const user = await accountHandler.createUserAccount(firstName, lastName, type, studentID, email, password, phone, school_id);
+            const user = await accountHandler.createUserAccount(first_name, last_name, type, student_id, email, password, phone,school_id);
             // Assert
             expect(user).toMatchObject(studentUser);
         });
 
         test('acceptance of valid worker user', async () => {
             // Arrange
-            const myworkerID = 66449055;
+            const myworkerID = 8000000;
 
             const workerUser = {
-                workerId: myworkerID,
-                firstName: 'Flora',
-                lastName: 'Gardener',
-                email: 'floralovesflowers@gmail.com',
+                worker_id: myworkerID,
+                first_name: 'Joshua',
+                last_name: 'Brooks',
+                email: 'joshuabrooks@gmail.com',
                 type: 'worker',
-                phone: '15191234567',
+                access_token: 'eeJAQr3wEC6CJZROFJTY',
+                phone: '+15191234567',
                 specialization: 'Masters in Social Work',
                 type: 'Guidance Counselor'
             };
 
             // Act
-            const user = await accountHandler.createUserAccount(firstName, lastName, type, studentID, email, password, phone, school_id);
+            const user = await accountHandler.createUserAccount(first_name, last_name, type, email, password, phone,worker_id,specialization);
+           
 
             // Assert
             expect(user).toMatchObject(workerUser);
