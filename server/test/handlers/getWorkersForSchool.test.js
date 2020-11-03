@@ -11,7 +11,7 @@ test('workerIds for school match array', async () => {
 
     // Act
     const workerIds = await schoolHandler.getWorkerIdsForSchool(testschoolId);
-
+    
     // Assert
     expect(workerIds).toStrictEqual(workerIds);
 });
