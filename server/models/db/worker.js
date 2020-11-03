@@ -12,11 +12,11 @@ async function getWorker(email, password) {
 }
 
 // This method inserts a worker account given specific information.
-async function insertWorkerAccount(firstName, lastName, type, workerId, email, password, phone, specialization) {
+async function insertWorkerAccount(first_name, last_name, type, worker_id, email, password, phone, specialization) {
     //Data recieved from the front end sign up form
     //Insert one row into a table
-    return db.run(`insert into ${Tables.worker}(firstName, lastName, type, workerId, email, password, phone, specialization) values 
-    (${firstName}, ${lastName}, ${type}, ${workerId}, ${email}, ${password}, ${phone}, ${specialization})`, ['C'], function (err) {
+    return db.run(`insert into ${Tables.worker}(first_name, last_name, type, worker_id, email, password, phone, specialization) values 
+    (${first_name}, ${last_name}, ${type}, ${worker_id}, ${email}, ${password}, ${phone}, ${specialization})`, ['C'], function (err) {
         if (err) {
             return console.log(err.message);
         }

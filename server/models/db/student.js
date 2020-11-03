@@ -11,11 +11,11 @@ async function getStudent(email, password) {
     return userModel.getUser(email, password, Tables.student, Student);
 }
 // This method inserts a student account given specific information.
-async function insertStudentAccount(firstName, lastName, type, studentID, email, password, phone, schoolId) {
+async function insertStudentAccount(first_name, last_name, type, student_id, email, password, phone, school_id) {
     //Data recieved from the front end sign up form
     //Insert one row into a table
-    return db.run(`insert into ${Tables.student}(firstName, lastName, type, studentID, email, password, phone, schoolId) values 
-     (${firstName}, ${lastName}, ${type}, ${studentID}, ${email}, ${password}, ${phone}, ${schoolId})`, ['C'], function (err) {
+    return db.run(`insert into ${Tables.student}(first_name, last_name, type, student_id, email, password, phone, school_id) values 
+     (${first_name}, ${last_name}, ${type}, ${student_id}, ${email}, ${password}, ${phone}, ${school_id})`, ['C'], function (err) {
         if (err) {
             return console.log(err.message);
         }
