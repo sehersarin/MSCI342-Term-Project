@@ -10,10 +10,11 @@ describe('testing inputting of worker schedule functionality', () => {
         const testWorkerId = '8000000';
         const testSchoolId = '1';
         const testSlotId = '1';
-        const testDate = '2020-12-28';       
+        const testDate = '2020-12-28';  
+        const testStatus = 'available';    
 
         // Act
-        const isSuccessfullyInserted = await timeslotHandler.addWorkerTimeslot(testSlotId, testSchoolId, testWorkerId, testDate);
+        const isSuccessfullyInserted = await timeslotHandler.addWorkerTimeslot(testSlotId, testSchoolId, testWorkerId, testStatus, testDate);
 
         // Assert
         expect(isSuccessfullyInserted).toBe(true);
@@ -21,13 +22,14 @@ describe('testing inputting of worker schedule functionality', () => {
 
     test('testing invalid values for inputting worker schedule ', async () => {
         // Arrange
-        const testWorkerId = '8000028';
+        const testWorkerId = null ;
         const testSchoolId = '1';
         const testSlotId = '1';
-        const testDate = '2020-12-28';       
+        const testDate = '2020-12-28'; 
+        const testStatus = 'available';       
 
         // Act
-        const isSuccessfullyInserted = await timeslotHandler.addWorkerTimeslot(testSlotId, testSchoolId, testWorkerId, testDate);
+        const isSuccessfullyInserted = await timeslotHandler.addWorkerTimeslot(testSlotId, testSchoolId, testWorkerId, testStatus, testDate);
 
         // Assert
         expect(isSuccessfullyInserted).toBe(false);
