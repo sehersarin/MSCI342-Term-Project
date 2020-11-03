@@ -125,9 +125,9 @@ router.post('/api/add-recurring-schedule', async (req, res) => {
     if (!_.isNil(error)) res.send(error);
 
     // Attempts to insert the available workers at each school 
-    const isSuccessfullyInserted = await schoolHandler.getWorkerIdsForSchool(schoolId);
+    const workerIds = await schoolHandler.getWorkerIdsForSchool(schoolId);
 
-    res.send(isSuccessfullyInserted);
+    res.send(workerIds);
 });
 
 module.exports = router
