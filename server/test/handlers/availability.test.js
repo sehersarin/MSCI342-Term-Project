@@ -155,6 +155,7 @@ test('rejection of invalid workerId', async () => {
  expect(availableTimes).tobe(null);
 });
 
+/* The following code is the test for the stub which will be deleted once this PR is approved.
     //stub
     test('initial setup of worker availability fetching', async () => {
         // Arrange
@@ -190,5 +191,6 @@ test('rejection of invalid workerId', async () => {
         // Assert
         expect(availableTimes).toMatchObject(testAvailableTimes);
     });
+    */
 
 })
