@@ -120,7 +120,7 @@ router.post('/api/add-recurring-schedule', async (req, res) => {
 
     const schoolId = query.schoolId ? query.schoolId : null;
 
-    const { error } = paramSchema.validate({schoolId});
+    const { error } = getWorkersForSchool.validate({schoolId});
 
     if (!_.isNil(error)) res.send(error);
 
