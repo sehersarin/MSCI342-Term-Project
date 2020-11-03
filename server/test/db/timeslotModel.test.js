@@ -24,7 +24,7 @@ describe('testing parameters for insertWorkerTimeslot method', () => {
         const slotId = '1';
         const schoolId = '1';
         const workerId = '8000000';
-        const date = '2020-12-25';
+        const date = '2020-12-24';
 
         // Act
         const isTimelslotInserted = await timeslotModel.insertWorkerTimeslot(slotId, schoolId, workerId, date);
