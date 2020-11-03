@@ -5,17 +5,32 @@ describe('testing inputting of worker schedule functionality', () => {
         jest.resetModules(); // Clears any cache between tests.
     });
 
-    test('testing initial stub for inputting worker schedule', async () => {
+    test('testing valid values for inputting worker schedule ', async () => {
         // Arrange
-        const testWorkerId = 8000000;
-        const testSchoolId = 1;
-        const testSlotId = 1;
+        const testWorkerId = '8000000';
+        const testSchoolId = '1';
+        const testSlotId = '1';
+        const testDate = '2020-12-28';       
 
         // Act
-        const isSuccessfullyInserted = await timeslotHandler.addWorkerTimeslot(testWorkerId, testSchoolId, testSlotId);
+        const isSuccessfullyInserted = await timeslotHandler.addWorkerTimeslot(testSlotId, testSchoolId, testWorkerId, testDate);
 
         // Assert
         expect(isSuccessfullyInserted).toBe(true);
+    });
+
+    test('testing invalid values for inputting worker schedule ', async () => {
+        // Arrange
+        const testWorkerId = '8000028';
+        const testSchoolId = '1';
+        const testSlotId = '1';
+        const testDate = '2020-12-28';       
+
+        // Act
+        const isSuccessfullyInserted = await timeslotHandler.addWorkerTimeslot(testSlotId, testSchoolId, testWorkerId, testDate);
+
+        // Assert
+        expect(isSuccessfullyInserted).toBe(false);
     });
 });
 
