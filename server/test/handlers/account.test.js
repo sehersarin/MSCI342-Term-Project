@@ -4,71 +4,71 @@ describe('Test to check valid account creation', () => {
     beforeEach(() => {
         jest.resetModules();
     });
-
+    //TEST 1
     //Create a test using Arrange, Act, Assert format
-    test('rejection of null values for StudentID', async () => {
+    test('rejection of null values for student_id, first_name, last_name, email, type, phone, school_id', async () => {
         // Arrange
-
-        const testStudentID = null;
-
-        /* These are hard-coded values to test the stub.
-        // In order to test, the tester should input these credentials
-        const email = 'victorhugo@gmail.com';
-        const password = 'victorlovespoetry';
-        const first_name = 'Victor';
-        const last_name = 'Hugo';
-        const phone = '6476442200';
-        const type = 'student';
-        const studentID = '20764242';
-        
-
-        const testUser = {
-            type: 'student', //note: 'type' is called 'role' in the UI, but refers to either a worker or a student.
-            student_id: '20764242',
-            firstname: 'Victor',
-            lastname: 'Hugo',
-            email: 'victorhugo@gmail.com',
-            phone: '6476442200'
-        };
-*/
+        const testStudent_id = null;
+        const testFirst_name = null;
+        const testLast_name = null;
+        const testEmail = null;
+        const testType = null;
+        const testPhone = null;
+        const testSchool_id = null;
 
         // Act
-        const user = await accountHandler.createUserAccount(first_name, last_name, type, studentID, email, password, phone, school_id);
-
-        // Assert
-        expect(user).toMatchObject(null);
-
-        //if the user object ceated during account creation matches the test user, the account has been created sucessfully.
-
-
-    });
-
-    test('rejection of invalid StudentID', async () => {
-        // Arrange
-        const testStudentID = 'invalidStudentID';
-
-
-        // Act
-        const user = await accountHandler.createUserAccount(first_name, last_name, type, studentID, email, password, phone, school_id);
-
+        const user = await accountHandler.createUserAccount(testStudent_id, testFirst_name, testLast_name, testEmail, testType, testPhone, testSchool_id);
 
         // Assert
         expect(user).toBe(null);
+        //all values should return null
+
     });
+    //TEST 2
+    test('rejection of empty values for student_id, first_name, last_name, email, type, phone, school_id', async () => {
+        // Arrange
+        const testStudent_id = '';
+        const testFirst_name = '';
+        const testLast_name = '';
+        const testEmail = '';
+        const testType = '';
+        const testPhone = '';
+        const testSchool_id = '';
 
 
+        // Act
+        const user = await authenticateHandler.createUserAccount(testStudent_id, testFirst_name, testLast_name, testEmail, testType, testPhone, testSchool_id);
 
-    describe('testing valid account creation', () => {
-        beforeEach(() => {
-            jest.resetModules(); // Clears any cache between tests.
+        // Assert
+        expect(user).toBe(null);
+        //all values should return null
+
+        //TEST 3
+        test('rejection of invalid student_id', async () => {
+            // Arrange
+            const teststudent_id = 'invalidstudent_id';
+
+
+            // Act
+            const user = await accountHandler.createUserAccount(teststudent_id);
+
+            // Assert
+            expect(user).toBe(null);
+            //student_id should be null
         });
 
-        test('acceptance of valid student user', async () => {
-            // Arrange
-            const mystudentID = '12345678';
 
-            const studentUser = {
-                    student_id: mystudentID ,
+        //TEST 4
+        describe('testing valid account creation', () => {
+            beforeEach(() => {
+                jest.resetModules(); // Clears any cache between tests.
+            });
+
+            test('acceptance of valid student user', async () => {
+                // Arrange
+                const mystudent_id = '12345678';
+                const studentUser = {
+                    student_id: mystudent_id,
                     first_name: 'John',
                     last_name: 'Doe',
                     email: 'johndoe@gmail.com',
@@ -78,18 +78,16 @@ describe('Test to check valid account creation', () => {
                     school_id: 1
                 };
 
-            });
-
             // Act
-            const user = await accountHandler.createUserAccount(first_name, last_name, type, student_id, email, password, phone,school_id);
+            const user = await accountHandler.createUserAccount(mystudent_id);
             // Assert
             expect(user).toMatchObject(studentUser);
+             //if the user object ceated during account creation matches the test user, the account has been created sucessfully.
         });
-
+//TEST 5
         test('acceptance of valid worker user', async () => {
             // Arrange
             const myworkerID = 8000000;
-
             const workerUser = {
                 worker_id: myworkerID,
                 first_name: 'Joshua',
@@ -103,13 +101,15 @@ describe('Test to check valid account creation', () => {
             };
 
             // Act
-            const user = await accountHandler.createUserAccount(first_name, last_name, type, email, password, phone,worker_id,specialization);
-           
+            const user = await accountHandler.createUserAccount(myworkerID);
+
 
             // Assert
             expect(user).toMatchObject(workerUser);
+             //if the user object ceated during account creation matches the test user, the account has been created sucessfully.
         });
     });
 
 
-});
+})
+})
