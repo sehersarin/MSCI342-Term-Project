@@ -11,18 +11,18 @@ async function getStudent(email, password) {
     return userModel.getUser(email, password, Tables.student, Student);
 }
 // This method inserts a student account given specific information.
-async function insertStudentAccount(firstName, lastName, type, studentID, email, password, phone, school_id ) {
+async function insertStudentAccount(firstName, lastName, type, studentID, email, password, phone, schoolId) {
     //Data recieved from the front end sign up form
- //Insert one row into a table
-     return db.run(`insert into ${Tables.student}(firstName, lastName, type, studentID, email, password, phone, school_id) values 
-     (${firstName}, ${lastName}, ${type}, ${studentID}, ${email}, ${password}, ${phone}, ${school_id})`,['C'], function(err){
-         if (err) {
-             return console.log(err.message);
-           }
-           //get the last insert id
-           console.log(`A row has been inserted with rowid ${this.lastID}`);
-     });
-    }
+    //Insert one row into a table
+    return db.run(`insert into ${Tables.student}(firstName, lastName, type, studentID, email, password, phone, schoolId) values 
+     (${firstName}, ${lastName}, ${type}, ${studentID}, ${email}, ${password}, ${phone}, ${schoolId})`, ['C'], function (err) {
+        if (err) {
+            return console.log(err.message);
+        }
+        //get the last insert id
+        console.log(`A row has been inserted with rowid ${this.lastID}`);
+    });
+}
 
 module.exports = {
     getStudent,
