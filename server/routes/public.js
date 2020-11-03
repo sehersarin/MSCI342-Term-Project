@@ -28,7 +28,10 @@ router.get('/login', async (req, res) => {
     res.send(user);
 });
 
+<<<<<<< Updated upstream
 <<<<<<< HEAD
+=======
+>>>>>>> Stashed changes
 router.get('/api/create-user', async (req, res) => {
     // joi verification
     // Validate appropriate parameters are passed into the create account endpoint.
@@ -74,6 +77,7 @@ router.get('/api/create-user', async (req, res) => {
 
 
     const user = await accountHandler.createUserAccount(firstName, lastName, type, studentId, email, password, phone,workerId,schoolId,specialization);
+<<<<<<< Updated upstream
 =======
 router.get('/create-user', async (req, res) => {
     const firstName = req.query.firstName;
@@ -86,6 +90,8 @@ router.get('/create-user', async (req, res) => {
 
     const user = await accountHandler.createUserAccount(firstName, lastName, type, studentID, email, password, phone);
 >>>>>>> master
+=======
+>>>>>>> Stashed changes
 
     res.send(user);
 });
