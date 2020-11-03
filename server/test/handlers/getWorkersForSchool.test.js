@@ -69,6 +69,7 @@ describe('testing valid school ID parameters', () => {
     test('null values for optional fields', async () => {
         // Arrange
         const testschoolId = 1;
+        
         // Act
         const isSuccessfullyInserted = await schoolHandler.getWorkerIdsForSchool(testschoolId);
 
