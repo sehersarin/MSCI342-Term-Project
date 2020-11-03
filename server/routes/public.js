@@ -41,9 +41,9 @@ router.get('/api/create-user', async (req, res) => {
         phone: Joi.string().max(20).phoneNumber(),
         firstName: Joi.string().min(1).max(20).required(),
         lastName: Joi.string().min(1).max(20).required(),
-        studentID: Joi.number().positive().integer(),
-        workerID: Joi.number().positive().integer(),
-        type: Joi.string().valid(['student', 'worker']),
+        studentId: Joi.number().positive().integer(),
+        workerId: Joi.number().positive().integer(),
+        userType: Joi.string().min(1).valid(['student', 'worker']),
         specialization: Joi.string().valid(['social worker', 'guidance councellor']),//verify options
         accessToken: Joi.string().alphanum().min(3).max(30).required(), 
         //insert joi verification for firstname,lastname, type,studentID,workerID,phone
@@ -54,8 +54,8 @@ router.get('/api/create-user', async (req, res) => {
     const firstName = req.query.firstName;
     const lastName = req.query.lastName;
     const type = req.query.type; //note: 'type' is called 'role' in the UI, but refers to either a worker or a student.
-    const studentID = req.query.studentID;//Students only
-    const workerID = req.query.workerID;//Workers only
+    const studentId = req.query.studentID;//Students only
+    const workerId = req.query.workerID;//Workers only
     const email = req.query.email;
     const password = req.query.password;
     const phone = req.query.phone;
@@ -66,11 +66,11 @@ router.get('/api/create-user', async (req, res) => {
    
 
     //error check
-    const { error, value } = paramSchema.validate({ email: paramEmail, password: paramPassword });
+    const { error, value } = paramSchema.validate({ email: paramEmail, password: paramPassword, firstName: paramFirstName,lastName: paramLastName, });
     if (!_.isNil(error)) res.send(error);
 
 
-    const user = await accountHandler.createUserAccount(firstName, lastName, type, studentID, email, password, phone,workerID,school_id,specialization,accessToken);
+    const user = await accountHandler.createUserAccount(firstName, lastName, type, studentId, email, password, phone,workerId,school_id,specialization,accessToken);
 
     res.send(user);
 });
