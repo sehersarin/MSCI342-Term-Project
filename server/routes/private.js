@@ -124,12 +124,9 @@ router.get('/appointments', async (req, res) => {
 
     if (!_.isNil(error)) res.send(error);
 
-    let appointmentDetails = [];
-
-    // Separate methods for the student and worker appointments as they return different parameters in the object (to reduce redundancy and size of response).
-    // Additionally these methods return details beyond the bare appointment details and thus were not named as only getAppointments to avoid confusion.
-    if (!_.isNil(studentId)) appointmentDetails = await appointmentHandler.getAppointmentDetailsForStudent(studentId, status);
-    else appointmentDetails = await appointmentHandler.getAppointmentDetailsForWorker(workerId, status);
+    // Leverages the same method for the student and worker appointments as they have a similar query structure (to reduce redundancy and size of response).
+    // Note that this method return details beyond the bare appointment details and thus were not named as only getAppointments to avoid confusion.
+    const appointmentDetails = await appointmentHandler.getAppointmentDetails(studentId, workerId, status);
 
     res.send(appointmentDetails);
 });
