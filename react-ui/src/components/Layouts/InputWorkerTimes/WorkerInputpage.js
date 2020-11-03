@@ -1,6 +1,5 @@
 import React from 'react'
 import Check from './CheckboxApplication';
-import AvailableMeetingHeader from './AvailableMeetingHeader';
  import TimeSlot from './TimeSlot'; 
 import './WorkerInputpage.scss';
  import { Link } from 'react-router-dom';
@@ -19,7 +18,6 @@ class WorkerInputpage extends React.Component {    // this class component would
         
         return (
             <div>
-                <AvailableMeetingHeader/>
                 <Check/>
                  {/* <TimeSlot/> */}                        {/*  No functionaility implmeented with timeslots yet */}
        
@@ -30,10 +28,7 @@ class WorkerInputpage extends React.Component {    // this class component would
                     <option value="School2">School 2</option>
                     <option value="School3">School 3</option> 
                     </select>
-                </Container>  } */} {/* commented out as school selection functionality isn't implemented yet */}
-
-                <Link to="/dashboard" >Go back</Link>  
-            
+                </Container>  } */} {/* commented out as school selection functionality isn't implemented yet */}            
             </div>
         )
         

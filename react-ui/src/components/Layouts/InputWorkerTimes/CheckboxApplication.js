@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
-import './CheckboxApplication.css';
+import './CheckboxApplication.scss';
 import { Container, Row, Col } from 'react-grid-system';
 import { Redirect, Route, withRouter, Link, Router } from "react-router-dom";
 
