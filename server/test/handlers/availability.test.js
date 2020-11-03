@@ -13,7 +13,7 @@ describe('testing fetching of worker availability functionality', () => {
         const availableTimes = await availabilityHandler.getWorkerAvailability(workerId, schoolId, startTime, endTime);
 
         // Assert
-        expect(availableTimes).toMatchObject(testAvailableTimes);
+        expect(availableTimes).tobe(null);
     });
 
     //TEST 2
