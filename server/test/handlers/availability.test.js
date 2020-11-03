@@ -126,6 +126,20 @@ test('rejection of empty string value for required startTime parameter', async (
     expect(availableTimes).tobe(null);
 });
 //TEST 9
+test('rejection of empty string value for required endTime parameter', async () => {
+    // Arrange
+    const testWorkerId = 8000000;
+    const testSchoolId = 1;
+    const testStartTime = '2020-10-20';
+    const testEndTime = '';
+
+    // Act
+    const availableTimes = await availabilityHandler.getWorkerAvailability(testWorkerId, testSchoolId, testStartTime, testEndTime);
+
+    // Assert
+    expect(availableTimes).tobe(null);
+});
+
 
     //stub
     test('initial setup of worker availability fetching', async () => {
