@@ -51,22 +51,22 @@ router.get('/api/create-user', async (req, res) => {
     // the endpoint `/api/create-user` accepts ALL parameters for both user types, 
     //as listed in the migrations> create-worker-table and migrations> create-student-table
 
-    const first_name = req.query.first_name;
-    const last_name = req.query.last_name;
-    const type = req.query.type; //note: 'type' is called 'role' in the UI, but refers to either a worker or a student.
-    const student_id = req.query.student_id;//Students only
-    const workerId = req.query.workerID;//Workers only
-    const email = req.query.email;
-    const password = req.query.password;
-    const phone = req.query.phone;
-    const school_id = req.query.school_id; //Students only
-    const specialization = req.query.specialization; //Workers only
-    const access_token = req.query.access_token; //is this needed? If yes, add to worker.js line 18 and student.js line 17
+    const paramFirst_name = req.query.first_name;
+    const paramLast_name = req.query.last_name;
+    const paramType = req.query.type; //note: 'type' is called 'role' in the UI, but refers to either a worker or a student.
+    const paramStudent_id = req.query.student_id;//Students only
+    const paramWorker_id = req.query.worker_id;//Workers only
+    const paramEmail = req.query.email;
+    const paramPassword = req.query.password;
+    const paramPhone = req.query.phone;
+    const paramSchool_id = req.query.school_id; //Students only
+    const paramSpecialization = req.query.specialization; //Workers only
+   //const access_token = req.query.access_token; //is this needed? If yes, add to worker.js line 18 and student.js line 17
 
    
 
     //error check
-    const { error, value } = paramSchema.validate({ email: paramEmail, password: paramPassword, first_name: paramfirst_name,last_name: paramlast_name, });
+    const { error, value } = paramSchema.validate({ email: paramEmail, password: paramPassword, first_name: paramFirst_name,last_name: paramLast_name, type: paramType, student_id: paramStudent_id, worker_id: paramWorker_id, phone: paramPhone, school_id: paramSchool_id, specialization: paramSpecialization});
     if (!_.isNil(error)) res.send(error);
 
 
