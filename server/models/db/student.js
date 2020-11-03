@@ -11,7 +11,7 @@ async function getStudent(email, password) {
     return userModel.getUser(email, password, Tables.student, Student);
 }
 // This method inserts a student account given specific information.
-async function insertStudentAccount(first_name, last_name, type, student_id, email, password, phone, school_id) {
+async function insertStudentAccount(firstName, lastName, type, studentId, email, password, phone, schoolId) {
     //Data recieved from the front end sign up form
     //Insert one row into a table
     return db.run(`insert into ${Tables.student}(first_name, last_name, type, student_id, email, password, phone, school_id) values 
