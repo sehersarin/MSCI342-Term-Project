@@ -5,28 +5,18 @@ describe('testing user to input schoolID to see worker ID ', () => {
         jest.resetModules(); // Clears any cache between tests.
     });
 
-test('workerIds for school match array', async () => {
+test('Initial setup for getting workers for the school', async () => {
     // Arrange
-    const testschoolId = '';
+    const testSchoolId = '1';
 
     // Act
-    const workerIds = await schoolHandler.getWorkerIdsForSchool(testschoolId);
-    
-    // Assert
-    expect(workerIds).toStrictEqual(workerIds);
-});
-
-test('array matches worker Id', async () => {
-    // Arrange
-    const testschoolId = '1';
-
-    // Act
-    const testworkerIds=[8000000, 8000001, 8000002, 8000003]
-    const workerIds = await schoolHandler.getWorkerIdsForSchool(testschoolId);
+    const testWorkerIds=[8000000, 8000001, 8000002, 8000003]
+    const workerIds = await schoolHandler.getWorkerIdsForSchool(testSchoolId);
 
     // Assert
-    expect(workerIds).toStrictEqual(testworkerIds);
+    expect(workerIds).toStrictEqual(testWorkerIds);
 });
+
 //The following tests are for endpoint testing for the logic of the code 
 //test('rejection of no parameters', async () => {
 // Arrange
