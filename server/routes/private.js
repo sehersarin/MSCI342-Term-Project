@@ -8,6 +8,7 @@ const authenticateHandler = require('../models/handlers/authenticate');
 const appointmentHandler = require('../models/handlers/appointment');
 const workerTimeslotHandler = require('../models/handlers/workerTimeslot');
 const availabilityHandler = require('../models/handlers/availability');
+const TimeslotStatus  = require('../../constants/timeslot-status.json');
 
 // Binds a middleware to check access tokens for all private requests.
 router.use(async function (req, res, next) {
@@ -66,7 +67,7 @@ router.post('/add-recurring-schedule', async (req, res) => {
     const slotId = query.slotId ? query.slotId : null;
     const schoolId = query.schoolId ? query.schoolId : null;
     const workerId = query.workerId ? query.workerId : null;
-    const status = query.status ? query.status : 'available';
+    const status = query.status ? query.status : TimeslotStatus.available;
     const date = query.date ? query.date : null;
 
     const { error } = paramSchema.validate({ slotId, schoolId, workerId, status, date });
