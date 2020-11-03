@@ -10,11 +10,22 @@ test('workerIds for school match array', async () => {
     const testschoolId = '';
 
     // Act
-    //const workerIds = await schoolHandler.getWorkerIdsForSchool(testschoolId);
-    const workerIds = await schoolHandler.getWorkerIdsForSchool();
-    
+    const workerIds = await schoolHandler.getWorkerIdsForSchool(testschoolId);
+
     // Assert
     expect(workerIds).toStrictEqual(workerIds);
+});
+
+test('array matches worker Id', async () => {
+    // Arrange
+    const testschoolId = '1';
+
+    // Act
+    const testworkerIds=[8000000, 8000001, 8000002, 8000003]
+    const workerIds = await schoolHandler.getWorkerIdsForSchool(testschoolId);
+
+    // Assert
+    expect(workerIds).toStrictEqual(testworkerIds);
 });
 //The following tests are for endpoint testing for the logic of the code 
 //test('rejection of no parameters', async () => {
