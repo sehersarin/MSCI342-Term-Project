@@ -5,76 +5,110 @@ describe('testing getting appointment details functionality', () => {
         jest.resetModules();
     });
 
-    test('initial setup of getting appointment details for a student', async() => {
+    test('rejection of no parameters', async () => {
         // Arrange
-        const studentId = '12345678';
-        const status = 'upcoming';
-        const testAppointmentDetails = [
-            {
-                appointmentId: 1,
-                worker: {
-                    firstName: 'Tyler',
-                    lastName: 'Evans',
-                },
-                date: '2020-11-05',
-                startTime: '08:00:00',
-                endTime: '08:30:00',
-                status: 'upcoming',
-            },
-            {
-                appointmentId: 2,
-                worker: {
-                    firstName: 'Joshua',
-                    lastName: 'Brooks',
-                },
-                date: '2020-11-07',
-                startTime: '08:30:00',
-                endTime: '09:00:00',
-                status: 'upcoming',
-            },
-        ];
+        var isThrown = false;
 
         // Act
-        const appointmentDetails = await appointmentHandler.getAppointmentDetailsForStudent(studentId, status);
+        try {
+            const appointmentDetails = await appointmentHandler.getAppointmentDetails();
+        } catch (err) {
+            isThrown = true;
+        }
 
         // Assert
-        expect(appointmentDetails).toMatchObject(testAppointmentDetails);
+        expect(isThrown).toBe(true);
     });
 
-    test('initial setup of getting appointment details for a worker', async() => {
+    test('all null values', async () => {
         // Arrange
-        const workerId = '12345678';
-        const status = 'upcoming';
-        const testAppointmentDetails = [
-            {
-                appointmentId: 1,
-                student: {
-                    firstName: 'John',
-                    lastName: 'Doe',
-                },
-                date: '2020-11-05',
-                startTime: '08:00:00',
-                endTime: '08:30:00',
-                status: 'upcoming',
-            },
-            {
-                appointmentId: 3,
-                student: {
-                    firstName: 'Jane',
-                    lastName: 'Smith',
-                },
-                date: '2020-11-05',
-                startTime: '08:30:00',
-                endTime: '09:00:00',
-                status: 'upcoming',
-            },
-        ];
+        const studentId = null;
+        const workerId = null;
+        const status = null;
 
         // Act
-        const appointmentDetails = await appointmentHandler.getAppointmentDetailsForWorker(workerId, status);
+        const appointmentDetails = await appointmentHandler.getAppointmentDetails(studentId, workerId, status);
 
         // Assert
-        expect(appointmentDetails).toMatchObject(testAppointmentDetails);
+        expect(appointmentDetails).toBe(null);
+    });
+
+    test('empty strings for optional status field', async () => {
+        // Arrange
+        const studentId = 12345678;
+        const workerId = null;
+        const status = '';
+
+        // Act
+        const appointmentDetails = await appointmentHandler.getAppointmentDetails(studentId, workerId, status);
+
+        // Assert
+        expect(appointmentDetails).toBeTruthy();
+    });
+
+    test('null values for optional status field', async () => {
+        // Arrange
+        const studentId = 12345678;
+        const workerId = null;
+        const status = null;
+
+        // Act
+        const appointmentDetails = await appointmentHandler.getAppointmentDetails(studentId, workerId, status);
+
+        // Assert
+        expect(appointmentDetails).toBeTruthy();
+    });
+
+    test('getting appointment details for a student', async () => {
+        // Arrange
+        const studentId = 12345678;
+        const workerId = null;
+        const status = 'upcoming';
+        const testAppointmentDetail = {
+            appointmentId: 3,
+            worker: {
+                workerId: 8000001,
+                firstName: 'Carlos',
+                lastName: 'Smiths'
+            },
+            student: null,
+            date: '2020-11-22',
+            startTime: '08:00:00',
+            endTime: '08:30:00',
+            status: 'upcoming'
+        };
+
+        // Act
+        const appointmentDetails = await appointmentHandler.getAppointmentDetails(studentId, workerId, status);
+
+        // Assert
+        expect(appointmentDetails).toContainEqual(testAppointmentDetail);
+    });
+
+    test('getting appointment details for a student', async () => {
+        // Arrange
+        const studentId = null;
+        const workerId = 8000000;
+        const status = 'upcoming';
+        const testAppointmentDetail = {
+            appointmentId: 2,
+            worker: null,
+            student: {
+                studentId: 12345679,
+                firstName: 'Jane',
+                lastName: 'Smith'
+            },
+            date: '2020-10-20',
+            startTime: '08:30:00',
+            endTime: '09:00:00',
+            status: 'upcoming'
+        };
+
+        // Act
+        const appointmentDetails = await appointmentHandler.getAppointmentDetails(studentId, workerId, status);
+
+        // Assert
+        expect(appointmentDetails).toContainEqual(testAppointmentDetail);
     });
 
 }); 

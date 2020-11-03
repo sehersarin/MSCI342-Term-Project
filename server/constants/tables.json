@@ -1,8 +1,7 @@
 {
     "appointment": "Appointment",
     "student": "Student", 
-    "worker": "Service_Worker", 
-    "timeslot": "Timeslot", 
+    "worker": "Service_Worker",
     "workerTimeslot": "Worker_Timeslot",
-    "school": "School"    
+    "timeslot": "Timeslot"
 }
