@@ -27,12 +27,12 @@ async function createUserAccount(firstName, lastName, type, studentId, email, pa
             // If the userType is neither a student nor a worker, then return null.
             return null;
         }
-    //} catch(err) {
-       // console.log('Error occurred in createUserAccount method', err);
-       // return null;
+    } catch(err) {
+       console.log('Error occurred in createUserAccount method', err);
+       return null;
     
    }
-finally {}};
+};
 
 //export the createUserAccount
 module.exports = {

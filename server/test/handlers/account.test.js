@@ -132,5 +132,18 @@ describe('Test to check valid account creation', () => {
             expect(user).toEqual(expect.objectContaining(workerUser));
             //if the user object ceated during account creation matches the test user, the account has been created sucessfully.
         });
+
+          //TEST 6
+    test('rejection of invalid userType', async () => {
+        // Arrange
+        const testUserType = 'invalidUserType';
+
+        // Act
+        const user = await accountHandler.createUserAccount(testUserType);
+
+        // Assert
+        expect(user).toBe(null);
+        //studentID should be null
+    });
     });
 });
