@@ -7,10 +7,6 @@ import { Redirect, Route, withRouter } from "react-router-dom";
 import ReactDOM from "react-dom";
 import moment from 'moment';
 
-
-
-
-
 class WorkerInputpage extends React.Component {    // this class component would be putting together other components into one page
     render() {
 

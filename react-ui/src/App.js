@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import LogIn from "./components/Layouts/LogIn"
 import Dashboard from "./components/Dashboard/Dashboard"
 import Signup from "./components/Layouts/Signup"
-import WorkerInputpage from './components/Layouts/InputWorkerTimes/WorkerInputpage'
 import './App.scss'
 import {
   BrowserRouter as Router,

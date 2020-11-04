@@ -67,38 +67,38 @@ describe('Checkbox component', () => {
     expect(checkbox.checked).toEqual(false)
   })
 
- test("multiple checkbox can be checked and unchecked", () => {
-  //Arrange
-  const { getByDisplayValue } = render(<Check />);
-  const checkbox = getByDisplayValue("1");
-  const checkbox2 = getByDisplayValue("2");
+  test("multiple checkbox can be checked and unchecked", () => {
+    //Arrange
+    const { getByDisplayValue } = render(<Check />);
+    const checkbox = getByDisplayValue("1");
+    const checkbox2 = getByDisplayValue("2");
 
-  //Act
-  
-  fireEvent.click(checkbox);
-  fireEvent.click(checkbox2);
+    //Act
 
-  //Assert
-  expect(checkbox.checked).toEqual(true);
-  expect(checkbox2.checked).toEqual(true);
-})
+    fireEvent.click(checkbox);
+    fireEvent.click(checkbox2);
 
-test("submitting one checked box, no date selected", () => {
-  //Arrange
-  const { getByDisplayValue } = render(<Check />);
-  const checkbox = getByDisplayValue("1");
-  const expectedArg = "No date has been selected, please selected a date";
-  const submit = getByDisplayValue("Done")
-  //Act
-  window.alert = jest.fn();
-  fireEvent.click(checkbox);
-  fireEvent.click(submit)
+    //Assert
+    expect(checkbox.checked).toEqual(true);
+    expect(checkbox2.checked).toEqual(true);
+  })
 
-  //Assert
-  expect(checkbox.checked).toEqual(true);
-  expect(window.alert).toHaveBeenCalledWith(expectedArg);
+  test("submitting one checked box, no date selected", () => {
+    //Arrange
+    const { getByDisplayValue } = render(<Check />);
+    const checkbox = getByDisplayValue("1");
+    const expectedArg = "No date has been selected, please selected a date";
+    const submit = getByDisplayValue("Done")
+    //Act
+    window.alert = jest.fn();
+    fireEvent.click(checkbox);
+    fireEvent.click(submit)
 
-})
+    //Assert
+    expect(checkbox.checked).toEqual(true);
+    expect(window.alert).toHaveBeenCalledWith(expectedArg);
+
+  })
 
 
 });
