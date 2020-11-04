@@ -3,40 +3,23 @@ the front end UI in order to create a user account in the backend*/
 
 async function createUserAccount(firstName, lastName, type, studentId, email, password, phone) {
     // Searches the student table to see if a student account exists for the given data.
-var user;
-    If userType = userType.student {
+    var user;
+    if (userType == userType.student) {
         //Generates an accessToken of length 20 characters.
         // Note: The accessToken includes all alphanumeric characters except for 0, O, I, and l — characters easily mistaken for each other)
-       const accessToken =  new UIDGenerator(UIDGenerator.BASE16).20; 
+        const accessToken = new UIDGenerator(UIDGenerator.BASE16,20);
 
-        user = await studentModel.insertStudentAccount(firstName, lastName, type, studentId, email, password, phone);
-        if (!_.isNil(user)) return student;
-    } else if userType = userType.worker {
+        user = await studentModel.insertStudentAccount(firstName, lastName, type, studentId, email, password, phone, accessToken);
+        if (!_.isNil(user)) return user;
+    } else if (userType == userType.worker) {
         // Searches the worker table to see if a student account exists for the given data.
-        user = await workerModel.insertWorkerAccount(firstName, lastName, type, workerId, email, password, phone);
-        if (!_.isNil(user)) return worker;
+        user = await workerModel.insertWorkerAccount(firstName, lastName, type, workerId, email, password, phone, accessToken);
+        if (!_.isNil(user)) return user;
     }
 
     // Returns the user
     return null;
 };
-
-//code on lines 18-28 is not needed (hard-coded for the previous iteration). I will delete this once I know that the lines 5-15 run properly.
-/* const user = {
-     type: 'student', //note: 'type' is called 'role' in the UI, but refers to either a worker or a student.
-     studentId: '20764242',
-     firstname: 'Victor',
-     lastname: 'Hugo',
-     email: 'victorhugo@gmail.com',
-     phone: '6476442200'
-
-      /*  Please note: When returning user object, 
-     I have omitted the 'password'. 
-     This is done intentionally for privacy reasons. */
-
-
-
-
 
 //export the createUserAccount
 module.exports = {

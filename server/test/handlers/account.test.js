@@ -25,19 +25,18 @@ describe('Test to check valid account creation', () => {
 
     });
     //TEST 2
-    test('rejection of empty values for studentID, firstName, lastName, email, type, phone, schoolId', async () => {
+    test('rejection of empty values for studentID, firstName, lastName, email, phone, schoolId', async () => {
         // Arrange
         const testStudentId = '';
         const testFirstName = '';
         const testLastName = '';
         const testEmail = '';
-        const testType = '';
         const testPhone = '';
         const testSchoolId = '';
 
 
         // Act
-        const user = await authenticateHandler.createUserAccount(testStudentId, testFirstName, testLastName, testEmail, testType, testPhone, testSchoolId);
+        const user = await authenticateHandler.createUserAccount(testStudentId, testFirstName, testLastName, testEmail, testPhone, testSchoolId);
 
         // Assert
         expect(user).toBe(null);
@@ -68,18 +67,17 @@ describe('Test to check valid account creation', () => {
                 // Arrange
                 const mystudent_id = '12345678';
                 const studentUser = {
-                    studentID: mystudent_id,
+                    studentId: mystudent_id,
                     firstName: 'John',
                     lastName: 'Doe',
                     email: 'johndoe@gmail.com',
-                    type: 'student',
                     accessToken: 'XcCa92ZvOnQKZsGtOKOa',
                     phone: null,
                     schoolId: 1
                 };
 
             // Act
-            const user = await accountHandler.createUserAccount(mystudent_id);
+            const user = await accountHandler.createUserAccount(mystudentId);
             // Assert
             expect(user).toMatchObject(studentUser);
              //if the user object ceated during account creation matches the test user, the account has been created sucessfully.
@@ -89,7 +87,7 @@ describe('Test to check valid account creation', () => {
             // Arrange
             const myworkerID = 8000000;
             const workerUser = {
-                workerId: myworkerID,
+                workerId: myworkerId,
                 firstName: 'Joshua',
                 lastName: 'Brooks',
                 email: 'joshuabrooks@gmail.com',
@@ -101,7 +99,7 @@ describe('Test to check valid account creation', () => {
             };
 
             // Act
-            const user = await accountHandler.createUserAccount(myworkerID);
+            const user = await accountHandler.createUserAccount(myworkerId);
 
 
             // Assert
