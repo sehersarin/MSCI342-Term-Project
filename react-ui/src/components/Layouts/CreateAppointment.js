@@ -12,11 +12,7 @@ class CreateAppointment extends Component {
     return (
       <Fragment>
         {/* <Header/> */}
-<<<<<<< HEAD
         <CreateAppointmentForm id={this.state.id}/>
-=======
-        <CreateAppointmentForm user={this.props}/>
->>>>>>> b8d7aa5e49603ebdc4111386268290e5d6b775ee
       </Fragment>
     );
   }
