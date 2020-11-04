@@ -6,7 +6,7 @@ class CreateAppointment extends Component {
     return (
       <Fragment>
         {/* <Header/> */}
-        <CreateAppointmentForm schoolId={this.props.match.params.schoolId}/>
+        <CreateAppointmentForm user={this.props}/>
       </Fragment>
     );
   }

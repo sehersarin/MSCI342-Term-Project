@@ -6,7 +6,7 @@ class SelectWorker extends Component {
     return (
       <Fragment>
         {/* <Header/> */}
-        <SelectWorkerForm email={this.props.email}/>
+        <SelectWorkerForm user={this.props}/>
       </Fragment>
     );
   }
