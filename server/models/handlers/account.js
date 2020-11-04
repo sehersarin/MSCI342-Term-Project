@@ -14,15 +14,17 @@ async function createUserAccount(firstName, lastName, type, studentId, email, pa
     const uidgen = new UIDGenerator(UIDGenerator.BASE16);
     const token = await uidgen.generate();
     const accessToken = token.substring(0, 20);
+
 //try catch not needed as the front end doesnt allow a third option for the input to user type outside student or worker
     try {
+
         if (userType == UserTypes.student) {
             const student = await studentModel.insertStudentAccount(firstName, lastName, studentId, email, password, phone, schoolId, accessToken);
             if (!_.isNil(student)) return student;
         } else if (userType == UserTypes.worker) {
             // Searches the worker table to see if a student account exists for the given data.
             const worker = await workerModel.insertWorkerAccount(firstName, lastName, type, workerId, email, password, phone, specialization, accessToken);
-            if (!_.isNil(worker)) return worker;
+        if (!_.isNil(worker)) return worker;
         } else {
             // If the userType is neither a student nor a worker, then return null.
             return null;
