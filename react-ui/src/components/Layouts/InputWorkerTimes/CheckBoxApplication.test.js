@@ -17,7 +17,7 @@ describe('Checkbox component', () => {
 
   test("Should render without crashing", () => {
     const div = document.createElement("div");
-    ReactDOM.render(<Check></Check>, div)
+    ReactDOM.render(<Check/>, div)
   })
 
   test('no props are passed in', () => {

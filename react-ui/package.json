@@ -29,5 +29,4 @@
     "@babel/plugin-proposal-decorators": "^7.12.1",
     "jest-environment-jsdom-sixteen": "^1.0.3"
   }
- 
 }
