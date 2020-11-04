@@ -49,23 +49,46 @@ class InputAvailability extends Component {
   handleSubmit= event => {
       event.preventDefault();
       console.log(this.state.timeslots)
-    //   componentDidUpdate(prevProps) {
-    //     // Typical usage (don't forget to compare props):
-    //     if (this.props.userID !== prevProps.userID) {
-    //       this.fetchData(this.props.userID);
-    //     }
-    //   }
+      var params = { accessToken: "XcCa92ZvOnQKZsGtOKOa"}
+      axios.get(`/api/possible-timeslots/?${queryString.stringify(params)}`)
+      .then(res => {
+        if(res.data!==""){
+          this.setState({
+              items:res.data
+            });
+        }
+      })
+    //post this.state.timeslots to backend
+    // axios.post('/', { fname, lname, email })
+    // .then((result) => {
+    //   //access the results here....
+    // });
   } 
 
   render() {
+
+    function tConvert (time) {
+      // Check correct time format and split into components
+      time = time.toString ().match (/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+     
+      if (time.length > 1) { // If time format correct
+        time = time.slice (1);  // Remove full string match value
+        time[5] = +time[0] < 12 ? 'AM' : 'PM'; // Set AM/PM
+        time[0] = +time[0] % 12 || 12; // Adjust hours
+      }
+      return time.join (''); // return adjusted time or original string
+    }
+
+
     const listItems = this.state.items.map((el)=>
     <React.Fragment>
-        
+        <label> 
         <input type="checkbox" id={el.timeslotId} value ={el.timeslotId} onChange={this.handleCheckbox}/>
+        {tConvert(el.startTime) + " to " + tConvert(el.endTime)}
       
-        <div>
-        {el.startTime + " to " + el.endTime}
-        </div> 
+       
+        </label>
+        <br></br>
       
     </React.Fragment>)
 

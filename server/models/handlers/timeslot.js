@@ -19,14 +19,24 @@ async function getPossibleTimeslots() {
   const timeslotDetails = [
       {
           timeslotId: 1,
-          startTime: '08:00:00',
-          endTime: '08:30:00',
+          startTime: '08:00',
+          endTime: '08:30',
       },
       {
         timeslotId: 2,
-        startTime: '09:00:00',
-        endTime: '09:30:00',
+        startTime: '09:00',
+        endTime: '09:30',
     },
+    {
+      timeslotId: 3,
+      startTime: '13:00',
+      endTime: '13:30',
+  },
+  {
+    timeslotId: 4,
+    startTime: '15:00',
+    endTime: '15:30',
+}
   ];
 
   return timeslotDetails;
