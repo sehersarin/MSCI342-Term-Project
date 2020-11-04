@@ -3,7 +3,6 @@
     bottom: 8px;
     right: 70px;
     font-size: 14px;
-  
 }
 
 input[Class= "DayBox"] {
@@ -36,8 +35,13 @@ input[Class= "DayBox"]:checked:after {
     transform: rotate(45deg);
     position: absolute;
     top: 2px;
-    left: 6px;
-    
+    left: 6px; 
+}
+
+.Info{
+    position: absolute;
+    top: 70px;
+    right: 350px; 
 }
  
 

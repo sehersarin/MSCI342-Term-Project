@@ -75,6 +75,7 @@ class Check extends React.Component { // this is a class component for the check
 
     return (
       <div>
+        <h1 className = "Info">Select Date and day(s) of week for recurring 4 week day starting from date selected</h1>
         <form className={"Container"} onSubmit={this.handleSubmit}>
           <h1>Recurring on</h1>
           {
