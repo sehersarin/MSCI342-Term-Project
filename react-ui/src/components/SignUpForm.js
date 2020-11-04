@@ -12,7 +12,6 @@ class SignupForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      
         first_name:"",
         last_name:"",
         role:"",
@@ -24,16 +23,19 @@ class SignupForm extends Component {
         email: "",
         phone:"",
         password: "",
-     
     };
-    this.handleChange = this.handleChange.bind(this);
+    this.handleFormChange = this.handleFormChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
 }
 
-handleChange(e) {
-    let target = e.target;
-    let name = target.name; 
-}
+handleFormChange = event => {
+  let val = event.target.value;
+  let stateName = event.target.name;
+  this.setState({
+    stateName: val
+  });
+  console.log(stateName, val);
+};
 
 handleSubmit(e) {
     e.preventDefault();
