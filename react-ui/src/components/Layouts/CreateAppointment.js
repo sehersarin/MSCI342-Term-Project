@@ -1,22 +1,16 @@
 import React, { Component, Fragment } from "react";
+import Header from "../Header"
 import CreateAppointmentForm from "../CreateAppointmentForm";
 
 class CreateAppointment extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      id:this.props.match.params.id,
-    }
-  }
   render() {
     return (
       <Fragment>
         {/* <Header/> */}
-        <CreateAppointmentForm id={this.state.id}/>
+        <CreateAppointmentForm/>
       </Fragment>
     );
   }
 }
-
 export default CreateAppointment;
 
