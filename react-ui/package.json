@@ -28,5 +28,11 @@
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.12.1",
     "jest-environment-jsdom-sixteen": "^1.0.3"
-  }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }
