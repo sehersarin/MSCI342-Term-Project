@@ -73,6 +73,23 @@ describe('SignupForm component', () => {
 
     //Assert
     expect(emailInput.value).toBe(newValue);
+  });
+
+  test('phone input in signup form', () => {
+    //Arrange
+    const dom = render(
+      <BrowserRouter>
+        <SignupForm />
+      </BrowserRouter>);
+      const newValue = "4169900909";
+
+    // Act
+    const getByName = queryByAttribute.bind(null, 'name');
+    const phoneInput = getByName(dom.container, 'phone');
+    fireEvent.change(phoneInput, { target: { value: newValue } })
+
+    //Assert
+    expect(phoneInput.value).toBe(newValue);
     
   });
 });
