@@ -16,7 +16,8 @@
     "pg-monitor": "^0.8.3",
     "pg-native": "^3.0.0",
     "pg-promise": "^7.0.3",
-    "postgrator": "^2.10.3"
+    "postgrator": "^2.10.3",
+    "uid-generator": "^2.0.0"
   },
   "devDependencies": {
     "jest": "^26.5.2",
