@@ -43,7 +43,6 @@ class App extends Component {
           {/* removed exact path  for both top and bottom*/}
           {/* <Redirect from="/" to="dashboard/" /> */}
         </Route>
-
         <Route path="*">
           <Redirect from="/" to="/login" component={LogIn} />
         </Route>
