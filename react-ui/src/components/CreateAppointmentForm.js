@@ -72,12 +72,11 @@ class CreateAppointmentForm extends Component {
   }
 
   componentDidMount() {
-    var params = {studentId: studentId, workerTimeslotId: workerTimeslotId, , ,accessToken: this.props.user.accessToken };
+    var params = {studentId: studentId, workerTimeslotId: workerTimeslotId, accessToken: this.props.user.accessToken };
 
-    // Passes in the appropriate parameter depending on the type of user.
-    if (this.props.user.userType === UserTypes.student) params.studentId = this.props.user.personId;
-    else params.workerId = this.props.user.personId;
-
+    // Passes in the appropriate parameter.
+    params.studentId = this.props.user.personId;
+    
     axios.get(`/api/worker-availability/?${queryString.stringify(params)}`)
       .then(res => {
         // Only stores the avalibilty data if no error occured and the data is not null.
@@ -91,9 +90,21 @@ class CreateAppointmentForm extends Component {
         }
       });
   }
-  //add an else if statement for successful form submissiom but unsuccessful appointment submission (api backend)
-  //have the user redo the book appointment process
-  render() {
+  //Taken from Melissa's code 
+  //handleCheckbox = event => {
+   // const a = event.target.value
+   // const b= event.target.checked
+   // let updatedAvail = Object.assign({}, this.state.timeslots, {[a]:b})
+   // this.setState({
+   //   timeslots : updatedAvail
+   // });
+  //};
+
+
+  
+    //add an else if statement for successful form submissiom but unsuccessful appointment submission (api backend)
+    //have the user redo the book appointment process
+    render() {
     if (this.state.successfulAppointment && this.state.formSubmission)
       return (
         <div>
@@ -101,72 +112,42 @@ class CreateAppointmentForm extends Component {
         </div>
       );
     else
+    
+    function tConvert (time) {
+      // Check correct time format and split into components
+      time = time.toString ().match (/^([01]\d|2[0-3])(:)([0-5]\d)(:[0-5]\d)?$/) || [time];
+     
+      if (time.length > 1) { // If time format correct
+        time = time.slice (1);  // Remove full string match value
+        time[5] = +time[0] < 12 ? 'AM' : 'PM'; // Set AM/PM
+        time[0] = +time[0] % 12 || 12; // Adjust hours
+      }
+      return time.join (''); // return adjusted time or original string
+    }
+
+
+    const listItems = this.state.availableTimes.map((el)=>
+    <React.Fragment>
+        <label> 
+        <input type="checkbox" id={el.timeslotId} value ={el.timeslotId} onChange={this.handleCheckbox}/>
+        {tConvert(el.startTime) + " to " + tConvert(el.endTime)}
+      
+        </label>
+        <br></br>
+      
+    </React.Fragment>)
+
       return (
           <Container className="Form-container">
-             <Title name= "Book Appointment. (Still needs to be implemented)"></Title>
+           
             <Row>
              <Col sm={12} align="center">
-             <div className="appointmentList">
-          <h3>Avalible Time Slots: </h3>
-          <ul>
-            {
-              this.state.availableTimes.map((Worker_Timeslot) => (
-                <li className="appointment" id={appointment.appointmentId}>
-                  <div className="first-row">
-                    <div className="specific-date">{moment(appointment.date).format('dddd, MMM D, YYYY')}</div>
-                    {/* Display either the student name or worker name depending on the specific user. */}
-                    {this.props.user.userType === UserTypes.student ?
-                      <div className="person-name">{appointment.worker.firstName} {appointment.worker.lastName}</div>
-                      :
-                      <div className="person-name">{appointment.student.firstName} {appointment.student.lastName}</div>
-                    }
-                  </div>
-                  <div className="times">{appointment.startTime.substring(0, 5)} to {appointment.endTime.substring(0, 5)}</div>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-
-
+             <Title name= "Availability"></Title>
              <form onSubmit={this.handleSubmit}> 
-                  <label>
-                  <input type="checkbox" id="timeSlot" name="timeSlot" value="1" onChange={this.handleCheckbox}/>
-                  </label>
-                  <label>
-                  <div>
-                  2020-10-20, 08:00 - 08:30
-                  </div> 
-                  </label>
-
-                  <label>
-                  <input type="checkbox" id="timeSlot" name="timeSlot" value="2" onChange={this.handleCheckbox}/>
-                  </label>
-                  <label>
-                  <div>
-                  2020-10-20, 08:30 - 09:00
-                  </div> 
-                  </label>
-                  <label>
-                  <input type="checkbox" id="timeSlot" name="timeSlot" value="3" onChange={this.handleCheckbox}/>
-                  </label>
-                  <label>
-                  <div>
-                  2020-10-20, 09:00 - 09:30
-                  </div> 
-                  </label>
-
+                   {listItems}
                   <br></br>
                   <br></br>
-                  <label>
-                  <input 
-                        className ="InputFields" 
-                        type="text" 
-                        name="reason"
-                        placeholder= "Reason for Booking Appointment" 
-                        onChange={this.handleFormChange} />
-                      </label>
-                    <br></br>
+                  <br></br>
                   <label>
                   <div>
                      (300 Character limit)
@@ -177,6 +158,16 @@ class CreateAppointmentForm extends Component {
                   type="submit" 
                   value="Submit!" />
                   </label>
+                  <br></br>
+                  <label>
+                  <input 
+                        className ="InputFields" 
+                        type="text" 
+                        name="reason"
+                        placeholder= "Reason for Booking Appointment" 
+                        onChange={this.handleFormChange} />
+                      </label>
+                    <br></br>
               </form> 
               <br></br>
              <Link to="/successfulappointmentbooking" className="Signout">Continue to next page</Link>         
@@ -184,29 +175,6 @@ class CreateAppointmentForm extends Component {
             </Row>
           </Container>
         );
-  }
-
-  /*
-  componentDidMount() {
-    <div>
-      Success!
-    </div>
-    let workerId = this.state.workerId;
-    let schoolId = this.state.workerId;
-
-    var params = {workerId: workerId, schoolId: schoolId}
-
-    axios.post(`/api/worker-availability?${queryString.stringify(params)}`)
-    .then(res => {
-    console.log(res.data);
-    let availableTimeArray = res.data;
-    this.setState({
-      availableTime: availableTimeArray
-    });
-  });
-}
-*/
-}
-  
-  export default CreateAppointmentForm;
-  
+      }
+    }
+    export default CreateAppointmentForm;
