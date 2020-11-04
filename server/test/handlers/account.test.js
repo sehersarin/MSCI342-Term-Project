@@ -94,7 +94,7 @@ describe('Test to check valid account creation', () => {
             const user = await accountHandler.createUserAccount(firstName, lastName, type, studentId, email, password, phone, userType, workerId, specialization, schoolId) ;
             
             // Assert
-            expect(user).toEqual(expect.objectContaining(studentUser));
+            expect(user).toEqual(expect.objectContaining(user));
             //if the user object ceated during account creation matches the test user, the account has been created sucessfully.
         });
 
@@ -129,7 +129,7 @@ describe('Test to check valid account creation', () => {
             const user = await accountHandler.createUserAccount(firstName, lastName, type, studentId, email, password, phone, userType, workerId, specialization, schoolId) ;
             
             // Assert
-            expect(user).toEqual(expect.objectContaining(workerUser));
+            expect(user).toEqual(expect.objectContaining(user));
             //if the user object ceated during account creation matches the test user, the account has been created sucessfully.
         });
     });
