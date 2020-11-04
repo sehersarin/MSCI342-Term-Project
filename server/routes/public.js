@@ -46,29 +46,29 @@ router.get('/api/create-user', async (req, res) => {
         userType: Joi.string().min(1).valid(['student', 'worker']),
         type: Joi.string(),
         specialization: Joi.string().valid(['social worker', 'guidance councellor']),//verify options
-        //access_token: Joi.string().alphanum().min(3).max(30).required(), 
-        //insert joi verification for first_name,last_name, type,student_id,workerID,phone
-    });
-    // the endpoint `/api/create-user` accepts ALL parameters for both user types, 
-    //as listed in the migrations> create-worker-table and migrations> create-student-table
+    }).xor('studentId', 'workerId'); // Either the studentId or the workerId must be specified (they both cannot be specified).
+       xor('schoolId', 'specialization'); // Either the schoolId or the specialization must be specified (they both cannot be specified).  
+    
+// the endpoint `/api/create-user` accepts ALL parameters for both user types, 
+//as listed in the migrations> create-worker-table and migrations> create-student-table
 
-    const paramFirstName = req.query.firstName;
-    const paramLastName = req.query.lastName;
-    const paramType = req.query.type; //note: 'type' is called 'role' in the UI, but refers to either a worker or a student.
-    const paramStudentId = req.query.studentId;//Students only
-    const paramWorkerId = req.query.workerId;//Workers only
-    const paramEmail = req.query.email;
-    const paramPassword = req.query.password;
-    const paramPhone = req.query.phone;
-    const paramUserType = req.query.userType;
-    const paramSchoolId = req.query.schoolId; //Students only
-    const paramSpecialization = req.query.specialization; //Workers only
+const paramFirstName = req.query.firstName;
+const paramLastName = req.query.lastName;
+const paramType = req.query.type; //note: 'type' is called 'role' in the UI, but refers to either a worker or a student.
+const paramStudentId = req.query.studentId;//Students only
+const paramWorkerId = req.query.workerId;//Workers only
+const paramEmail = req.query.email;
+const paramPassword = req.query.password;
+const paramPhone = req.query.phone;
+const paramUserType = req.query.userType;
+const paramSchoolId = req.query.schoolId; //Students only
+const paramSpecialization = req.query.specialization; //Workers only
 
-    //error check
-    const { error, value } = paramSchema.validate({ email: paramEmail, password: paramPassword, firstName: paramFirstName, lastName: paramLastName, type: paramType, studentId: paramStudentId, workerId: paramWorkerId, phone: paramPhone, schoolId: paramSchoolId, specialization: paramSpecialization, userType: paramUserType });
-    if (!_.isNil(error)) res.send(error);
+//error check
+const { error, value } = paramSchema.validate({ email: paramEmail, password: paramPassword, firstName: paramFirstName, lastName: paramLastName, type: paramType, studentId: paramStudentId, workerId: paramWorkerId, phone: paramPhone, schoolId: paramSchoolId, specialization: paramSpecialization, userType: paramUserType });
+if (!_.isNil(error)) res.send(error);
 
-    const user = await accountHandler.createUserAccount(firstName, lastName, type, studentId, email, password, phone, userType, workerId, specialization, schoolId );
+const user = await accountHandler.createUserAccount(firstName, lastName, type, studentId, email, password, phone, userType, workerId, specialization, schoolId);
 })
 
 module.exports = router;
