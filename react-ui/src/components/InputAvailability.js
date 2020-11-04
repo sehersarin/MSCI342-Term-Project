@@ -14,8 +14,12 @@ class InputAvailability extends Component {
     constructor(props) {
         super(props);
         this.state = {
+          val:"",
+          isChecked:"",
           items: [],
-          accessToken: ""
+          accessToken: "",
+          timeslots: {
+          }
         };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleCheckbox= this.handleCheckbox.bind(this);
@@ -34,16 +38,17 @@ class InputAvailability extends Component {
     })
   }
   handleCheckbox = event => {
-    let name = event.target.name;
+    const a = event.target.value
+    const b= event.target.checked
+    let updatedAvail = Object.assign({}, this.state.timeslots, {[a]:b})
     this.setState({
-      workerTimeslotId: name
+      timeslots : updatedAvail
     });
-    console.log('name', name);
   };
 
   handleSubmit= event => {
       event.preventDefault();
-      console.log("hello")
+      console.log(this.state.timeslots)
     //   componentDidUpdate(prevProps) {
     //     // Typical usage (don't forget to compare props):
     //     if (this.props.userID !== prevProps.userID) {
@@ -55,14 +60,13 @@ class InputAvailability extends Component {
   render() {
     const listItems = this.state.items.map((el)=>
     <React.Fragment>
-        <label>
-        <input type="checkbox" id={el.slotId} onChange={this.handleCheckbox}/>
-        </label>
-        <label>
+        
+        <input type="checkbox" id={el.timeslotId} value ={el.timeslotId} onChange={this.handleCheckbox}/>
+      
         <div>
         {el.startTime + " to " + el.endTime}
         </div> 
-        </label>
+      
     </React.Fragment>)
 
       return (
