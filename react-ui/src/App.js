@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import LogIn from "./components/Layouts/LogIn"
 import Dashboard from "./components/Dashboard/Dashboard"
 import Signup from "./components/Layouts/Signup"
-import CreateAppointment from "./components/Layouts/CreateAppointment"
 import './App.scss'
 import {
   BrowserRouter as Router,
@@ -28,10 +27,6 @@ class App extends Component {
         </Route>
         <Route path="/login" component={LogIn}>
           {/* <LogIn /> */}
-        </Route>
-        <Route exact path="/dashboard/CreateAppointment/:email/:id" component={CreateAppointment}>
-          {/* removed exact path  for both top and bottom*/}
-          {/* <Redirect from="/" to="dashboard/" /> */}
         </Route>
         <Route exact path="/dashboard/:email/:userType/:firstName/:personId/:accessToken" component={Dashboard}>
           {/* removed exact path  for both top and bottom*/}
