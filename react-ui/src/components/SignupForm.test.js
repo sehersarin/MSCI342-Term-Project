@@ -1,6 +1,6 @@
 import React from "react";
 import { create } from "react-test-renderer";
-import { render, waitFor, cleanup, fireEvent, queryByAttribute } from '@testing-library/react';
+import { render, waitFor, cleanup, fireEvent, queryByAttribute, getByDisplayValue } from '@testing-library/react';
 import * as axios from 'axios';
 
 import SignupForm from './SignUpForm';
@@ -8,6 +8,7 @@ import { BrowserRouter } from "react-router-dom";
 import { last } from "lodash";
 
 jest.mock('axios');
+
 
 describe('SignupForm component', () => {
   afterEach(cleanup);
@@ -31,7 +32,6 @@ describe('SignupForm component', () => {
 
     //Assert
     expect(firstNameInput.value).toBe(newValue);
-    // Expect that your state variable was changed
 
     //console.log('dom', this.state);
     //console.log('before', first_name.value);
@@ -108,6 +108,5 @@ describe('SignupForm component', () => {
 
     //Assert
     expect(passwordInput.value).toBe(newValue);
-    
   });
 });
