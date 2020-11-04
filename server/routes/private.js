@@ -8,6 +8,7 @@ const authenticateHandler = require('../models/handlers/authenticate');
 const appointmentHandler = require('../models/handlers/appointment');
 const workerTimeslotHandler = require('../models/handlers/timeslot');
 const availabilityHandler = require('../models/handlers/availability');
+const schoolHandler = require('../models/handlers/school');
 
 // Binds a middleware to check access tokens for all private requests.
 router.use(async function (req, res, next) {
@@ -145,5 +146,24 @@ router.get('/test', async (req, res) => {
     res.send(true);
 });
 
-module.exports = router
+router.post('/get-workers-for-school', async (req, res) => {
+    // Validate appropriate parameters are passed to view workers at each school 
+    const getWorkersForSchool = Joi.object({
+        schoolId: Joi.number().integer().required(), //The student must specify their school ID in order to view the workers
+    });
 
+    const query = req.query ? req.query : {};
+
+    const schoolId = query.schoolId ? query.schoolId : null;
+
+    const { error } = getWorkersForSchool.validate({schoolId});
+
+    if (!_.isNil(error)) res.send(error);
+
+    // Attempts to fetch all workers for a specific school 
+    const workerIds = await schoolHandler.getWorkerIdsForSchool(schoolId);
+
+    res.send(workerIds);
+});
+
+module.exports = router
