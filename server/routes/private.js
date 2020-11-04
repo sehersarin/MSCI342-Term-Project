@@ -6,8 +6,11 @@ const router = express.Router();
 
 const authenticateHandler = require('../models/handlers/authenticate');
 const appointmentHandler = require('../models/handlers/appointment');
-const workerTimeslotHandler = require('../models/handlers/timeslot');
+const workerTimeslotHandler = require('../models/handlers/workerTimeslot');
 const availabilityHandler = require('../models/handlers/availability');
+const schoolHandler = require('../models/handlers/school');
+
+const TimeslotStatus  = require('../constants/timeslot-status.json');
 
 // Binds a middleware to check access tokens for all private requests.
 router.use(async function (req, res, next) {
@@ -62,18 +65,19 @@ router.post('/add-recurring-schedule', async (req, res) => {
 
     const query = req.query ? req.query : {};
 
+    
     const slotId = query.slotId ? query.slotId : null;
-    const schoolId = query.schoolID ? query.schoolID : null;
-    const workerId = query.workerID ? query.workerID : null;
-    const status = query.status ? query.status : null;
+    const schoolId = query.schoolId ? query.schoolId : null;
+    const workerId = query.workerId ? query.workerId : null;
+    const status = query.status ? query.status : TimeslotStatus.available;
     const date = query.date ? query.date : null;
 
-    const { error } = paramSchema.validate({ workerTimeslotId, slotId, schoolId, workerId, status, date });
+    const { error } = paramSchema.validate({ slotId, schoolId, workerId, status, date });
 
     if (!_.isNil(error)) res.send(error);
 
     // Attempts to insert the worker availability into the database 
-    const isSuccessfullyInserted = await workerTimeslotHandler.addWorkerTimeslot(workerTimeslotId, slotId, schoolId, workerId, status, date);
+    const isSuccessfullyInserted = await workerTimeslotHandler.addWorkerTimeslot(slotId, schoolId, workerId, status, date);
 
     res.send(isSuccessfullyInserted);
 });
@@ -124,19 +128,45 @@ router.get('/appointments', async (req, res) => {
 
     if (!_.isNil(error)) res.send(error);
 
-    let appointmentDetails = [];
-
-    // Separate methods for the student and worker appointments as they return different parameters in the object (to reduce redundancy and size of response).
-    // Additionally these methods return details beyond the bare appointment details and thus were not named as only getAppointments to avoid confusion.
-    if (!_.isNil(studentId)) appointmentDetails = await appointmentHandler.getAppointmentDetailsForStudent(studentId, status);
-    else appointmentDetails = await appointmentHandler.getAppointmentDetailsForWorker(workerId, status);
+    // Leverages the same method for the student and worker appointments as they have a similar query structure (to reduce redundancy and size of response).
+    // Note that this method return details beyond the bare appointment details and thus were not named as only getAppointments to avoid confusion.
+    const appointmentDetails = await appointmentHandler.getAppointmentDetails(studentId, workerId, status);
 
     res.send(appointmentDetails);
+});
+
+
+//Returns all possible timeslots
+// Returns all the appointments/meetings for a given student or worker.
+// Note that appointments/meetings are synonymous, but only appointments will be used in the backend to maintain consistency.
+router.get('/possible-timeslots', async (req, res) => {
+timeslots = await workerTimeslotHandler.getPossibleTimeslots();
+
+    res.send(timeslots);
 });
 
 router.get('/test', async (req, res) => {
     res.send(true);
 });
 
-module.exports = router
+router.post('/get-workers-for-school', async (req, res) => {
+    // Validate appropriate parameters are passed to view workers at each school 
+    const getWorkersForSchool = Joi.object({
+        schoolId: Joi.number().integer().required(), //The student must specify their school ID in order to view the workers
+    });
 
+    const query = req.query ? req.query : {};
+
+    const schoolId = query.schoolId ? query.schoolId : null;
+
+    const { error } = getWorkersForSchool.validate({schoolId});
+
+    if (!_.isNil(error)) res.send(error);
+
+    // Attempts to fetch all workers for a specific school 
+    const workerIds = await schoolHandler.getWorkerIdsForSchool(schoolId);
+
+    res.send(workerIds);
+});
+
+module.exports = router
