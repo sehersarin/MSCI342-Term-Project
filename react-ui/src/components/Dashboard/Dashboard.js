@@ -51,9 +51,7 @@ class Dashboard extends Component {
               <li>
                 <Link to={`/dashboard`}>Home</Link>
               </li>
-              <li>
-                <Link to={`/dashboard/Availability`}>Availability</Link>
-              </li>
+             
               <li>
                 <Link to={`/dashboard/Profile/${email}`}>Profile</Link>
               </li>
@@ -67,16 +65,16 @@ class Dashboard extends Component {
 
                 {/* Only display the book appointment form if the user is a worker. */}
                 {userType === UserTypes.worker &&
+                <Fragment>
                 <li>
                   <Link to={`/dashboard/InputWorkerAvailabilitypage/${email}`}>Add Availability</Link>
                 </li>
-              }
-               {userType === UserTypes.worker &&
                 <li>
-                  <Link to={`/dashboard/Availability/${email}`}>Add Availability</Link>
-                </li>
+                <Link to={`/dashboard/Availability/${email}`}>Availability</Link>
+                 </li>
+              </Fragment>
               }
-
+            
               <li className="push-right">
                 <button onClick={this.signOut} href="#">Sign Out</button>
               </li>
