@@ -37,6 +37,7 @@ describe('SignupForm component', () => {
     //console.log('before', first_name.value);
     //console.log('after', first_name.value);
   });
+  
   test('last name input in signup form', () => {
     //Arrange
     const dom = render(
@@ -54,6 +55,24 @@ describe('SignupForm component', () => {
     expect(lastNameInput.value).toBe(newValue);
     // console.log('before', lastNameInput.value);
     // console.log('after', lastNameInput.value);
+    
+  });
+  
+  test('email input in signup form', () => {
+    //Arrange
+    const dom = render(
+      <BrowserRouter>
+        <SignupForm />
+      </BrowserRouter>);
+      const newValue = "helloworld@gmail.com";
+
+    // Act
+    const getByName = queryByAttribute.bind(null, 'name');
+    const emailInput = getByName(dom.container, 'email');
+    fireEvent.change(emailInput, { target: { value: newValue } })
+
+    //Assert
+    expect(emailInput.value).toBe(newValue);
     
   });
 });
