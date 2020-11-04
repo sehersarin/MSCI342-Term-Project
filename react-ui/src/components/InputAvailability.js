@@ -15,36 +15,11 @@ class InputAvailability extends Component {
         super(props);
         this.state = {
           items: [],
-          islogged: false,
-          userType: "",
-          firstName: "",
-          personId: "",
-          accessToken: "",
-          loginParams: {
-            email: "",
-            password: "",
-          }
+          accessToken: ""
         };
-        this.handleFormChange = this.handleFormChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleCheckbox= this.handleCheckbox.bind(this);
   }
-
-  handleCheckbox = event => {
-    let name = event.target.name;
-    this.setState({
-      workerTimeslotId: name
-    });
-    console.log('name', name);
-  };
-
-  handleFormChange = event => {
-    let val = event.target.value;
-    let stateName = event.target.name;
-    this.setState({
-      stateName: val
-    });
-    console.log(stateName, val);
-  };
 
   componentDidMount() {
     var params = { accessToken: "XcCa92ZvOnQKZsGtOKOa"}
@@ -58,9 +33,17 @@ class InputAvailability extends Component {
       }
     })
   }
-  
+  handleCheckbox = event => {
+    let name = event.target.name;
+    this.setState({
+      workerTimeslotId: name
+    });
+    console.log('name', name);
+  };
+
   handleSubmit= event => {
       event.preventDefault();
+      console.log("hello")
     //   componentDidUpdate(prevProps) {
     //     // Typical usage (don't forget to compare props):
     //     if (this.props.userID !== prevProps.userID) {
@@ -89,9 +72,7 @@ class InputAvailability extends Component {
              <Col sm={12} align="center">
              <Title name= "Availability"></Title>
              <form onSubmit={this.handleSubmit}> 
-               
                    {listItems}
-              
                   <br></br>
                   <br></br>
                   <label>
