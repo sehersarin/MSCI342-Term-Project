@@ -1,9 +1,7 @@
 import React, { Component, Fragment, Router } from "react";
 import { withRouter } from "react-router";
 import { Redirect, Switch, Route, Link } from "react-router-dom";
-
 import "./Dashboard.scss";
-
 import logo from '../../logo.svg'
 import Profile from "../Layouts/Profile";
 import Home from "../Layouts/Home";
@@ -12,6 +10,7 @@ import CreateAppointment from "../Layouts/CreateAppointment";
 import Availability from "../Layouts/Availability";
 
 import UserTypes from '../../constants/userTypes.json';
+import WorkerInputpage from "../Layouts/InputWorkerTimes/WorkerInputpage";
 
 class Dashboard extends Component {
   constructor(props) {
@@ -65,6 +64,19 @@ class Dashboard extends Component {
                 </li>
                 
               }
+
+                {/* Only display the book appointment form if the user is a worker. */}
+                {userType === UserTypes.worker &&
+                <li>
+                  <Link to={`/dashboard/InputWorkerAvailabilitypage/${email}`}>Add Availability</Link>
+                </li>
+              }
+               {userType === UserTypes.worker &&
+                <li>
+                  <Link to={`/dashboard/Availability/${email}`}>Add Availability</Link>
+                </li>
+              }
+
               <li className="push-right">
                 <button onClick={this.signOut} href="#">Sign Out</button>
               </li>
@@ -84,6 +96,9 @@ class Dashboard extends Component {
                 </Route>
                 <Route path={`/dashboard/Availability`}>
                   <Availability />
+                </Route>
+                <Route path = {`/dashboard/InputWorkerAvailabilitypage`}>
+                  <WorkerInputpage name ={personId}/>
                 </Route>
                 <Route exact path={`${this.props.match.path}`}>
                   <Home userType={userType} personId={personId} accessToken={accessToken} />
