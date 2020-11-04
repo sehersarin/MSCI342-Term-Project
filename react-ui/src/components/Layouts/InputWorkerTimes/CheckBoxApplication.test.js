@@ -1,9 +1,10 @@
 import React from "react";
 import { create } from "react-test-renderer";
-import { render, waitFor, cleanup, fireEvent } from '@testing-library/react';
+import { render, waitFor, cleanup, fireEvent, getByTestId } from '@testing-library/react';
 import * as axios from 'axios';
 import Check from "./CheckboxApplication";
 import ReactDOM from 'react-dom';
+import moment from 'moment'
 
 jest.mock('axios');
 
@@ -39,48 +40,6 @@ describe('Checkbox component', () => {
     expect(component.toJSON()).toMatchSnapshot();
   });
 
-  /*  test('Should capture day checkbox ticked correctly onChange', function() {
-     // Arrange
-    const component = create(<Check/>)
-    const input = component.find('input').at(1);
- 
-    //Act
-     input.instance().isChecked = true;
-     input.simulate('change');
- 
-     // Assert
-     expect(component.state().subscribed).toEqual(true);
-   });
-  */
-
-  /*   test('Renders header for checkbox form', ()=> {
-      //Arrange
-      const wrap = create(<Check />)
-  
-      //Act
-      const Title=  <h1>Recurring on</h1>
-  
-      //Assert
-      expect(wrap.contains(Title)).toEqual(true);
-    })
-   */
-
-  /*  test('Test submit button with a checkbox checked', ()=>{
-     //Arrange
-    const state = {id: '1', isChecked: true}
-    const expectedArg = "No date has been selected, please selected a date";
-    const component = create(<Check/>);
-  
-    //Act
-    window.alert = jest.fn();
-    component.setState(state)
-  
-    //Assert
-    component.getInstance(<Check/>).simulate('submit')
-    expect(window.alert).toHaveBeenCalledWith(expectedArg);
-   })
-   */
-
   test("checkbox changes state as it is checked/unchecked", () => {
     //Arrange
     const { getByDisplayValue } = render(<Check />);
@@ -108,20 +67,38 @@ describe('Checkbox component', () => {
     expect(checkbox.checked).toEqual(false)
   })
 
- /*  test("Date input is initally set to nothing", () => {
-    //Arrange
-    const { container } = render(
-      <div>
-        <Check />
-      </div>,
-    );
-    const testValue = '03/29/2019';
-    const input = getByTestId(container, 'date-input');
-    fireEvent.change(input, { target: { value: testValue } });
-    expect(input.value).toEqual(testValue);
-  }) */
- 
+ test("multiple checkbox can be checked and unchecked", () => {
+  //Arrange
+  const { getByDisplayValue } = render(<Check />);
+  const checkbox = getByDisplayValue("1");
+  const checkbox2 = getByDisplayValue("2");
 
+  //Act
+  
+  fireEvent.click(checkbox);
+  fireEvent.click(checkbox2);
+
+  //Assert
+  expect(checkbox.checked).toEqual(true);
+  expect(checkbox2.checked).toEqual(true);
+})
+
+test("submitting one checked box, no date selected", () => {
+  //Arrange
+  const { getByDisplayValue } = render(<Check />);
+  const checkbox = getByDisplayValue("1");
+  const expectedArg = "No date has been selected, please selected a date";
+  const submit = getByDisplayValue("Done")
+  //Act
+  window.alert = jest.fn();
+  fireEvent.click(checkbox);
+  fireEvent.click(submit)
+
+  //Assert
+  expect(checkbox.checked).toEqual(true);
+  expect(window.alert).toHaveBeenCalledWith(expectedArg);
+
+})
 
 
 });

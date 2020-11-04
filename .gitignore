@@ -24,3 +24,5 @@ server/.jest
 react-ui/npm-debug.log*
 react-ui/yarn-debug.log*
 react-ui/yarn-error.log*
+react-ui/package.json
+react-ui/package.json
