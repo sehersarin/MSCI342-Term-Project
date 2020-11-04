@@ -12,7 +12,7 @@ async function insertWorkerTimeslot(slotId, schoolId, workerId, status, date) {
     //var date_format = moment(date).format('YYYY MM DD');
     //console.log(date_format); 
 
-    return db.any(`insert into ${Tables.workerTimeslot} (slot_id, school_id, worker_id, status, date) values (${slotId}, ${schoolId}, ${workerId}, ${status ? `'${status}'` : `'available'`} , '${date}');`);
+    return db.any(`insert into ${Tables.workerTimeslot} (slot_id, school_id, worker_id, status, date) values (${slotId}, ${schoolId}, ${workerId}, ${status ? `'${status}'` : `'${TimeslotStatus.available}'`} , '${date}');`);
 }
 
 module.exports = {
