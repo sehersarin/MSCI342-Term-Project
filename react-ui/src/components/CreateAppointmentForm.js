@@ -24,7 +24,7 @@ class CreateAppointmentForm extends Component {
         purpose: "", // Max 300 => input size is 300
         successfulAppointment: false,
         formSubmission: false,
-        availableTime : []
+        availableTimes: []
       };
       this.handleFormChange = this.handleFormChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
@@ -70,6 +70,27 @@ class CreateAppointmentForm extends Component {
         });
       });
   }
+
+  componentDidMount() {
+    var params = {studentId: studentId, workerTimeslotId: workerTimeslotId, , ,accessToken: this.props.user.accessToken };
+
+    // Passes in the appropriate parameter depending on the type of user.
+    if (this.props.user.userType === UserTypes.student) params.studentId = this.props.user.personId;
+    else params.workerId = this.props.user.personId;
+
+    axios.get(`/api/worker-availability/?${queryString.stringify(params)}`)
+      .then(res => {
+        // Only stores the avalibilty data if no error occured and the data is not null.
+        // Else, shows no avalibly booking times and logs the error.
+        if (_.isNil(res.error) && !_.isNil(res.data)) {
+          this.setState({
+            availableTimes: res.data,
+          });
+        } else {
+          console.log('Error occurred when retrieving the worker avalibility ', res.error);
+        }
+      });
+  }
   //add an else if statement for successful form submissiom but unsuccessful appointment submission (api backend)
   //have the user redo the book appointment process
   render() {
@@ -85,6 +106,29 @@ class CreateAppointmentForm extends Component {
              <Title name= "Book Appointment. (Still needs to be implemented)"></Title>
             <Row>
              <Col sm={12} align="center">
+             <div className="appointmentList">
+          <h3>Avalible Time Slots: </h3>
+          <ul>
+            {
+              this.state.availableTimes.map((Worker_Timeslot) => (
+                <li className="appointment" id={appointment.appointmentId}>
+                  <div className="first-row">
+                    <div className="specific-date">{moment(appointment.date).format('dddd, MMM D, YYYY')}</div>
+                    {/* Display either the student name or worker name depending on the specific user. */}
+                    {this.props.user.userType === UserTypes.student ?
+                      <div className="person-name">{appointment.worker.firstName} {appointment.worker.lastName}</div>
+                      :
+                      <div className="person-name">{appointment.student.firstName} {appointment.student.lastName}</div>
+                    }
+                  </div>
+                  <div className="times">{appointment.startTime.substring(0, 5)} to {appointment.endTime.substring(0, 5)}</div>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+
              <form onSubmit={this.handleSubmit}> 
                   <label>
                   <input type="checkbox" id="timeSlot" name="timeSlot" value="1" onChange={this.handleCheckbox}/>

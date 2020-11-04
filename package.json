@@ -25,6 +25,7 @@
   "homepage": "https://github.com/sehersarin/MSCI342-Term-Project#readme",
   "dependencies": {
     "lodash": "^4.17.20",
-    "moment": "^2.29.1"
+    "moment": "^2.29.1",
+    "pg-native": "^3.0.0"
   }
 }
