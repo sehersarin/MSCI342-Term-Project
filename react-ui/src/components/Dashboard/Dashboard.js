@@ -9,6 +9,7 @@ import Profile from "../Layouts/Profile";
 import Home from "../Layouts/Home";
 import NotFound from "../Layouts/404";
 import CreateAppointment from "../Layouts/CreateAppointment";
+import Availability from "../Layouts/Availability";
 
 import UserTypes from '../../constants/userTypes.json';
 
@@ -52,6 +53,9 @@ class Dashboard extends Component {
                 <Link to={`/dashboard`}>Home</Link>
               </li>
               <li>
+                <Link to={`/dashboard/Availability`}>Availability</Link>
+              </li>
+              <li>
                 <Link to={`/dashboard/Profile/${email}`}>Profile</Link>
               </li>
               {/* Only display the book appointment form if the user is a student. */}
@@ -59,6 +63,7 @@ class Dashboard extends Component {
                 <li>
                   <Link to={`/dashboard/CreateAppointment/${email}`}>Create Appointment</Link>
                 </li>
+                
               }
               <li className="push-right">
                 <button onClick={this.signOut} href="#">Sign Out</button>
@@ -76,6 +81,9 @@ class Dashboard extends Component {
                 </Route>
                 <Route path={`/dashboard/CreateAppointment`}>
                   <CreateAppointment name={personId} />
+                </Route>
+                <Route path={`/dashboard/Availability`}>
+                  <Availability />
                 </Route>
                 <Route exact path={`${this.props.match.path}`}>
                   <Home userType={userType} personId={personId} accessToken={accessToken} />
