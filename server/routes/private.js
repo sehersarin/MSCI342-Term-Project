@@ -8,6 +8,7 @@ const authenticateHandler = require('../models/handlers/authenticate');
 const appointmentHandler = require('../models/handlers/appointment');
 const workerTimeslotHandler = require('../models/handlers/timeslot');
 const availabilityHandler = require('../models/handlers/availability');
+const schoolHandler = require('../models/handlers/school');
 
 // Binds a middleware to check access tokens for all private requests.
 router.use(async function (req, res, next) {
