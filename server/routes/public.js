@@ -81,8 +81,7 @@ router.get('/create-user', async (req, res) => {
 
     const user = await accountHandler.createUserAccount(firstName, lastName, type, studentID, email, password, phone);
 
-
     res.send(user);
 });
 
-module.exports = router 
+module.exports = router })
