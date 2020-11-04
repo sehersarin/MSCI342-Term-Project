@@ -22,7 +22,7 @@ class SignupForm extends Component {
         id_value:"",
         email: "",
         phone:"",
-        password: "",
+        user_password: "",
     };
     this.handleFormChange = this.handleFormChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);

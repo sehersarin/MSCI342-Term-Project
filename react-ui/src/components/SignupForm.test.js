@@ -92,4 +92,22 @@ describe('SignupForm component', () => {
     expect(phoneInput.value).toBe(newValue);
     
   });
+  
+  test('password input in signup form', () => {
+    //Arrange
+    const dom = render(
+      <BrowserRouter>
+        <SignupForm />
+      </BrowserRouter>);
+      const newValue = "123456789";
+
+    // Act
+    const getByName = queryByAttribute.bind(null, 'name');
+    const passwordInput = getByName(dom.container, 'user_password');
+    fireEvent.change(passwordInput, { target: { value: newValue } })
+
+    //Assert
+    expect(passwordInput.value).toBe(newValue);
+    
+  });
 });
