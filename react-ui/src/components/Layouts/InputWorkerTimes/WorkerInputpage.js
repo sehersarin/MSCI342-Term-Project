@@ -9,11 +9,9 @@ import moment from 'moment';
 
 class WorkerInputpage extends React.Component {    // this class component would be putting together other components into one page
     render() {
-
         return (
             <div>
                 <Check />
-                {/* <TimeSlot/> */}                        {/*  No functionaility implmeented with timeslots yet */}
                 {/* { <Container className = "wraper">
                     <label for ="school" className = "SelectSchoolsLabel" > Select School:</label>
                     <select name="school" className ="SelectSchools"  id="school">   
@@ -24,10 +22,8 @@ class WorkerInputpage extends React.Component {    // this class component would
                 </Container>  } */} {/* commented out as school selection functionality isn't implemented yet */}
             </div>
         )
-
     }
 }
-
 export default WorkerInputpage
 /*
 const rootElement = document.getElementById("root");

@@ -59,12 +59,12 @@ describe('Checkbox component', () => {
     const checkbox = getByDisplayValue("1");
 
     //Act
-    expect(checkbox.checked).toEqual(false)
-    fireEvent.click(checkbox)
-    fireEvent.click(checkbox)
+    expect(checkbox.checked).toEqual(false);
+    fireEvent.click(checkbox);
+    fireEvent.click(checkbox);
 
     //Assert
-    expect(checkbox.checked).toEqual(false)
+    expect(checkbox.checked).toEqual(false);
   })
 
   test("multiple checkbox can be checked and unchecked", () => {
@@ -92,7 +92,7 @@ describe('Checkbox component', () => {
     //Act
     window.alert = jest.fn();
     fireEvent.click(checkbox);
-    fireEvent.click(submit)
+    fireEvent.click(submit);
 
     //Assert
     expect(checkbox.checked).toEqual(true);
@@ -100,5 +100,58 @@ describe('Checkbox component', () => {
 
   })
 
+  test("submitting one checked box, and a date is selected", () => {
+    //Arrange
+    const { getByDisplayValue} = render(<Check />);
+    const date = getByDisplayValue('');
+    const checkbox = getByDisplayValue("1");
+    const expectedArg = "Days has been selected";
+    const submit = getByDisplayValue("Done")
+    //Act
+    window.alert = jest.fn();
+    fireEvent.click(checkbox);
+    fireEvent.change(date, { target: { value: '2020-01-15' } });
+    fireEvent.click(submit);
 
+    //Assert
+    expect(checkbox.checked).toEqual(true);
+    expect(window.alert).toHaveBeenCalledWith(expectedArg);
+
+  })
+
+  test("submitting no checked box, and a date is selected", () => {
+    //Arrange
+    const { getByDisplayValue} = render(<Check />);
+    const date = getByDisplayValue('');
+    const expectedArg = "No day has been checked, please selected a day";
+    const submit = getByDisplayValue("Done")
+    //Act
+    window.alert = jest.fn();
+    fireEvent.change(date, { target: { value: '2020-01-15' } });
+    fireEvent.click(submit);
+
+    //Assert
+    expect(window.alert).toHaveBeenCalledWith(expectedArg);
+  })
+
+  
+  test("submitting checkbox Tuesday, and a Monday is selected", () => { 
+    //Arrange
+    const { getByDisplayValue} = render(<Check />);
+    const date = getByDisplayValue('');
+    const checkbox = getByDisplayValue("2");
+    const expectedArg = "Days has been selected";
+    const submit = getByDisplayValue("Done")
+    //Act
+    window.alert = jest.fn();
+    fireEvent.click(checkbox);
+    fireEvent.change(date, { target: { value: '2020-11-02' } });
+    fireEvent.click(submit);
+
+    //Assert
+    expect(checkbox.checked).toEqual(true);
+    expect(window.alert).toHaveBeenCalledWith(expectedArg);
+
+  })
+ 
 });

@@ -1,8 +1,8 @@
 import React from 'react';
-import { render } from 'react-dom';
+import { render } from 'react-dom'; 
 import './CheckboxApplication.scss';
-import { Container, Row, Col } from 'react-grid-system';
-import { Redirect, Route, withRouter, Link, Router } from "react-router-dom";
+ import { Container, Row, Col } from 'react-grid-system';
+import { Redirect, Route, withRouter, Link, Router } from "react-router-dom"; 
 import moment from 'moment'
 
 class Check extends React.Component { // this is a class component for the checkbox feature of selecting recurring days
@@ -59,7 +59,7 @@ class Check extends React.Component { // this is a class component for the check
             NextWeek = moment(StartingDay).add(7, "days");
             StartingDay = NextWeek;
           }
-          console.log(AvailableDates);    // test line
+          console.log(AvailableDates); // test line
         }
       }
       if (DaySelected === false) {
