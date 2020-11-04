@@ -14,7 +14,7 @@ async function createUserAccount(firstName, lastName, type, studentId, email, pa
     const uidgen = new UIDGenerator(UIDGenerator.BASE16);
     const token = await uidgen.generate();
     const accessToken = token.substring(0, 20);
-
+//try catch not needed as the front end doesnt allow a third option for the input to user type outside student or worker
     try {
         if (userType == UserTypes.student) {
             const student = await studentModel.insertStudentAccount(firstName, lastName, studentId, email, password, phone, schoolId, accessToken);
