@@ -1,3 +1,5 @@
+const { db } = require('../../lib/connection');
+
 const userModel = require('../db/user');
 
 const Student = require('../data/Student');
@@ -10,18 +12,14 @@ const Tables = require('../../constants/tables.json');
 async function getStudent(email, password) {
     return userModel.getUser(email, password, Tables.student, Student);
 }
+
 // This method inserts a student account given specific information.
 async function insertStudentAccount(firstName, lastName, studentId, email, password, phone, schoolId, accessToken) {
-    //Data recieved from the front end sign up form
-    //Insert one row into a table
-    return db.run(`insert into ${Tables.student}(first_name, last_name, student_id, email, password, phone, school_id, access_token) values 
-     (${firstName}, ${lastName}, ${studentId}, ${email}, ${password}, ${phone}, ${schoolId}, ${accessToken})`, ['C'], function (err) {
-        if (err) {
-            return console.log(err.message);
-        }
-        //get the last insert id
-        console.log(`A row has been inserted with rowid ${this.lastID}`);
-    });
+    // Insert one row into the student table and obtains all values inserted using RETURNING keyword.
+    const studentData = await db.any(`insert into ${Tables.student}(first_name, last_name, student_id, email, password, phone, school_id, access_token) values 
+     ('${firstName}', '${lastName}', ${studentId}, '${email}', '${password}', '${phone}', '${schoolId}', '${accessToken}') RETURNING *`);
+
+    return new Student(studentData[0]);
 }
 
 module.exports = {

@@ -1,3 +1,5 @@
+const { db } = require('../../lib/connection');
+
 const userModel = require('../db/user');
 
 const Worker = require('../data/Worker');
@@ -13,19 +15,14 @@ async function getWorker(email, password) {
 
 // This method inserts a worker account given specific information.
 async function insertWorkerAccount(firstName, lastName, type, workerId, email, password, phone, specialization, accessToken) {
-    //Data recieved from the front end sign up form
-    //Insert one row into a table
-    return db.run(`insert into ${Tables.worker}(first_name, last_name, type, worker_id, email, password, phone, specialization, access_token) values 
-    (${firstName}, ${lastName}, ${type}, ${workerId}, ${email}, ${password}, ${phone}, ${specialization}, ${accessToken})`, ['C'], function (err) {
-        if (err) {
-            return console.log(err.message);
-        }
-        //get the last insert id
-        console.log(`A row has been inserted with rowid ${this.lastID}`);
-    });
+    // Insert one row into the worker table and obtains all values inserted using RETURNING keyword.
+    const workerData = await db.any(`insert into ${Tables.worker}(first_name, last_name, type, worker_id, email, password, phone, specialization, access_token) values 
+    ('${firstName}', '${lastName}', '${type}', ${workerId}, '${email}', '${password}', '${phone}', '${specialization}', '${accessToken}') RETURNING *`);
+
+    return new Worker(workerData[0]);
 }
 
 module.exports = {
-    getWorker, 
+    getWorker,
     insertWorkerAccount,
 }
