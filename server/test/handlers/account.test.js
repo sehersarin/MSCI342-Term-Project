@@ -36,7 +36,7 @@ describe('Test to check valid account creation', () => {
 
 
         // Act
-        const user = await authenticateHandler.createUserAccount(testStudentId, testFirstName, testLastName, testEmail, testPhone, testSchoolId);
+        const user = await accountHandler.createUserAccount(testStudentId, testFirstName, testLastName, testEmail, testPhone, testSchoolId);
 
         // Assert
         expect(user).toBe(null);

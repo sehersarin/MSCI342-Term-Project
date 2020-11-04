@@ -68,20 +68,7 @@ router.get('/api/create-user', async (req, res) => {
     const { error, value } = paramSchema.validate({ email: paramEmail, password: paramPassword, firstName: paramFirstName, lastName: paramLastName, type: paramType, studentId: paramStudentId, workerId: paramWorkerId, phone: paramPhone, schoolId: paramSchoolId, specialization: paramSpecialization, userType: paramUserType });
     if (!_.isNil(error)) res.send(error);
 
-    const user = await accountHandler.createUserAccount(firstName, lastName, type, studentId, email, password, phone, workerId, schoolId, specialization);
+    const user = await accountHandler.createUserAccount(firstName, lastName, type, studentId, email, password, phone, userType, workerId, specialization, schoolId );
+})
 
-router.get('/create-user', async (req, res) => {
-    const firstName = req.query.firstName;
-    const lastName = req.query.lastName;
-    const type = req.query.type; //note: 'type' is called 'role' in the UI, but refers to either a worker or a student.
-    const studentID = req.query.studentID;
-    const email = req.query.email;
-    const password = req.query.password;
-    const phone = req.query.phone;
-
-    const user = await accountHandler.createUserAccount(firstName, lastName, type, studentID, email, password, phone);
-
-    res.send(user);
-});
-
-module.exports = router })
+module.exports = router;
