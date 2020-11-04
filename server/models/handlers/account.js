@@ -1,13 +1,13 @@
 /* The goal: Take in the user input from the Account Creation form in 
 the front end UI in order to create a user account in the backend*/
 
-async function createUserAccount(firstName, lastName, type, studentId, email, password, phone, userType, workerId, specialization, schoolId ) {
+async function createUserAccount(firstName, lastName, type, studentId, email, password, phone, userType, workerId, specialization, schoolId) {
     // Searches the student table to see if a student account exists for the given data.
     var user;
+    const accessToken = new UIDGenerator(UIDGenerator.BASE16, 20);
     if (userType == userType.student) {
         //Generates an accessToken of length 20 characters.
         // Note: The accessToken includes all alphanumeric characters except for 0, O, I, and l — characters easily mistaken for each other)
-        const accessToken = new UIDGenerator(UIDGenerator.BASE16,20);
 
         user = await studentModel.insertStudentAccount(firstName, lastName, type, studentId, email, password, phone, schoolId, accessToken);
         if (!_.isNil(user)) return user;
