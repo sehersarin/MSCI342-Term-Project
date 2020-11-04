@@ -7,18 +7,23 @@ import "./CreateAppointmentForm.scss"
 import { Link } from 'react-router-dom';
 
 import queryString from 'query-string'
+import CreateAppointment from "./Layouts/CreateAppointment";
 
 const axios = require('axios').default;
 
 //This class is for students to sign up for appointments 
 //students or support workers may access this page from the dashboard then fill in the following information 
 
-class CreateAppointmentForm extends Component {
+class SelectWorkerForm extends Component {
     constructor(props) {
       super(props);
+     // email = this.props.email
+
       this.state = {
-        id:this.props.id,
-        workerId: 8000000, // taken from Amy's test for the api
+        submit:false,
+        id:1,
+        email: this.props.email,
+        workerId: "", // taken from Amy's test for the api
         schoolId: 1,       //will need to implement a page before this to pass these values through
         studentId: 0, // check with Melissa if already stored in props
         workerTimeslotId : 0, 
@@ -49,80 +54,55 @@ class CreateAppointmentForm extends Component {
   };
   
   handleSubmit(e) {
-      e.preventDefault();
-
-      this.setState({
-        formSubmission: true
-      });
-
-      let studentId = this.state.studentId;
-      let workerTimeslotId = this.state.workerTimeslotId;
-      let purpose = this.state.purpose;
-
-      var params = {studentId: studentId, workerTimeslotId: workerTimeslotId, purpose: purpose}
-
-      axios.get(`/api/book-appointment?${queryString.stringify(params)}`)
-      .then(res => {
-        console.log(res.data);
-        let isSuccess = res.data;
-        // if success
-        this.setState({
-          successfulAppointment: isSuccess
-        });
-      });
+    this.setState({
+      submit: true
+    });
   }
   //add an else if statement for successful form submissiom but unsuccessful appointment submission (api backend)
   //have the user redo the book appointment process
+  
   render() {
-    console.log(this.state.id)
+    let newRoute= <Route path="/Dashboard/SelectWorker" render={props => ( <Redirect to={`/dashboard/CreateAppointment/${this.state.email}/${this.state.id}`} Component={CreateAppointment}/>)}></Route> 
+ 
+    if(this.state.submit){
+      return newRoute;
+    }
+    
+    console.log(this.state.email);
       return (
           <Container className="Form-container">
-             <Title name= "Book Appointment. (Still needs to be implemented)"></Title>
+             <Title name= "Select A Service Worker. (Still needs to be implemented)"></Title>
             <Row>
              <Col sm={12} align="center">
              <form onSubmit={this.handleSubmit}> 
                   <label>
-                  <input type="checkbox" id="timeSlot" name="timeSlot" value="1" onChange={this.handleCheckbox}/>
+                  <input type="checkbox" id="workerID" name="workerID" value="1" onChange={this.handleCheckbox}/>
                   </label>
                   <label>
                   <div>
-                  2020-10-20, 08:00 - 08:30
+                  Worker 1
                   </div> 
                   </label>
 
                   <label>
-                  <input type="checkbox" id="timeSlot" name="timeSlot" value="2" onChange={this.handleCheckbox}/>
+                  <input type="checkbox" id="workerID" name="workerID" value="2" onChange={this.handleCheckbox}/>
                   </label>
                   <label>
                   <div>
-                  2020-10-20, 08:30 - 09:00
+                  Worker 2
                   </div> 
                   </label>
                   <label>
-                  <input type="checkbox" id="timeSlot" name="timeSlot" value="3" onChange={this.handleCheckbox}/>
+                  <input type="checkbox" id="workerID" name="workerID" value="3" onChange={this.handleCheckbox}/>
                   </label>
                   <label>
                   <div>
-                  2020-10-20, 09:00 - 09:30
+                  Worker 3
                   </div> 
                   </label>
-
                   <br></br>
                   <br></br>
                   <label>
-                  <input 
-                        className ="InputFields" 
-                        type="text" 
-                        name="reason"
-                        placeholder= "Reason for Booking Appointment" 
-                        onChange={this.handleFormChange} />
-                      </label>
-                    <br></br>
-                  <label>
-                  <div>
-                     (300 Character limit)
-                  </div>
-                  <br></br>
                   <input
                   className ="SubmitButton" 
                   type="submit" 
@@ -130,17 +110,12 @@ class CreateAppointmentForm extends Component {
                   </label>
               </form> 
               <br></br>
-              <div>
-                
-              <Link to="/dashboard">Home</Link>
-              
-            </div>
-              </Col>
+              <Link to={`/dashboard/CreateAppointment/${this.state.email}/${this.state.id}`}>Create Appointment</Link>       
+             </Col>
             </Row>
           </Container>
-        );  
+        );
   }
 }
-  
-  export default CreateAppointmentForm;
+  export default SelectWorkerForm ;
   
