@@ -21,6 +21,7 @@ class SelectWorkerForm extends Component {
 
       this.state = {
         submit:false,
+        id:1,
         email: this.props.email,
         workerId: "", // taken from Amy's test for the api
         schoolId: 1,       //will need to implement a page before this to pass these values through
@@ -61,7 +62,7 @@ class SelectWorkerForm extends Component {
   //have the user redo the book appointment process
   
   render() {
-    let newRoute= <Route path="/Dashboard/SelectWorker" render={props => ( <Redirect to={`/dashboard/CreateAppointment/${this.state.email}/${this.schoolId}`} Component={CreateAppointment}/>)}></Route> 
+    let newRoute= <Route path="/Dashboard/SelectWorker" render={props => ( <Redirect to={`/dashboard/CreateAppointment/${this.state.email}/${this.state.id}`} Component={CreateAppointment}/>)}></Route> 
  
     if(this.state.submit){
       return newRoute;
@@ -109,7 +110,7 @@ class SelectWorkerForm extends Component {
                   </label>
               </form> 
               <br></br>
-              <Link to={`/dashboard/CreateAppointment/${this.state.email}/${this.schoolId}`}>Create Appointment</Link>       
+              <Link to={`/dashboard/CreateAppointment/${this.state.email}/${this.state.id}`}>Create Appointment</Link>       
              </Col>
             </Row>
           </Container>
