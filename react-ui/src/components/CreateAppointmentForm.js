@@ -3,7 +3,7 @@ import { Container, Row, Col } from 'react-grid-system';
 import { Redirect, Route, withRouter } from "react-router-dom";
 import Title from "./Title"
 import "./CreateAppointmentForm.scss"
-// import dashboard from "./Layouts/Dashboard"
+import dashboard from "./Layouts/Dashboard"
 import { Link } from 'react-router-dom';
 
 import queryString from 'query-string'
@@ -73,13 +73,6 @@ class CreateAppointmentForm extends Component {
   //add an else if statement for successful form submissiom but unsuccessful appointment submission (api backend)
   //have the user redo the book appointment process
   render() {
-    if (this.state.successfulAppointment && this.state.formSubmission)
-      return (
-        <div>
-          Success!
-        </div>
-      );
-    else
       return (
           <Container className="Form-container">
              <Title name= "Book Appointment. (Still needs to be implemented)"></Title>
@@ -135,33 +128,17 @@ class CreateAppointmentForm extends Component {
                   </label>
               </form> 
               <br></br>
-             <Link to="/successfulappointmentbooking" className="Signout">Continue to next page</Link>         
-             </Col>
+              <div>
+
+              <Link to="/dashboard">Home</Link>
+
+              </div>
+              </Col>
             </Row>
           </Container>
         );
   }
 
-  /*
-  componentDidMount() {
-    <div>
-      Success!
-    </div>
-    let workerId = this.state.workerId;
-    let schoolId = this.state.workerId;
-
-    var params = {workerId: workerId, schoolId: schoolId}
-
-    axios.post(`/api/worker-availability?${queryString.stringify(params)}`)
-    .then(res => {
-    console.log(res.data);
-    let availableTimeArray = res.data;
-    this.setState({
-      availableTime: availableTimeArray
-    });
-  });
-}
-*/
 }
   
   export default CreateAppointmentForm;
