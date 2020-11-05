@@ -7,6 +7,7 @@ import "./CreateAppointmentForm.scss"
 import { Link } from 'react-router-dom';
 
 import queryString from 'query-string'
+import CreateAppointment from "./Layouts/CreateAppointment";
 
 const axios = require('axios').default;
 
@@ -18,6 +19,7 @@ class SelectWorkerForm extends Component {
       super(props);
      // email = this.props.email
       this.state = {
+        submit:false,
         email: this.props.email,
         workerId: "", // taken from Amy's test for the api
         schoolId: 1,       //will need to implement a page before this to pass these values through
@@ -50,10 +52,19 @@ class SelectWorkerForm extends Component {
   };
 
   handleSubmit(e) {
+    this.setState({
+      submit: true
+    });
   }
   //add an else if statement for successful form submissiom but unsuccessful appointment submission (api backend)
   //have the user redo the book appointment process
   render() {
+    let newRoute= <Route path="/Dashboard/SelectWorker" render={props => ( <Redirect to={`/dashboard/CreateAppointment/${this.state.email}/${this.schoolId}`} Component={CreateAppointment}/>)}></Route> 
+
+    if(this.state.submit){
+      return newRoute;
+    }
+
     console.log(this.state.email);
       return (
           <Container className="Form-container">
@@ -96,7 +107,7 @@ class SelectWorkerForm extends Component {
                   </label>
               </form> 
               <br></br>
-              <Link to={`/dashboard/CreateAppointment/`}>Create Appointment</Link>       
+              <Link to={`/dashboard/CreateAppointment/${this.state.email}/${this.schoolId}`}>Create Appointment</Link>           
              </Col>
             </Row>
           </Container>
