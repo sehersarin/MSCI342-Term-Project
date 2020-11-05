@@ -3,7 +3,7 @@ import { Container, Row, Col } from 'react-grid-system';
 import { Redirect, Route, withRouter } from "react-router-dom";
 import Title from "./Title"
 import "./CreateAppointmentForm.scss"
-import dashboard from "./Layouts/Dashboard"
+//import dashboard from "./Layouts/Dashboard"
 import { Link } from 'react-router-dom';
 
 import queryString from 'query-string'
@@ -18,7 +18,7 @@ class CreateAppointmentForm extends Component {
       super(props);
       this.state = {
         workerId: 8000000, // taken from Amy's test for the api
-        schoolId: 1,       //will need to implement a page before this to pass these values through
+        schoolId: this.props.schoolId,       //will need to implement a page before this to pass these values through
         studentId: 0, // check with Melissa if already stored in props
         workerTimeslotId : 0, 
         purpose: "", // Max 300 => input size is 300
