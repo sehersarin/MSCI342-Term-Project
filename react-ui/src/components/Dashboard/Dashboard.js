@@ -6,6 +6,7 @@ import logo from '../../logo.svg'
 import Profile from "../Layouts/Profile";
 import Home from "../Layouts/Home";
 import NotFound from "../Layouts/404";
+import SelectWorker from "../Layouts/SelectWorker";
 import CreateAppointment from "../Layouts/CreateAppointment";
 import UserTypes from '../../constants/userTypes.json';
 import WorkerInputpage from "../Layouts/InputWorkerTimes/WorkerInputpage";
@@ -54,8 +55,8 @@ class Dashboard extends Component {
               </li>
               {/* Only display the book appointment form if the user is a student. */}
               {userType === UserTypes.student &&
-                <li>
-                  <Link to={`/dashboard/CreateAppointment/${email}`}>Create Appointment</Link>
+                 <li>
+                 <Link to={`/dashboard/SelectWorker/${email}`}>Book Appointment</Link>
                 </li>
               }
 
@@ -82,6 +83,9 @@ class Dashboard extends Component {
                 </Route>
                 <Route path={`/dashboard/CreateAppointment`}>
                   <CreateAppointment name={personId} />
+                </Route>
+                <Route path={`/dashboard/SelectWorker`}>
+                  <SelectWorker email={this.state.email}/>
                 </Route>
                 <Route path = {`/dashboard/InputWorkerAvailabilitypage`}>
                   <WorkerInputpage name ={personId}/>
