@@ -6,16 +6,24 @@ const workerModel = require('../db/worker');
 
 const UserTypes = require('../../constants/userTypes.json');
 
-/* The goal: Take in the user input from the Account Creation form in 
-the front end UI in order to create a user account in the backend*/
+   /* The goal: The function 'createUserAccount' does the following:
+   a) Takes in the user input from the Sign Up form in the front end UI
+   b) Creates a corresponding user account in the backend by storing 
+    student account information in the database's student table, and
+    worker account information in the database's worker table.
+   c) Generates an accessToken which is stored in the user's account  */
+
 async function createUserAccount(firstName, lastName, type, studentId, email, password, phone, userType, workerId, specialization, schoolId) {
+
     // Generates an accessToken of length 20 characters.
-    // Note: The accessToken includes all alphanumeric characters except for 0, O, I, and l — characters easily mistaken for each other)
     const uidgen = new UIDGenerator(UIDGenerator.BASE16);
+    /* Note: The accessToken includes all alphanumeric characters except for 0, O, I, and l
+    (characters easily mistaken for each other)*/
+
     const token = await uidgen.generate();
     const accessToken = token.substring(0, 20);
 
-//try catch not needed as the front end doesnt allow a third option for the input to user type outside student or worker
+    //try catch not needed as the front end doesnt allow a third option for the input to user type outside student or worker
     try {
 
         if (userType == UserTypes.student) {
@@ -24,16 +32,16 @@ async function createUserAccount(firstName, lastName, type, studentId, email, pa
         } else if (userType == UserTypes.worker) {
             // Searches the worker table to see if a student account exists for the given data.
             const worker = await workerModel.insertWorkerAccount(firstName, lastName, type, workerId, email, password, phone, specialization, accessToken);
-        if (!_.isNil(worker)) return worker;
+            if (!_.isNil(worker)) return worker;
         } else {
             // If the userType is neither a student nor a worker, then return null.
             return null;
         }
-    } catch(err) {
-       console.log('Error occurred in createUserAccount method', err);
-       return null;
-    
-   }
+    } catch (err) {
+        console.log('Error occurred in createUserAccount method', err);
+        return null;
+
+    }
 };
 
 //export the createUserAccount
