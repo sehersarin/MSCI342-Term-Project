@@ -156,7 +156,7 @@ render() {
                   onChange={this.handleFormChange} />
                 </label>
                 <br></br>
-                <br></br>
+                <p className ="Title-Style3"> All fields marked with * are required</p>
                 <input 
                 className ="SubmitButton" 
                 type="submit" 
