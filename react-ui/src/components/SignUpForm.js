@@ -58,7 +58,7 @@ render() {
                   type="text" 
                   name="first_name"
                   size ="40"
-                  placeholder= "Enter First Name" 
+                  placeholder= "Enter First Name*" 
                   onChange={this.handleFormChange} />
                 </label>
                 <br></br>
@@ -68,19 +68,19 @@ render() {
                   type="text" 
                   name="last_name"
                   size ="40"
-                  placeholder= "Enter Last Name" 
+                  placeholder= "Enter Last Name*" 
                   onChange={this.handleFormChange} />
                 </label>
                 <br></br>
                 <br></br>
-                <label for="role" className ="Title-Style2"> Select User Role: </label>
+                <label for="role" className ="Title-Style2"> Select User Role*: </label>
                 <select name="role" className ="InputFields3" id="type">
                   <option value="student">Student</option>
                   <option value="worker1">Worker</option>
                 </select>
                 <br></br>
                 <br></br>
-                <label for="worker_type" className ="Title-Style2"> Select Worker Type (or N/A otherwise): </label>
+                <label for="worker_type" className ="Title-Style2"> Select Worker Type* (or N/A otherwise): </label>
                 <br></br>
                 <select name="worker_type" className ="InputFields2" id="type">
                   <option value="student">Social Worker</option>
@@ -99,7 +99,7 @@ render() {
                     </label>
                   <br></br>
                   <br></br>
-                <label for="specialization" className ="Title-Style2"> Select Worker Specialization (or N/A): </label>
+                <label for="specialization" className ="Title-Style2"> Select Worker Specialization* (or N/A): </label>
                 <br></br>
                 <select name="specialization" className ="InputFields2" id="type">
                   <option value="student">Masters in Social Work</option>
@@ -122,7 +122,7 @@ render() {
                   className ="InputFields" 
                   type="text" 
                   name="id_value"
-                  placeholder= "Enter Student or Worker ID" 
+                  placeholder= "Enter Student or Worker ID*" 
                   onChange={this.handleFormChange} />
                 </label>
                 <br></br>
@@ -132,7 +132,7 @@ render() {
                   type="text" 
                   name="email"
                   size ="320"
-                  placeholder= "Enter Email Address" 
+                  placeholder= "Enter Email Address*" 
                   onChange={this.handleFormChange} />
                 </label>
                 <br></br>
@@ -152,7 +152,7 @@ render() {
                   name="user_password"
                   type="password" 
                   size ="40"
-                  placeholder= "Enter Password" 
+                  placeholder= "Enter Password*" 
                   onChange={this.handleFormChange} />
                 </label>
                 <br></br>
