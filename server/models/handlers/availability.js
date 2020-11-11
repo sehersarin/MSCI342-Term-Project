@@ -8,19 +8,20 @@ const UserTypes = require('../../constants/userTypes.json');
 async function getWorkerAvailability(workerId, schoolId, startTime, endTime) {
    
     // Searches the worker table to see if it is valid worker credentials
-    
-    try {
         const worker = await workerModel.getWorker(email, password);
     if  (!_.isNil(worker))
      return worker;
-    } catch (error){
-        console.log('Error occurred in getWorkerAvailibility method: ', error);
-        return false;
+     return workerModel.getWorkerAvailability(workerId, schoolId, startTime, endTime);
     }
-};
 
 // Fetches all the essential availibility details and returns the workerId in case more information is desired.
-    const availableTimes = [
+ 
+
+
+
+/* Will delete these hardcoded values
+
+const availableTimes = [
         {
             workerTimeslotId: 1,
             startTime: '08:00:00', 
@@ -43,6 +44,7 @@ async function getWorkerAvailability(workerId, schoolId, startTime, endTime) {
 
     return availableTimes;
 };
+*/
 
 module.exports = {
     getWorkerAvailability,
