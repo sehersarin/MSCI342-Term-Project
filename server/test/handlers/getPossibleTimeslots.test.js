@@ -1,4 +1,4 @@
-const workerTimeslotHandler = require('../models/handlers/workerTimeslot');
+const workerTimeslotHandler = require('../../models/handlers/workerTimeslot');
 
 describe('testing getting possible timeslots functionality', () => {
     beforeEach(() => {
@@ -26,84 +26,84 @@ describe('testing getting possible timeslots functionality', () => {
         */
         const testTimeslotDetails = [
             {
-                timeslotId: 1,
-                startTime: '08:00:00',
-                endTime: '08:30:00'
+                slot_id: 1,
+                start_time: '08:00:00',
+                end_time: '08:30:00'
             },
             {
-                timeslotId: 2,
-                startTime: '08:30:00',
-                endTime: '09:00:00'
+                slot_id: 2,
+                start_time: '08:30:00',
+                end_time: '09:00:00'
             },
             {
-                timeslotId: 3,
-                startTime: '09:00:00',
-                endTime: '09:30:00'
+                slot_id: 3,
+                start_time: '09:00:00',
+                end_time: '09:30:00'
             },
             {
-                timeslotId: 4,
-                startTime: '09:30:00',
-                endTime: '10:00:00'
+                slot_id: 4,
+                start_time: '09:30:00',
+                end_time: '10:00:00'
             },
             {
-                timeslotId: 5,
-                startTime: '10:00:00',
-                endTime: '10:30:00'
+                slot_id: 5,
+                start_time: '10:00:00',
+                end_time: '10:30:00'
             },
             {
-                timeslotId: 6,
-                startTime: '10:30:00',
-                endTime: '11:00:00'
+                slot_id: 6,
+                start_time: '10:30:00',
+                end_time: '11:00:00'
             },
             {
-                timeslotId: 7,
-                startTime: '11:00:00',
-                endTime: '11:30:00'
+                slot_id: 7,
+                start_time: '11:00:00',
+                end_time: '11:30:00'
             },
             {
-                timeslotId: 8,
-                startTime: '11:30:00',
-                endTime: '12:00:00'
+                slot_id: 8,
+                start_time: '11:30:00',
+                end_time: '12:00:00'
             },
             {
-                timeslotId: 9,
-                startTime: '12:00:00',
-                endTime: '12:30:00'
+                slot_id: 9,
+                start_time: '12:00:00',
+                end_time: '12:30:00'
             },
             {
-                timeslotId: 10,
-                startTime: '12:30:00',
-                endTime: '13:00:00'
+                slot_id: 10,
+                start_time: '12:30:00',
+                end_time: '13:00:00'
             },
             {
-                timeslotId: 11,
-                startTime: '13:00:00',
-                endTime: '13:30:00'
+                slot_id: 11,
+                start_time: '13:00:00',
+                end_time: '13:30:00'
             },
             {
-                timeslotId: 12,
-                startTime: '13:30:00',
-                endTime: '14:00:00'
+                slot_id: 12,
+                start_time: '13:30:00',
+                end_time: '14:00:00'
             },
             {
-                timeslotId: 13,
-                startTime: '14:00:00',
-                endTime: '14:30:00'
+                slot_id: 13,
+                start_time: '14:00:00',
+                end_time: '14:30:00'
             },
             {
-                timeslotId: 14,
-                startTime: '14:30:00',
-                endTime: '15:00:00'
+                slot_id: 14,
+                start_time: '14:30:00',
+                end_time: '15:00:00'
             },
             {
-                timeslotId: 15,
-                startTime: '15:00:00',
-                endTime: '15:30:00'
+                slot_id: 15,
+                start_time: '15:00:00',
+                end_time: '15:30:00'
             },
         ];
 
         // Act
-        const possibleTimeslots = await appointmentHandler.getAppointmentDetailsForStudent(studentId, status);
+        const possibleTimeslots = await workerTimeslotHandler.getPossibleTimeslots();
 
         // Assert
         expect(possibleTimeslots).toMatchObject(testTimeslotDetails);
