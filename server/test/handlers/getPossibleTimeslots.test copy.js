@@ -1,5 +1,4 @@
-/*
-const appointmentHandler = require('../../models/handlers/timeslot');
+const workerTimeslotHandler = require('../models/handlers/workerTimeslot');
 
 describe('testing getting possible timeslots functionality', () => {
     beforeEach(() => {
@@ -8,68 +7,113 @@ describe('testing getting possible timeslots functionality', () => {
 
     test('initial setup of getting appointment details for a student', async() => {
         // Arrange
-        const studentId = '12345678';
-        const status = 'upcoming';
-        const testAppointmentDetails = [
+        /*
+        ('08:00:00', '08:30:00'), 
+        ('08:30:00', '09:00:00'), 
+        ('09:00:00', '09:30:00'), 
+        ('09:30:00', '10:00:00'),
+        ('10:00:00', '10:30:00'), 
+        ('10:30:00', '11:00:00'), 
+        ('11:00:00', '11:30:00'), 
+        ('11:30:00', '12:00:00'), 
+        ('12:00:00', '12:30:00'), 
+        ('12:30:00', '13:00:00'), 
+        ('13:00:00', '13:30:00'), 
+        ('13:30:00', '14:00:00'),
+        ('14:00:00', '14:30:00'), 
+        ('14:30:00', '15:00:00'), 
+        ('15:00:00', '15:30:00');
+        */
+        const testTimeslotDetails = [
             {
-                appointmentId: 1,
-                worker: {
-                    firstName: 'Tyler',
-                    lastName: 'Evans',
-                },
-                date: '2020-11-05',
+                timeslotId: 1,
                 startTime: '08:00:00',
-                endTime: '08:30:00',
-                status: 'upcoming',
+                endTime: '08:30:00'
             },
             {
-                appointmentId: 2,
-                worker: {
-                    firstName: 'Joshua',
-                    lastName: 'Brooks',
-                },
-                date: '2020-11-07',
+                timeslotId: 2,
                 startTime: '08:30:00',
-                endTime: '09:00:00',
-                status: 'upcoming',
+                endTime: '09:00:00'
+            },
+            {
+                timeslotId: 3,
+                startTime: '09:00:00',
+                endTime: '09:30:00'
+            },
+            {
+                timeslotId: 4,
+                startTime: '09:30:00',
+                endTime: '10:00:00'
+            },
+            {
+                timeslotId: 5,
+                startTime: '10:00:00',
+                endTime: '10:30:00'
+            },
+            {
+                timeslotId: 6,
+                startTime: '10:30:00',
+                endTime: '11:00:00'
+            },
+            {
+                timeslotId: 7,
+                startTime: '11:00:00',
+                endTime: '11:30:00'
+            },
+            {
+                timeslotId: 8,
+                startTime: '11:30:00',
+                endTime: '12:00:00'
+            },
+            {
+                timeslotId: 9,
+                startTime: '12:00:00',
+                endTime: '12:30:00'
+            },
+            {
+                timeslotId: 10,
+                startTime: '12:30:00',
+                endTime: '13:00:00'
+            },
+            {
+                timeslotId: 11,
+                startTime: '13:00:00',
+                endTime: '13:30:00'
+            },
+            {
+                timeslotId: 12,
+                startTime: '13:30:00',
+                endTime: '14:00:00'
+            },
+            {
+                timeslotId: 13,
+                startTime: '14:00:00',
+                endTime: '14:30:00'
+            },
+            {
+                timeslotId: 14,
+                startTime: '14:30:00',
+                endTime: '15:00:00'
+            },
+            {
+                timeslotId: 15,
+                startTime: '15:00:00',
+                endTime: '15:30:00'
             },
         ];
 
         // Act
-        const appointmentDetails = await appointmentHandler.getAppointmentDetailsForStudent(studentId, status);
+        const possibleTimeslots = await appointmentHandler.getAppointmentDetailsForStudent(studentId, status);
 
         // Assert
-        expect(appointmentDetails).toMatchObject(testAppointmentDetails);
+        expect(possibleTimeslots).toMatchObject(testTimeslotDetails);
     });
-
+/*
     test('initial setup of getting appointment details for a worker', async() => {
         // Arrange
         const workerId = '12345678';
         const status = 'upcoming';
-        const testAppointmentDetails = [
-            {
-                appointmentId: 1,
-                student: {
-                    firstName: 'John',
-                    lastName: 'Doe',
-                },
-                date: '2020-11-05',
-                startTime: '08:00:00',
-                endTime: '08:30:00',
-                status: 'upcoming',
-            },
-            {
-                appointmentId: 3,
-                student: {
-                    firstName: 'Jane',
-                    lastName: 'Smith',
-                },
-                date: '2020-11-05',
-                startTime: '08:30:00',
-                endTime: '09:00:00',
-                status: 'upcoming',
-            },
-        ];
+    
 
         // Act
         const appointmentDetails = await appointmentHandler.getAppointmentDetailsForWorker(workerId, status);
@@ -77,6 +121,6 @@ describe('testing getting possible timeslots functionality', () => {
         // Assert
         expect(appointmentDetails).toMatchObject(testAppointmentDetails);
     });
+    */
 
 }); 
-*/
