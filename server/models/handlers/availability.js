@@ -7,10 +7,11 @@ const UserTypes = require('../../constants/userTypes.json');
 //
 async function getWorkerAvailability(workerId, schoolId, startTime, endTime) {
    
-    // Searches the worker table to see if it is valid worker credentials
-        const worker = await workerModel.getWorker(email, password);
+    // Don't need this becuase the db will return an error if the worker credentials are invalid.Searches the worker table to see if it is valid worker credentials
+   /*     const worker = await workerModel.getWorker(email, password);
     if  (!_.isNil(worker))
-     return worker;
+     return worker;*/
+
      return workerModel.getWorkerAvailability(workerId, schoolId, startTime, endTime);
     }
 
