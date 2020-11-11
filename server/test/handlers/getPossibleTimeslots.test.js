@@ -1,4 +1,4 @@
-const workerTimeslotHandler = require('../../models/handlers/workerTimeslot');
+const timeslotHandler = require('../../models/handlers/Timeslot');
 
 describe('testing getting possible timeslots functionality', () => {
     beforeEach(() => {
@@ -103,7 +103,7 @@ describe('testing getting possible timeslots functionality', () => {
         ];
 
         // Act
-        const possibleTimeslots = await workerTimeslotHandler.getPossibleTimeslots();
+        const possibleTimeslots = await timeslotHandler.getPossibleTimeslots();
 
         // Assert
         expect(possibleTimeslots).toMatchObject(testTimeslotDetails);
