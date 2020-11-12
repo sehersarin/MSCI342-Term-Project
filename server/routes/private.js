@@ -173,7 +173,7 @@ router.post('/get-workers-for-school', async (req, res) => {
 // Note that appointments/meetings are synonymous, but only appointments will be used in the backend to maintain consistency.
 router.get('/cancel-specific-day', async (req, res) => {
     const paramSchema = Joi.object({
-        workerId: Joi.number().integer(),
+        workerId: Joi.number().integer().required(),
         specificDate: Joi.date().iso().required(),
         
         // Following potential query parameters are commented out to be revisited in a future story. 
