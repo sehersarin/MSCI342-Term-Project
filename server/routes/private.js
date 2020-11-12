@@ -169,28 +169,28 @@ router.post('/get-workers-for-school', async (req, res) => {
     res.send(workerIds);
 });
 
-// Cancels all the appointments/meetings and updates worker availability to unavailable for a worker on a specific day.
-// Also allows workers to specify an endTime to cancel the meetings and state unavailability for a specified duration.
-// However, the endTime is optional and if not provided, it is assumed that the worker wants to cancel the entire day.
+// Cancels all the appointments/meetings and updates worker availability to unavailable for a worker for a specific day.
 // Note that appointments/meetings are synonymous, but only appointments will be used in the backend to maintain consistency.
 router.get('/cancel-specific-day', async (req, res) => {
     const paramSchema = Joi.object({
         workerId: Joi.number().integer(),
-        startTime: Joi.date().iso().required(),
-        endTime: Joi.date().iso().greater(Joi.ref('startTime')) // Checks to ensure that endDate > startDate is specified.
+        specificDate: Joi.date().iso().required(),
+        
+        // Following potential query parameters are commented out to be revisited in a future story. 
+        // startTime: Joi.date().iso().required(),
+        // endTime: Joi.date().iso().greater(Joi.ref('startTime')) // Checks to ensure that endDate > startDate is specified.
     })
 
     const query = req.query ? req.query : {};
 
     const workerId = query.workerId;
-    const startTime = query.startTime;
-    const endTime = query.endTime;
+    const specificDate = query.specificDate;
 
-    const { error } = paramSchema.validate({ workerId, startTime, endTime });
+    const { error } = paramSchema.validate({ workerId, specificDate });
 
     if (!_.isNil(error)) res.send(error);
 
-    const isCancelledSuccessfully = await appointmentHandler.cancelWorkerAppointments(workerId, startTime, endTime);
+    const isCancelledSuccessfully = await appointmentHandler.cancelWorkerAppointments(workerId, specificDate);
 
     res.send(isCancelledSuccessfully);
 });
