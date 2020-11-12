@@ -12,16 +12,6 @@ async function insertWorkerTimeslot(slotId, schoolId, workerId, status, date) {
     return db.any(`insert into ${Tables.workerTimeslot} (slot_id, school_id, worker_id, status, date) values (${slotId}, ${schoolId}, ${workerId}, ${status ? `'${status}'` : `'${TimeslotStatus.available}'`} , '${date}');`);
 }
 
-// This method returns the timeslot records stored in the timeslot table 
-//Note the total absence of parameters, as this method simply returns all possible timeslots 
-async function getPossibleTimeslots() {
-    const timeslotDetails = await db.any(`select * from ${Tables.timeslot};`);
-
-    if (_.isEmpty(timeslotDetails)) return null;
-    return timeslotDetails;
-}
-
 module.exports = {
-    insertWorkerTimeslot,
-    getPossibleTimeslots,
+    insertWorkerTimeslot
 } 
