@@ -24,7 +24,18 @@ async function getAppointmentDetails(studentId, workerId, status) {
     return appointmentModel.getAppointmentDetails(studentId, workerId, status);
 }
 
+// Attempts to cancel all the worker appointments and updates their availability to unavailable for the entire day
+// or for a specified period.
+// Returns true if the worker appointments and their times were successfully updated and false if error encountered.
+async function cancelWorkerAppointments(workerId, specificDate) {
+    // Hard-coded true for temporary stub and can be removed once logic implemented.
+    const isCancelledSuccessfully = true;
+    
+    return isCancelledSuccessfully;
+}
+
 module.exports = {
     bookAppointment,
     getAppointmentDetails,
+    cancelWorkerAppointments,
 }

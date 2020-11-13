@@ -2,6 +2,11 @@
 
 exports[`Checkbox component snapshot renders 1`] = `
 <div>
+  <h1
+    className="Info"
+  >
+    Select Date and day(s) of week to set recurring 4 week schedule starting from date selected
+  </h1>
   <form
     className="Container"
     onSubmit={[Function]}
