@@ -125,7 +125,18 @@ describe('testing getting possible timeslots functionality', () => {
         expect(possibleTimeslots).toMatchObject(testTimeslotDetails);
     });
 
-    test('testing specified time parameters expecting null return ', async () => {
+    test('testing specified time parameters expecting empty array return ', async () => {
+        // Arrange
+        const testTimeslotDetails = [];
+
+        // Act
+        const possibleTimeslots = await timeslotHandler.getPossibleTimeslots('16:00:00', '17:00:00');
+
+        // Assert
+        expect(possibleTimeslots).toMatchObject(testTimeslotDetails);
+    });
+
+    test('testing invlaid parameters', async () => {
         // Arrange
         const testTimeslotDetails = [
         ];

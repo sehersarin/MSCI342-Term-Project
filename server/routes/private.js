@@ -143,20 +143,20 @@ router.get('/appointments', async (req, res) => {
 //If one or both ofthe parameters is null or not vlaid, the method will return all timeslots in the timeslot table 
 router.get('/possible-timeslots', async (req, res) => {
     const paramSchema = Joi.object({
-        specificStartTime: Joi.date().iso(),
-        specificEndTime: Joi.date().iso().greater(Joi.ref('startTime'))
+        startTime: Joi.date().iso(),
+        endTime: Joi.date().iso().greater(Joi.ref('startTime'))
     });
 
     const query = req.query ? req.query : {};
 
-    const specificStartTime = query.specificStartTime ? query.specificStartTime : null;
-    const specificEndTime = query.specificEndTime ? query.specificEndTime : null;
+    const startTime = query.startTime ? query.startTime : null;
+    const endTime = query.endTime ? query.endTime : null;
 
     //const { error } = paramSchema.validate({specificStartTime, specificEndTime });
 
     //if (!_.isNil(error)) res.send(error);
 
-    timeslots = await TimeslotHandler.getPossibleTimeslots(specificStartTime, specificEndTime);
+    timeslots = await TimeslotHandler.getPossibleTimeslots(startTime, endTime);
 
     res.send(timeslots);
 });
