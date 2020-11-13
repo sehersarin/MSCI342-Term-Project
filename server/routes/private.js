@@ -137,8 +137,10 @@ router.get('/appointments', async (req, res) => {
 });
 
 
-//Returns all possible timeslots. 
-//Note the total absence of parameters, as this method simply returns all possible timeslots  
+
+// This method returns the timeslot records stored in the timeslot table 
+//Note the parameters, as this method, if given specific start time and specific end time to return, wil only return timeslots within the start and end time parameters 
+//If one or both ofthe parameters is null or not vlaid, the method will return all timeslots in the timeslot table 
 router.get('/possible-timeslots', async (req, res) => {
     const paramSchema = Joi.object({
         specificStartTime: Joi.date().iso(),
