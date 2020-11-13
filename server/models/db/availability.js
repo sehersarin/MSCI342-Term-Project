@@ -3,8 +3,6 @@ const { db } = require('../../lib/connection');
 const AvailabilityDetails = require('../data/AvailabilityDetails');
 
 const Tables = require('../../constants/tables.json');
-const AppointmentStatus = require('../../constants/appointmentStatus.json');
-
 
 async function getAvailabilityDetails(studentId, workerId, status) {
     var queryParams = `${Tables.appointment}.appointment_id, ${Tables.workerTimeslot}.date, ${Tables.timeslot}.start_time, ${Tables.timeslot}.end_time, ${Tables.appointment}.status`;
@@ -18,12 +16,7 @@ async function getAvailabilityDetails(studentId, workerId, status) {
         queryCond += ` and ${Tables.appointment}.student_id=${studentId}`;
     
 
-    const queryStmt = `select ${queryParams} from ${tableJoins} where ${queryCond};`;
-    const appointments = await db.any(queryStmt);
-
-    if (_.isEmpty(appointments)) return null;
-
-    return _.map(appointments, appointment => new AvailabilityDetails(appointment));
+    const queryStatement = `select ${queryParams} from ${tableJoins} where ${queryCond};`;
 }
 
 module.exports = {
