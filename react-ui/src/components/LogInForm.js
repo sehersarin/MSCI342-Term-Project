@@ -1,6 +1,6 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import { Container, Row, Col } from 'react-grid-system';
-import { Redirect, Route, withRouter, Link} from "react-router-dom";
+import { Redirect, Route, withRouter, Link } from "react-router-dom";
 import Title from "./Title"
 import "./LogInForm.scss"
 import Dashboard from "./Dashboard/Dashboard"
@@ -34,73 +34,93 @@ class logInForm extends Component {
     });
   };
 
-
   login = event => {
     let email = this.state.loginParams.email;
     let password = this.state.loginParams.password;
-    var params = {email: email, password: password}
-    axios.get(`/public/login/?${queryString.stringify(params)}`)
-    .then(res => {
-      if(res.data!==""){
-        this.setState({
-          email : res.data.email,
-          userType: res.data.userType,
-          firstName: res.data.firstName,
-          personId: res.data.workerId || res.data.studentId,
-          accessToken: res.data.accessToken,
-          islogged: true
+    let validinput = true;
+    var params = { email: email, password: password }
+
+    if (email === "" && password === "") {
+      validinput = false
+      alert("Please enter email and password")
+      event.preventDefault();
+    } else if (email === "") {
+      validinput = false;
+      alert("Please enter an email")
+      event.preventDefault();
+    } else if (password === "") {
+      validinput = false;
+      alert("please enter an password")
+      event.preventDefault();
+    }
+
+    if (validinput === true) {
+      axios.get(`/public/login/?${queryString.stringify(params)}`)
+        .then(res => {
+          if (res.data !== "") {
+            this.setState({
+              email: res.data.email,
+              userType: res.data.userType,
+              firstName: res.data.firstName,
+              personId: res.data.workerId || res.data.studentId,
+              accessToken: res.data.accessToken,
+              islogged: true
+            })
+            // localStorage.setItem("token", "T");
+            console.log(this.state.userType)
+          } else {
+            alert("Invalid Email or Password")
+            event.target.reset();
+          }
         })
-        // localStorage.setItem("token", "T");
-        console.log(this.state.userType)
-      }
-    })
-    event.preventDefault();
-  } 
+      event.preventDefault();
+    }
+  }
 
   render() {
     // TO DO: Find a better way to pass the params
-    let newRoute= <Route exact path="/login" render={props => ( <Redirect to={`/dashboard/${this.state.loginParams.email}/${this.state.userType}/${this.state.firstName}/${this.state.personId}/${this.state.accessToken}`} Component={Dashboard}/>)}></Route> 
-  
+    let newRoute = <Route exact path="/login" render={props => (<Redirect to={`/dashboard/${this.state.loginParams.email}/${this.state.userType}/${this.state.firstName}/${this.state.personId}/${this.state.accessToken}`} Component={Dashboard} />)}></Route>
+
     if (this.state.islogged) {
       return newRoute;
     }
-      return (
-        <Container className="Form-container">
-           <Title name= "Log In."></Title>
-          <Row>
-           <Col sm={12} align="center">
-           <form onSubmit={this.login}>
-                <label>
-                  <input 
-                  className ="InputFields" 
-                  type="text" 
+    return (
+      <Container className="Form-container">
+        <Title name="Log In."></Title>
+        <Row>
+          <Col sm={12} align="center">
+            <form onSubmit={this.login}>
+              <label>
+                <input
+                  className="InputFields"
+                  type="text"
                   name="email"
-                  placeholder= "email" 
+                  placeholder="email"
                   onChange={this.handleFormChange} />
-                </label>
-                <br></br>
-                <label>
-                  <input 
-                  className ="InputFields" 
+              </label>
+              <br></br>
+              <label>
+                <input
+                  className="InputFields"
                   name="password"
-                  type="password" 
-                  placeholder= "password" 
+                  type="password"
+                  placeholder="password"
                   onChange={this.handleFormChange} />
-                </label>
-                <br></br>
-                <input 
-                className ="SubmitButton" 
-                type="submit" 
+              </label>
+              <br></br>
+              <input
+                className="SubmitButton"
+                type="submit"
                 value="Log In!" />
             </form>
             <br></br>
             <Link to={`/signup`}>Don't have an account?</Link>
             <Route path="/signup" component={Signup}></Route>
-            </Col>
-           </Row>
-        </Container>
-      );
-    }
+          </Col>
+        </Row>
+      </Container>
+    );
   }
-  export default withRouter(logInForm);
-  
+}
+export default withRouter(logInForm);
+
