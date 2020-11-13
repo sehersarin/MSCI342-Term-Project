@@ -76,7 +76,7 @@ render() {
                 <br></br>
                 <br></br>
                 <label for="role" className ="Title-Style2"> Select User Role*: </label>
-                <select name="role" className ="InputFields3" id="type">
+                <select name="role" className ="InputFields3" id="type" required>
                   <option value="student">Student</option>
                   <option value="worker1">Worker</option>
                 </select>
@@ -84,7 +84,7 @@ render() {
                 <br></br>
                 <label for="worker_type" className ="Title-Style2"> Select Worker Type* (or N/A otherwise): </label>
                 <br></br>
-                <select name="worker_type" className ="InputFields2" id="type">
+                <select name="worker_type" className ="InputFields2" id="type" required>
                   <option value="student">Social Worker</option>
                   <option value="worker1">Guidance Counselor</option>
                   <option value="other">Other</option>
@@ -103,7 +103,7 @@ render() {
                   <br></br>
                 <label for="specialization" className ="Title-Style2"> Select Worker Specialization* (or N/A): </label>
                 <br></br>
-                <select name="specialization" className ="InputFields2" id="type">
+                <select name="specialization" className ="InputFields2" id="type" required>
                   <option value="student">Masters in Social Work</option>
                   <option value="worker1">Psychologist</option>
                   <option value="other">Other</option>
