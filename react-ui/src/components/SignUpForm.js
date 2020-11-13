@@ -59,6 +59,7 @@ render() {
                   name="first_name"
                   size ="40"
                   placeholder= "Enter First Name*" 
+                  required="required"
                   onChange={this.handleFormChange} />
                 </label>
                 <br></br>
@@ -69,6 +70,7 @@ render() {
                   name="last_name"
                   size ="40"
                   placeholder= "Enter Last Name*" 
+                  required="required"
                   onChange={this.handleFormChange} />
                 </label>
                 <br></br>
@@ -123,6 +125,7 @@ render() {
                   type="text" 
                   name="id_value"
                   placeholder= "Enter Student or Worker ID*" 
+                  required="required"
                   onChange={this.handleFormChange} />
                 </label>
                 <br></br>
@@ -133,6 +136,7 @@ render() {
                   name="email"
                   size ="320"
                   placeholder= "Enter Email Address*" 
+                  required="required"
                   onChange={this.handleFormChange} />
                 </label>
                 <br></br>
@@ -153,6 +157,7 @@ render() {
                   type="password" 
                   size ="40"
                   placeholder= "Enter Password*" 
+                  required="required"
                   onChange={this.handleFormChange} />
                 </label>
                 <br></br>
