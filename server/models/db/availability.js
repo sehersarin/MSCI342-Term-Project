@@ -17,6 +17,12 @@ async function getAvailabilityDetails(studentId, workerId, status) {
     
 
     const queryStatement = `select ${queryParams} from ${tableJoins} where ${queryCond};`;
+    
+    const availability = await db.any(queryStatement);
+
+    if (_.isEmpty(availability)) return null;
+
+    return _.map(availability, appointment => new AvailabilityDetails(appointment));
 }
 
 module.exports = {
