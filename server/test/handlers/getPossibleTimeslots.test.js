@@ -5,25 +5,8 @@ describe('testing getting possible timeslots functionality', () => {
         jest.resetModules();
     });
 
-    test('initial setup of getting appointment details for a student', async() => {
+    test('testing null parameters expecting full return of all records ', async () => {
         // Arrange
-        /*
-        ('08:00:00', '08:30:00'), 
-        ('08:30:00', '09:00:00'), 
-        ('09:00:00', '09:30:00'), 
-        ('09:30:00', '10:00:00'),
-        ('10:00:00', '10:30:00'), 
-        ('10:30:00', '11:00:00'), 
-        ('11:00:00', '11:30:00'), 
-        ('11:30:00', '12:00:00'), 
-        ('12:00:00', '12:30:00'), 
-        ('12:30:00', '13:00:00'), 
-        ('13:00:00', '13:30:00'), 
-        ('13:30:00', '14:00:00'),
-        ('14:00:00', '14:30:00'), 
-        ('14:30:00', '15:00:00'), 
-        ('15:00:00', '15:30:00');
-        */
         const testTimeslotDetails = [
             {
                 slot_id: 1,
@@ -108,19 +91,50 @@ describe('testing getting possible timeslots functionality', () => {
         // Assert
         expect(possibleTimeslots).toMatchObject(testTimeslotDetails);
     });
-/*
-    test('initial setup of getting appointment details for a worker', async() => {
+
+
+    test('testing specified time parameters expecting a return', async () => {
         // Arrange
-        const workerId = '12345678';
-        const status = 'upcoming';
-    
+        const testTimeslotDetails = [
+            {
+                slot_id: 5,
+                start_time: '10:00:00',
+                end_time: '10:30:00'
+            },
+            {
+                slot_id: 6,
+                start_time: '10:30:00',
+                end_time: '11:00:00'
+            },
+            {
+                slot_id: 7,
+                start_time: '11:00:00',
+                end_time: '11:30:00'
+            },
+            {
+                slot_id: 8,
+                start_time: '11:30:00',
+                end_time: '12:00:00'
+            },
+        ];
 
         // Act
-        const appointmentDetails = await appointmentHandler.getAppointmentDetailsForWorker(workerId, status);
+        const possibleTimeslots = await timeslotHandler.getPossibleTimeslots('10:00:00', '12:00:00');
 
         // Assert
-        expect(appointmentDetails).toMatchObject(testAppointmentDetails);
+        expect(possibleTimeslots).toMatchObject(testTimeslotDetails);
     });
-    */
+
+    test('testing specified time parameters expecting null return ', async () => {
+        // Arrange
+        const testTimeslotDetails = [
+        ];
+
+        // Act
+        const possibleTimeslots = await timeslotHandler.getPossibleTimeslots('16:00:00', '17:00:00');
+
+        // Assert
+        expect(possibleTimeslots).toMatchObject(testTimeslotDetails);
+    });
 
 }); 
