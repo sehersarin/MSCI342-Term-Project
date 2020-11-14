@@ -10,7 +10,7 @@ describe('testing fetching of worker availability functionality', () => {
         // No test variables need to be initialized.
 
         // Act
-        const availableTimes = await availabilityHandler.getWorkerAvailability(workerId, schoolId, startTime, endTime);
+        const availableTimes = await availabilityHandler.getAvailabilityDetails(slot_id, school_id, worker_id, status, date);
 
         // Assert
         expect(availableTimes).tobe(null);
@@ -26,7 +26,7 @@ describe('testing fetching of worker availability functionality', () => {
         const testEndTime = '2020-10-20';
 
         // Act
-        const availableTimes = await availabilityHandler.getWorkerAvailability(testWorkerId, testSchoolId, testStartTime, testEndTime);
+        const availableTimes = await availabilityHandler.getAvailabilityDetails(testWorkerId, testSchoolId, testStartTime, testEndTime);
 
         // Assert
         expect(availableTimes).tobe(null);
@@ -42,7 +42,7 @@ describe('testing fetching of worker availability functionality', () => {
         const testEndTime = '2020-10-20';
 
         // Act
-        const availableTimes = await availabilityHandler.getWorkerAvailability(testWorkerId, testSchoolId, testStartTime, testEndTime);
+        const availableTimes = await availabilityHandler.getAvailabilityDetails(testWorkerId, testSchoolId, testStartTime, testEndTime);
 
         // Assert
         expect(availableTimes).tobe(null);
@@ -58,7 +58,7 @@ test('rejection of null value for required startTime parameter', async () => {
     const testEndTime = '2020-10-20';
 
     // Act
-    const availableTimes = await availabilityHandler.getWorkerAvailability(testWorkerId, testSchoolId, testStartTime, testEndTime);
+    const availableTimes = await availabilityHandler.getAvailabilityDetails(testWorkerId, testSchoolId, testStartTime, testEndTime);
 
     // Assert
     expect(availableTimes).tobe(null);
@@ -74,7 +74,7 @@ test('rejection of null value for required endTime parameter', async () => {
     const testEndTime = null;
 
     // Act
-    const availableTimes = await availabilityHandler.getWorkerAvailability(testWorkerId, testSchoolId, testStartTime, testEndTime);
+    const availableTimes = await availabilityHandler.getAvailabilityDetails(testWorkerId, testSchoolId, testStartTime, testEndTime);
 
     // Assert
     expect(availableTimes).tobe(null);
@@ -90,7 +90,7 @@ test('rejection of empty string value for required workerId parameter', async ()
     const testEndTime = '2020-10-20';
 
     // Act
-    const availableTimes = await availabilityHandler.getWorkerAvailability(testWorkerId, testSchoolId, testStartTime, testEndTime);
+    const availableTimes = await availabilityHandler.getAvailabilityDetails(testWorkerId, testSchoolId, testStartTime, testEndTime);
 
     // Assert
     expect(availableTimes).tobe(null);
@@ -105,7 +105,7 @@ test('rejection of empty string value for required schoolId parameter', async ()
     const testEndTime = '2020-10-20';
 
     // Act
-    const availableTimes = await availabilityHandler.getWorkerAvailability(testWorkerId, testSchoolId, testStartTime, testEndTime);
+    const availableTimes = await availabilityHandler.getAvailabilityDetails(testWorkerId, testSchoolId, testStartTime, testEndTime);
 
     // Assert
     expect(availableTimes).tobe(null);
@@ -120,7 +120,7 @@ test('rejection of empty string value for required startTime parameter', async (
     const testEndTime = '2020-10-20';
 
     // Act
-    const availableTimes = await availabilityHandler.getWorkerAvailability(testWorkerId, testSchoolId, testStartTime, testEndTime);
+    const availableTimes = await availabilityHandler.getAvailabilityDetails(testWorkerId, testSchoolId, testStartTime, testEndTime);
 
     // Assert
     expect(availableTimes).tobe(null);
@@ -134,7 +134,7 @@ test('rejection of empty string value for required endTime parameter', async () 
     const testEndTime = '';
 
     // Act
-    const availableTimes = await availabilityHandler.getWorkerAvailability(testWorkerId, testSchoolId, testStartTime, testEndTime);
+    const availableTimes = await availabilityHandler.getAvailabilityDetails(testWorkerId, testSchoolId, testStartTime, testEndTime);
 
     // Assert
     expect(availableTimes).tobe(null);
@@ -149,7 +149,7 @@ test('rejection of invalid workerId', async () => {
  const testEndTime = '2020-10-20';
 
  // Act
- const availableTimes = await availabilityHandler.getWorkerAvailability(testWorkerId, testSchoolId, testStartTime, testEndTime);
+ const availableTimes = await availabilityHandler.getAvailabilityDetails(testWorkerId, testSchoolId, testStartTime, testEndTime);
 
  // Assert
  expect(availableTimes).tobe(null);
@@ -186,7 +186,7 @@ test('rejection of invalid workerId', async () => {
         ];
 
         // Act
-        const availableTimes = await availabilityHandler.getWorkerAvailability(workerId, schoolId, startTime, endTime);
+        const availableTimes = await availabilityHandler.getAvailabilityDetails(workerId, schoolId, startTime, endTime);
 
         // Assert
         expect(availableTimes).toMatchObject(testAvailableTimes);
