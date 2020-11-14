@@ -9,16 +9,16 @@ async function getAvailabilityDetails(slot_id, school_id, worker_id, status, dat
     var queryCond = `${Tables.Worker_Timeslot}.worker_id='${worker_id}'`
 
     // Execute query to obtain all need Worker_Timeslot information for a worker.
-    
-       queryParams += `, ${Tables.Worker_Timeslot}.slot_id, ${Tables.workerTimeslot}.school_id, ${Tables.timeslot}.worker_id, ${Tables.timeslot}.date, ${Tables.Worker_Timeslot}.status`;
-        queryCond += ` and ${Tables.Worker_Timeslot}.worker_id='${worker_id}'`;
-    
-//The queryStatement selects the parameters: slot_id, school_id, worker_id, status, and date
-// from the Worker_Timeslot table
-//where worker_id = the given worker_id
+
+    queryParams += `, ${Tables.Worker_Timeslot}.slot_id, ${Tables.workerTimeslot}.school_id, ${Tables.timeslot}.worker_id, ${Tables.timeslot}.date, ${Tables.Worker_Timeslot}.status`;
+    queryCond += ` and ${Tables.Worker_Timeslot}.worker_id='${worker_id}'`;
+
+    //The queryStatement selects the parameters: slot_id, school_id, worker_id, status, and date
+    // from the Worker_Timeslot table
+    //where worker_id = the given worker_id
 
     const queryStatement = `select ${queryParams} from ${Tables.Worker_Timeslot} where ${queryCond};`;
-    
+
     const availability = await db.any(queryStatement);
 
     //The queryStatement returns null if the availability is empty
