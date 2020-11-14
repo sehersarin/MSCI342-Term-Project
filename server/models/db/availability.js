@@ -1,6 +1,6 @@
 const { db } = require('../../lib/connection');
 
-const AvailabilityDetails = require('../data/AvailabilityDetails');
+const getAvailabilityDetails = require('../data/AvailabilityDetails');
 
 const Tables = require('../../constants/tables.json');
 //Parameters returned are slot_id, school_id, worker_id, status, and date
