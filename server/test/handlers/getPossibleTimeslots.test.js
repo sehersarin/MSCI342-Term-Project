@@ -135,7 +135,7 @@ describe('testing getting possible timeslots functionality', () => {
         // Assert
         expect(possibleTimeslots).toMatchObject(testTimeslotDetails);
     });
-
+/*
     test('testing invlaid parameters', async () => {
         // Arrange
         const testTimeslotDetails = [
@@ -147,5 +147,5 @@ describe('testing getting possible timeslots functionality', () => {
         // Assert
         expect(possibleTimeslots).toMatchObject(testTimeslotDetails);
     });
-
+*/
 }); 
