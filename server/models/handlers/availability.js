@@ -1,6 +1,6 @@
 // Gets the time availabilities for a specific worker for a specific school.
 const _ = require('lodash');
-const workerModel = require('../db/worker');
+const availabilityModel = require('../db/availability');
 //need userTypes or Workerstatus?
 const UserTypes = require('../../constants/userTypes.json');
 
@@ -8,11 +8,11 @@ const UserTypes = require('../../constants/userTypes.json');
 async function getAvailabilityDetails(slot_id, school_id, worker_id, status, date)  {
    
     // Don't need this becuase the db will return an error if the worker credentials are invalid.Searches the worker table to see if it is valid worker credentials
-   /*     const worker = await workerModel.getWorker(email, password);
+   /*     const worker = await availabilityModel.getWorker(email, password);
     if  (!_.isNil(worker))
      return worker;*/
 
-     return workerModel.getAvailabilityDetails(slot_id, school_id, worker_id, status, date) ;
+     return availabilityModel.getAvailabilityDetails(slot_id, school_id, worker_id, status, date) ;
     }
 
 // Fetches all the essential availibility details and returns the workerId in case more information is desired.
