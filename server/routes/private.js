@@ -97,7 +97,7 @@ router.post('/worker-availability', async (req, res) => {
 
     if (!_.isNil(error)) res.send(error);
 
-    const availableTimes = await availabilityHandler.getWorkerAvailability(workerId, schoolId, startTime, endTime);
+    const availableTimes = await availabilityHandler.getAvailabilityDetails(slot_id, school_id, worker_id, status, date);
 
     res.send(availableTimes);
 
