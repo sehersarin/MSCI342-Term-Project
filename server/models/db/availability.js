@@ -22,7 +22,7 @@ async function getAvailabilityDetails(studentId, workerId, status) {
 
     if (_.isEmpty(availability)) return null;
 
-    return _.map(availability, appointment => new AvailabilityDetails(appointment));
+    return _.map(availability => new AvailabilityDetails(appointment));
 }
 
 module.exports = {
