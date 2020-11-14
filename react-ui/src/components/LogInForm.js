@@ -37,44 +37,29 @@ class logInForm extends Component {
   login = event => {
     let email = this.state.loginParams.email;
     let password = this.state.loginParams.password;
-    let validinput = true;
     var params = { email: email, password: password }
 
-    if (email === "" && password === "") {
-      validinput = false
-      alert("Please enter email and password")
-      event.preventDefault();
-    } else if (email === "") {
-      validinput = false;
-      alert("Please enter an email")
-      event.preventDefault();
-    } else if (password === "") {
-      validinput = false;
-      alert("please enter an password")
-      event.preventDefault();
-    }
+    axios.get(`/public/login/?${queryString.stringify(params)}`)
+      .then(res => {
+        if (res.data == null) {
+          this.setState({
+            email: res.data.email,
+            userType: res.data.userType,
+            firstName: res.data.firstName,
+            personId: res.data.workerId || res.data.studentId,
+            accessToken: res.data.accessToken,
+            islogged: true
+          })
+          // localStorage.setItem("token", "T");
+          console.log(this.state.userType)
+        } else {
+          alert("Invalid Email or Password")
+          event.target.reset();
+          event.preventDefault();
+        }
+      })
+    event.preventDefault();
 
-    if (validinput === true) {
-      axios.get(`/public/login/?${queryString.stringify(params)}`)
-        .then(res => {
-          if (res.data !== "") {
-            this.setState({
-              email: res.data.email,
-              userType: res.data.userType,
-              firstName: res.data.firstName,
-              personId: res.data.workerId || res.data.studentId,
-              accessToken: res.data.accessToken,
-              islogged: true
-            })
-            // localStorage.setItem("token", "T");
-            console.log(this.state.userType)
-          } else {
-            alert("Invalid Email or Password")
-            event.target.reset();
-          }
-        })
-      event.preventDefault();
-    }
   }
 
   render() {
@@ -96,6 +81,7 @@ class logInForm extends Component {
                   type="text"
                   name="email"
                   placeholder="email"
+                  required
                   onChange={this.handleFormChange} />
               </label>
               <br></br>
@@ -105,6 +91,7 @@ class logInForm extends Component {
                   name="password"
                   type="password"
                   placeholder="password"
+                  required
                   onChange={this.handleFormChange} />
               </label>
               <br></br>
