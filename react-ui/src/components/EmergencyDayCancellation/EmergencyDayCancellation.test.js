@@ -168,4 +168,26 @@ describe('EmergencyDayCancellation component', () => {
         expect(window.alert).toHaveBeenCalledWith(failedMsg);
     });
 
+    test('rejection of an inputted date that is in the past', async () => {
+        const testUser = {
+            userType: 'worker',
+            personId: '8000000',
+            accessToken: 'XcCa92ZvOnQKZsGtOKOa',
+        };
+        const selectedDate = '2019-10-11'
+        const failedMsg = "Error!\nAn issue occurred when trying to cancel all appointments for Friday, Oct 11, 2019.\nPlease try again!";
+        window.alert = jest.fn();
+
+        // Act
+        const testRenderer = TestRenderer.create(<EmergencyDayCancellation user={testUser} />);
+        const testInstance = testRenderer.root;
+        ReactDOM.createPortal = node => node; // Needed to mock the portal parent for clicking.
+        testInstance.findByProps({ className: "cancelAppointmentBtn" }).props.onClick(); // Opens the modal.
+        testInstance.findByProps({ className: "cancelledDateInput" }).props.onChange({ target: { value: selectedDate } }); // Simulates user input of date.
+        await testInstance.findByProps({ className: "cancelDayForm" }).props.onSubmit({ preventDefault: () => { } }); // Submits the form.
+
+        // Arrange
+        expect(window.alert).toHaveBeenCalledWith(failedMsg);
+    });
+
 });
