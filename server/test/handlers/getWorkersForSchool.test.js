@@ -5,130 +5,131 @@ describe('testing user to input schoolID to see worker ID ', () => {
         jest.resetModules(); // Clears any cache between tests.
     });
 
-test('Initial setup for getting workers for the school', async () => {
-    // Arrange
-    const testSchoolId = '1';
+    test('Initial setup for getting workers for the school', async () => {
+        // Arrange
+        const testSchoolId = '1';
 
-    // Act
-    const testWorkerIds=[8000000, 8000001, 8000002, 8000003]
-    const workerIds = await schoolHandler.getWorkerIdsForSchool(testSchoolId);
+        // Act
+        const testWorkerIds = [8000000, 8000001, 8000002, 8000003]
+        const workerIds = await schoolHandler.getWorkerIdsForSchool(testSchoolId);
 
-    // Assert
-    expect(workerIds).toStrictEqual(testWorkerIds);
+        // Assert
+        expect(workerIds).toStrictEqual(testWorkerIds);
+    });
+
+    //The following tests are for endpoint testing for the logic of the code 
+    test('rejection of no parameters', async () => {
+        //Arrange
+        // No test variables need to be initialized.
+
+        // Act
+        const workerIds = await schoolHandler.getWorkerIdsForSchool();
+        const workerIds = await schoolHandler.getWorkerIdsForSchool();
+
+        // Assert
+        expect(workerIds).toStrictEqual(workerIds);
+    });
+
+    test('rejection of null value for required schoolId parameter', async () => {
+        // Arrange
+        const testschoolId = null;
+
+        // Act
+        const workerIds = await schoolHandler.getWorkerIdsForSchool(testschoolId);
+        const workerIds = await schoolHandler.getWorkerIdsForSchool();
+
+        // Assert
+        expect(workerIds).toStrictEqual(workerIds);
+    });
+
+    test('rejection of empty string value for required schoolId parameter', async () => {
+        // Arrange
+        const testschoolId = '';
+
+        // Act
+        workerIds = await schoolHandler.getWorkerIdsForSchool(testschoolId);
+        const workerIds = await schoolHandler.getWorkerIdsForSchool();
+
+        // Assert
+        (workerIds).toStrictEqual(workerIds);
+    });
+
+    test('rejection of invalid school id', async () => {
+        // Arrange
+        const testschoolId = 0;
+
+        // Act
+        const workerIds = await schoolHandler.getWorkerIdsForSchool(testschoolId);
+        const workerIds = await schoolHandler.getWorkerIdsForSchool();
+
+        // Assert
+        expect(workerIds).toStrictEqual(workerIds);
+    });
 });
 
-//The following tests are for endpoint testing for the logic of the code 
-//test('rejection of no parameters', async () => {
-// Arrange
-// No test variables need to be initialized.
+describe('testing valid school ID parameters', () => {
+    beforeEach(() => {
+        //jest.resetModules(); // Clears any cache between tests.
+    });
 
-// Act
-//const workerIds = await schoolHandler.getWorkerIdsForSchool();
-//const workerIds = await schoolHandler.getWorkerIdsForSchool();
+    test('empty strings for optional fields', async () => {
+        // Arrange
+        const testschoolId = 1;
 
-// Assert
-//expect(workerIds).toStrictEqual(workerIds);
-//});
+        // Act
+        const workerIds = await schoolHandler.getWorkerIdsForSchool(testschoolId);
+        const workerIds = await schoolHandler.getWorkerIdsForSchool();
 
-//test('rejection of null value for required schoolId parameter', async () => {
-// Arrange
-//const testschoolId= null;
+        // Assert
+        expect(workerIds).toStrictEqual(workerIds);
+    });
 
-// Act
-//const workerIds = await schoolHandler.getWorkerIdsForSchool(testschoolId);
-//const workerIds = await schoolHandler.getWorkerIdsForSchool();
+    test('null values for optional fields', async () => {
+        // Arrange
+        const testschoolId = 1;
 
-// Assert
-//expect(workerIds).toStrictEqual(workerIds);
-//});
+        // Act
+        const workerIds = await schoolHandler.getWorkerIdsForSchool(testschoolId);
+        const workerIds = await schoolHandler.getWorkerIdsForSchool();
 
-//test('rejection of empty string value for required schoolId parameter', async () => {
-// Arrange
-//const testschoolId = '';
+        // Assert
+        expect(workerIds).toStrictEqual(workerIds);
+    });
 
-// Act
-//const workerIds = await schoolHandler.getWorkerIdsForSchool(testschoolId);
-//const workerIds = await schoolHandler.getWorkerIdsForSchool();
+    test('only passing in values for required fields', async () => {
+        // Arrange
+        const testschoolId = 1;
 
-// Assert
-//expect(workerIds).toStrictEqual(workerIds);
-//});
+        // Act
+        const workerIds = await schoolHandler.getWorkerIdsForSchool(testschoolId);
+        const workerIds = await schoolHandler.getWorkerIdsForSchool();
 
-//test('rejection of invalid school id', async () => {
-// Arrange
-//const testschoolId = 0;
+        // Assert
+        expect(workerIds).toStrictEqual(workerIds);
+        //});
 
-// Act
-//const workerIds = await schoolHandler.getWorkerIdsForSchool(testschoolId);
-//const workerIds = await schoolHandler.getWorkerIdsForSchool();
+        test('passing in valid string values for required fields', async () => {
+            // Arrange
+            const testschoolId = "1";
 
-// Assert
-//expect(workerIds).toStrictEqual(workerIds);
-//});
-//});
+            // Act
+            const workerIds = await schoolHandler.getWorkerIdsForSchool(testschoolId);
+            const workerIds = await schoolHandler.getWorkerIdsForSchool();
 
-//describe('testing valid school ID parameters', () => {
-//beforeEach(() => {
-//jest.resetModules(); // Clears any cache between tests.
-//});
+            // Assert
+            expect(workerIds).toStrictEqual(workerIds);
+        });
 
-//test('empty strings for optional fields', async () => {
-// Arrange
-//const testschoolId = 1;
+        ('passing in valid values for all fields', async () => {
+            // Arrange
+            const testschoolId = 1;
 
-// Act
-//const workerIds = await schoolHandler.getWorkerIdsForSchool(testschoolId);
-//const workerIds = await schoolHandler.getWorkerIdsForSchool();
+            // Act
+            const workerIds = await schoolHandler.getWorkerIdsForSchool(testschoolId);
+            const workerIds = await schoolHandler.getWorkerIdsForSchool();
 
-// Assert
-//expect(workerIds).toStrictEqual(workerIds);
-//});
-
-//test('null values for optional fields', async () => {
-// Arrange
-//const testschoolId = 1;
-
-// Act
-//const workerIds = await schoolHandler.getWorkerIdsForSchool(testschoolId);
-//const workerIds = await schoolHandler.getWorkerIdsForSchool();
-
-// Assert
-//expect(workerIds).toStrictEqual(workerIds);
-//});
-
-//test('only passing in values for required fields', async () => {
-// Arrange
-//const testschoolId = 1;
-
-// Act
-//const workerIds = await schoolHandler.getWorkerIdsForSchool(testschoolId);
-//const workerIds = await schoolHandler.getWorkerIdsForSchool();
-
-// Assert
-//expect(workerIds).toStrictEqual(workerIds);
-//});
-
-//test('passing in valid string values for required fields', async () => {
-// Arrange
-//const testschoolId = "1";
-
-// Act
-//const workerIds = await schoolHandler.getWorkerIdsForSchool(testschoolId);
-//const workerIds = await schoolHandler.getWorkerIdsForSchool();
-
-// Assert
-//expect(workerIds).toStrictEqual(workerIds);
-//});
-
-//test('passing in valid values for all fields', async () => {
-// Arrange
-//const testschoolId = 1;
-
-// Act
-//const workerIds = await schoolHandler.getWorkerIdsForSchool(testschoolId);
-//const workerIds = await schoolHandler.getWorkerIdsForSchool();
-
-// Assert
-//expect(workerIds).toStrictEqual(workerIds);
-    //});
+            // Assert
+            expect(workerIds).toStrictEqual(workerIds);
+        });
+    });
 });
