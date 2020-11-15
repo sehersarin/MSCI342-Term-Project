@@ -47,7 +47,7 @@ class logInForm extends Component {
       alert("You have entered an invalid email address!")
     } else {
       var params = { email: email, password: password }
-
+     
       axios.get(`/public/login/?${queryString.stringify(params)}`)
         .then(res => {
           if (_.isNil(res.error) && res.data) {
@@ -61,6 +61,7 @@ class logInForm extends Component {
             })
             // localStorage.setItem("token", "T");
             console.log(this.state.userType)
+            event.preventDefault();
           } else {
             alert("Invalid Email or Password")
             event.target.reset();
@@ -83,7 +84,7 @@ class logInForm extends Component {
         <Title name="Log In."></Title>
         <Row>
           <Col sm={12} align="center">
-            <form onSubmit={this.login}  className = "LogInForm"  >
+            <form onSubmit={this.login}   className = "LogInForm"   >
               <label>
                 <input
                   className="InputFields"

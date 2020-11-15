@@ -1,6 +1,6 @@
 import React from "react";
 import { create } from "react-test-renderer";
-import { render, waitFor, cleanup, fireEvent, queryByAttribute, getByDisplayValue, getByPlaceholderText,screen } from '@testing-library/react';
+import { render, waitFor, cleanup, fireEvent, queryByAttribute, getByDisplayValue, getByPlaceholderText, screen } from '@testing-library/react';
 import * as axios from 'axios';
 import { BrowserRouter } from "react-router-dom";
 import { last } from "lodash";
@@ -19,19 +19,19 @@ describe('SignupForm component', () => {
     jest.resetModules(); // Clears any cache between tests.
   });
 
-/*    test('testing valid email and invalid password', async() => {
+  test('testing valid email and invalid password', async () => {
     //Arrange
     const dom = render(
-        <BrowserRouter>
-          <LogInForm />
-        </BrowserRouter>);
-    const email = getByPlaceholderText(dom.container,'email');
-    const password = getByPlaceholderText(dom.container,'password');
-    const submit = getByDisplayValue(dom.container,"Log In!");
+      <BrowserRouter>
+        <LogInForm />
+      </BrowserRouter>);
+    const email = getByPlaceholderText(dom.container, 'email');
+    const password = getByPlaceholderText(dom.container, 'password');
+    const submit = getByDisplayValue(dom.container, "Log In!");
     const expectedArg = "Invalid Email or Password";
     const resp = { email: 'joshuabrooks@gmail.com', password: 'post' }
-    axios.get.mockImplementation(() => Promise.resolve(resp)); 
-   
+    await axios.get.mockImplementation(() => Promise.resolve(resp));
+
     // Act
     window.alert = jest.fn();
     fireEvent.change(email, { target: { value: 'joshuabrooks@gmail.com' } });
@@ -39,32 +39,33 @@ describe('SignupForm component', () => {
     fireEvent.click(submit);
     
     //Assert
-     expect(axios.get).toHaveBeenCalledTimes(1); 
-    expect(window.alert).toHaveBeenCalledWith(expectedArg); 
-    
-  });  */
-  
+    await axios.get
+    expect(window.alert).toHaveBeenCalledWith(expectedArg);
+
+  });
+
   test('testing valid email and valid password', async() => {
-    //Arrange
-    const dom = render(
-        <BrowserRouter>
-          <LogInForm />
-        </BrowserRouter>);
-    const email = getByPlaceholderText(dom.container,'email');
-    const password = getByPlaceholderText(dom.container,'password');
-    const submit = getByDisplayValue(dom.container,"Log In!");
-    const resp = { email: 'joshuabrooks@gmail.com', password: 'j1234' }
-    axios.get.mockImplementation(() => Promise.resolve(resp));
-   
-    // Act
-    window.alert = jest.fn();
-    fireEvent.change(email, { target: { value: 'joshuabrooks@gmail.com' } });
-    fireEvent.change(password, { target: { value: 'j1234' } });
-    fireEvent.click(submit);
-    
-    //Assert
-    expect(axios.get).toHaveBeenCalledTimes(1);
-  });    
+      //Arrange
+      const dom = render(
+          <BrowserRouter>
+            <LogInForm />
+          </BrowserRouter>);
+      const email = getByPlaceholderText(dom.container,'email');
+      const password = getByPlaceholderText(dom.container,'password');
+      const submit = getByDisplayValue(dom.container,"Log In!");
+      const resp = { email: 'joshuabrooks@gmail.com', password: 'j1234' }
+      await axios.get.mockImplementation(() => Promise.resolve(resp));
+     
+      // Act
+      window.alert = jest.fn();
+      fireEvent.change(email, { target: { value: 'joshuabrooks@gmail.com' } });
+      fireEvent.change(password, { target: { value: 'j1234' } });
+      fireEvent.click(submit);
+      
+      //Assert
+      await axios.get
+      expect(window.alert).toHaveBeenCalledWith('');
+    });   
 
   /*  test('testing valid email and invalid password', async() => {
     //Arrange
@@ -91,11 +92,11 @@ describe('SignupForm component', () => {
   test('testing inputting email and password', () => {
     //Arrange
     const dom = render(
-        <BrowserRouter>
-          <LogInForm />
-        </BrowserRouter>);
-    const email = getByPlaceholderText(dom.container,'email');
-    const password = getByPlaceholderText(dom.container,'password');
+      <BrowserRouter>
+        <LogInForm />
+      </BrowserRouter>);
+    const email = getByPlaceholderText(dom.container, 'email');
+    const password = getByPlaceholderText(dom.container, 'password');
     const Email = 'joshuabrooks@gmail.com'
     const Password = 'j1234'
     // Act
@@ -105,17 +106,17 @@ describe('SignupForm component', () => {
     //Assert
     expect(email.value).toBe(Email);
     expect(password.value).toBe(Password);
-  }); 
+  });
 
   test('testing invalid email', () => {
     //Arrange
     const dom = render(
-        <BrowserRouter>
-          <LogInForm />
-        </BrowserRouter>);
-    const email = getByPlaceholderText(dom.container,'email');
-    const password = getByPlaceholderText(dom.container,'password');
-    const submit = getByDisplayValue(dom.container,"Log In!");
+      <BrowserRouter>
+        <LogInForm />
+      </BrowserRouter>);
+    const email = getByPlaceholderText(dom.container, 'email');
+    const password = getByPlaceholderText(dom.container, 'password');
+    const submit = getByDisplayValue(dom.container, "Log In!");
     const Email = 'joshuabrooks@gmail.c'
     const Password = 'j1234'
     const expectedArg = "You have entered an invalid email address!";
@@ -127,6 +128,6 @@ describe('SignupForm component', () => {
 
     //Assert
     expect(window.alert).toHaveBeenCalledWith(expectedArg);
-  }); 
+  });
 
 })
