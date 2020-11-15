@@ -83,7 +83,7 @@ class logInForm extends Component {
         <Title name="Log In."></Title>
         <Row>
           <Col sm={12} align="center">
-            <form onSubmit={this.login}>
+            <form onSubmit={this.login}  className = "LogInForm"  >
               <label>
                 <input
                   className="InputFields"
