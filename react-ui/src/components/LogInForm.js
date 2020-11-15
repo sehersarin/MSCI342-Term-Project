@@ -50,6 +50,7 @@ class logInForm extends Component {
      
       axios.get(`/public/login/?${queryString.stringify(params)}`)
         .then(res => {
+          console.log(res.data)
           if (_.isNil(res.error) && res.data) {
             this.setState({
               email: res.data.email,
@@ -60,8 +61,8 @@ class logInForm extends Component {
               islogged: true
             })
             // localStorage.setItem("token", "T");
-            console.log(this.state.userType)
             event.preventDefault();
+            console.log(this.state.userType)
           } else {
             alert("Invalid Email or Password")
             event.target.reset();
@@ -84,7 +85,7 @@ class logInForm extends Component {
         <Title name="Log In."></Title>
         <Row>
           <Col sm={12} align="center">
-            <form onSubmit={this.login}   className = "LogInForm"   >
+            <form onSubmit={this.login}  /*   className = "LogInForm"  */  >
               <label>
                 <input
                   className="InputFields"
