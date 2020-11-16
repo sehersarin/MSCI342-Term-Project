@@ -8,7 +8,10 @@ describe('testing fetching of worker availability functionality', () => {
     test('rejection of no parameters', async () => {
         // Arrange
         // No test variables need to be initialized.
-
+        const workerId = null;
+        const schoolId = null;
+        const startTime = null;
+        const endTime = null;
         // Act
         const availableTimes = await availabilityHandler.getAvailabilityDetails(workerId, schoolId, startTime, endTime);
 
