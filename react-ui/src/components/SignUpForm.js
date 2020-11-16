@@ -7,6 +7,7 @@ import "./SignupForm.scss"
 import Dashboard from "./Dashboard/Dashboard"
 import { Link } from 'react-router-dom';
 import queryString from 'query-string'
+import _ from 'lodash';
 
 
 const axios = require('axios').default;
@@ -28,6 +29,8 @@ class SignupForm extends Component {
         email: "",
         phone:"",
         password: "",
+        accessToken: "",
+        isSubmitted: false,
     };
     this.handleFormChange = this.handleFormChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -56,42 +59,58 @@ signup = event => {
   let email = this.state.email;
   let phone = this.state.phone;
   let password = this.state.password;
-  // var params = { 
-  //   email: this.state.email,
-  //   password: Joi.string().min(3).max(40).required(),
-  //   phone: Joi.string().max(20),
-  //   firstName: Joi.string().min(1).max(20).required(),
-  //   lastName: Joi.string().min(1).max(20).required(),
-  //   studentId: Joi.number().positive().integer(),
-  //   workerId: Joi.number().positive().integer(),
-  //   schoolId: Joi.number().positive().integer(),
-  //   userType: Joi.string().min(1).valid('student', 'worker'),
-  //   type: Joi.string(),
-  //   specialization: Joi.string().valid('social worker', 'guidance councellor')
-  // }
+  
+  var params = { 
+    firstName: this.state.firstName,
+    lastName: this.state.lastName,
+    userType: this.state.userType,
+    //workerType
+    //optionalType
+    //specialization
+    //optionalSpecialization
+    //personId
+    email: this.state.email,
+    phone: this.state.phone,
+    password: this.state.password,
+    
+    /* studentId: Joi.number().positive().integer(),
+    workerId: Joi.number().positive().integer(),
+    schoolId: Joi.number().positive().integer(),
+    type: Joi.string(),
+    specialization: Joi.string().valid('social worker', 'guidance councellor') */
+  }
 
-  //axios.get(`/public/create-user/?${queryString.stringify(params)}`)
+  axios.get(`/public/create-user/?${queryString.stringify(params)}`)
 
   //look at loginform and copy the .Nil etc.
-  // .then(res => {
-  //   if (res.data == null) {
-  //     this.setState({
-  //       firstName: res.data.firstName,
-  //       lastName: res.data.lastName,
-  //       userType: res.data.userType,
+  .then(res => {
+    console.log(res.data)
+    if (_.isNil(res.error) && res.data) {
+      this.setState({
+        firstName: res.data.firstName,
+        lastName: res.data.lastName,
+        userType: res.data.userType,
   //       workerType: res.data.workerType,
   //       optionalType: res.data.optionalType,
   //       specialization: res.data.specialization,
   //       optionalSpecialization: res.data.optionalSpecialization,
-  //       personId: res.data.personId,
-  //       email: res.data.email,
-  //       phone: res.data.phone,
-  //       password: res.data.password,
-
-        //if (_.isNil(res.error) && res.data) {}
-    //  })
-   // }
- // })
+        personId: res.data.workerId || res.data.studentId,
+        email: res.data.email,
+        phone: res.data.phone,
+        password: res.data.password,
+        accessToken: res.data.accessToken,
+        isSubmitted: true
+     })
+      event.preventDefault();
+      console.log(this.state.userType)
+   }
+   else {
+    alert("Invalid Form Criteria")
+    event.target.reset();
+    event.preventDefault();
+  }
+ })
+ event.preventDefault();
 }
 
 
@@ -105,9 +124,14 @@ handleSubmit(e) {
 render() {
 
  // let newRoute = <Route exact path="/signup" render={props => (<Redirect to={`/dashboard/${this.state.firstName}/${this.state.lastName}/${this.state.userType}/${this.state.workerType}/${this.state.optionalType}/${this.state.specialization}/${this.state.optionalSpecialization}/${this.state.personId}/${this.state.email}/${this.state.phone}/${this.state.password}`} Component={Dashboard} />)}></Route>
-    // return newRoute;
+    let newRoute = <Route exact path="/signup" render={props => (<Redirect to={`/dashboard/${this.state.email}/${this.state.userType}/${this.state.firstName}/${this.state.personId}/${this.state.accessToken}`} Component={Dashboard} />)}></Route>
+   
     //create a isSubmitted state 
-    //call that function here and return
+    //call that function here and return    
+    if (this.state.isSubmitted) {
+      return newRoute;
+    }
+
     return (
         <Container className="Form-container">
            <Title name= "Sign Up."></Title>
