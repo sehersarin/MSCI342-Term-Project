@@ -63,6 +63,7 @@ router.post('/add-recurring-schedule', async (req, res) => {
         date: Joi.date().iso().required(), //Enables the worker to select weekdays (Monday to Friday) and add in schedule for each corresponding day of the week
     });
 
+
     const query = req.query ? req.query : {};
 
     
@@ -86,9 +87,10 @@ router.post('/worker-availability', async (req, res) => {
     const paramSchema = Joi.object({
         workerId: Joi.number().integer().required(),
         schoolId: Joi.number().integer().allow(null),
-        startTime: Joi.date().iso(),
-        endTime: Joi.date().iso().greater(Joi.ref('startTime'))
+        startTime: Joi.string().max(30),
+        endTime: Joi.string().max(30), 
     });
+        //date: Joi.date().format('YYYY-MM-DDTHH:MMZ'),
 
     const query = req.query ? req.query : {};
 
@@ -101,7 +103,7 @@ router.post('/worker-availability', async (req, res) => {
 
     if (!_.isNil(error)) res.send(error);
 
-    const availableTimes = await availabilityHandler.getAvailabilityDetails(slot_id, school_id, worker_id, status, date);
+    const availableTimes = await availabilityHandler.getAvailabilityDetails(workerId, schoolId, startTime, endTime);
 
     res.send(availableTimes);
 
