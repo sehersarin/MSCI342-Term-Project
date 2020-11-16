@@ -48,5 +48,5 @@ const availableTimes = [
 */
 
 module.exports = {
-    availableTimes,
+    getAvailabilityDetails,
 }
