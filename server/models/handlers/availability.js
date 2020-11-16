@@ -2,7 +2,6 @@
 const _ = require('lodash');
 const availabilityHandler = require('../db/availability');
 //need userTypes or Workerstatus?
-const UserTypes = require('../../constants/userTypes.json');
 
 //
 async function getAvailabilityDetails(workerId, schoolId, startTime, endTime)  {
