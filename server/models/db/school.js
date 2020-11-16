@@ -11,10 +11,10 @@ async function getWorkerIdsForSchool(schoolId, Object) {
     if (_.isNil(schoolId) ) return null;
     
     //Query to recieve worker IDs from Service Worker School Table 
-    const data = await db.any(`select worker_id from Service_Worker_School where school_id='${schoolId}';`);
+    const workerIds = await db.any(`select worker_id from Service_Worker_School where school_id='${schoolId}';`);
 
     //Retrieve worker attributes such as name, phone number, etc 
-    const data = await db.any(`select worker_id from Service_Worker';`);
+    const data = await db.any(`select worker_id from Service_Worker where school_id='${first_name}, ${last_name}, ${email}, ${phone}, ${specialization};`);
 
     if (_.isEmpty(data)) return null;
 
