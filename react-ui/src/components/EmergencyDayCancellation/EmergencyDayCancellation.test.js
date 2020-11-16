@@ -104,6 +104,31 @@ describe('EmergencyDayCancellation component', () => {
         expect(window.alert).toHaveBeenCalledWith(failedMsg);
     });
 
+    test('error returned in the axios call', async () => {
+        // Arrange
+        const testUser = {
+            userType: 'worker',
+            personId: '8000000',
+            accessToken: 'XcCa92ZvOnQKZsGtOKOa',
+        };
+        const selectedDate = '2020-12-15';
+        const resp = { data: true, error: "Unknown error" };
+        const failedMsg = "Error!\nAn issue occurred when trying to cancel all appointments for Tuesday, Dec 15, 2020.\nPlease try again!";
+        axios.get.mockImplementation(() => Promise.resolve(resp));
+        window.alert = jest.fn();
+
+        // Act
+        const testRenderer = TestRenderer.create(<EmergencyDayCancellation user={testUser} />);
+        const testInstance = testRenderer.root;
+        ReactDOM.createPortal = node => node; // Needed to mock the portal parent for clicking.
+        testInstance.findByProps({ className: "cancelAppointmentBtn" }).props.onClick(); // Opens the modal.
+        testInstance.findByProps({ className: "cancelledDateInput" }).props.onChange({ target: { value: selectedDate } }); // Simulates user input of date.
+        await testInstance.findByProps({ className: "cancelDayForm" }).props.onSubmit({ preventDefault: () => { } }); // Submits the form.
+
+        // Arrange
+        expect(window.alert).toHaveBeenCalledWith(failedMsg);
+    });
+
     test('submission of the cancellation modal with no user props but a date is inputted', async () => {
         // Arrange
         const selectedDate = '2020-12-15';
