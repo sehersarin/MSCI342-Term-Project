@@ -3,7 +3,6 @@ const _ = require('lodash');
 const availabilityHandler = require('../db/availability');
 //need userTypes or Workerstatus?
 
-//
 async function getAvailabilityDetails(workerId, schoolId, startTime, endTime) {
 
     // Don't need this becuase the db will return an error if the worker credentials are invalid.Searches the worker table to see if it is valid worker credentials
