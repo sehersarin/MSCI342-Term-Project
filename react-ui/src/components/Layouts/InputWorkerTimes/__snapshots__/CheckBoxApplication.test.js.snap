@@ -1,0 +1,113 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Checkbox component snapshot renders 1`] = `
+<div>
+  <h1
+    className="Info"
+  >
+    Select Date and day(s) of week to set recurring 4 week schedule starting from date selected
+  </h1>
+  <form
+    className="Container"
+    onSubmit={[Function]}
+  >
+    <h1>
+      Recurring on
+    </h1>
+    <div>
+      <label>
+        <input
+          className="DayBox"
+          onChange={[Function]}
+          type="checkbox"
+          value={1}
+        />
+         
+        Monday
+      </label>
+    </div>
+    <div>
+      <label>
+        <input
+          className="DayBox"
+          onChange={[Function]}
+          type="checkbox"
+          value={2}
+        />
+         
+        Tuesday
+      </label>
+    </div>
+    <div>
+      <label>
+        <input
+          className="DayBox"
+          onChange={[Function]}
+          type="checkbox"
+          value={3}
+        />
+         
+        Wednesday
+      </label>
+    </div>
+    <div>
+      <label>
+        <input
+          className="DayBox"
+          onChange={[Function]}
+          type="checkbox"
+          value={4}
+        />
+         
+        Thursday
+      </label>
+    </div>
+    <div>
+      <label>
+        <input
+          className="DayBox"
+          onChange={[Function]}
+          type="checkbox"
+          value={5}
+        />
+         
+        Friday
+      </label>
+    </div>
+    <div>
+      <label>
+        <input
+          className="DayBox"
+          onChange={[Function]}
+          type="checkbox"
+          value={6}
+        />
+         
+        Saturday
+      </label>
+    </div>
+    <div>
+      <label>
+        <input
+          className="DayBox"
+          onChange={[Function]}
+          type="checkbox"
+          value={7}
+        />
+         
+        Sunday
+      </label>
+    </div>
+    <br />
+    <input
+      id="DATE"
+      type="date"
+    />
+    <br />
+    <input
+      type="submit"
+      value="Done"
+    />
+  </form>
+</div>
+`;

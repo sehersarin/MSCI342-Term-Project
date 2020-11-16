@@ -1,16 +1,15 @@
 import React, { Component, Fragment, Router } from "react";
 import { withRouter } from "react-router";
 import { Redirect, Switch, Route, Link } from "react-router-dom";
-
 import "./Dashboard.scss";
-
 import logo from '../../logo.svg'
 import Profile from "../Layouts/Profile";
 import Home from "../Layouts/Home";
 import NotFound from "../Layouts/404";
+import SelectWorker from "../Layouts/SelectWorker";
 import CreateAppointment from "../Layouts/CreateAppointment";
-
 import UserTypes from '../../constants/userTypes.json';
+import WorkerInputpage from "../Layouts/InputWorkerTimes/WorkerInputpage";
 
 class Dashboard extends Component {
   constructor(props) {
@@ -56,10 +55,18 @@ class Dashboard extends Component {
               </li>
               {/* Only display the book appointment form if the user is a student. */}
               {userType === UserTypes.student &&
-                <li>
-                  <Link to={`/dashboard/CreateAppointment/${email}`}>Create Appointment</Link>
+                 <li>
+                 <Link to={`/dashboard/SelectWorker/${email}`}>Book Appointment</Link>
                 </li>
               }
+
+                {/* Only display the book appointment form if the user is a worker. */}
+                {userType === UserTypes.worker &&
+                <li>
+                  <Link to={`/dashboard/InputWorkerAvailabilitypage/${email}`}>Add Availability</Link>
+                </li>
+              }
+
               <li className="push-right">
                 <button onClick={this.signOut} href="#">Sign Out</button>
               </li>
@@ -76,6 +83,12 @@ class Dashboard extends Component {
                 </Route>
                 <Route path={`/dashboard/CreateAppointment`}>
                   <CreateAppointment name={personId} />
+                </Route>
+                <Route path={`/dashboard/SelectWorker`}>
+                  <SelectWorker email={this.state.email}/>
+                </Route>
+                <Route path = {`/dashboard/InputWorkerAvailabilitypage`}>
+                  <WorkerInputpage name ={personId}/>
                 </Route>
                 <Route exact path={`${this.props.match.path}`}>
                   <Home userType={userType} personId={personId} accessToken={accessToken} />
