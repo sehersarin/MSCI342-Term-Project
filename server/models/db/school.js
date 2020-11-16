@@ -23,7 +23,7 @@ async function getWorkerIdsForSchool(schoolId, Object) {
     return new Object(data[0]);
 }
 
-async function getWorkersUsingIds(workerId ) {
+async function getWorkersUsingIds(workerIds ) {
     var queryParams = `${Tables.appointment}.appointment_id, ${Tables.workerTimeslot}.date, ${Tables.timeslot}.start_time, ${Tables.timeslot}.end_time, ${Tables.appointment}.status`;
     var tableJoins = `${Tables.appointment} inner join ${Tables.workerTimeslot} on ${Tables.appointment}.worker_timeslot_id = ${Tables.workerTimeslot}.worker_timeslot_id natural join ${Tables.timeslot}`;
     var queryCond = `${Tables.appointment}.status='${status}'`
