@@ -12,7 +12,7 @@ async function getAvailabilityDetails(workerId, schoolId, startTime, endTime)  {
     if  (!_.isNil(worker))
      return worker;*/
 
-     return availabilityModel.getAvailabilityDetails(workerId, schoolId, startTime, endTime) ;
+     return availabilityHandler.getAvailabilityDetails(workerId, schoolId, startTime, endTime) ;
     }
 
 // Fetches all the essential availibility details and returns the workerId in case more information is desired.
