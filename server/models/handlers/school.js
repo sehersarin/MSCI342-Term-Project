@@ -1,8 +1,10 @@
-const timeslotModel = require('../db/workerTimeslot');
+const WorkerObjectModel = require('../db/school');
+
 async function getWorkerIdsForSchool(schoolId) {
-      var workerIds = [8000000, 8000001, 8000002, 8000003];
-      return workerIds;
+      return WorkerObjectModel.getWorkerIdsForSchool(schoolId);
 };
+
+
 module.exports = {
       getWorkerIdsForSchool,
 }
