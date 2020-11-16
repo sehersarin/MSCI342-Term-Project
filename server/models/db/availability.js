@@ -4,7 +4,7 @@ const getAvailabilityDetails = require('../data/AvailabilityDetails');
 
 const Tables = require('../../constants/tables.json');
 //Parameters returned are slot_id, school_id, worker_id, status, and date
-async function getAvailabilityDetails(slot_id, school_id, worker_id, status, date) {
+async function fetchAvailabilityDetails(slot_id, school_id, worker_id, status, date) {
     var queryParams = `${Tables.Worker_Timeslot}.slot_id, ${Tables.workerTimeslot}.school_id, ${Tables.timeslot}.worker_id, ${Tables.timeslot}.date, ${Tables.Worker_Timeslot}.status`;
     var queryCond = `${Tables.Worker_Timeslot}.worker_id='${worker_id}'`
 
@@ -29,5 +29,5 @@ async function getAvailabilityDetails(slot_id, school_id, worker_id, status, dat
 
 module.exports = {
 
-    getAvailabilityDetails,
+    fetchAvailabilityDetails,
 }  
