@@ -61,12 +61,10 @@ class logInForm extends Component {
               islogged: true
             })
             // localStorage.setItem("token", "T");
-            event.preventDefault();
             console.log(this.state.userType)
           } else {
             alert("Invalid Email or Password")
             event.target.reset();
-            event.preventDefault();
           }
         })
       event.preventDefault();
