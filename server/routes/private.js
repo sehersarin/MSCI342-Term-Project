@@ -149,12 +149,12 @@ router.get('/possible-timeslots', async (req, res) => {
 
     const query = req.query ? req.query : {};
 
-    const startTime = query.startTime ? query.startTime : null;
-    const endTime = query.endTime ? query.endTime : null;
+    const startTime = query.startTime ;
+    const endTime = query.endTime ;
 
-    //const { error } = paramSchema.validate({specificStartTime, specificEndTime });
+    const { error } = paramSchema.validate({startTime, startTime });
 
-    //if (!_.isNil(error)) res.send(error);
+    if (!_.isNil(error)) res.send(error);
 
     timeslots = await TimeslotHandler.getPossibleTimeslots(startTime, endTime);
 
