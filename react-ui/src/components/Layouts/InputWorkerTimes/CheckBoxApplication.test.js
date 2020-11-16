@@ -15,6 +15,11 @@ describe('Checkbox component', () => {
     jest.resetModules(); // Clears any cache between tests.
   });
 
+  test("Should render without crashing", () => {	
+    const div = document.createElement("div");	
+    ReactDOM.render(<Check/>, div)	
+  })
+
   test('no props are passed in', () => {
     // Arrange
     var isThrown = false;
