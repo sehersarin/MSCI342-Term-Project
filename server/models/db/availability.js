@@ -4,9 +4,9 @@ const getAvailabilityDetails = require('../data/AvailabilityDetails');
 
 const Tables = require('../../constants/tables.json');
 //Parameters returned are slot_id, school_id, worker_id, status, and date
-async function availableTimes(slot_id, school_id, worker_id, status, date) {
+async function getAvailabilityDetails( school_id, worker_id, startTime, endTime) {
     var queryParams = `${Tables.Worker_Timeslot}.slot_id, ${Tables.workerTimeslot}.school_id, ${Tables.timeslot}.worker_id, ${Tables.timeslot}.date, ${Tables.Worker_Timeslot}.status`;
-    var queryCond = `${Tables.Worker_Timeslot}.worker_id='${worker_id}'`
+    var queryCond = `${Tables.Worker_Timeslot}.worker_id='${worker_id} and ${Tables.Worker_Timeslot}.school_id='${school_id} and ${Tables.Worker_Timeslot}.worker_id='${worker_id}'`
 
     // Execute query to obtain all need Worker_Timeslot information for a worker.
 
@@ -29,5 +29,5 @@ async function availableTimes(slot_id, school_id, worker_id, status, date) {
 
 module.exports = {
 
-    availableTimes,
+    getAvailabilityDetails,
 }  
