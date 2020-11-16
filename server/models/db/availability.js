@@ -19,7 +19,6 @@ async function getAvailabilityDetails( workerId, schoolId, startTime, endTime) {
     //where worker_id = the given worker_id
 
     const queryStatement = `select * from worker_timeslot natural join timeslot where school_id = ${schoolId} and worker_id = ${workerId} and start_time = '${startTime}' and end_time = '${endTime}' ;`;
-    //    where school_id = 1 and  worker_id = 8000000 and start_time = '8:00:00' and end_time = '8:30:00' 
 
     const availability = await db.any(queryStatement);
 
