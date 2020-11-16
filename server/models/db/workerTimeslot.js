@@ -1,8 +1,9 @@
 const _ = require('lodash');
 
 const { db } = require('../../lib/connection');
+
 const Tables = require('../../constants/tables.json');
-const TimeslotStatus = require('../../constants/timeslot-status.json');
+const TimeslotStatus  = require('../../constants/timeslotStatus.json');
 
 // This method inserts an appointment entry given specific information.
 async function insertWorkerTimeslot(slotId, schoolId, workerId, status, date) {
@@ -12,6 +13,15 @@ async function insertWorkerTimeslot(slotId, schoolId, workerId, status, date) {
     return db.any(`insert into ${Tables.workerTimeslot} (slot_id, school_id, worker_id, status, date) values (${slotId}, ${schoolId}, ${workerId}, ${status ? `'${status}'` : `'${TimeslotStatus.available}'`} , '${date}');`);
 }
 
+// This method mass updates all the worker's availability (that are currently in the system) on a specific date to a new status.
+// Entries will NOT be inserted to indicate that the worker is unavailable during all the timeslots of that day to minimize database storage
+// as it is assumed that the worker is unavailable if the information is not inputted. However, these rows are updated rather than deleted
+// for historical tracking and logging.
+async function updateWorkerAvailability(workerId, specificDate, newStatus) {
+    return db.any(`update ${Tables.workerTimeslot} set status='${newStatus}' where date='${specificDate}' and worker_id='${workerId}';`);
+}
+
 module.exports = {
-    insertWorkerTimeslot
+    insertWorkerTimeslot,
+    updateWorkerAvailability,
 } 

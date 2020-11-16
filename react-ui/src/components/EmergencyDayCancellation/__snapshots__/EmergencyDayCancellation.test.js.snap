@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EmergencyDayCancellation component Snapshot successfully renders 1`] = `
+<div>
+  <button
+    className="cancelAppointmentBtn"
+    onClick={[Function]}
+  >
+    Cancel All Appointments for a Specific Day
+  </button>
+</div>
+`;

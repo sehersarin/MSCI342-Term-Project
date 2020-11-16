@@ -11,7 +11,7 @@ const TimeslotHandler = require('../models/handlers/timeslot');
 const availabilityHandler = require('../models/handlers/availability');
 const schoolHandler = require('../models/handlers/school');
 
-const TimeslotStatus = require('../constants/timeslot-status.json');
+const TimeslotStatus  = require('../constants/timeslotStatus.json');
 
 // Binds a middleware to check access tokens for all private requests.
 router.use(async function (req, res, next) {
@@ -184,5 +184,32 @@ router.post('/get-workers-for-school', async (req, res) => {
 
     res.send(workerIds);
 });
+
+// Cancels all the appointments/meetings and updates worker availability to unavailable for a worker for a specific day.
+// Note that appointments/meetings are synonymous, but only appointments will be used in the backend to maintain consistency.
+router.get('/cancel-specific-day', async (req, res) => {
+    const paramSchema = Joi.object({
+        workerId: Joi.number().integer().required(),
+        specificDate: Joi.date().iso().required(),
+        
+        // Following potential query parameters are commented out to be revisited in a future story. 
+        // startTime: Joi.date().iso().required(),
+        // endTime: Joi.date().iso().greater(Joi.ref('startTime')) // Checks to ensure that endDate > startDate is specified.
+    })
+
+    const query = req.query ? req.query : {};
+
+    const workerId = query.workerId;
+    const specificDate = query.specificDate;
+
+    const { error } = paramSchema.validate({ workerId, specificDate });
+
+    if (!_.isNil(error)) res.send(error);
+
+    const isCancelledSuccessfully = await appointmentHandler.cancelWorkerAppointments(workerId, specificDate);
+
+    res.send(isCancelledSuccessfully);
+});
+
 
 module.exports = router
