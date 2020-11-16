@@ -27,15 +27,15 @@ describe('SignupForm component', () => {
 
     // Act
     const getByName = queryByAttribute.bind(null, 'name');
-    const firstNameInput = getByName(dom.container, 'first_name');
+    const firstNameInput = getByName(dom.container, 'firstName');
     fireEvent.change(firstNameInput, { target: { value: newValue } })
 
     //Assert
     expect(firstNameInput.value).toBe(newValue);
 
     //console.log('dom', this.state);
-    //console.log('before', first_name.value);
-    //console.log('after', first_name.value);
+    //console.log('before', firstName.value);
+    //console.log('after', firstName.value);
   });
   
   test('last name input in signup form', () => {
@@ -48,7 +48,7 @@ describe('SignupForm component', () => {
 
     // Act
     const getByName = queryByAttribute.bind(null, 'name');
-    const lastNameInput = getByName(dom.container, 'last_name');
+    const lastNameInput = getByName(dom.container, 'lastName');
     fireEvent.change(lastNameInput, { target: { value: newValue } })
 
     //Assert
@@ -103,7 +103,7 @@ describe('SignupForm component', () => {
 
     // Act
     const getByName = queryByAttribute.bind(null, 'name');
-    const passwordInput = getByName(dom.container, 'user_password');
+    const passwordInput = getByName(dom.container, 'password');
     fireEvent.change(passwordInput, { target: { value: newValue } })
 
     //Assert
