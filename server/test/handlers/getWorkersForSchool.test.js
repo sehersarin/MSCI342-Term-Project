@@ -24,7 +24,6 @@ describe('testing user to input schoolID to see worker ID ', () => {
 
         // Act
         const workerIds = await schoolHandler.getWorkerIdsForSchool();
-        const workerIds = await schoolHandler.getWorkerIdsForSchool();
 
         // Assert
         expect(workerIds).toStrictEqual(workerIds);
@@ -36,7 +35,6 @@ describe('testing user to input schoolID to see worker ID ', () => {
 
         // Act
         const workerIds = await schoolHandler.getWorkerIdsForSchool(testschoolId);
-        const workerIds = await schoolHandler.getWorkerIdsForSchool();
 
         // Assert
         expect(workerIds).toStrictEqual(workerIds);
@@ -48,7 +46,6 @@ describe('testing user to input schoolID to see worker ID ', () => {
 
         // Act
         workerIds = await schoolHandler.getWorkerIdsForSchool(testschoolId);
-        const workerIds = await schoolHandler.getWorkerIdsForSchool();
 
         // Assert
         (workerIds).toStrictEqual(workerIds);
@@ -60,7 +57,6 @@ describe('testing user to input schoolID to see worker ID ', () => {
 
         // Act
         const workerIds = await schoolHandler.getWorkerIdsForSchool(testschoolId);
-        const workerIds = await schoolHandler.getWorkerIdsForSchool();
 
         // Assert
         expect(workerIds).toStrictEqual(workerIds);
@@ -78,7 +74,6 @@ describe('testing valid school ID parameters', () => {
 
         // Act
         const workerIds = await schoolHandler.getWorkerIdsForSchool(testschoolId);
-        const workerIds = await schoolHandler.getWorkerIdsForSchool();
 
         // Assert
         expect(workerIds).toStrictEqual(workerIds);
@@ -90,7 +85,6 @@ describe('testing valid school ID parameters', () => {
 
         // Act
         const workerIds = await schoolHandler.getWorkerIdsForSchool(testschoolId);
-        const workerIds = await schoolHandler.getWorkerIdsForSchool();
 
         // Assert
         expect(workerIds).toStrictEqual(workerIds);
@@ -102,7 +96,6 @@ describe('testing valid school ID parameters', () => {
 
         // Act
         const workerIds = await schoolHandler.getWorkerIdsForSchool(testschoolId);
-        const workerIds = await schoolHandler.getWorkerIdsForSchool();
 
         // Assert
         expect(workerIds).toStrictEqual(workerIds);
@@ -114,19 +107,17 @@ describe('testing valid school ID parameters', () => {
 
             // Act
             const workerIds = await schoolHandler.getWorkerIdsForSchool(testschoolId);
-            const workerIds = await schoolHandler.getWorkerIdsForSchool();
 
             // Assert
             expect(workerIds).toStrictEqual(workerIds);
         });
 
-        ('passing in valid values for all fields', async () => {
+        test ('passing in valid values for all fields', async () => {
             // Arrange
             const testschoolId = 1;
 
             // Act
             const workerIds = await schoolHandler.getWorkerIdsForSchool(testschoolId);
-            const workerIds = await schoolHandler.getWorkerIdsForSchool();
 
             // Assert
             expect(workerIds).toStrictEqual(workerIds);
