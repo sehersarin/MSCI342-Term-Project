@@ -138,11 +138,10 @@ router.get('/appointments', async (req, res) => {
 
 
 
-// This method returns the timeslot records stored in the timeslot table 
-//Note the parameters, as this method, if given specific start time and specific end time to return, wil only return timeslots within the start and end time parameters 
-//If one or both ofthe parameters is null or not vlaid, the method will return all timeslots in the timeslot table 
+// The method will return all timeslots in the timeslot table 
+//Note that there is an future opportunity to expand functionality of this endpoint to filter the records pulled based on start time or end time of the timeslot 
 router.get('/possible-timeslots', async (req, res) => {
-
+    
     timeslots = await TimeslotHandler.getPossibleTimeslots();
 
     res.send(timeslots);
