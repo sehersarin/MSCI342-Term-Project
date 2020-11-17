@@ -9,79 +9,79 @@ describe('testing getting possible timeslots functionality', () => {
         // Arrange
         const testTimeslotDetails = [
             {
-                slot_id: 1,
-                start_time: '08:00:00',
-                end_time: '08:30:00'
+                slotId: 1,
+                startTime: '08:00:00',
+                endTime: '08:30:00'
             },
             {
-                slot_id: 2,
-                start_time: '08:30:00',
-                end_time: '09:00:00'
+                slotId: 2,
+                startTime: '08:30:00',
+                endTime: '09:00:00'
             },
             {
-                slot_id: 3,
-                start_time: '09:00:00',
-                end_time: '09:30:00'
+                slotId: 3,
+                startTime: '09:00:00',
+                endTime: '09:30:00'
             },
             {
-                slot_id: 4,
-                start_time: '09:30:00',
-                end_time: '10:00:00'
+                slotId: 4,
+                startTime: '09:30:00',
+                endTime: '10:00:00'
             },
             {
-                slot_id: 5,
-                start_time: '10:00:00',
-                end_time: '10:30:00'
+                slotId: 5,
+                startTime: '10:00:00',
+                endTime: '10:30:00'
             },
             {
-                slot_id: 6,
-                start_time: '10:30:00',
-                end_time: '11:00:00'
+                slotId: 6,
+                startTime: '10:30:00',
+                endTime: '11:00:00'
             },
             {
-                slot_id: 7,
-                start_time: '11:00:00',
-                end_time: '11:30:00'
+                slotId: 7,
+                startTime: '11:00:00',
+                endTime: '11:30:00'
             },
             {
-                slot_id: 8,
-                start_time: '11:30:00',
-                end_time: '12:00:00'
+                slotId: 8,
+                startTime: '11:30:00',
+                endTime: '12:00:00'
             },
             {
-                slot_id: 9,
-                start_time: '12:00:00',
-                end_time: '12:30:00'
+                slotId: 9,
+                startTime: '12:00:00',
+                endTime: '12:30:00'
             },
             {
-                slot_id: 10,
-                start_time: '12:30:00',
-                end_time: '13:00:00'
+                slotId: 10,
+                startTime: '12:30:00',
+                endTime: '13:00:00'
             },
             {
-                slot_id: 11,
-                start_time: '13:00:00',
-                end_time: '13:30:00'
+                slotId: 11,
+                startTime: '13:00:00',
+                endTime: '13:30:00'
             },
             {
-                slot_id: 12,
-                start_time: '13:30:00',
-                end_time: '14:00:00'
+                slotId: 12,
+                startTime: '13:30:00',
+                endTime: '14:00:00'
             },
             {
-                slot_id: 13,
-                start_time: '14:00:00',
-                end_time: '14:30:00'
+                slotId: 13,
+                startTime: '14:00:00',
+                endTime: '14:30:00'
             },
             {
-                slot_id: 14,
-                start_time: '14:30:00',
-                end_time: '15:00:00'
+                slotId: 14,
+                startTime: '14:30:00',
+                endTime: '15:00:00'
             },
             {
-                slot_id: 15,
-                start_time: '15:00:00',
-                end_time: '15:30:00'
+                slotId: 15,
+                startTime: '15:00:00',
+                endTime: '15:30:00'
             },
         ];
 
