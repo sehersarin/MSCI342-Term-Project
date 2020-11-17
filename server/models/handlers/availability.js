@@ -5,8 +5,8 @@ const availabilityHandler = require('../db/availability');
 
 async function getAvailabilityDetails(workerId, schoolId, startTime, endTime) {
 
-    // Don't need this becuase the db will return an error if the worker credentials are invalid.Searches the worker table to see if it is valid worker credentials
-    //const worker = await availabilityModel.getWorker(email, password);
+    // Worker credentials do not need to be checked as the getAvailabilityDetails method will return an error if the worker credentials are invalid.
+
     if (_.isNil(workerId) || _.isNil(schoolId)) {
         return null;
     }
