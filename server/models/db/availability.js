@@ -19,7 +19,7 @@ async function getAvailabilityDetails(workerId, schoolId, startTime, endTime) {
         // from the Worker_Timeslot table
         //where worker_id = the given worker_id
 
-        const queryStatement = `select * from worker_timeslot natural join timeslot where school_id = ${schoolId} and worker_id = ${workerId} and start_time = '${startTime}' and end_time = '${endTime}' ;`;
+        const queryStatement = `select * from worker_timeslot natural join timeslot where school_id = ${schoolId} and worker_id = ${workerId} and start_time = '${startTime}' and end_time = '${endTime}' and status = ${'available'};`;
 
         const availability = await db.any(queryStatement);
         //The queryStatement returns null if the availability is empty
