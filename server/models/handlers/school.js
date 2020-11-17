@@ -1,7 +1,7 @@
-const WorkerObjectModel = require('../db/school');
+const schoolModel = require('../db/school');
 
 async function getWorkerIdsForSchool(schoolId) {
-      return WorkerObjectModel.getWorkerIdsForSchool(schoolId);
+      return schoolModel.getWorkerIdsForSchool(schoolId);
 };
 
 
