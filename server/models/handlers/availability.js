@@ -1,7 +1,6 @@
 // Gets the time availabilities for a specific worker for a specific school.
 const _ = require('lodash');
 const availabilityModel = require('../db/availability');
-//need userTypes or Workerstatus?
 
 async function getAvailabilityDetails(workerId, schoolId, startTime, endTime) {
 
