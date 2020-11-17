@@ -21,6 +21,7 @@ async function getWorkerIdsForSchool(schoolId) {
         //queryCond += ` and ${Tables.appointment}.student_id=${studentId}`;
         //workerIds = 8000000;
         const workerIds_2 = JSON.stringify(workerIds);
+        const workerIds_2=JSON.map(workerIds)
 
         //up till here, this is relevant to getting the worker ids 
 
@@ -39,12 +40,12 @@ async function getWorkerIdsForSchool(schoolId) {
 
 
         // this part is relevant to getting the worker objects from the ids 
-        const queryStmt = `select ${queryParams} from ${tableJoins} where worker_id in (${query_string});`;
-        const query_output = await db.any(queryStmt);
+        //const queryStmt = `select ${queryParams} from ${tableJoins} where worker_id in (${query_string});`;
+        //const query_output = await db.any(queryStmt);
 
-        if (_.isEmpty(query_output)) return null;
+        //if (_.isEmpty(query_output)) return null;
 
-        return _.map(query_output, worker_object => new WorkerDetails(worker_object));
+        //return _.map(query_output, worker_object => new WorkerDetails(worker_object));
 
     } catch (err) {
         console.log('Error occurred in ', err);
