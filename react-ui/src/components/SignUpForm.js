@@ -32,8 +32,8 @@ class SignupForm extends Component {
         accessToken: "",
         isSubmitted: false,
     };
-    this.handleFormChange = this.handleFormChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    // this.handleFormChange = this.handleFormChange.bind(this);
+    // this.handleSubmit = this.handleSubmit.bind(this);
 }
 
 handleFormChange = event => {
@@ -53,7 +53,7 @@ signup = event => {
   let userType = this.state.userType;
   let workerType = this.state.workerType;
   let optionalType = this.state.optionalType;
-  let specialization = this.specialization;
+  let specialization = this.state.specialization;
   let optionalSpecialization = this.state.optionalSpecialization;
   let personId = this.state.personId;
   let email = this.state.email;
@@ -64,36 +64,31 @@ signup = event => {
     firstName: this.state.firstName,
     lastName: this.state.lastName,
     userType: this.state.userType,
-    //workerType
-    //optionalType
-    //specialization
-    //optionalSpecialization
-    //personId
+    type: this.state.workerType || this.state.optionalType,
+    specialization: this.state.specialization || this.state.optionalSpecialization,
+    workerId: this.state.personId,
+    studentId: this.state.personId,
+    // personId = this.state.personId,
     email: this.state.email,
     phone: this.state.phone,
     password: this.state.password,
-    
     /* studentId: Joi.number().positive().integer(),
     workerId: Joi.number().positive().integer(),
     schoolId: Joi.number().positive().integer(),
-    type: Joi.string(),
-    specialization: Joi.string().valid('social worker', 'guidance councellor') */
+    */
   }
 
   axios.get(`/public/create-user/?${queryString.stringify(params)}`)
 
-  //look at loginform and copy the .Nil etc.
   .then(res => {
-    console.log(res.data)
-    if (_.isNil(res.error) && res.data) {
+    // console.log(res.data)
+   if (_.isNil(res.error) && res.data) {
       this.setState({
         firstName: res.data.firstName,
         lastName: res.data.lastName,
         userType: res.data.userType,
-  //       workerType: res.data.workerType,
-  //       optionalType: res.data.optionalType,
-  //       specialization: res.data.specialization,
-  //       optionalSpecialization: res.data.optionalSpecialization,
+        type: res.data.workerType || res.data.optionalType,
+        specialization: res.data.specialization || res.data.optionalSpecialization,
         personId: res.data.workerId || res.data.studentId,
         email: res.data.email,
         phone: res.data.phone,
@@ -101,33 +96,28 @@ signup = event => {
         accessToken: res.data.accessToken,
         isSubmitted: true
      })
-      event.preventDefault();
       console.log(this.state.userType)
-   }
+  }
    else {
     alert("Invalid Form Criteria")
     event.target.reset();
-    event.preventDefault();
   }
  })
- event.preventDefault();
+ event.preventDefault()
 }
 
 
-handleSubmit(e) {
-    e.preventDefault();
+//handleSubmit(e) {
+   // e.preventDefault();
 
     //console.log('The form was submitted with the following data:');
     //console.log(this.state);
-}
+//}
 
 render() {
 
- // let newRoute = <Route exact path="/signup" render={props => (<Redirect to={`/dashboard/${this.state.firstName}/${this.state.lastName}/${this.state.userType}/${this.state.workerType}/${this.state.optionalType}/${this.state.specialization}/${this.state.optionalSpecialization}/${this.state.personId}/${this.state.email}/${this.state.phone}/${this.state.password}`} Component={Dashboard} />)}></Route>
     let newRoute = <Route exact path="/signup" render={props => (<Redirect to={`/dashboard/${this.state.email}/${this.state.userType}/${this.state.firstName}/${this.state.personId}/${this.state.accessToken}`} Component={Dashboard} />)}></Route>
-   
-    //create a isSubmitted state 
-    //call that function here and return    
+      
     if (this.state.isSubmitted) {
       return newRoute;
     }
@@ -137,7 +127,7 @@ render() {
            <Title name= "Sign Up."></Title>
           <Row>
            <Col sm={12} align="center">
-           <form onSubmit={this.login}>
+           <form onSubmit={this.signup}>
            
                 <label>
                 <input 
@@ -264,5 +254,5 @@ render() {
 }
 }
 
-export default SignupForm;
+export default withRouter(SignupForm);
 
