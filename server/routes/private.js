@@ -142,21 +142,8 @@ router.get('/appointments', async (req, res) => {
 //Note the parameters, as this method, if given specific start time and specific end time to return, wil only return timeslots within the start and end time parameters 
 //If one or both ofthe parameters is null or not vlaid, the method will return all timeslots in the timeslot table 
 router.get('/possible-timeslots', async (req, res) => {
-    const paramSchema = Joi.object({
-        startTime: Joi.date().iso(),
-        endTime: Joi.date().iso().greater(Joi.ref('startTime'))
-    });
 
-    const query = req.query ? req.query : {};
-
-    const startTime = query.startTime ;
-    const endTime = query.endTime ;
-
-    const { error } = paramSchema.validate({startTime, startTime });
-
-    if (!_.isNil(error)) res.send(error);
-
-    timeslots = await TimeslotHandler.getPossibleTimeslots(startTime, endTime);
+    timeslots = await TimeslotHandler.getPossibleTimeslots();
 
     res.send(timeslots);
 });
