@@ -12,7 +12,6 @@ const availabilityHandler = require('../models/handlers/availability');
 const schoolHandler = require('../models/handlers/school');
 
 const TimeslotStatus  = require('../constants/timeslotStatus.json');
-const moment = require('moment');
 
 // Binds a middleware to check access tokens for all private requests.
 router.use(async function (req, res, next) {
@@ -144,22 +143,18 @@ router.get('/appointments', async (req, res) => {
 //If one or both ofthe parameters is null or not vlaid, the method will return all timeslots in the timeslot table 
 router.get('/possible-timeslots', async (req, res) => {
     const paramSchema = Joi.object({
-        startTime: Joi.string().max(30),
-        endTime: Joi.string().max(30),
+        startTime: Joi.date().iso(),
+        endTime: Joi.date().iso().greater(Joi.ref('startTime'))
     });
-    //(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)
 
     const query = req.query ? req.query : {};
 
     const startTime = query.startTime ;
     const endTime = query.endTime ;
 
-    const regexp  = /^([0-9]|0[0-9]|1[0-9]|2[0-3])(:[0-5][0-9]){1,2}$/;
-    if(regexp.test(startTime)) res.send(error);
-    //if(regexp.test(endTime)) res.send(error);
-    const { error } = paramSchema.validate({startTime, endTime });
+    const { error } = paramSchema.validate({startTime, startTime });
 
-    if (!_.isNil(error)) res.send(error);  
+    if (!_.isNil(error)) res.send(error);
 
     timeslots = await TimeslotHandler.getPossibleTimeslots(startTime, endTime);
 
