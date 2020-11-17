@@ -7,7 +7,7 @@ const router = express.Router();
 const authenticateHandler = require('../models/handlers/authenticate');
 const appointmentHandler = require('../models/handlers/appointment');
 const workerTimeslotHandler = require('../models/handlers/workerTimeslot');
-const TimeslotHandler = require('../models/handlers/timeslot');
+const timeslotHandler = require('../models/handlers/timeslot');
 const availabilityHandler = require('../models/handlers/availability');
 const schoolHandler = require('../models/handlers/school');
 
@@ -142,7 +142,7 @@ router.get('/appointments', async (req, res) => {
 //Note that there is an future opportunity to expand functionality of this endpoint to filter the records pulled based on start time or end time of the timeslot 
 router.get('/possible-timeslots', async (req, res) => {
     
-    timeslots = await TimeslotHandler.getPossibleTimeslots();
+    const timeslots = await timeslotHandler.getPossibleTimeslots();
 
     res.send(timeslots);
 });
