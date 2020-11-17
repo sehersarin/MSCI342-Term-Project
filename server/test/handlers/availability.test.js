@@ -5,7 +5,7 @@ describe('testing fetching of worker availability functionality', () => {
         jest.resetModules();
     });
     //TEST 1
-    test('rejection of no parameters', async () => {
+    test('rejection of null parameters', async () => {
         // Arrange
         // No test variables need to be initialized.
         const workerId = null;
