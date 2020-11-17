@@ -1,6 +1,6 @@
 // Gets the time availabilities for a specific worker for a specific school.
 const _ = require('lodash');
-const availabilityHandler = require('../db/availability');
+const availabilityModel = require('../db/availability');
 //need userTypes or Workerstatus?
 
 async function getAvailabilityDetails(workerId, schoolId, startTime, endTime) {
@@ -11,7 +11,7 @@ async function getAvailabilityDetails(workerId, schoolId, startTime, endTime) {
         return null;
     }
 
-    return availabilityHandler.getAvailabilityDetails(workerId, schoolId, startTime, endTime);
+    return availabilityModel.getAvailabilityDetails(workerId, schoolId, startTime, endTime);
 }
 
 // Fetches all the essential availibility details and returns the workerId in case more information is desired.
