@@ -142,59 +142,6 @@ describe('testing fetching of worker availability functionality', () => {
         // Assert
         expect(availableTimes).toBe(null);
     });
-    /*
-    //TEST 10
-    test('rejection of invalid workerId', async () => {
-     // Arrange
-     const workerId = 0;
-     const schoolId = 1;
-     const startTime = '8:00:00';
-     const endTime = '8:30:00';
-    
-     // Act
-     const availableTimes = await availabilityHandler.getAvailabilityDetails(workerId, schoolId, startTime, endTime);
-    
-     // Assert
-     expect(availableTimes).toBe(null);
-    });
-    */
-
-    /* The following code is the test for the stub which will be deleted once this PR is approved.
-        //stub
-        test('initial setup of worker availability fetching', async () => {
-            // Arrange
-            const workerId = 8000000;
-            const schoolId = 1;
-            const startTime = '8:30:00';
-            const endTime = '8:30:00';
-    
-            const testAvailableTimes = [
-                {
-                    workerTimeslotId: 1,
-                    startTime: '08:00:00',
-                    endTime: '08:30:00',
-                    date: '8:30:00'
-                },
-                {
-                    workerTimeslotId: 2,
-                    startTime: '08:30:00',
-                    endTime: '09:00:00',
-                    date: '8:30:00'
-                },
-                {
-                    workerTimeslotId: 3,
-                    startTime: '09:00:00',
-                    endTime: '09:30:00',
-                    date: '8:30:00'
-                }
-            ];
-    
-            // Act
-            const availableTimes = await availabilityHandler.getAvailabilityDetails(workerId, schoolId, startTime, endTime);
-    
-            // Assert
-            expect(availableTimes).toMatchObject(testAvailableTimes);
-        });
-        */
+   
 
 })
