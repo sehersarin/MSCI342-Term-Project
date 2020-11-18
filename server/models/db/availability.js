@@ -1,6 +1,6 @@
 const { db } = require('../../lib/connection');
 
-const getAvailabilityDetails = require('../data/AvailabilityDetails');
+const AvailabilityDetails = require('../data/AvailabilityDetails');
 
 const Tables = require('../../constants/tables.json');
 
@@ -14,7 +14,7 @@ async function getAvailabilityDetails(workerId, schoolId, startTime, endTime) {
         //The queryStatement returns null if the availability is empty
         if (_.isEmpty(availability)) return null;
 
-        return availability;
+        return AvailabilityDetails(availability);
 
     } catch (err) {
         console.log('Error occurred in ', err);

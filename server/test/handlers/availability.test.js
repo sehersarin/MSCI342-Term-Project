@@ -4,6 +4,7 @@ describe('testing fetching of worker availability functionality', () => {
     beforeEach(() => {
         jest.resetModules();
     });
+
     //TEST 1
     test('rejection of null parameters', async () => {
         // Arrange
@@ -20,7 +21,6 @@ describe('testing fetching of worker availability functionality', () => {
     });
 
     //TEST 2
-
     test('rejection of null value for required workerId parameter', async () => {
         // Arrange
         const workerId = null;
@@ -36,7 +36,6 @@ describe('testing fetching of worker availability functionality', () => {
     });
 
     //TEST 3
-
     test('rejection of null value for required SchoolId parameter', async () => {
         // Arrange
         const workerId = 8000000;
@@ -52,7 +51,6 @@ describe('testing fetching of worker availability functionality', () => {
     });
 
     //TEST 4
-
     test('rejection of null value for required startTime parameter', async () => {
         // Arrange
         const workerId = 8000000;
@@ -68,7 +66,6 @@ describe('testing fetching of worker availability functionality', () => {
     });
 
     //TEST 5
-
     test('rejection of null value for required endTime parameter', async () => {
         // Arrange
         const workerId = 8000000;
@@ -84,7 +81,6 @@ describe('testing fetching of worker availability functionality', () => {
     });
 
     //TEST 6
-
     test('rejection of empty string value for required workerId parameter', async () => {
         // Arrange
         const workerId = '';
@@ -113,8 +109,8 @@ describe('testing fetching of worker availability functionality', () => {
         // Assert
         expect(availableTimes).toBe(null);
     });
-    //TEST 8
 
+    //TEST 8
     test('rejection of empty string value for required startTime parameter', async () => {
         // Arrange
         const workerId = 8000000;
@@ -128,6 +124,7 @@ describe('testing fetching of worker availability functionality', () => {
         // Assert
         expect(availableTimes).toBe(null);
     });
+
     //TEST 9
     test('rejection of empty string value for required endTime parameter', async () => {
         // Arrange
@@ -142,6 +139,6 @@ describe('testing fetching of worker availability functionality', () => {
         // Assert
         expect(availableTimes).toBe(null);
     });
-   
+
 
 })
