@@ -20,7 +20,7 @@ class CreateAppointmentForm extends Component {
     constructor(props) {
       super(props);
       this.state = {
-        workerId: window.location.href.slice(50,56), //possible look into referencing by character not index placement
+        workerId: window.location.href.slice(50,57), //possible look into referencing by character not index placement
         schoolId: 1 ,   
         studentId: this.props.user.personId, 
         workerTimeslotId : 0, 
@@ -78,7 +78,7 @@ class CreateAppointmentForm extends Component {
   //add an else if statement for successful form submissiom but unsuccessful appointment submission (api backend)
   //have the user redo the book appointment process
   render() {
-    console.log(this.state.startDate, this.state.endDate);
+    console.log(this.state.startDate, this.state.endDate, this.state.workerId);
       return (
           <Container className="Form-container">
              <Title name= "Book Appointment. (Still needs to be implemented)"></Title>

@@ -82,32 +82,25 @@ class SelectWorkerForm extends Component {
       return (
 
           <Container className="Form-container">
-             <Title name= "Select A Service Worker."></Title>
+             <Title name= "Select A Service Worker"></Title>
             <Row>
              <Col sm={12} align="center">
-                
-                  <input 
-                  type="radio" 
-                  value="800000" 
-                  name="choice"
-                  onChange= {this.handleFormChange}/> Worker 1
-                  <br></br>
-
-                  <input 
-                  type="radio" 
-                  value="800001" 
-                  name="choice"
-                  onChange= {this.handleFormChange}/> Worker 2
-                  <br></br>
-
-                  <input 
-                  type="radio" 
-                  value="800002" 
-                  name="choice"
-                  onChange= {this.handleFormChange}/> Worker 3
-                  <br></br>
-                  <br></br>
-                  
+                  {this.state.WorkerIds.map((item) => (
+                  <div>
+                      <label>
+                        <input
+                          name="choice"
+                          type="radio"
+                          value={item.workerId}
+                          onChange={this.handleFormChange}
+                        />{" "}
+                        {item.firstName + " "}
+                        {item.lastName} <br></br>   
+                        {item.specialization} <br></br> 
+                        {item.type} <br></br> <br></br> 
+                      </label>
+                    </div>
+                  ))}
 
                   <form onSubmit={this.handleSubmit}> 
                   <input
