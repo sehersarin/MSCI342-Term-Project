@@ -14,16 +14,10 @@ async function getWorkerIdsForSchool(schoolId) {
     try {
         //Query to recieve worker IDs from Service Worker School Table 
         const workerIds = await db.any(`select worker_id from Service_Worker_School where school_id='${schoolId}';`);
-        //return workerIds;
 
-        var queryParams = `${Tables.worker}.worker_id, ${Tables.worker}.first_name, ${Tables.worker}.last_name`;
-        var tableJoins = ` ${Tables.worker} `;
-        //queryCond += ` and ${Tables.appointment}.student_id=${studentId}`;
-        //workerIds = 8000000;
-        const workerIds_2 = JSON.stringify(workerIds);
-
-        if (_.isEmpty(query_output)) return null;
-        return _.map(query_output, worker_object => new WorkerDetails(worker_object));
+        if (_.isEmpty(workerIds)) return null;
+        return workerIds;
+        //_.map(query_output, worker_object => new WorkerDetails(worker_object));
 
     } catch (err) {
         console.log('Error occurred in ', err);
