@@ -63,11 +63,9 @@ class Dashboard extends Component {
 
                 {/* Only display the book appointment form if the user is a worker. */}
                 {userType === UserTypes.worker &&
-                <Fragment>
                 <li>
                   <Link to={`/dashboard/InputWorkerAvailabilitypage/${email}`}>Add Availability</Link>
                 </li>
-              </Fragment>
               }
 
               <li className="push-right">
