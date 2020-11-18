@@ -12,7 +12,7 @@ async function getWorkerIdsForSchool(schoolId) {
     if (_.isNil(schoolId)) return null;
     try {
         //Query to recieve worker IDs from Service Worker School Table 
-        const workerIds = await db.any(`select worker_id from Tables.service_Worker_School where school_id='${schoolId}';`);
+        const workerIds = await db.any(`select worker_id from ${Tables.workerSchool} where school_id='${schoolId}';`);
 
         if (_.isEmpty(workerIds)) return null;
         return _.map(workerIds, 'worker_id');
