@@ -29,7 +29,7 @@ async function getWorkersByWorkerIds(workerIds) {
 
     if (_.isEmpty(query_output)) return null;
 
-    return _.map(query_output, worker_object => new WorkerDetails(worker_object));
+    return _.map(query_output, worker_object => new Worker(worker_object));
 }
 
 module.exports = {
