@@ -140,5 +140,19 @@ describe('testing fetching of worker availability functionality', () => {
         expect(availableTimes).toBe(null);
     });
 
+     //TEST 10
+     test('Accept that all valid paramters return the expected values ', async () => {
+        // Arrange
+        const workerId = 8000000;
+        const schoolId = 1;
+        const startTime = '2020-10-19';
+        const endTime = '2020-10-21';
+
+        // Act
+        const availableTimes = await availabilityHandler.getAvailabilityDetails(workerId, schoolId, startTime, endTime);
+
+        // Assert
+        expect(availableTimes).toBeDefine;
+    });
 
 })
