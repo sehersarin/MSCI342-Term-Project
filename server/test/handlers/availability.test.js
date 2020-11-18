@@ -12,7 +12,7 @@ describe('testing fetching of worker availability functionality', () => {
         const workerId = null;
         const schoolId = null;
         const startTime = null;
-        const endTime = '8:30:00';
+        const endTime = '2020-10-20';
         // Act
         const availableTimes = await availabilityHandler.getAvailabilityDetails(workerId, schoolId, startTime, endTime);
 
@@ -25,8 +25,8 @@ describe('testing fetching of worker availability functionality', () => {
         // Arrange
         const workerId = null;
         const schoolId = 1;
-        const startTime = '8:00:00';
-        const endTime = '8:30:00';
+        const startTime = '2020-10-19';
+        const endTime = '2020-10-20';
 
         // Act
         const availableTimes = await availabilityHandler.getAvailabilityDetails(workerId, schoolId, startTime, endTime);
@@ -40,8 +40,8 @@ describe('testing fetching of worker availability functionality', () => {
         // Arrange
         const workerId = 8000000;
         const schoolId = null;
-        const startTime = '8:00:00';
-        const endTime = '8:30:00';
+        const startTime = '2020-10-19';
+        const endTime = '2020-10-20';
 
         // Act
         const availableTimes = await availabilityHandler.getAvailabilityDetails(workerId, schoolId, startTime, endTime);
@@ -56,7 +56,7 @@ describe('testing fetching of worker availability functionality', () => {
         const workerId = 8000000;
         const schoolId = 1;
         const startTime = null;
-        const endTime = '8:30:00';
+        const endTime = '2020-10-20';
 
         // Act
         const availableTimes = await availabilityHandler.getAvailabilityDetails(workerId, schoolId, startTime, endTime);
@@ -70,7 +70,7 @@ describe('testing fetching of worker availability functionality', () => {
         // Arrange
         const workerId = 8000000;
         const schoolId = 1;
-        const startTime = '8:00:00';
+        const startTime = '2020-10-19';
         const endTime = null;
 
         // Act
@@ -85,8 +85,8 @@ describe('testing fetching of worker availability functionality', () => {
         // Arrange
         const workerId = '';
         const schoolId = 1;
-        const startTime = '8:00:00';
-        const endTime = '8:30:00';
+        const startTime = '2020-10-19';
+        const endTime = '2020-10-20';
 
         // Act
         const availableTimes = await availabilityHandler.getAvailabilityDetails(workerId, schoolId, startTime, endTime);
@@ -100,8 +100,8 @@ describe('testing fetching of worker availability functionality', () => {
         // Arrange
         const workerId = 8000000;
         const schoolId = '';
-        const startTime = '8:00:00';
-        const endTime = '8:30:00';
+        const startTime = '2020-10-19';
+        const endTime = '2020-10-20';
 
         // Act
         const availableTimes = await availabilityHandler.getAvailabilityDetails(workerId, schoolId, startTime, endTime);
@@ -116,7 +116,7 @@ describe('testing fetching of worker availability functionality', () => {
         const workerId = 8000000;
         const schoolId = 1;
         const startTime = '';
-        const endTime = '8:30:00';
+        const endTime = '2020-10-20';
 
         // Act
         const availableTimes = await availabilityHandler.getAvailabilityDetails(workerId, schoolId, startTime, endTime);
@@ -130,7 +130,7 @@ describe('testing fetching of worker availability functionality', () => {
         // Arrange
         const workerId = 8000000;
         const schoolId = 1;
-        const startTime = '8:00:00';
+        const startTime = '2020-10-19';
         const endTime = '';
 
         // Act
