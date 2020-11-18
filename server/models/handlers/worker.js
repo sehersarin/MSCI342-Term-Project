@@ -1,6 +1,6 @@
 const workerModel = require('../db/worker');
 
-// Adds a timeslot into the database and returns true upon successful completion. 
+// A second query to fetch worker details from the workerIds
 async function getWorkersByWorkerIds(workerIds) {
     const workerObjects = await workerModel.getWorkersByWorkerIds(workerIds);
     return workerObjects;
