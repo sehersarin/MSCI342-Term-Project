@@ -16,7 +16,7 @@ async function getAvailabilityDetails(workerId, schoolId, startDate, endDate) {
         //The queryStatement returns null if the availability is empty
         if (_.isEmpty(availabilities)) return null;
 
-        return _.map(availabilities, availability => AvailabilityDetail(availability));
+        return _.map(availabilities, availability => new AvailabilityDetail(availability));
 
     } catch (err) {
         console.log('Error occurred in ', err);
