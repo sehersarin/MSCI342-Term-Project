@@ -6,8 +6,7 @@ const Tables = require('../../constants/tables.json');
 
 //Parameters returned are slot_id, school_id, worker_id, status, and date
 async function getAvailabilityDetails(workerId, schoolId, startTime, endTime) {
-    try {
-       
+    try {    
         const queryStatement = `select * from worker_timeslot natural join timeslot where school_id = ${schoolId} and worker_id = ${workerId} and start_time = '${startTime}' and end_time = '${endTime}' and status = ${'available'};`;
 
         const availability = await db.any(queryStatement);
