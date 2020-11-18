@@ -94,8 +94,8 @@ router.post('/worker-availability', async (req, res) => {
 
     const workerId = query.workerId ? query.workerId : null;
     const schoolId = query.schoolId ? query.schoolId : null;
-    const startTime = query.startTime ? query.startTime : null;
-    const endTime = query.endTime ? query.endTime : null;
+    const startTime = query.startTime;
+    const endTime = query.endTime;
 
     const { error } = paramSchema.validate({ workerId, schoolId, startTime, endTime });
 
