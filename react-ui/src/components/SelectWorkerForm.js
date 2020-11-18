@@ -31,6 +31,7 @@ class SelectWorkerForm extends Component {
         WorkerIds: [],
       };
       this.handleFormChange = this.handleFormChange.bind(this);
+      this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleFormChange = event => {
@@ -41,6 +42,13 @@ class SelectWorkerForm extends Component {
     });
     console.log(workerId, val);
   };
+
+  handleSubmit(e) {
+    this.setState({
+      formSubmission: true
+    });
+  }
+
 
   componentDidMount() {
     var params = { schoolId: this.state.schoolId, accessToken: this.state.accessToken };
@@ -62,18 +70,21 @@ class SelectWorkerForm extends Component {
 
 
   render() {
-    //const { email, studentId, schoolId, userType, workerId, accessToken } = this.state;
-    //let newRoute= <Route path="/Dashboard/SelectWorker" render={props => ( <Redirect to={`/dashboard/CreateAppointment/${email}/${userType}/${studentId}/${schoolId}/${workerId}/${accessToken}`} Component={CreateAppointment}/>)}></Route> 
+    const { email, studentId, schoolId, userType, workerId, accessToken } = this.state;
+    //DO NOT CHANGE THE ORDER OF THIS ROUTE
+    //the next page reads in information from the URL
+    let newRoute= <Route path="/Dashboard/SelectWorker" render={props => ( <Redirect to={`/dashboard/CreateAppointment/${workerId}/${email}/${userType}/${studentId}/${schoolId}/${accessToken}`} Component={CreateAppointment}/>)}></Route> 
 
-    //if(this.state.submit){
-     // return newRoute;
-  //  }
+    if(this.state.formSubmission){
+      return newRoute;
+    }
+    else{
       return (
           <Container className="Form-container">
              <Title name= "Select A Service Worker."></Title>
             <Row>
              <Col sm={12} align="center">
-                  
+                <form onSubmit={this.handleSubmit}> 
                   <input 
                   type="radio" 
                   value="800000" 
@@ -96,31 +107,17 @@ class SelectWorkerForm extends Component {
                   <br></br>
                   <br></br>
 
-                  <Link to = {`/dashboard/CreateAppointment/${this.state.workerId}/${this.state.email}/${this.state.userType}/${this.state.studentId}/${this.state.schoolId}/${this.state.accessToken}`}>
                   <input
                   className ="SubmitButton" 
                   type="submit" 
                   value="Submit!"/> 
-                  </Link>
-
-                
-                <div>
-                <main role="main">
-                  <div className="main">
-                    <Switch>
-                      <Route path= {`/dashboard/CreateAppointment/`}>
-                        <CreateAppointment workerId={this.state.workerId} />
-                      </Route>
-                    </Switch>
-                  </div>
-                </main>
-                </div>
-
+                </form>
              <br></br>   
              </Col>
             </Row>
           </Container>
         );
   }
+}
 }
 export default SelectWorkerForm ;
