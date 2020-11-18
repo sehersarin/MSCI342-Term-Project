@@ -24,10 +24,9 @@ async function insertWorkerAccount(firstName, lastName, type, workerId, email, p
 
 //This method returns the first name, last name and other information about the worker 
 async function getWorkersByWorkerIds(workerIds) {
+    if (_.isNil(workerIds)) return null;
     const queryStmt = `select * from service_worker where worker_id in (${workerIds});`;
     const query_output = await db.any(queryStmt);
-
-    if (_.isEmpty(query_output)) return null;
     return _.map(query_output, worker_object => new Worker(worker_object));
 }
 
