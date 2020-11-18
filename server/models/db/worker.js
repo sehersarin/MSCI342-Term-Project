@@ -27,7 +27,7 @@ async function getWorkersByWorkerIds(workerIds) {
     const queryStmt = `select * from service_worker where worker_id in (${workerIds});`;
     const query_output = await db.any(queryStmt);
 
-    if (_.isEmpty(query_output)) return null;
+    //if (_.isEmpty(query_output)) return null;
 
     return _.map(query_output, worker_object => new Worker(worker_object));
 }
