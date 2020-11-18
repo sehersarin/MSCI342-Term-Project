@@ -22,10 +22,6 @@ async function insertWorkerAccount(firstName, lastName, type, workerId, email, p
     return new Worker(workerData[0]);
 }
 
-module.exports = {
-    getWorker,
-    insertWorkerAccount,
-}
 //This method returns the first name, last name and other information about the worker 
 async function getWorkersByWorkerIds(workerId) {
     const queryStmt = `select ${queryParams} from ${tableJoins} where worker_id in (${query_string});`;
@@ -37,5 +33,7 @@ async function getWorkersByWorkerIds(workerId) {
 }
 
 module.exports = {
-    getWorkersByWorkerIds,
+    getWorker,
+    insertWorkerAccount,
+    getWorkersByWorkerIds
 }
