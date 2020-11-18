@@ -6,11 +6,12 @@ const router = express.Router();
 
 const authenticateHandler = require('../models/handlers/authenticate');
 const appointmentHandler = require('../models/handlers/appointment');
-const workerTimeslotHandler = require('../models/handlers/timeslot');
+const workerTimeslotHandler = require('../models/handlers/workerTimeslot');
+const timeslotHandler = require('../models/handlers/timeslot');
 const availabilityHandler = require('../models/handlers/availability');
 const schoolHandler = require('../models/handlers/school');
 
-const TimeslotStatus  = require('../constants/timeslot-status.json');
+const TimeslotStatus  = require('../constants/timeslotStatus.json');
 
 // Binds a middleware to check access tokens for all private requests.
 router.use(async function (req, res, next) {
@@ -65,7 +66,6 @@ router.post('/add-recurring-schedule', async (req, res) => {
 
     const query = req.query ? req.query : {};
 
-    
     const slotId = query.slotId ? query.slotId : null;
     const schoolId = query.schoolId ? query.schoolId : null;
     const workerId = query.workerId ? query.workerId : null;
@@ -112,7 +112,7 @@ router.post('/worker-availability', async (req, res) => {
 router.get('/appointments', async (req, res) => {
     const paramSchema = Joi.object({
         studentId: Joi.number().integer(),
-        workerId: Joi.number().integer(), 
+        workerId: Joi.number().integer(),
         status: Joi.array().items(Joi.string().min(1).max(300)) // Optional parameter and will default to only upcoming if not specified.
     }).xor('studentId', 'workerId'); // Either the studentId or the workerId must be specified (they both cannot be specified).
 
@@ -136,11 +136,12 @@ router.get('/appointments', async (req, res) => {
 });
 
 
-//Returns all possible timeslots
-// Returns all the appointments/meetings for a given student or worker.
-// Note that appointments/meetings are synonymous, but only appointments will be used in the backend to maintain consistency.
+
+// The method will return all timeslots in the timeslot table 
+//Note that there is an future opportunity to expand functionality of this endpoint to filter the records pulled based on start time or end time of the timeslot 
 router.get('/possible-timeslots', async (req, res) => {
-timeslots = await workerTimeslotHandler.getPossibleTimeslots();
+    
+    const timeslots = await timeslotHandler.getPossibleTimeslots();
 
     res.send(timeslots);
 });
@@ -159,7 +160,7 @@ router.post('/get-workers-for-school', async (req, res) => {
 
     const schoolId = query.schoolId ? query.schoolId : null;
 
-    const { error } = getWorkersForSchool.validate({schoolId});
+    const { error } = getWorkersForSchool.validate({ schoolId });
 
     if (!_.isNil(error)) res.send(error);
 

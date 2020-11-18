@@ -83,7 +83,7 @@ class InputAvailability extends Component {
     const listItems = this.state.items.map((el)=>
     <React.Fragment>
         <label> 
-        <input type="checkbox" id={el.timeslotId} value ={el.timeslotId} onChange={this.handleCheckbox}/>
+        <input type="checkbox" id={el.slotId} value ={el.slotId} onChange={this.handleCheckbox}/>
         {tConvert(el.startTime) + " to " + tConvert(el.endTime)}
       
        
@@ -110,7 +110,7 @@ class InputAvailability extends Component {
                   <input
                   className ="SubmitButton" 
                   type="submit" 
-                  value="Submit!" />
+                  value="Add Availability" />
                   </label>
               </form> 
               <br></br>

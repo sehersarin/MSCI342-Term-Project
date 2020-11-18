@@ -68,9 +68,6 @@ class Dashboard extends Component {
                 <li>
                   <Link to={`/dashboard/InputWorkerAvailabilitypage/${email}`}>Add Availability</Link>
                 </li>
-                <li>
-                <Link to={`/dashboard/Availability/${email}`}>Availability</Link>
-                 </li>
               </Fragment>
               }
 
@@ -91,13 +88,11 @@ class Dashboard extends Component {
                 <Route path={`/dashboard/CreateAppointment`}>
                   <CreateAppointment name={personId} />
                 </Route>
-
-                <Route path={`/dashboard/Availability`}>
+                {/* <Route path={`/dashboard/Availability`}>
                   <Availability />
-
+            <Route/> */}
                 <Route path={`/dashboard/SelectWorker`}>
                   <SelectWorker email={this.state.email}/>
-
                 </Route>
                 <Route path = {`/dashboard/InputWorkerAvailabilitypage`}>
                   <WorkerInputpage name ={personId}/>
