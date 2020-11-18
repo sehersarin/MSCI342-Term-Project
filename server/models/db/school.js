@@ -16,7 +16,7 @@ async function getWorkerIdsForSchool(schoolId) {
         const workerIds = await db.any(`select worker_id from Service_Worker_School where school_id='${schoolId}';`);
 
         if (_.isEmpty(workerIds)) return null;
-        return workerIds;
+        return _.map(workerIds, 'worker_id');
         //_.map(query_output, worker_object => new WorkerDetails(worker_object));
 
     } catch (err) {
