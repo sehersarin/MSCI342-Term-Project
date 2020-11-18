@@ -10,12 +10,12 @@ const TimeslotStatus = require('../../constants/timeslotStatus.json');
 //Parameters returned are slot_id, school_id, worker_id, status, and date
 async function getAvailabilityDetails(workerId, schoolId, startDate, endDate) {
     try {
-        var queryStatement = `select * from ${ Tables.workerTimeslot } natural join ${ Tables.timeslot } where worker_id = ${ workerId }`;
+        var queryStatement = `select * from ${Tables.workerTimeslot} natural join ${Tables.timeslot} where worker_id = ${workerId}`;
 
         //Only adds conditions if the user specified the conditions.
-        if (schoolId) queryStatement += ` and school_id = ${schoolId }`;
+        if (schoolId) queryStatement += ` and school_id = ${schoolId}`;
         if (startDate) queryStatement += ` and date >= '${startDate}'`;
-        if (endDate) query += ` and date <= '${endDate}'`;
+        if (endDate) queryStatement += ` and date <= '${endDate}'`;
 
         queryStatement += ` and status = '${TimeslotStatus.available}';`;
 
