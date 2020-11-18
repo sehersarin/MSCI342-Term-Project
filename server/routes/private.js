@@ -89,19 +89,19 @@ router.post('/worker-availability', async (req, res) => {
         startTime: Joi.date().iso(),
         endTime: Joi.date().iso().greater(Joi.ref('startTime'))
     });
-
+        
     const query = req.query ? req.query : {};
 
     const workerId = query.workerId ? query.workerId : null;
     const schoolId = query.schoolId ? query.schoolId : null;
-    const startTime = query.startTime ? query.startTime : null;
-    const endTime = query.endTime ? query.endTime : null;
+    const startTime = query.startTime;
+    const endTime = query.endTime;
 
     const { error } = paramSchema.validate({ workerId, schoolId, startTime, endTime });
 
     if (!_.isNil(error)) res.send(error);
 
-    const availableTimes = await availabilityHandler.getWorkerAvailability(workerId, schoolId, startTime, endTime);
+    const availableTimes = await availabilityHandler.getAvailabilityDetails(workerId, schoolId, startTime, endTime);
 
     res.send(availableTimes);
 

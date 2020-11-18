@@ -1,4 +1,4 @@
-const timeslotModel = require('../db/Timeslot');
+const timeslotModel = require('../db/timeslot');
 
 // Fetches timeslot records from the timeslot table 
 async function getPossibleTimeslots() {
