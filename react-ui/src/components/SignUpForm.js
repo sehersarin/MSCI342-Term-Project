@@ -32,7 +32,7 @@ class SignupForm extends Component {
         accessToken: "",
         isSubmitted: false,
     };
-    // this.handleFormChange = this.handleFormChange.bind(this);
+    this.handleFormChange = this.handleFormChange.bind(this);
     // this.handleSubmit = this.handleSubmit.bind(this);
 }
 
@@ -45,8 +45,6 @@ handleFormChange = event => {
   console.log(stateName, val);
 };
 
-//change variable names to lower camel case
-// fix this signup event to add params (take second half this.state.)
 signup = event => {
   let firstName = this.state.firstName;
   let lastName = this.state.lastName;
@@ -81,7 +79,7 @@ signup = event => {
   axios.get(`/public/create-user/?${queryString.stringify(params)}`)
 
   .then(res => {
-    // console.log(res.data)
+    console.log(res.data)
    if (_.isNil(res.error) && res.data) {
       this.setState({
         firstName: res.data.firstName,
@@ -105,7 +103,6 @@ signup = event => {
  })
  event.preventDefault()
 }
-
 
 //handleSubmit(e) {
    // e.preventDefault();

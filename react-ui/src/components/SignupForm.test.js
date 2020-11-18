@@ -78,25 +78,6 @@ describe('SignupForm component', () => {
     expect(emailInput.value).toBe(newValue);
   });
 
-  // test('testing no email input', () => {
-    
-  //   //Arrange
-  //   const dom = render(
-  //     <BrowserRouter>
-  //       <SignupForm />
-  //     </BrowserRouter>);
-  //   const email = getByPlaceholderText(dom.container, 'Enter Email Address*');
-  //   const password = getByPlaceholderText(dom.container, 'Enter Password*');
-  //   const submit = getByDisplayValue(dom.container, "Submit!");
-    
-  //   // Act
-  //   fireEvent.change(password, { target: { value: 'j1234' } });
-  //   fireEvent.click(submit);
-
-  //   //Assert
-  //   expect(email.required).toBe(true)
-  // });
-
   test('phone input in signup form', () => {
     //Arrange
     const dom = render(
@@ -132,7 +113,6 @@ describe('SignupForm component', () => {
     expect(passwordInput.value).toBe(newValue);
   });
 
-  //test not working
   test('testing valid input for API call', async () => { 
     const dom = render(
       <BrowserRouter>
