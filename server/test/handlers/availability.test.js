@@ -152,7 +152,37 @@ describe('testing fetching of worker availability functionality', () => {
         const availableTimes = await availabilityHandler.getAvailabilityDetails(workerId, schoolId, startTime, endTime);
 
         // Assert
-        expect(availableTimes).toBeDefine;
+        expect(availableTimes).toBeDefined();
     });
+
+    //TEST 11
+test('Accept that all valid paramters but no availible timeslots exist for the specified date range returns null ', async () => {
+    // Arrange
+    const workerId = 8000000;
+    const schoolId = 1;
+    const startTime = '2020-10-15';
+    const endTime = '2020-10-16';
+
+    // Act
+    const availableTimes = await availabilityHandler.getAvailabilityDetails(workerId, schoolId, startTime, endTime);
+
+    // Assert
+    expect(availableTimes).toBe(null);
+});
+
+   //TEST 12
+   test('The case where the specified endTime is earlier than the endTime returns null ', async () => {
+    // Arrange
+    const workerId = 8000000;
+    const schoolId = 1;
+    const startTime = '2020-10-16';
+    const endTime = '2020-10-15';
+
+    // Act
+    const availableTimes = await availabilityHandler.getAvailabilityDetails(workerId, schoolId, startTime, endTime);
+
+    // Assert
+    expect(availableTimes).toBe(null);
+});
 
 })
