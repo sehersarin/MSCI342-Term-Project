@@ -10,11 +10,13 @@ const axios = require("axios").default;
 
 class Check extends React.Component {
   // this is a class component for the checkbox feature of selecting recurring days
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       val: "",
       isChecked: "",
+      personId: this.props.personId,
+      // personId : this.props.personId,
       items: [],
       startDay: moment(),
       accessToken: "",
@@ -67,8 +69,6 @@ class Check extends React.Component {
     this.setState({
       startDay: moment(document.getElementById("DATE").value),
     });
-    console.log(document.getElementById("DATE").value)
-    // console.log(moment(new Date().format("DD-MM-YYYY"))
     var isChecked = event.target.checked;
     var item = event.target.value;
     this.setState((prevState) => ({
@@ -79,6 +79,7 @@ class Check extends React.Component {
   handleSubmit(event) {
     // submits selected days and assigns recurrenting dates based off boxes checked
     let AvailableDates = [];
+   
     let currentDayNumber = moment(this.state.startDay).day();
     let DaySelected = false; // variable for if checkboxes are checked or not
 
@@ -87,9 +88,11 @@ class Check extends React.Component {
       event.preventDefault();
     } else {
       var busySlots = {};
+      // busySlots[0][this.state.personId][this.state.startDay.format("DD-MM-YYYY")]= this.state.timeslots
       busySlots[
         this.state.startDay.format("DD-MM-YYYY")
-      ] = this.state.timeslots;
+      ] = this.state.timeslots
+      busySlots['personId'] = this.state.personId
       for (let i = 1; i <= 7; i++) {
         let startofweek = moment(this.state.startDay).isoWeekday(0); // sets beginning of week to sunday
         if (this.state.checkedDays.get(String(i)) === true) {
@@ -103,8 +106,10 @@ class Check extends React.Component {
           let StartingDay = startofweek.add(AddDayCounter, "day");
           let NextWeek = "";
 
-          for (let k = 0; k <= 4; k++) {
-            busySlots[StartingDay.format("DD-MM-YYYY")] = this.state.timeslots;
+          for (let k = 1; k <= 5; k++) {
+            // busySlots[k][this.state.personId][StartingDay.format("DD-MM-YYYY")]= this.state.timeslots
+            busySlots[StartingDay.format("DD-MM-YYYY")] = this.state.timeslots
+            busySlots['personId'] = this.state.personId
             NextWeek = moment(StartingDay).add(7, "days");
             StartingDay = NextWeek;
           }
@@ -175,7 +180,7 @@ class Check extends React.Component {
               <label></label>
             </Col>
             <Col xs={4} debug>
-              <p>Recurring on</p>
+              <p>Recurring on:</p>
               {this.state.Days.map((item) => (
                 <div>
                   <label>
