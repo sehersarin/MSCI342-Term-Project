@@ -1,6 +1,4 @@
-
-class AvailabilityDetails {
-
+class AvailabilityDetail {
     constructor(availabilityData) {
         this.schoolId = availabilityData.school_id;
         this.workerId = availabilityData.worker_id,
@@ -11,4 +9,4 @@ class AvailabilityDetails {
     }
 }
 
-module.exports = AvailabilityDetails;
+module.exports = AvailabilityDetail;
