@@ -7,7 +7,7 @@ const Tables = require('../../constants/tables.json');
 
 const WorkerDetails = require('../data/Worker');
 
-// This method returns the corresponding workers given school ID. If the school ID is incorrect, it will return null. 
+// This method returns the corresponding worker ids given school ID. If the school ID is incorrect, it will return null. 
 // If either the tableName or Object are null or undefined, an error will be thrown.
 async function getWorkerIdsForSchool(schoolId) {
     if (_.isNil(schoolId)) return null;
@@ -17,7 +17,6 @@ async function getWorkerIdsForSchool(schoolId) {
 
         if (_.isEmpty(workerIds)) return null;
         return _.map(workerIds, 'worker_id');
-        //_.map(query_output, worker_object => new WorkerDetails(worker_object));
 
     } catch (err) {
         console.log('Error occurred in ', err);
