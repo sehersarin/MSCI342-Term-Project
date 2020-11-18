@@ -1,6 +1,6 @@
 const { db } = require('../../lib/connection');
 
-//const getAvailabilityDetails = require('../data/AvailabilityDetails');
+const getAvailabilityDetails = require('../data/AvailabilityDetails');
 
 const Tables = require('../../constants/tables.json');
 
