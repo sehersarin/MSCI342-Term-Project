@@ -9,6 +9,9 @@ import { Link } from 'react-router-dom';
 import queryString from 'query-string'
 
 const axios = require('axios').default;
+var moment = require('moment');
+var date = new Date();
+var eDate = new Date(Date.now() + 14*24*60*60*1000);
 
 //This class is for students to sign up for appointments 
 //students or support workers may access this page from the dashboard then fill in the following information 
@@ -25,8 +28,8 @@ class CreateAppointmentForm extends Component {
         successfulAppointment: false,
         formSubmission: false,
         availableTime : [],
-        startDate: new Date(), //format correctly 
-        endDate: ""  //start date + 14 days
+        startDate: moment(date).format('YYYY-MM-DD'), // start date
+        endDate: moment(eDate).format('YYYY-MM-DD') //start date + 14 days
       };
       this.handleFormChange = this.handleFormChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
@@ -75,7 +78,7 @@ class CreateAppointmentForm extends Component {
   //add an else if statement for successful form submissiom but unsuccessful appointment submission (api backend)
   //have the user redo the book appointment process
   render() {
-    console.log(this.state.workerId);
+    console.log(this.state.startDate, this.state.endDate);
       return (
           <Container className="Form-container">
              <Title name= "Book Appointment. (Still needs to be implemented)"></Title>

@@ -53,7 +53,7 @@ class SelectWorkerForm extends Component {
   componentDidMount() {
     var params = { schoolId: this.state.schoolId, accessToken: this.state.accessToken };
 
-    axios.get(`/api/get-workers-for-school/?${queryString.stringify(params)}`)
+    axios.post(`/api/get-workers-for-school/?${queryString.stringify(params)}`)
       .then(res => {
         // Only stores the worker data if no error occured and the data is not null.
         // Else, shows no workers and logs the error.
@@ -62,9 +62,9 @@ class SelectWorkerForm extends Component {
           this.setState({
             WorkerIds: res.data,
           });
-       // } else {
+      // } else {
          // console.log('Error occurred when mounting the WorkerList ', res.error);
-       // }
+        //}
       });
   }
 
@@ -80,11 +80,12 @@ class SelectWorkerForm extends Component {
     }
     else{
       return (
+
           <Container className="Form-container">
              <Title name= "Select A Service Worker."></Title>
             <Row>
              <Col sm={12} align="center">
-                <form onSubmit={this.handleSubmit}> 
+                
                   <input 
                   type="radio" 
                   value="800000" 
@@ -106,7 +107,9 @@ class SelectWorkerForm extends Component {
                   onChange= {this.handleFormChange}/> Worker 3
                   <br></br>
                   <br></br>
+                  
 
+                  <form onSubmit={this.handleSubmit}> 
                   <input
                   className ="SubmitButton" 
                   type="submit" 
