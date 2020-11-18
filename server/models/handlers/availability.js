@@ -8,11 +8,8 @@ async function getAvailabilityDetails(workerId, schoolId, startDate, endDate) {
         return null;
     }
 
-    return availabilityModel.getAvailabilityDetails(workerId, schoolId, startDate, endTime);
+    return availabilityModel.getAvailabilityDetails(workerId, schoolId, startDate, endDate);
 }
-
-
-
 
 module.exports = {
     getAvailabilityDetails,
