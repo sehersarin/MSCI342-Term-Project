@@ -9,6 +9,7 @@ const appointmentHandler = require('../models/handlers/appointment');
 const workerTimeslotHandler = require('../models/handlers/workerTimeslot');
 const availabilityHandler = require('../models/handlers/availability');
 const schoolHandler = require('../models/handlers/school');
+const workerHandler = require('../models/handlers/worker');
 
 const TimeslotStatus  = require('../constants/timeslotStatus.json');
 
@@ -165,7 +166,7 @@ router.post('/get-workers-for-school', async (req, res) => {
 
     // Attempts to fetch all worker ids  for a specific school 
     const workerIds = await schoolHandler.getWorkerIdsForSchool(schoolId);
-    const workerObjects = await schoolHandler.getWorkersByWorkerIds(workerIds);
+    const workerObjects = await workerHandler.getWorkersByWorkerIds(workerIds);
     res.send(workerObjects);
 });
 

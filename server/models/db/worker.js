@@ -24,7 +24,7 @@ async function insertWorkerAccount(firstName, lastName, type, workerId, email, p
 
 //This method returns the first name, last name and other information about the worker 
 async function getWorkersByWorkerIds(workerIds) {
-    const queryStmt = `select ${queryParams} from ${tableJoins} where worker_id in (${query_string});`;
+    const queryStmt = `select * from service_worker where worker_id in (${workerIds});`;
     const query_output = await db.any(queryStmt);
 
     if (_.isEmpty(query_output)) return null;
