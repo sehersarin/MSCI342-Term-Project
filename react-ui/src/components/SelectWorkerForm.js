@@ -1,17 +1,18 @@
 import React, {Component} from "react";
 import { Container, Row, Col } from 'react-grid-system';
-import { Redirect, Route, withRouter } from "react-router-dom";
+import { Redirect, Route, Switch, Link, withRouter } from "react-router-dom";
 import Title from "./Title"
 import "./CreateAppointmentForm.scss"
 // import dashboard from "./Layouts/Dashboard"
-import { Link } from 'react-router-dom';
 
 import queryString from 'query-string'
 import CreateAppointment from "./Layouts/CreateAppointment"
-const axios = require('axios').default;
 
-//This class is for students to sign up for appointments 
-//students or support workers may access this page from the dashboard then fill in the following information 
+
+const axios = require('axios').default;
+var moment = require('moment');
+
+//This class is for students to choose a worker to sign up for appointments with
 
 class SelectWorkerForm extends Component {
     constructor(props) {
@@ -21,7 +22,7 @@ class SelectWorkerForm extends Component {
         submit:false,
         email: this.props.user.email,
         userType: this.props.user.userType,
-        workerId: "Not_Changed!!", // taken from Amy's test for the api
+        workerId: "Not_Changed!!", // check to see if changed in the URL in the next page
         schoolId: 1,
         //schoolId: this.props.user.schoolId,  this doesn't seem to work
         studentId: this.props.user.personId, 
@@ -30,24 +31,16 @@ class SelectWorkerForm extends Component {
         WorkerIds: [],
       };
       this.handleFormChange = this.handleFormChange.bind(this);
-      this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleFormChange = event => {
     let val = event.target.value;
     let workerId = event.target.name;
-    //this.state.workerId = val
     this.setState({
       workerId: val
     });
     console.log(workerId, val);
   };
-
-  handleSubmit(e) {
-    this.setState({
-      submit: true
-    });
-  }
 
   componentDidMount() {
     var params = { schoolId: this.state.schoolId, accessToken: this.state.accessToken };
@@ -61,27 +54,26 @@ class SelectWorkerForm extends Component {
           this.setState({
             WorkerIds: res.data,
           });
-        //} else {
-          //console.log('Error occurred when mounting the AppointmentList ', res.error);
-        //}
+       // } else {
+         // console.log('Error occurred when mounting the WorkerList ', res.error);
+       // }
       });
   }
 
 
   render() {
-    const { email, studentId, schoolId, userType, workerId, accessToken } = this.state;
-    let newRoute= <Route path="/Dashboard/SelectWorker" render={props => ( <Redirect to={`/dashboard/CreateAppointment/${email}/${userType}/${studentId}/${schoolId}/${workerId}/${accessToken}`} Component={CreateAppointment}/>)}></Route> 
+    //const { email, studentId, schoolId, userType, workerId, accessToken } = this.state;
+    //let newRoute= <Route path="/Dashboard/SelectWorker" render={props => ( <Redirect to={`/dashboard/CreateAppointment/${email}/${userType}/${studentId}/${schoolId}/${workerId}/${accessToken}`} Component={CreateAppointment}/>)}></Route> 
 
-    if(this.state.submit){
-      return newRoute;
-    }
+    //if(this.state.submit){
+     // return newRoute;
+  //  }
       return (
           <Container className="Form-container">
              <Title name= "Select A Service Worker."></Title>
             <Row>
              <Col sm={12} align="center">
-                <form onSubmit={this.handleSubmit}>
-                
+                  
                   <input 
                   type="radio" 
                   value="800000" 
@@ -91,8 +83,8 @@ class SelectWorkerForm extends Component {
 
                   <input 
                   type="radio" 
-                  value="800001"
-                  name="choice" 
+                  value="800001" 
+                  name="choice"
                   onChange= {this.handleFormChange}/> Worker 2
                   <br></br>
 
@@ -104,12 +96,26 @@ class SelectWorkerForm extends Component {
                   <br></br>
                   <br></br>
 
+                  <Link to = {`/dashboard/CreateAppointment/${this.state.email}/${this.state.userType}/${this.state.studentId}/${this.state.schoolId}/${this.state.workerId}/${this.state.accessToken}`}>
                   <input
                   className ="SubmitButton" 
                   type="submit" 
                   value="Submit!"/> 
+                  </Link>
 
-                </form>
+                
+                <div>
+                <main role="main">
+                  <div className="main">
+                    <Switch>
+                      <Route path= {`/dashboard/CreateAppointment/`}>
+                        <CreateAppointment workerId={this.state.workerId} />
+                      </Route>
+                    </Switch>
+                  </div>
+                </main>
+                </div>
+
              <br></br>   
              </Col>
             </Row>
