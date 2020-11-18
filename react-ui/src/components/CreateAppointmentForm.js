@@ -7,6 +7,7 @@ import "./CreateAppointmentForm.scss"
 import { Link } from 'react-router-dom';
 
 import queryString from 'query-string'
+import Home from "./Layouts/Home";
 
 const axios = require('axios').default;
 var moment = require('moment');
@@ -21,35 +22,39 @@ class CreateAppointmentForm extends Component {
       super(props);
       this.state = {
         workerId: window.location.href.slice(50,57), //possible look into referencing by character not index placement
-        schoolId: 1 ,   
+        schoolId: "1" ,   
         studentId: this.props.user.personId, 
-        workerTimeslotId : 0, 
+        accessToken: this.props.user.accessToken,
+        workerTimeslotId: 0, 
         purpose: "", // Max 300 => input size is 300
         successfulAppointment: false,
         formSubmission: false,
-        availableTime : [],
-        startDate: moment(date).format('YYYY-MM-DD'), // start date
-        endDate: moment(eDate).format('YYYY-MM-DD') //start date + 14 days
+        availableTimes: [],
+        startDate: String(moment(date).format('YYYY-MM-DD')), // start date
+        endDate: String(moment(eDate).format('YYYY-MM-DD')) //start date + 14 days
       };
       this.handleFormChange = this.handleFormChange.bind(this);
+      this.handleReasonChange = this.handleReasonChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleCheckbox = event => {
-    let name = event.target.name;
-    this.setState({
-      workerTimeslotId: name
-    });
-    console.log('name', name);
-  };
 
   handleFormChange = event => {
     let val = event.target.value;
-    let stateName = event.target.name;
+    let workerTimeslotId = event.target.name;
     this.setState({
-      stateName: val
+      workerTimeslotId: val
     });
-    console.log(stateName, val);
+    console.log(workerTimeslotId, val);
+  };
+
+  handleReasonChange = event => {
+    let val = event.target.value;
+    let purpose = event.target.name;
+    this.setState({
+      purpose: val
+    });
+    console.log(purpose, val);
   };
   
   handleSubmit(e) {
@@ -63,9 +68,9 @@ class CreateAppointmentForm extends Component {
       let workerTimeslotId = this.state.workerTimeslotId;
       let purpose = this.state.purpose;
 
-      var params = {studentId: studentId, workerTimeslotId: workerTimeslotId, purpose: purpose}
+      var params = {studentId: studentId, workerTimeslotId: workerTimeslotId, purpose: String(purpose), accessToken: this.state.accessToken}
 
-      axios.get(`/api/book-appointment?${queryString.stringify(params)}`)
+      axios.post(`/api/book-appointment?${queryString.stringify(params)}`)
       .then(res => {
         console.log(res.data);
         let isSuccess = res.data;
@@ -75,64 +80,36 @@ class CreateAppointmentForm extends Component {
         });
       });
   }
+
+  componentDidMount() {
+    console.log(this.state.accessToken)
+    var params = { workerId: this.state.workerId, schoolId: this.state.schoolId, startTime: this.state.startDate, endTime: this.state.endDate, accessToken: this.state.accessToken };
+    axios.post(`/api/worker-availability/?${queryString.stringify(params)}`)
+      .then(res => {
+        // Only stores the worker data if no error occured and the data is not null.
+        // Else, shows no workers and logs the error.
+        //if (_.isNil(res.error) && !_.isNil(res.data)) {
+          console.log(res.data);
+          this.setState({
+            availableTimes: res.data,
+          });
+      // } else {
+         // console.log('Error occurred when mounting the WorkerList ', res.error);
+       // }
+      });
+  }
   //add an else if statement for successful form submissiom but unsuccessful appointment submission (api backend)
   //have the user redo the book appointment process
   render() {
-    console.log(this.state.startDate, this.state.endDate, this.state.workerId);
-      return (
-          <Container className="Form-container">
-             <Title name= "Book Appointment. (Still needs to be implemented)"></Title>
+    //const { email, studentId, schoolId, userType, workerId, accessToken } = this.state;
+    //let newRoute= <Route path="/Dashboard" render={props => ( <Redirect to={`/dashboard/${email}/${userType}/${studentId}/${accessToken}`} Component={Home}/>)}></Route> 
+    if(this.state.successfulAppointment){
+      return(
+        <Container className="Form-container">
+             <Title name= "Successful Appointment Booking!"></Title>
             <Row>
              <Col sm={12} align="center">
-             <form onSubmit={this.handleSubmit}> 
-                  <label>
-                  <input type="checkbox" id="timeSlot" name="timeSlot" value="1" onChange={this.handleCheckbox}/>
-                  </label>
-                  <label>
-                  <div>
-                  2020-10-20, 08:00 - 08:30
-                  </div> 
-                  </label>
-
-                  <label>
-                  <input type="checkbox" id="timeSlot" name="timeSlot" value="2" onChange={this.handleCheckbox}/>
-                  </label>
-                  <label>
-                  <div>
-                  2020-10-20, 08:30 - 09:00
-                  </div> 
-                  </label>
-                  <label>
-                  <input type="checkbox" id="timeSlot" name="timeSlot" value="3" onChange={this.handleCheckbox}/>
-                  </label>
-                  <label>
-                  <div>
-                  2020-10-20, 09:00 - 09:30
-                  </div> 
-                  </label>
-
-                  <br></br>
-                  <br></br>
-                  <label>
-                  <input 
-                        className ="InputFields" 
-                        type="text" 
-                        name="reason"
-                        placeholder= "Reason for Booking Appointment" 
-                        onChange={this.handleFormChange} />
-                      </label>
-                    <br></br>
-                  <label>
-                  <div>
-                     (300 Character limit)
-                  </div>
-                  <br></br>
-                  <input
-                  className ="SubmitButton" 
-                  type="submit" 
-                  value="Submit!" />
-                  </label>
-              </form> 
+                  
               <br></br>
               <div>
 
@@ -142,8 +119,59 @@ class CreateAppointmentForm extends Component {
               </Col>
             </Row>
           </Container>
+      );
+    }
+    else{
+      return (
+          <Container className="Form-container">
+             <Title name= "Book Appointment"></Title>
+            <Row>
+             <Col sm={12} align="center">
+                  {this.state.availableTimes.map((item) => (
+                        <div>
+                            <label>
+                              <input
+                                name="choice"
+                                type="radio"
+                                value={item.workerTimeslotId}
+                                onChange={this.handleFormChange}
+                              />{" "}
+                               {moment(item.date).format('dddd, MMM D, YYYY')} <br></br>
+                              {item.startTime.substring(0, 5)} to {item.endTime.substring(0, 5)}<br></br>
+                              <br></br>    
+                            </label>
+                          </div>
+                        ))}
+                  <br></br>
+                  <label>
+                  <input 
+                        className ="InputFields" 
+                        type="text" 
+                        name="reason"
+                        placeholder= "Reason for Booking Appointment" 
+                        onChange={this.handleReasonChange} />
+                      </label>
+                    <br></br>
+                  <label>
+                  <div>
+                     (300 Character limit)
+                  </div>
+                  <br></br>
+                  </label>
+              <form onSubmit={this.handleSubmit}> 
+                  <input
+                  className ="SubmitButton" 
+                  type="submit" 
+                  value="Submit!" />
+                 
+              </form> 
+              <br></br>
+              </Col>
+            </Row>
+          </Container>
         );
   }
+}
 
 }
   
