@@ -19,35 +19,28 @@ class SelectWorkerForm extends Component {
      // email = this.props.email
       this.state = {
         submit:false,
-        email: this.props.email,
-        workerId: "", // taken from Amy's test for the api
-        schoolId: 1,       //will need to implement a page before this to pass these values through
-        studentId: 0, // check with Melissa if already stored in props
-        workerTimeslotId : 0, 
-        purpose: "", // Max 300 => input size is 300
-        successfulAppointment: false,
+        email: this.props.user.email,
+        userType: this.props.user.userType,
+        workerId: "Not_Changed!!", // taken from Amy's test for the api
+        schoolId: 1,
+        //schoolId: this.props.user.schoolId,  this doesn't seem to work
+        studentId: this.props.user.personId, 
+        accessToken: this.props.user.accessToken,
         formSubmission: false,
-        availableTime : []
+        WorkerIds: [],
       };
       this.handleFormChange = this.handleFormChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleCheckbox = event => {
-    let name = event.target.name;
-    this.setState({
-      workerTimeslotId: name
-    });
-    console.log('name', name);
-  };
-
   handleFormChange = event => {
     let val = event.target.value;
-    let stateName = event.target.name;
+    let workerId = event.target.name;
+    //this.state.workerId = val
     this.setState({
-      stateName: val
+      workerId: val
     });
-    console.log(stateName, val);
+    console.log(workerId, val);
   };
 
   handleSubmit(e) {
@@ -55,61 +48,73 @@ class SelectWorkerForm extends Component {
       submit: true
     });
   }
-  //add an else if statement for successful form submissiom but unsuccessful appointment submission (api backend)
-  //have the user redo the book appointment process
+
+  componentDidMount() {
+    var params = { schoolId: this.state.schoolId, accessToken: this.state.accessToken };
+
+    axios.get(`/api/get-workers-for-school/?${queryString.stringify(params)}`)
+      .then(res => {
+        // Only stores the worker data if no error occured and the data is not null.
+        // Else, shows no workers and logs the error.
+        //if (_.isNil(res.error) && !_.isNil(res.data)) {
+          console.log(res.data);
+          this.setState({
+            WorkerIds: res.data,
+          });
+        //} else {
+          //console.log('Error occurred when mounting the AppointmentList ', res.error);
+        //}
+      });
+  }
+
+
   render() {
-    let newRoute= <Route path="/Dashboard/SelectWorker" render={props => ( <Redirect to={`/dashboard/CreateAppointment/${this.state.email}/${this.schoolId}`} Component={CreateAppointment}/>)}></Route> 
+    const { email, studentId, schoolId, userType, workerId, accessToken } = this.state;
+    let newRoute= <Route path="/Dashboard/SelectWorker" render={props => ( <Redirect to={`/dashboard/CreateAppointment/${email}/${userType}/${studentId}/${schoolId}/${workerId}/${accessToken}`} Component={CreateAppointment}/>)}></Route> 
 
     if(this.state.submit){
       return newRoute;
     }
-    console.log(this.state.email);
       return (
           <Container className="Form-container">
-             <Title name= "Select A Service Worker. (Still needs to be implemented)"></Title>
+             <Title name= "Select A Service Worker."></Title>
             <Row>
              <Col sm={12} align="center">
-             <form onSubmit={this.handleSubmit}> 
-                  <label>
-                  <input type="checkbox" id="workerID" name="workerID" value="1" onChange={this.handleCheckbox}/>
-                  </label>
-                  <label>
-                  <div>
-                  Worker 1
-                  </div> 
-                  </label>
+                <form onSubmit={this.handleSubmit}>
+                
+                  <input 
+                  type="radio" 
+                  value="800000" 
+                  name="choice"
+                  onChange= {this.handleFormChange}/> Worker 1
+                  <br></br>
 
-                  <label>
-                  <input type="checkbox" id="workerID" name="workerID" value="2" onChange={this.handleCheckbox}/>
-                  </label>
-                  <label>
-                  <div>
-                  Worker 2
-                  </div> 
-                  </label>
-                  <label>
-                  <input type="checkbox" id="workerID" name="workerID" value="3" onChange={this.handleCheckbox}/>
-                  </label>
-                  <label>
-                  <div>
-                  Worker 3
-                  </div> 
-                  </label>
+                  <input 
+                  type="radio" 
+                  value="800001"
+                  name="choice" 
+                  onChange= {this.handleFormChange}/> Worker 2
+                  <br></br>
+
+                  <input 
+                  type="radio" 
+                  value="800002" 
+                  name="choice"
+                  onChange= {this.handleFormChange}/> Worker 3
                   <br></br>
                   <br></br>
-                  <label>
+
                   <input
                   className ="SubmitButton" 
                   type="submit" 
-                  value="Submit!" />
-                  </label>
-              </form> 
-              <br></br>
-              <Link to={`/dashboard/CreateAppointment/${this.state.email}/${this.schoolId}`}>Create Appointment</Link>      
+                  value="Submit!"/> 
+
+                </form>
+             <br></br>   
              </Col>
             </Row>
           </Container>
         );
   }
 }
-  export default SelectWorkerForm ;
+export default SelectWorkerForm ;

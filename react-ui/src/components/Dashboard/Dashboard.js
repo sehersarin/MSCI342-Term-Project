@@ -56,7 +56,7 @@ class Dashboard extends Component {
               {/* Only display the book appointment form if the user is a student. */}
               {userType === UserTypes.student &&
                  <li>
-                 <Link to={`/dashboard/SelectWorker/${email}`}>Book Appointment</Link>
+                 <Link to={`/dashboard/SelectWorker/${email}/${userType}/${personId}/${accessToken}`}>Book Appointment</Link>
                 </li>
               }
 
@@ -82,10 +82,10 @@ class Dashboard extends Component {
                   <Profile name={firstName} />
                 </Route>
                 <Route path={`/dashboard/CreateAppointment`}>
-                  <CreateAppointment name={personId} />
+                  <CreateAppointment email={this.state.email} userType={userType} personId={personId} accessToken={accessToken} />
                 </Route>
                 <Route path={`/dashboard/SelectWorker`}>
-                  <SelectWorker email={this.state.email}/>
+                  <SelectWorker email={this.state.email} userType={userType} personId={personId} accessToken={accessToken} />
                 </Route>
                 <Route path = {`/dashboard/InputWorkerAvailabilitypage`}>
                   <WorkerInputpage name ={personId}/>

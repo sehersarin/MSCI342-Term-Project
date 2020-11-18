@@ -18,8 +18,8 @@ class CreateAppointmentForm extends Component {
       super(props);
       this.state = {
         workerId: 8000000, // taken from Amy's test for the api
-        schoolId: this.props.schoolId,       //will need to implement a page before this to pass these values through
-        studentId: 0, // check with Melissa if already stored in props
+        schoolId: this.props.user.schoolId,   
+        studentId: this.props.user.personId, // check with Melissa if already stored in props
         workerTimeslotId : 0, 
         purpose: "", // Max 300 => input size is 300
         successfulAppointment: false,
