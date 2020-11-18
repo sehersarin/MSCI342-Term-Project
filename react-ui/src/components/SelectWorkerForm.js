@@ -96,7 +96,7 @@ class SelectWorkerForm extends Component {
                   <br></br>
                   <br></br>
 
-                  <Link to = {`/dashboard/CreateAppointment/${this.state.email}/${this.state.userType}/${this.state.studentId}/${this.state.schoolId}/${this.state.workerId}/${this.state.accessToken}`}>
+                  <Link to = {`/dashboard/CreateAppointment/${this.state.workerId}/${this.state.email}/${this.state.userType}/${this.state.studentId}/${this.state.schoolId}/${this.state.accessToken}`}>
                   <input
                   className ="SubmitButton" 
                   type="submit" 

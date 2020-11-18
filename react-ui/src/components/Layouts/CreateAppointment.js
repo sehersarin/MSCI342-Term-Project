@@ -4,7 +4,6 @@ import CreateAppointmentForm from "../CreateAppointmentForm";
 
 class CreateAppointment extends Component {
   render() {
-    console.log(this.props.workerId)
     return (
       <Fragment>
         {/* <Header/> */}
