@@ -8,7 +8,6 @@ import Home from "../Layouts/Home";
 import NotFound from "../Layouts/404";
 import SelectWorker from "../Layouts/SelectWorker";
 import CreateAppointment from "../Layouts/CreateAppointment";
-import Availability from "../Layouts/Availability";
 import UserTypes from '../../constants/userTypes.json';
 import WorkerInputpage from "../Layouts/InputWorkerTimes/WorkerInputpage";
 
@@ -88,11 +87,9 @@ class Dashboard extends Component {
                 <Route path={`/dashboard/CreateAppointment`}>
                   <CreateAppointment name={personId} />
                 </Route>
-                {/* <Route path={`/dashboard/Availability`}>
-                  <Availability />
-            <Route/> */}
                 <Route path={`/dashboard/SelectWorker`}>
                   <SelectWorker email={this.state.email}/>
+
                 </Route>
                 <Route path = {`/dashboard/InputWorkerAvailabilitypage`}>
                   <WorkerInputpage name ={personId}/>
