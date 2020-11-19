@@ -6,7 +6,7 @@ describe('testing fetching of worker availability functionality', () => {
     });
 
     //TEST 1
-    test('rejection of null parameters', async () => {
+    test('Rejection of null parameters', async () => {
         // Arrange
         // No test variables need to be initialized.
         const workerId = null;
@@ -21,7 +21,7 @@ describe('testing fetching of worker availability functionality', () => {
     });
 
     //TEST 2
-    test('rejection of null value for required workerId parameter', async () => {
+    test('Rejection of null value for required workerId parameter', async () => {
         // Arrange
         const workerId = null;
         const schoolId = 1;
