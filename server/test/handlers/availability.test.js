@@ -37,7 +37,7 @@ describe('testing fetching of worker availability functionality', () => {
 
     //TEST 3
     test('Acceptance of a null value for the SchoolId parameter', async () => {
-        
+
         // Arrange
         //A null value for the SchoolId parameter is allowed and should return a non-null result for the worker availability corresponding to the specified workerId
         const workerId = 8000000;
@@ -55,7 +55,7 @@ describe('testing fetching of worker availability functionality', () => {
 
     //TEST 4
     test('Acceptance of a null value for the `startTime` parameter.', async () => {
-       
+
         // Arrange
         //A null value for the `startTime` parameter is allowed and should return a non-null result for the worker availability corresponding to the specified workerId.
         const workerId = 8000000;
@@ -73,7 +73,7 @@ describe('testing fetching of worker availability functionality', () => {
 
     //TEST 5
     test('Acceptance of a null value for the `endTime` parameter', async () => {
-    
+
         //A null value for the `endTime` parameter is allowed and should return a non-null result for the worker availability corresponding to the specified workerId.
         // Arrange
         const workerId = 8000000;
@@ -151,8 +151,8 @@ describe('testing fetching of worker availability functionality', () => {
         expect(availableTimes).toBeDefined();
     });
 
-     //TEST 10
-     test('Acceptance of all valid and non-null parameters for workerId, schoolId, startTime, and endTime (Happy path)', async () => {
+    //TEST 10
+    test('Acceptance of all valid and non-null parameters for workerId, schoolId, startTime, and endTime (Happy path)', async () => {
         // Arrange
         const workerId = 8000000;
         const schoolId = 1;
@@ -168,42 +168,41 @@ describe('testing fetching of worker availability functionality', () => {
     });
 
     //TEST 11
-test('Accept all valid and non-null parameters which correspond to no existing worker availabilities (return null)', async () => {
-   
-    // Arrange
-    
-    //Accept all valid and non-null parameters entered for workerId, schoolId, startTime, and endTime,
-    // where there are no exisiting availible timeslots for the specified workerId between
-    // the date range of the specified startTime, and endTime 
-    const workerId = 8000000;
-    const schoolId = 1;
-    const startTime = '2020-10-15';
-    const endTime = '2020-10-16';
+    test('Accept all valid and non-null parameters which correspond to no existing worker availabilities (return null)', async () => {
 
-    // Act
-    const availableTimes = await availabilityHandler.getAvailabilityDetails(workerId, schoolId, startTime, endTime);
+        // Arrange
+        //Accept all valid and non-null parameters entered for workerId, schoolId, startTime, and endTime,
+        // where there are no exisiting availible timeslots for the specified workerId between
+        // the date range of the specified startTime, and endTime 
+        const workerId = 8000000;
+        const schoolId = 1;
+        const startTime = '2020-10-15';
+        const endTime = '2020-10-16';
 
-    // Assert
-    //Should return null to indicate that there are no exisiting availible timeslots for the specified workerId between
-    // the date range of the specified startTime, and endTime 
-    expect(availableTimes).toBe(null);
-});
+        // Act
+        const availableTimes = await availabilityHandler.getAvailabilityDetails(workerId, schoolId, startTime, endTime);
 
-   //TEST 12
-   test('Rejection of the case where the specified endTime is earlier than the endTime', async () => {
-    // Arrange
-    const workerId = 8000000;
-    const schoolId = 1;
-    const startTime = '2020-10-16';
-    const endTime = '2020-10-15';
+        // Assert
+        //Should return null to indicate that there are no exisiting availible timeslots for the specified 
+        //workerId between the date range of the specified startTime, and endTime 
+        expect(availableTimes).toBe(null);
+    });
 
-    // Act
-    const availableTimes = await availabilityHandler.getAvailabilityDetails(workerId, schoolId, startTime, endTime);
+    //TEST 12
+    test('Rejection of the case where the specified endTime is earlier than the endTime', async () => {
+        // Arrange
+        const workerId = 8000000;
+        const schoolId = 1;
+        const startTime = '2020-10-16';
+        const endTime = '2020-10-15';
 
-    // Assert
-    ////Should return null to indicate that there are no exisiting availible timeslots between
-    // the invalid date range of the specified startTime, and endTime 
-    expect(availableTimes).toBe(null);
-});
+        // Act
+        const availableTimes = await availabilityHandler.getAvailabilityDetails(workerId, schoolId, startTime, endTime);
+
+        // Assert
+        ////Should return null to indicate that there are no exisiting availible timeslots between
+        // the invalid date range of the specified startTime, and endTime 
+        expect(availableTimes).toBe(null);
+    });
 
 })
