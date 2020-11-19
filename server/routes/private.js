@@ -67,7 +67,6 @@ router.post('/add-recurring-schedule', async (req, res) => {
 
     const query = req.query ? req.query : {};
 
-
     const slotId = query.slotId ? query.slotId : null;
     const schoolId = query.schoolId ? query.schoolId : null;
     const workerId = query.workerId ? query.workerId : null;
