@@ -62,8 +62,7 @@ describe('Checkbox component', () => {
     expect(axios.get).toHaveBeenCalled();
   })
 
-
-  test("Testing case where user only select a checkbox", async () => {
+  test("Testing case where user only select a recurring checkbox", async () => {
     //Arrange
     const dom = render(
       <BrowserRouter>
@@ -73,6 +72,47 @@ describe('Checkbox component', () => {
     const checkbox = getByDisplayValue(dom.container, "100");
     const submit = getByDisplayValue(dom.container, "Add Availability")
     const date = getByDisplayValue(dom.container, "")
+
+    const timeslots = [{ slotId: 1, startTime: "08:00:00", endTime: "08:30:00" },
+    { slotId: 2, startTime: "08:30:00", endTime: "09:00:00" },
+    { slotId: 3, startTime: "09:00:00", endTime: "09:30:00" },
+    { slotId: 4, startTime: "09:30:00", endTime: "10:00:00" },
+    { slotId: 5, startTime: "10:00:00", endTime: "10:30:00" },
+    { slotId: 6, startTime: "10:30:00", endTime: "11:00:00" },
+    { slotId: 7, startTime: "11:00:00", endTime: "11:30:00" },
+    { slotId: 8, startTime: "11:30:00", endTime: "12:00:00" },
+    { slotId: 9, startTime: "12:00:00", endTime: "12:30:00" },
+    { slotId: 10, startTime: "12:30:00", endTime: "13:00:00" },
+    { slotId: 11, startTime: "13:00:00", endTime: "13:30:00" },
+    { slotId: 12, startTime: "13:30:00", endTime: "14:00:00" },
+    { slotId: 13, startTime: "14:00:00", endTime: "14:30:00" },
+    { slotId: 14, startTime: "14:30:00", endTime: "15:00:00" },
+    { slotId: 15, startTime: "15:00:00", endTime: "15:30:00" }]
+    
+    //Act
+    window.alert = jest.fn();
+    const resp = { data: timeslots }
+    const expectedArg = "Please select timeslot(s)";
+    await axios.get.mockImplementation(() => Promise.resolve(resp));
+    fireEvent.click(checkbox)
+    fireEvent.change(date, { target: { value: '2020-11-25' } });
+    fireEvent.click(submit)
+
+
+    //Assert
+    expect(window.alert).toHaveBeenCalledWith(expectedArg);
+  })
+
+  test("Testing case where timeslot isn't select", async () => {
+    //Arrange
+    const dom = render(
+      <BrowserRouter>
+        <Check />
+      </BrowserRouter>);
+
+    // const checkbox = getByDisplayValue(dom.container, "1");
+    const submit = getByDisplayValue(dom.container, "Add Availability")
+
 
     const timeslots = [{ slotId: 1, startTime: "08:00:00", endTime: "08:30:00" },
     { slotId: 2, startTime: "08:30:00", endTime: "09:00:00" },
@@ -96,8 +136,7 @@ describe('Checkbox component', () => {
     const resp = { data: timeslots }
     const expectedArg = "Please select timeslot(s)";
     await axios.get.mockImplementation(() => Promise.resolve(resp));
-    fireEvent.click(checkbox)
-    fireEvent.change(date, { target: { value: '2020-11-25' } });
+    // fireEvent.click(checkbox)
     fireEvent.click(submit)
 
 
@@ -105,16 +144,12 @@ describe('Checkbox component', () => {
     expect(window.alert).toHaveBeenCalledWith(expectedArg);
   })
 
-  test("Testing case where date isn't select", async () => {
+  test("Testing valid input where only timeslot is selected", async () => {
     //Arrange
     const dom = render(
       <BrowserRouter>
         <Check />
       </BrowserRouter>);
-
-    const checkbox = getByDisplayValue(dom.container, "100");
-    const submit = getByDisplayValue(dom.container, "Add Availability")
-
 
     const timeslots = [{ slotId: 1, startTime: "08:00:00", endTime: "08:30:00" },
     { slotId: 2, startTime: "08:30:00", endTime: "09:00:00" },
@@ -132,15 +167,19 @@ describe('Checkbox component', () => {
     { slotId: 14, startTime: "14:30:00", endTime: "15:00:00" },
     { slotId: 15, startTime: "15:00:00", endTime: "15:30:00" }]
     //const params = { accessToken: "XcCa92ZvOnQKZsGtOKOa" }
+    // const timeslot1 = getByDisplayValue(dom.asFragment(), "1");
+    const date = getByDisplayValue(dom.container, "")
+    const submit = getByDisplayValue(dom.container, "Add Availability")
 
     //Act
     window.alert = jest.fn();
     const resp = { data: timeslots }
-    const expectedArg = "No date has been selected, please selected a date";
+    const expectedArg = "Input is added";
     await axios.get.mockImplementation(() => Promise.resolve(resp));
+    const checkbox = getByDisplayValue(dom.container, "1");
     fireEvent.click(checkbox)
+    fireEvent.change(date, { target: { value: '2020-11-25' } });
     fireEvent.click(submit)
-
 
     //Assert
     expect(window.alert).toHaveBeenCalledWith(expectedArg);
@@ -153,10 +192,6 @@ describe('Checkbox component', () => {
         <Check />
       </BrowserRouter>);
 
-    const checkbox = getByDisplayValue(dom.container, "100");
-    const submit = getByDisplayValue(dom.container, "Add Availability")
-
-
     const timeslots = [{ slotId: 1, startTime: "08:00:00", endTime: "08:30:00" },
     { slotId: 2, startTime: "08:30:00", endTime: "09:00:00" },
     { slotId: 3, startTime: "09:00:00", endTime: "09:30:00" },
@@ -173,18 +208,21 @@ describe('Checkbox component', () => {
     { slotId: 14, startTime: "14:30:00", endTime: "15:00:00" },
     { slotId: 15, startTime: "15:00:00", endTime: "15:30:00" }]
     //const params = { accessToken: "XcCa92ZvOnQKZsGtOKOa" }
-    const timeslot1 = getByDisplayValue(dom.asFragment(), "1");
+    // const timeslot1 = getByDisplayValue(dom.asFragment(), "1");
     const date = getByDisplayValue(dom.container, "")
+    const recurring = getByDisplayValue(dom.container, "100");
+    const submit = getByDisplayValue(dom.container, "Add Availability")
+
     //Act
     window.alert = jest.fn();
     const resp = { data: timeslots }
     const expectedArg = "Input is added";
     await axios.get.mockImplementation(() => Promise.resolve(resp));
+    const checkbox = getByDisplayValue(dom.container, "1");
     fireEvent.click(checkbox)
-    fireEvent.click(timeslot1)
+    fireEvent.click(recurring)
     fireEvent.change(date, { target: { value: '2020-11-25' } });
     fireEvent.click(submit)
-
 
     //Assert
     expect(window.alert).toHaveBeenCalledWith(expectedArg);

@@ -149,23 +149,6 @@ class Check extends React.Component {
       return time.join(""); // return adjusted time or original string
     }
 
-    const listItems = this.state.items.map((el) => (
-      <React.Fragment>
-        <div>
-          <label>
-            <input
-              type="checkbox"
-              id={el.slotId}
-              value={el.slotId}
-              onChange={this.handleCheckbox}
-            />
-            {tConvert(el.startTime) + " to " + tConvert(el.endTime)}
-          </label>
-          <br></br>
-        </div>
-      </React.Fragment>
-    ));
-
     return (
       <Container className="Form-container">
         <Title name="Availability"/><Title/>
@@ -175,7 +158,21 @@ class Check extends React.Component {
               <input type="date" id="DATE" onChange={this.handleChange} />
               <br />
               <br />
-              {listItems}
+              {this.state.items.map((el) => (
+                  <div>
+                    <label>
+                      <input
+                        type="checkbox"
+                        id={el.slotId}
+                        value={el.slotId}
+                        onChange={this.handleCheckbox}
+                      />
+                      {tConvert(el.startTime) + " to " + tConvert(el.endTime)}
+                    </label>
+                    <br></br>
+                  </div>
+              ))}
+              {/* {listItems} */}
               <br></br>
               <br></br>
               <label></label>
