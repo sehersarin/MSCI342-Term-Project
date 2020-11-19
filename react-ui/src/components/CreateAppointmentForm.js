@@ -82,7 +82,7 @@ class CreateAppointmentForm extends Component {
   }
 
   componentDidMount() {
-    console.log(this.state.accessToken)
+    console.log(this.state.workerId);
     var params = { workerId: this.state.workerId, schoolId: this.state.schoolId, startTime: this.state.startDate, endTime: this.state.endDate, accessToken: this.state.accessToken };
     axios.post(`/api/worker-availability/?${queryString.stringify(params)}`)
       .then(res => {

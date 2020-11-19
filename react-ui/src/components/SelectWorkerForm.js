@@ -28,6 +28,7 @@ class SelectWorkerForm extends Component {
         studentId: this.props.user.personId, 
         accessToken: this.props.user.accessToken,
         formSubmission: false,
+        formSelection: false,
         WorkerIds: [],
       };
       this.handleFormChange = this.handleFormChange.bind(this);
@@ -38,7 +39,8 @@ class SelectWorkerForm extends Component {
     let val = event.target.value;
     let workerId = event.target.name;
     this.setState({
-      workerId: val
+      workerId: val,
+      formSelection: true
     });
     console.log(workerId, val);
   };
@@ -76,7 +78,7 @@ class SelectWorkerForm extends Component {
     let newRoute= <Route path="/Dashboard/SelectWorker" render={props => ( <Redirect to={`/dashboard/CreateAppointment/${workerId}/${email}/${userType}/${studentId}/${schoolId}/${accessToken}`} Component={CreateAppointment}/>)}></Route> 
 
     if(this.state.formSubmission){
-      return newRoute;
+        return newRoute;
     }
     else{
       return (
