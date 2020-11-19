@@ -22,13 +22,13 @@ class Check extends React.Component {
       accessToken: "",
       timeslots: "",
       Days: [
-        { id: 1, value: "Monday" },
-        { id: 2, value: "Tuesday" },
-        { id: 3, value: "Wednesday" },
-        { id: 4, value: "Thursday" },
-        { id: 5, value: "Friday" },
-        { id: 6, value: "Saturday" },
-        { id: 7, value: "Sunday" },
+        { id: 100, value: "Monday" },
+        { id: 200, value: "Tuesday" },
+        { id: 300, value: "Wednesday" },
+        { id: 400, value: "Thursday" },
+        { id: 500, value: "Friday" },
+        { id: 600, value: "Saturday" },
+        { id: 700, value: "Sunday" },
       ],
       checkedDays: new Map(),
     };
@@ -37,9 +37,9 @@ class Check extends React.Component {
     this.handleCheckbox = this.handleCheckbox.bind(this);
   }
 
-  componentDidMount() {
+ async componentDidMount() {
     var params = { accessToken: "XcCa92ZvOnQKZsGtOKOa" };
-    axios
+    await axios
       .get(`/api/possible-timeslots/?${queryString.stringify(params)}`)
       .then((res) => {
         if (res.data !== "") {
@@ -47,6 +47,7 @@ class Check extends React.Component {
             items: res.data,
           });
         }
+        console.log(res.data)
       });
       let date_ob = new Date();
       let date = ("0" + date_ob.getDate()).slice(-2); 
@@ -81,7 +82,7 @@ class Check extends React.Component {
     let AvailableDates = [];
    
     let currentDayNumber = moment(this.state.startDay).day();
-    let DaySelected = false; // variable for if checkboxes are checked or not
+    //let DaySelected = false; // variable for if checkboxes are checked or not
 
     if (this.state.startDay.format("DD-MM-YYYY") === "Invalid date") {
       alert("No date has been selected, please selected a date");
@@ -95,8 +96,8 @@ class Check extends React.Component {
       busySlots['personId'] = this.state.personId
       for (let i = 1; i <= 7; i++) {
         let startofweek = moment(this.state.startDay).isoWeekday(0); // sets beginning of week to sunday
-        if (this.state.checkedDays.get(String(i)) === true) {
-          DaySelected = true;
+        if (this.state.checkedDays.get(String(i*100)) === true) {
+          //DaySelected = true;
           var AddDayCounter = i;
 
           if (AddDayCounter < currentDayNumber) {

@@ -62,7 +62,7 @@ describe('SignupForm component', () => {
       userType: "worker",
       workerId: 8000000
     }]
-
+  
     const email = getByPlaceholderText(dom.container, 'email');
     const password = getByPlaceholderText(dom.container, 'password');
     const submit = getByDisplayValue(dom.container, "Log In!");
