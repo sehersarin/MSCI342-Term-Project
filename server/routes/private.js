@@ -10,6 +10,7 @@ const workerTimeslotHandler = require('../models/handlers/workerTimeslot');
 const timeslotHandler = require('../models/handlers/timeslot');
 const availabilityHandler = require('../models/handlers/availability');
 const schoolHandler = require('../models/handlers/school');
+const workerHandler = require('../models/handlers/worker');
 
 const TimeslotStatus  = require('../constants/timeslotStatus.json');
 
@@ -164,10 +165,10 @@ router.post('/get-workers-for-school', async (req, res) => {
 
     if (!_.isNil(error)) res.send(error);
 
-    // Attempts to fetch all workers for a specific school 
+    // Attempts to fetch all worker ids  for a specific school 
     const workerIds = await schoolHandler.getWorkerIdsForSchool(schoolId);
-
-    res.send(workerIds);
+    const workerObjects = await workerHandler.getWorkersByWorkerIds(workerIds);
+    res.send(workerObjects);
 });
 
 // Cancels all the appointments/meetings and updates worker availability to unavailable for a worker for a specific day.
