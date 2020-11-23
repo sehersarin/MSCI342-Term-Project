@@ -1,0 +1,36 @@
+@import "../Common/ColorSchema.scss";
+
+.cancelAppointmentBtn {
+    background-color: $emergency-btn-color;
+    position: absolute;
+    right: 0;
+    padding: 5px;
+    margin-right: 10px;
+    font-size: $typical-font-size;   
+}
+
+.closeBtn {
+    float: right;
+    padding: 20px;
+    font-size: $typical-font-size;
+    background-color: $worker-active-color;
+}
+
+.cancelDayForm {
+    display: block;
+    text-align: center;
+    font-size: $typical-font-size;
+    margin-top: 5%;
+}
+
+.cancelledDateInput {
+    text-align: center;
+    font-size: $input-font-size;
+}
+
+.submitBtn {
+    background-color: $emergency-btn-color;
+    margin-top: 5%;
+    padding: 1%;
+    font-size: $typical-font-size;
+}
