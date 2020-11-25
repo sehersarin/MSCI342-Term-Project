@@ -60,7 +60,6 @@ async function cancelSpecificAppointment(appointmentId) {
         // Cancels specific appointment.
         const cancelSpecificAppointment = appointmentModel.cancelSpecificAppointment(appointmentId);
         if (_.isEmpty(cancelSpecificAppointment)) return false;
-        if (_.isNil(cancelSpecificAppointment)) return false;
 
         // Updates the worker's availability to unavailable for the  timeslot of that specific appointment
         //using appointmentId, find workerTimeslotId (in appointment table, simple query)

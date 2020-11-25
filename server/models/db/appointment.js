@@ -60,7 +60,7 @@ async function cancelSpecificAppointment(appointmentId) {
         //select from where query simply returns empty 
         //how to evluate output? 
     const selectQueryOutput = `select * from ${Tables.appointment} ${queryCondition};`;   
-    if (_.isEmpty(selectQueryOutput)) return null;
+    if (_.isEmpty(selectQueryOutput)) return false;
     // Isolated the query condition to decrease the length of the query line and increase code readability.
 
     return db.any(`update ${Tables.appointment} set status='${AppointmentStatus.cancelled}' ${queryCondition};`);
