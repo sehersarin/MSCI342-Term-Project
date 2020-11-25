@@ -55,6 +55,8 @@ async function cancelSpecificAppointment(appointmentId) {
     try {
         // Cancels specific appointment.
         const cancelSpecificAppointment = appointmentModel.cancelSpecificAppointment(appointmentId);
+        if (_.isEmpty(cancelSpecificAppointment)) return false;
+        if (_.isNil(cancelSpecificAppointment)) return false;
         
         // Updates the worker's availability to unavailable for the  timeslot of that specific appointment
             //using appointmentId, find workerTimeslotId (in appointment table, simple query)
@@ -63,9 +65,10 @@ async function cancelSpecificAppointment(appointmentId) {
 
         // Leverage Promise chain to complete both requests asynchronously and decrease execution time.
         //await Promise.all([updateWorkerAvailability, cancelSpecificAppointment]);
-        await Promise.all([cancelSpecificAppointment]);
+        //await Promise.all([cancelSpecificAppointment]);
 
-        return true;
+        //return true;
+        return cancelSpecificAppointment; 
     } catch (error) {
         console.log('Error occurred in cancelSpecificAppointment method: ', error);
         return false;
