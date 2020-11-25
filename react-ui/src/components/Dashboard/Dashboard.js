@@ -38,7 +38,7 @@ class Dashboard extends Component {
 
     // Else it will display the appropriate header based on the user type.
     const { email, firstName, personId, userType, accessToken } = this.state;
-
+    console.log(this.state.personId)
     return (
       <Fragment>
         <header className={userType}>
@@ -51,6 +51,7 @@ class Dashboard extends Component {
               <li>
                 <Link to={`/dashboard`}>Home</Link>
               </li>
+             
               <li>
                 <Link to={`/dashboard/Profile/${email}`}>Profile</Link>
               </li>
@@ -89,7 +90,7 @@ class Dashboard extends Component {
                   <SelectWorker email={this.state.email} userType={userType} personId={personId} accessToken={accessToken} />
                 </Route>
                 <Route path = {`/dashboard/InputWorkerAvailabilitypage`}>
-                  <WorkerInputpage name ={personId}/>
+                  <WorkerInputpage personId ={this.state.personId}/>
                 </Route>
                 <Route exact path={`${this.props.match.path}`}>
                   <Home userType={userType} personId={personId} accessToken={accessToken} />
