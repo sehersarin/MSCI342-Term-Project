@@ -7,6 +7,7 @@ import "./CreateAppointmentForm.scss"
 
 import queryString from 'query-string'
 import CreateAppointment from "./Layouts/CreateAppointment"
+import _ from 'lodash'
 
 
 const axios = require('axios').default;
@@ -59,14 +60,14 @@ class SelectWorkerForm extends Component {
       .then(res => {
         // Only stores the worker data if no error occured and the data is not null.
         // Else, shows no workers and logs the error.
-        //if (_.isNil(res.error) && !_.isNil(res.data)) {
+        if (_.isNil(res.error) && !_.isNil(res.data)) {
           console.log(res.data);
           this.setState({
             WorkerIds: res.data,
           });
-      // } else {
-         // console.log('Error occurred when mounting the WorkerList ', res.error);
-        //}
+        } else {
+          console.log('Error occurred when mounting the WorkerList for school ', res.error);
+        }
       });
   }
 
@@ -76,7 +77,25 @@ class SelectWorkerForm extends Component {
     //DO NOT CHANGE THE ORDER OF THIS ROUTE
     //the next page reads in information from the URL
     let newRoute= <Route path="/Dashboard/SelectWorker" render={props => ( <Redirect to={`/dashboard/CreateAppointment/${workerId}/${email}/${userType}/${studentId}/${schoolId}/${accessToken}`} Component={CreateAppointment}/>)}></Route> 
+    if(this.state.WorkerIds == ""){
+      return(
+        <Container className="Form-container">
+             <Title name= "Sorry, no service workers for your school were found"></Title>
+            <Row>
+             <Col sm={12} align="center">
+                  
+              <br></br>
+              <div>
 
+              <Link to="/dashboard">Home</Link>
+
+              </div>
+              </Col>
+            </Row>
+          </Container>
+      );
+    }
+    else{
     if(this.state.formSubmission){
         return newRoute;
     }
@@ -115,7 +134,7 @@ class SelectWorkerForm extends Component {
             </Row>
           </Container>
         );
-  }
+  }}
 }
 }
 export default SelectWorkerForm ;

@@ -8,6 +8,8 @@ import { Link } from 'react-router-dom';
 
 import queryString from 'query-string'
 import Home from "./Layouts/Home";
+import _ from 'lodash'
+
 
 const axios = require('axios').default;
 var moment = require('moment');
@@ -88,22 +90,22 @@ class CreateAppointmentForm extends Component {
       .then(res => {
         // Only stores the worker data if no error occured and the data is not null.
         // Else, shows no workers and logs the error.
-        //if (_.isNil(res.error) && !_.isNil(res.data)) {
+        if (_.isNil(res.error) && !_.isNil(res.data)) {
           console.log(res.data);
           this.setState({
             availableTimes: res.data,
           });
-      // } else {
-         // console.log('Error occurred when mounting the WorkerList ', res.error);
-       // }
+       } else {
+          console.log('Error occurred when mounting the WorkerList ', res.error);
+        }
       });
   }
-  //add an else if statement for successful form submissiom but unsuccessful appointment submission (api backend)
-  //have the user redo the book appointment process
+  
   render() {
     //const { email, studentId, schoolId, userType, workerId, accessToken } = this.state;
     //let newRoute= <Route path="/Dashboard" render={props => ( <Redirect to={`/dashboard/${email}/${userType}/${studentId}/${accessToken}`} Component={Home}/>)}></Route> 
-    if(this.state.successfulAppointment){
+    if(this.state.formSubmission){
+      if(this.state.successfulAppointment){
       return(
         <Container className="Form-container">
              <Title name= "Successful Appointment Booking!"></Title>
@@ -121,6 +123,24 @@ class CreateAppointmentForm extends Component {
           </Container>
       );
     }
+    else{
+      return(
+      <Container className="Form-container">
+             <Title name= "Appointment Booking Failed, Please Try Again"></Title>
+            <Row>
+             <Col sm={12} align="center">
+                  
+              <br></br>
+              <div>
+
+              <Link to="/dashboard">Home</Link>
+
+              </div>
+              </Col>
+            </Row>
+          </Container>
+           );
+    }}
     else{
       return (
           <Container className="Form-container">

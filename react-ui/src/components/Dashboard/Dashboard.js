@@ -21,6 +21,7 @@ class Dashboard extends Component {
       firstName: this.props.match.params.name,
       personId: this.props.match.params.personId,
       accessToken: this.props.match.params.accessToken,
+      //schoolId: this.props.match.params.schoolId
     };
   }
 
