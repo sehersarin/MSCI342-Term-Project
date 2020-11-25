@@ -155,7 +155,7 @@ class Check extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <Row>
             <Col xs={8} align="center">
-              <input type="date" id="DATE" onChange={this.handleChange} />
+              <input type="date" id="DATE" onChange={this.handleChange} min={new Date().toISOString().split('T')[0]} />
               <br />
               <br />
               {this.state.items.map((el) => (
