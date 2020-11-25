@@ -41,7 +41,7 @@ describe('testing cancellation of specific worker appointments', () => {
         expect(isCancelledSuccessfully).toBe(testIsCancelled);
     });
 
-    test('invalid value for the appointmentId', async() => {
+    test('invalid true value for the appointmentId', async() => {
         // Arrange
         const appointmentId = true;
 
@@ -54,9 +54,22 @@ describe('testing cancellation of specific worker appointments', () => {
         expect(isCancelledSuccessfully).toBe(testIsCancelled);
     });
 
+    test('invalid number value for the appointmentId', async() => {
+        // Arrange
+        const appointmentId = 5;
+
+        const testIsCancelled = false;
+
+        // Act
+        const isCancelledSuccessfully = await appointmentHandler.cancelSpecificAppointment(appointmentId);
+
+        // Assert
+        expect(isCancelledSuccessfully).toBe(testIsCancelled);
+    });
+
     test('valid parameters for appointmentId', async() => {
         // Arrange
-        const appointmentId = 8000000;
+        const appointmentId = 55;
 
         const testIsCancelled = true;
 
@@ -69,7 +82,7 @@ describe('testing cancellation of specific worker appointments', () => {
 
     test('valid string value for the appointmentId', async() => {
         // Arrange
-        const appointmentId = '8000000';
+        const appointmentId = '56';
 
         const testIsCancelled = true;
 
