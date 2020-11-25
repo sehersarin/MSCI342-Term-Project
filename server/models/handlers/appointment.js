@@ -48,8 +48,32 @@ async function cancelWorkerAppointments(workerId, specificDate) {
     }
 }
 
+async function cancelSpecificAppointment(appointmentId) {
+    // If this method is somehow called without specifying values for the required parameters, false is returned.
+    if (_.isNil(appointmentId)) return false;
+
+    try {
+        // Cancels specific appointment.
+        const cancelSpecificAppointment = appointmentModel.cancelSpecificAppointment(appointmentId);
+        
+        // Updates the worker's availability to unavailable for the  timeslot of that specific appointment
+            //using appointmentId, find workerTimeslotId
+            //using workerTimeslotId, update availbility  
+        //const updateWorkerAvailability = workerTimeslotModel.updateWorkerAvailability(workerId, specificDate, TimeslotStatus.unavailable);
+
+        // Leverage Promise chain to complete both requests asynchronously and decrease execution time.
+        //await Promise.all([updateWorkerAvailability, cancelWorkerAppointments]);
+
+        return true;
+    } catch (error) {
+        console.log('Error occurred in cancelSpecificAppointment method: ', error);
+        return false;
+    }
+}
+
 module.exports = {
     bookAppointment,
     getAppointmentDetails,
     cancelWorkerAppointments,
+    cancelSpecificAppointment,
 }
