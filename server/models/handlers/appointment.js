@@ -57,12 +57,13 @@ async function cancelSpecificAppointment(appointmentId) {
         const cancelSpecificAppointment = appointmentModel.cancelSpecificAppointment(appointmentId);
         
         // Updates the worker's availability to unavailable for the  timeslot of that specific appointment
-            //using appointmentId, find workerTimeslotId
-            //using workerTimeslotId, update availbility  
+            //using appointmentId, find workerTimeslotId (in appointment table, simple query)
+            //using workerTimeslotId, update availbility (similar to simran's ticket, but changes value to available, as opposed to simran, she changes to unavailable) 
         //const updateWorkerAvailability = workerTimeslotModel.updateWorkerAvailability(workerId, specificDate, TimeslotStatus.unavailable);
 
         // Leverage Promise chain to complete both requests asynchronously and decrease execution time.
-        //await Promise.all([updateWorkerAvailability, cancelWorkerAppointments]);
+        //await Promise.all([updateWorkerAvailability, cancelSpecificAppointment]);
+        await Promise.all([cancelSpecificAppointment]);
 
         return true;
     } catch (error) {

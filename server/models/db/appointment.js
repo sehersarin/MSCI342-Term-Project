@@ -54,12 +54,15 @@ async function cancelWorkerAppointments(workerId, specificDate) {
 // Cancels specific appointments/meeting and updates worker availability to available for a worker for the specific timeslot. 
 // Note that appointments/meetings are synonymous, but only appointments will be used in the backend to maintain consistency.
 async function cancelSpecificAppointment(appointmentId) {
-    //go to appointments table only 
-    //change value to cancelled? 
-    
+    //how to know if update was successful? 
+
+    //check if appointmentId exists in table?  
+        //select from where query 
+        //how to evluate output? 
+       
+
     // Isolated the query condition to decrease the length of the query line and increase code readability.
     const queryCondition = `where appointment_id='${appointmentId}'`;
-    //update appointment set status = 'cancelled' where appointment_id ='2'
     return db.any(`update ${Tables.appointment} set status='${AppointmentStatus.cancelled}' ${queryCondition};`);
 }
 
