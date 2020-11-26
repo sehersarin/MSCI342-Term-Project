@@ -77,7 +77,7 @@ class Check extends React.Component {
     }));
   }
 
-  handleSubmit(event) {
+  async handleSubmit(event) {
     // submits selected days and assigns recurrenting dates based off boxes checked
     let AvailableDates = [];
    

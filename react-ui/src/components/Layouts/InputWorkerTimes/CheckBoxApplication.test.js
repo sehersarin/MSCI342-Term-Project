@@ -178,7 +178,7 @@ describe('Checkbox component', () => {
     await axios.get.mockImplementation(() => Promise.resolve(resp));
     const checkbox = getByDisplayValue(dom.container, "1");
     fireEvent.click(checkbox)
-    fireEvent.change(date, { target: { value: '2020-11-25' } });
+    fireEvent.change(date, { target: { value: '2021-11-25' } });
     fireEvent.click(submit)
 
     //Assert
@@ -221,7 +221,7 @@ describe('Checkbox component', () => {
     const checkbox = getByDisplayValue(dom.container, "1");
     fireEvent.click(checkbox)
     fireEvent.click(recurring)
-    fireEvent.change(date, { target: { value: '2020-11-25' } });
+    fireEvent.change(date, { target: { value: '2021-11-25' } });
     fireEvent.click(submit)
 
     //Assert
