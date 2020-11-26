@@ -3,7 +3,7 @@
 .BookForm-container{
     padding: 50px;
  }
- .Form-container .InputReason{
+ .BookForm-container .InputReason{
    /*width: 100%;*/
    padding: 12px 20px;
    margin-top:4px;
@@ -19,7 +19,7 @@
    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 15px 0 rgba(0,0,0,0.15);
  }
  
- .Form-container .SubmitAppButton{
+ .BookForm-container .SubmitAppButton{
      background-color: $student-color;
      color:black;
      border:none;

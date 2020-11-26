@@ -178,7 +178,7 @@ class CreateAppointmentForm extends Component {
     //else return the form to be filled out
     else{ 
       return (
-          <Container className="Form-container">
+          <Container className="BookForm-container">
              <Title name= "Book Appointment"></Title>
             <Row>
              <Col sm={12} align="center">
