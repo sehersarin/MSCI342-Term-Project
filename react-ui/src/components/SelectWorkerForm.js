@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import { Container, Row, Col } from 'react-grid-system';
 import { Redirect, Route, Switch, Link, withRouter } from "react-router-dom";
 import Title from "./Title"
-import "./CreateAppointmentForm.scss"
+import "./SelectWorkerForm.scss"
 // import dashboard from "./Layouts/Dashboard"
 
 import queryString from 'query-string'
@@ -46,10 +46,16 @@ class SelectWorkerForm extends Component {
     console.log(workerId, val);
   };
 
-  handleSubmit(e) {
+  handleSubmit(event) {
+    if(this.state.formSelection === false){
+      alert("Please Select a Worker");
+      event.preventDefault();
+    }
+    else{
     this.setState({
       formSubmission: true
     });
+    }
   }
 
 
@@ -100,7 +106,7 @@ class SelectWorkerForm extends Component {
         return newRoute;
     }
     else{
-      return (
+      return(
 
           <Container className="Form-container">
              <Title name= "Select A Service Worker"></Title>
@@ -125,9 +131,9 @@ class SelectWorkerForm extends Component {
 
                   <form onSubmit={this.handleSubmit}> 
                   <input
-                  className ="SubmitButton" 
+                  className ="SubmitWorkerButton" 
                   type="submit" 
-                  value="Submit!"/> 
+                  value="Next"/> 
                 </form>
              <br></br>   
              </Col>

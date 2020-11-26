@@ -30,6 +30,8 @@ class CreateAppointmentForm extends Component {
         workerTimeslotId: 0, 
         purpose: "", // Max 300 => input size is 300
         successfulAppointment: false,
+        timeSelection: false,
+        reasonSelection: false,
         formSubmission: false,
         availableTimes: [],
         startDate: String(moment(date).format('YYYY-MM-DD')), // start date
@@ -45,7 +47,8 @@ class CreateAppointmentForm extends Component {
     let val = event.target.value;
     let workerTimeslotId = event.target.name;
     this.setState({
-      workerTimeslotId: val
+      workerTimeslotId: val,
+      timeSelection: true
     });
     console.log(workerTimeslotId, val);
   };
@@ -54,13 +57,25 @@ class CreateAppointmentForm extends Component {
     let val = event.target.value;
     let purpose = event.target.name;
     this.setState({
-      purpose: val
+      purpose: val,
+      reasonSelection: true
+
     });
     console.log(purpose, val);
   };
   
-  handleSubmit(e) {
-      e.preventDefault();
+  handleSubmit(event) {
+     
+    if(this.state.timeSelection === false){
+      alert("Please Select a Timeslot");
+      event.preventDefault();
+    }
+    else if(this.state.reasonSelection === false){
+      alert("Please Specify Your Reason");
+      event.preventDefault();
+    }
+    else{
+      event.preventDefault();
 
       this.setState({
         formSubmission: true
@@ -81,7 +96,7 @@ class CreateAppointmentForm extends Component {
           successfulAppointment: isSuccess
         });
       });
-  }
+  }}
 
   componentDidMount() {
     console.log(this.state.workerId);
@@ -102,10 +117,28 @@ class CreateAppointmentForm extends Component {
   }
   
   render() {
-    //const { email, studentId, schoolId, userType, workerId, accessToken } = this.state;
-    //let newRoute= <Route path="/Dashboard" render={props => ( <Redirect to={`/dashboard/${email}/${userType}/${studentId}/${accessToken}`} Component={Home}/>)}></Route> 
-    if(this.state.formSubmission){
-      if(this.state.successfulAppointment){
+    //if no avalible times were found
+    if(this.state.availableTimes === ""){
+      return(
+        <Container className="Form-container">
+             <Title name= "There are no avalible times for this worker, sorry"></Title>
+            <Row>
+             <Col sm={12} align="center">
+                  
+              <br></br>
+              <div>
+
+              <Link to="/dashboard">Home</Link>
+
+              </div>
+              </Col>
+            </Row>
+          </Container>
+      );
+    } 
+    else{
+    //if form was submitted but the appointment was not saved successfully
+    if(this.state.formSubmission === true && this.state.successfulAppointment === true){
       return(
         <Container className="Form-container">
              <Title name= "Successful Appointment Booking!"></Title>
@@ -123,7 +156,8 @@ class CreateAppointmentForm extends Component {
           </Container>
       );
     }
-    else{
+    //if the for was submitted and the appointment was saved successfully
+    else if (this.state.formSubmission === true && this.state.successfulAppointment === false){
       return(
       <Container className="Form-container">
              <Title name= "Appointment Booking Failed, Please Try Again"></Title>
@@ -140,8 +174,9 @@ class CreateAppointmentForm extends Component {
             </Row>
           </Container>
            );
-    }}
-    else{
+    }
+    //else return the form to be filled out
+    else{ 
       return (
           <Container className="Form-container">
              <Title name= "Book Appointment"></Title>
@@ -165,7 +200,7 @@ class CreateAppointmentForm extends Component {
                   <br></br>
                   <label>
                   <input 
-                        className ="InputFields" 
+                        className ="InputReason" 
                         type="text" 
                         name="reason"
                         placeholder= "Reason for Booking Appointment" 
@@ -180,7 +215,7 @@ class CreateAppointmentForm extends Component {
                   </label>
               <form onSubmit={this.handleSubmit}> 
                   <input
-                  className ="SubmitButton" 
+                  className ="SubmitAppButton" 
                   type="submit" 
                   value="Submit!" />
                  
@@ -192,7 +227,7 @@ class CreateAppointmentForm extends Component {
         );
   }
 }
-
+}
 }
   
   export default CreateAppointmentForm;
