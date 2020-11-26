@@ -28,10 +28,9 @@ class CreateAppointmentForm extends Component {
         studentId: this.props.user.personId, 
         accessToken: this.props.user.accessToken,
         workerTimeslotId: 0, 
-        purpose: "", // Max 300 => input size is 300
+        reason: "", // Max 300 => input size is 300
         successfulAppointment: false,
         timeSelection: false,
-        reasonSelection: false,
         formSubmission: false,
         availableTimes: [],
         startDate: String(moment(date).format('YYYY-MM-DD')), // start date
@@ -57,9 +56,7 @@ class CreateAppointmentForm extends Component {
     let val = event.target.value;
     let purpose = event.target.name;
     this.setState({
-      purpose: val,
-      reasonSelection: true
-
+      reason: val,
     });
     console.log(purpose, val);
   };
@@ -70,8 +67,12 @@ class CreateAppointmentForm extends Component {
       alert("Please Select a Timeslot");
       event.preventDefault();
     }
-    else if(this.state.reasonSelection === false){
+    else if(this.state.reason === ""){
       alert("Please Specify Your Reason");
+      event.preventDefault();
+    }
+    else if(this.state.reason.length > 300){
+      alert("Your Reason is Over 300 Characters");
       event.preventDefault();
     }
     else{
@@ -197,7 +198,7 @@ class CreateAppointmentForm extends Component {
                         ))}
                   <br></br>
                   <label>
-                  <input 
+                  <textarea 
                         className ="InputReason" 
                         type="text" 
                         name="reason"
@@ -205,12 +206,10 @@ class CreateAppointmentForm extends Component {
                         onChange={this.handleReasonChange} />
                       </label>
                     <br></br>
-                  <label>
                   <div>
-                     (300 Character limit)
+                     ({300 - this.state.reason.length} Characters lefts)
                   </div>
                   <br></br>
-                  </label>
               <form onSubmit={this.handleSubmit}> 
                   <input
                   className ="SubmitAppButton" 
