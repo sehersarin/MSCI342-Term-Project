@@ -22,6 +22,20 @@ async function getWorkerIdsForSchool(schoolId) {
         return null;
     }
 }
+
+async function getSchoolsByWorkerIds(workerId) {
+    try {
+        const schoolIds = await db.any(`select school_id from ${Tables.workerSchool} where wroker_id='${workerId}';`);
+        if (_.isEmpty(schoolIds)) return null;
+        return _.map(schoolIds, 'school_id');
+
+    } catch (err) {
+        console.log('Error occurred in ', err);
+        return null;
+    }
+}
+
 module.exports = {
     getWorkerIdsForSchool,
+    getSchoolsByWorkerIds,
 }

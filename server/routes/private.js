@@ -147,6 +147,24 @@ router.get('/possible-timeslots', async (req, res) => {
     res.send(timeslots);
 });
 
+router.get('/get-schools-for-worker', async (req, res) => {
+    
+    const paramSchema = Joi.object({
+        workerId: Joi.number().integer().required(),
+    })
+
+    const workerId = req.query.workerId;
+
+    const { error } = paramSchema.validate({ workerId});
+
+    if (!_.isNil(error)) res.send(error);
+
+    const schools = await workerHandler.getSchools(workerId);
+
+    res.send(schools);
+});
+
+
 router.get('/test', async (req, res) => {
     res.send(true);
 });
