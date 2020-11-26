@@ -85,7 +85,7 @@ class SelectWorkerForm extends Component {
     let newRoute= <Route path="/Dashboard/SelectWorker" render={props => ( <Redirect to={`/dashboard/CreateAppointment/${workerId}/${email}/${userType}/${studentId}/${schoolId}/${accessToken}`} Component={CreateAppointment}/>)}></Route> 
     if(this.state.WorkerIds == ""){
       return(
-        <Container className="Form-container">
+        <Container className="WorkerSelectForm-container">
              <Title name= "Sorry, no service workers for your school were found"></Title>
             <Row>
              <Col sm={12} align="center">
@@ -108,23 +108,24 @@ class SelectWorkerForm extends Component {
     else{
       return(
 
-          <Container className="Form-container">
+          <Container className="WorkerSelectForm-container">
              <Title name= "Select A Service Worker"></Title>
             <Row>
              <Col sm={12} align="center">
                   {this.state.WorkerIds.map((item) => (
-                  <div>
-                      <label>
-                        <input
+                  <div className= "workerTile">
+                      <label className="worker-name">
+                        <div>
+                        <input className="SelectionButton"
                           name="choice"
                           type="radio"
                           value={item.workerId}
                           onChange={this.handleFormChange}
                         />{" "}
-                        {item.firstName + " "}
-                        {item.lastName} <br></br>   
-                        {item.specialization} <br></br> 
-                        {item.type} <br></br> <br></br> 
+                        {item.firstName} {item.lastName}</div>
+                        <br></br>
+                        <div className="type">{item.type}</div>
+                        <div className="specialization">{item.specialization}</div>
                       </label>
                     </div>
                   ))}

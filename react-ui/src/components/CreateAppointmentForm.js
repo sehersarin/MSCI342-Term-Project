@@ -183,18 +183,16 @@ class CreateAppointmentForm extends Component {
             <Row>
              <Col sm={12} align="center">
                   {this.state.availableTimes.map((item) => (
-                        <div>
-                            <label>
-                              <input
+                        <div className="timeSlot">
+                              <div className="date"> 
+                              <input className="timeSelection"
                                 name="choice"
                                 type="radio"
                                 value={item.workerTimeslotId}
                                 onChange={this.handleFormChange}
                               />{" "}
-                               {moment(item.date).format('dddd, MMM D, YYYY')} <br></br>
-                              {item.startTime.substring(0, 5)} to {item.endTime.substring(0, 5)}<br></br>
-                              <br></br>    
-                            </label>
+                               {moment(item.date).format('dddd, MMM D, YYYY')}</div>
+                              <div className="time"> {item.startTime.substring(0, 5)} to {item.endTime.substring(0, 5)}</div>
                           </div>
                         ))}
                   <br></br>
