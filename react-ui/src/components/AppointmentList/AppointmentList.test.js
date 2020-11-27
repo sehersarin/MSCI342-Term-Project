@@ -390,7 +390,7 @@ describe('rendering appointment cancellation popups', () => {
       accessToken: 'eeJAQr3wEC6CJZROFJTY',
     };
     const resp = { data: appointmentDetails };
-    const submissionMsg = 'The appointment was NOT cancelled. Please try again.';
+    const submissionMsg = "The appointment was NOT cancelled!\r\n\nThis feature is not fully integrated yet, but the ConnectMe team is working hard to finish it. We appreciate your patience!";
 
     axios.get.mockImplementation(() => Promise.resolve(resp));
     window.alert = jest.fn();

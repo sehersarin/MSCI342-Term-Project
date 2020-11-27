@@ -54,7 +54,7 @@ export default class AppointmentList extends Component {
           label: 'Yes',
           className: "yes-cancel-btn",
           onClick: () => {
-            alert('The appointment was NOT cancelled. Please try again.');
+            alert("The appointment was NOT cancelled!\r\n\nThis feature is not fully integrated yet, but the ConnectMe team is working hard to finish it. We appreciate your patience!");
 
             /* TO DO: UNCOMMENT LOGIC ONCE INTEGRATE WITH API.
              // Stores whether the appointment was successfully cancelled in a variable. 
