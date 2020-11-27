@@ -1,11 +1,13 @@
+const workerTimeslot = require('../../models/db/workerTimeslot');
 const appointmentHandler = require('../../models/handlers/appointment');
+const workerTimeslotHandler = require('../../models/handlers/workerTimeslot');
 
 describe('testing cancellation of specific worker appointments', () => {
     beforeEach(() => {
         jest.resetModules();
     });
 
-    test('no parameters passed in for the method', async() => {
+    test('no parameters passed in for the method', async () => {
         // Arrange
         const testIsCancelled = false;
 
@@ -16,7 +18,7 @@ describe('testing cancellation of specific worker appointments', () => {
         expect(isCancelledSuccessfully).toBe(testIsCancelled);
     });
 
-    test('null values for appointmentId parameter', async() => {
+    test('null values for appointmentId parameter', async () => {
         // Arrange
         const appointmentId = null;
         const testIsCancelled = false;
@@ -28,7 +30,7 @@ describe('testing cancellation of specific worker appointments', () => {
         expect(isCancelledSuccessfully).toBe(testIsCancelled);
     });
 
-    test('empty string for the appointmentId', async() => {
+    test('empty string for the appointmentId', async () => {
         // Arrange
         const appointmentId = '';
 
@@ -41,7 +43,7 @@ describe('testing cancellation of specific worker appointments', () => {
         expect(isCancelledSuccessfully).toBe(testIsCancelled);
     });
 
-    test('invalid true value for the appointmentId', async() => {
+    test('invalid true value for the appointmentId', async () => {
         // Arrange
         const appointmentId = true;
 
@@ -54,7 +56,7 @@ describe('testing cancellation of specific worker appointments', () => {
         expect(isCancelledSuccessfully).toBe(testIsCancelled);
     });
 
-    test('invalid number value for the appointmentId', async() => {
+    test('invalid number value for the appointmentId', async () => {
         // Arrange
         const appointmentId = 37;
 
@@ -67,7 +69,7 @@ describe('testing cancellation of specific worker appointments', () => {
         expect(isCancelledSuccessfully).toBe(testIsCancelled);
     });
 
-    test('valid parameters for appointmentId', async() => {
+    test('valid parameters for appointmentId', async () => {
         // Arrange
         const appointmentId = 38;
 
@@ -80,17 +82,34 @@ describe('testing cancellation of specific worker appointments', () => {
         expect(isCancelledSuccessfully).toBe(testIsCancelled);
     });
 
-    test('valid string value for the appointmentId', async() => {
+    test('1 test individual worker timeslot status update ', async () => {
         // Arrange
-        const appointmentId = '39';
+        const workerTimeslotId = 23;
+        const newStatus = 'available';
 
-        const testIsCancelled = true;
+        const updatedSuccessfully = true;
 
         // Act
-        const isCancelledSuccessfully = await appointmentHandler.cancelSpecificAppointment(appointmentId);
+        const isUpdated = await workerTimeslotHandler.updateIndividualWorkerAvailability(workerTimeslotId, newStatus);
 
         // Assert
-        expect(isCancelledSuccessfully).toBe(testIsCancelled);
+        expect(isUpdated).toBe(updatedSuccessfully);
     });
+
+    test('2 test individual worker timeslot status update', async () => {
+        // Arrange
+        const workerTimeslotId = 103;
+        const newStatus = 'available';
+
+        const updatedSuccessfully = false;
+
+        // Act
+        const isUpdated = await workerTimeslotHandler.updateIndividualWorkerAvailability(workerTimeslotId, newStatus));
+
+        // Assert
+        expect(isUpdated).toBe(updatedSuccessfully);
+    });
+
+
 
 })
