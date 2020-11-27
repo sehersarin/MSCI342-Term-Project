@@ -81,6 +81,7 @@ describe('testing cancellation of specific worker appointments', () => {
         // Assert
         expect(isCancelledSuccessfully).toBe(testIsCancelled);
     });
+    //Due to database structure, there will never be a worker timeslot id input into this method that is non-existent and therefore testing cases are complete at this point
 
     test('1 test individual worker timeslot status update ', async () => {
         // Arrange
@@ -96,20 +97,17 @@ describe('testing cancellation of specific worker appointments', () => {
         expect(isUpdated).toBe(updatedSuccessfully);
     });
 
-    test('2 test individual worker timeslot status update', async () => {
+    test('test individual worker timeslot status update with invalid workertimeslot ', async () => {
         // Arrange
-        const workerTimeslotId = 103;
+        const workerTimeslotId = 'hello';
         const newStatus = 'available';
 
         const updatedSuccessfully = false;
 
         // Act
-        const isUpdated = await workerTimeslotHandler.updateIndividualWorkerAvailability(workerTimeslotId, newStatus));
+        const isUpdated = await workerTimeslotHandler.updateIndividualWorkerAvailability(workerTimeslotId, newStatus);
 
         // Assert
         expect(isUpdated).toBe(updatedSuccessfully);
     });
-
-
-
 })
