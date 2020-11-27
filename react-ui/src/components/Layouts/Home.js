@@ -12,7 +12,7 @@ class Home extends Component {
       <Fragment>
         {this.props.userType === UserTypes.worker && <EmergencyDayCancellation user={this.props}/> }
         <Title name="Welcome"/>
-        <AppointmentList user={this.props} />
+        <AppointmentList user={this.props} schoolId={this.props.schoolId} />
       </Fragment>
     );
   }

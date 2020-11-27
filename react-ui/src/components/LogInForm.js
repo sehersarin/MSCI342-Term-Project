@@ -19,6 +19,7 @@ class logInForm extends Component {
       firstName: "",
       personId: "",
       accessToken: "",
+      schoolId: "",
       loginParams: {
         email: "",
         password: "",
@@ -58,6 +59,7 @@ class logInForm extends Component {
               firstName: res.data.firstName,
               personId: res.data.workerId || res.data.studentId,
               accessToken: res.data.accessToken,
+              schoolId: res.data.schoolId,
               islogged: true
             })
             // localStorage.setItem("token", "T");

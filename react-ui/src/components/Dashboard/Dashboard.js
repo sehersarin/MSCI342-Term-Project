@@ -21,7 +21,7 @@ class Dashboard extends Component {
       firstName: this.props.match.params.name,
       personId: this.props.match.params.personId,
       accessToken: this.props.match.params.accessToken,
-      //schoolId: this.props.match.params.schoolId
+      schoolId: this.props.match.params.schoolId
     };
   }
 
@@ -37,8 +37,8 @@ class Dashboard extends Component {
     if (this.state.isLogout) return <Redirect to="/login" />;
 
     // Else it will display the appropriate header based on the user type.
-    const { email, firstName, personId, userType, accessToken } = this.state;
-    console.log(this.state.personId)
+    const { email, firstName, personId, userType, accessToken, schoolId} = this.state;
+    console.log(this.state.personId, this.state.schoolId)
     return (
       <Fragment>
         <header className={userType}>
@@ -84,16 +84,16 @@ class Dashboard extends Component {
                   <Profile name={firstName} />
                 </Route>
                 <Route path={`/dashboard/CreateAppointment`}>
-                  <CreateAppointment email={this.state.email} userType={userType} personId={personId} accessToken={accessToken} />
+                  <CreateAppointment email={this.state.email} userType={userType} personId={personId} accessToken={accessToken} schoolId={schoolId}/>
                 </Route>
                 <Route path={`/dashboard/SelectWorker`}>
-                  <SelectWorker email={this.state.email} userType={userType} personId={personId} accessToken={accessToken} />
+                  <SelectWorker email={this.state.email} userType={userType} personId={personId} accessToken={accessToken} schoolId={schoolId}/>
                 </Route>
                 <Route path = {`/dashboard/InputWorkerAvailabilitypage`}>
-                  <WorkerInputpage personId ={this.state.personId}/>
+                  <WorkerInputpage personId ={this.state.personId} schoolId={schoolId}/>
                 </Route>
                 <Route exact path={`${this.props.match.path}`}>
-                  <Home userType={userType} personId={personId} accessToken={accessToken} />
+                  <Home userType={userType} personId={personId} accessToken={accessToken} schoolId={schoolId}/>
                 </Route>
                 <Route path="*">
                   <NotFound />
