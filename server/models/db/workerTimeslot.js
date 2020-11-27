@@ -3,6 +3,7 @@ const _ = require('lodash');
 const { db } = require('../../lib/connection');
 const Tables = require('../../constants/tables.json');
 const TimeslotStatus = require('../../constants/timeslot-status.json');
+const WorkerTimeslot = require('../data/workerTimeslot');
 
 // This method inserts an appointment entry given specific information.
 async function insertWorkerTimeslot(slotId, schoolId, workerId, status, date) {
@@ -19,7 +20,7 @@ async function checkWorkerAvailability(slotId, workerId, status, date) {
 
     try {
         //Selects the status of the given worker_id at the given slot_id
-        var queryStatement = `select * from ${Tables.workerTimeslot}  where worker_id = ${workerId} and slot_id = ${slotId}`;
+        var queryStatement = `select ${status} from ${Tables.workerTimeslot}  where worker_id = ${workerId} and slot_id = ${slotId}`;
 
         //Only adds date if the user specified the date.
         if (date) queryStatement += ` and date = ${date}`;
@@ -30,7 +31,7 @@ async function checkWorkerAvailability(slotId, workerId, status, date) {
         else if (_.isEqual(available)) return true;
         //else return false;
 
-        return _.map(isAvailable, availability => new AvailabilityDetail(availability));
+        return _.map(isAvailable, availability => new WorkerTimeslot(availability));
 
     } catch (err) {
         console.log('Error occurred in ', err);
