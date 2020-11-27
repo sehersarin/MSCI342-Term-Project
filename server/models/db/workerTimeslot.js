@@ -21,7 +21,13 @@ async function updateWorkerAvailability(workerId, specificDate, newStatus) {
     return db.any(`update ${Tables.workerTimeslot} set status='${newStatus}' where date='${specificDate}' and worker_id='${workerId}';`);
 }
 
+async function updateIndividualWorkerAvailability( workerTimeslotId, newStatus) {
+    return db.any(`update ${Tables.workerTimeslot} set status='${newStatus}' where worker_timeslot_id='${workerTimeslotId}';`);
+}
+
 module.exports = {
     insertWorkerTimeslot,
     updateWorkerAvailability,
+    updateIndividualWorkerAvailability,
+    
 } 

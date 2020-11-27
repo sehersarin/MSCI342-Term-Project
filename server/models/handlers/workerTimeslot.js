@@ -10,6 +10,17 @@ async function addWorkerTimeslot(slotId, schoolId, workerId, status, date) {
         return false;
     }
 };
+async function updateIndividualWorkerAvailability(workerTimeslotId, newStatus) {
+    try {
+        await timeslotModel.updateIndividualWorkerAvailability(workerTimeslotId, newStatus);
+        return true;
+    } catch (error) {
+        console.log('Error occurred in updateIndividualWorkerAvailability method: ', error);
+        return false;
+    }
+};
+
 module.exports = {
-    addWorkerTimeslot
+    addWorkerTimeslot, 
+    updateIndividualWorkerAvailability,
 }

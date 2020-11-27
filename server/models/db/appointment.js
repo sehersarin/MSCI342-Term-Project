@@ -56,15 +56,34 @@ async function cancelWorkerAppointments(workerId, specificDate) {
 async function cancelSpecificAppointment(appointmentId) {
     //how to know if update was successful? 
     const queryCondition = `where appointment_id='${appointmentId}'`;
-    //check if appointmentId exists in table?  
-        //select from where query simply returns empty 
-        //how to evluate output? 
-    const selectQueryOutput = `select * from ${Tables.appointment} ${queryCondition} ;`;   
-    if (_.isEmpty(selectQueryOutput)) return false;
     // Isolated the query condition to decrease the length of the query line and increase code readability.
-
     return db.any(`update ${Tables.appointment} set status='${AppointmentStatus.cancelled}' ${queryCondition} RETURNING *;`);
-    
+
+}
+
+async function appointmentExists(appointmentId) {
+    //how to know if update was successful? 
+    // Isolated the query condition to decrease the length of the query line and increase code readability.
+    const queryCondition = `where appointment_id='${appointmentId}'`;
+    const queryOutput = db.any(`select exists(select 1 from ${Tables.appointment} ${queryCondition});`);   
+    return queryOutput;
+}
+
+async function findWorkerTimeslotId(appointmentId) {
+    //how to know if update was successful? 
+    // Isolated the query condition to decrease the length of the query line and increase code readability.
+    const queryCondition = `where appointment_id=${appointmentId}`;
+
+
+    const queryOutput = db.any(`select worker_timeslot_id from ${Tables.appointment} ${queryCondition} ;`);
+    //returns output of [{"worker_timeslot_id": 6}]
+    //return queryOutput;
+
+    //returns output of []
+    //return _.map(queryOutput, 'worker_timeslot_id');
+
+    //stub returns 6 
+    return 6;
 }
 
 module.exports = {
@@ -72,4 +91,6 @@ module.exports = {
     getAppointmentDetails,
     cancelWorkerAppointments,
     cancelSpecificAppointment,
+    appointmentExists,
+    findWorkerTimeslotId,
 } 

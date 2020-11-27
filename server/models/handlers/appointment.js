@@ -50,26 +50,30 @@ async function cancelWorkerAppointments(workerId, specificDate) {
 
 async function cancelSpecificAppointment(appointmentId) {
     // If this method is somehow called without specifying values for the required parameters, false is returned.
-    if (_.isNil(appointmentId)) return false;
+    if (_.isNil(appointmentId)) return "false null";
 
     try {
 
         //Check if appt exists
-        //return false; 
+        const doesAppointmentExist = appointmentModel.appointmentExists(appointmentId);
+        if (doesAppointmentExist == false) return "false does appointment exist";
 
-        //check if appt is not cancelled 
+        //low priority, check if appt is not cancelled 
 
         // Cancels specific appointment.
-        const cancelSpecificAppointment = appointmentModel.cancelSpecificAppointment(appointmentId);
+        //const cancelSpecificAppointment = appointmentModel.cancelSpecificAppointment(appointmentId);
         //if (_.isEmpty(cancelSpecificAppointment)) return false;
-        //if (_.isNil(cancelSpecificAppointment)) return false;
+        //if (_.isNil(cancelSpecificAppointment)) return "false cancelSpecificAppointment ";
 
         // Updates the worker's availability to unavailable for the  timeslot of that specific appointment
         //using appointmentId, find workerTimeslotId (in appointment table, simple query)
-        //using workerTimeslotId, update availbility (similar to simran's ticket, but changes value to available, as opposed to simran, she changes to unavailable) 
-        //const updateWorkerAvailability = workerTimeslotModel.updateWorkerAvailability(workerId, specificDate, TimeslotStatus.unavailable);
+        //const currentWorkerTimeslotId = appointmentModel.findWorkerTimeslotId(appointmentId);
+        //newStatus = 'available';
+       // const updateWorkerAvailability = workerTimeslotModel.updateIndividualWorkerAvailability(currentWorkerTimeslotId, newStatus);
+        //if (updateWorkerAvailability == false) return "false update worker availability";
 
-        return true;
+        return doesAppointmentExist;
+        //return currentWorkerTimeslotId;
     } catch (error) {
         console.log('Error occurred in cancelSpecificAppointment method: ', error);
         return false;
