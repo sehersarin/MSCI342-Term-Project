@@ -47,10 +47,17 @@ router.post('/book-appointment', async (req, res) => {
     if (!_.isNil(error)) res.send(error);
 
     // Attempts to insert the appointment into the database.
+
+    const workerIsAvailable = await workerTimeslotHandler.checkWorkerAvailability(slotId, workerId, status, date);
+    
+
+    If (workerIsAvailable = true); {
+        //continue to insert the appointment
+
     const isSuccessfullyInserted = await appointmentHandler.bookAppointment(studentId, workerTimeslotId, purpose, studentNotes, workerComments);
 
     res.send(isSuccessfullyInserted);
-
+    }
 });
 
 router.post('/add-recurring-schedule', async (req, res) => {
