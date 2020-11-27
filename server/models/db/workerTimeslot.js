@@ -26,12 +26,13 @@ async function checkWorkerAvailability(slotId, workerId, status, date) {
         if (date) queryStatement += ` and date = ${date}`;
 
         const isAvailable = await db.any(queryStatement);
-        //The queryStatement returns null if the availability is empty
+        //The queryStatement returns null if the status is empty
         if (_.isEmpty(isAvailable)) return null;
+       //if status is 'available', return true
         else if (_.isEqual(available)) return true;
         //else return false;
 
-        return _.map(isAvailable, availability => new WorkerTimeslot(availability));
+        return _.map(isAvailable, workerTimeslot => new WorkerTimeslot(workerTimeslot));
 
     } catch (err) {
         console.log('Error occurred in ', err);
@@ -39,9 +40,7 @@ async function checkWorkerAvailability(slotId, workerId, status, date) {
     }
 }
 
-
-
 module.exports = {
     insertWorkerTimeslot,
     checkWorkerAvailability
-} }
+} 
