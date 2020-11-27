@@ -56,7 +56,7 @@ describe('testing cancellation of specific worker appointments', () => {
 
     test('invalid number value for the appointmentId', async() => {
         // Arrange
-        const appointmentId = 5;
+        const appointmentId = 37;
 
         const testIsCancelled = false;
 
@@ -69,7 +69,7 @@ describe('testing cancellation of specific worker appointments', () => {
 
     test('valid parameters for appointmentId', async() => {
         // Arrange
-        const appointmentId = 1;
+        const appointmentId = 38;
 
         const testIsCancelled = true;
 
@@ -82,7 +82,7 @@ describe('testing cancellation of specific worker appointments', () => {
 
     test('valid string value for the appointmentId', async() => {
         // Arrange
-        const appointmentId = '2';
+        const appointmentId = '39';
 
         const testIsCancelled = true;
 

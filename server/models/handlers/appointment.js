@@ -50,7 +50,8 @@ async function cancelWorkerAppointments(workerId, specificDate) {
 
 async function cancelSpecificAppointment(appointmentId) {
     // If this method is somehow called without specifying values for the required parameters, false is returned.
-    if (_.isNil(appointmentId)) return "false null";
+    if (_.isNil(appointmentId)) return false;
+    if (!_.isNumber(appointmentId)) return false; 
 
     try {
         //Check if appt exists
