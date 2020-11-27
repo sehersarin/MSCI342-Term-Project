@@ -61,20 +61,20 @@ async function cancelSpecificAppointment(appointmentId) {
         //low priority, check if appt is not cancelled 
 
         // Cancels specific appointment.
-        const cancelSpecificAppointment = appointmentModel.cancelSpecificAppointment(appointmentId);
+        //const cancelSpecificAppointment = appointmentModel.cancelSpecificAppointment(appointmentId);
         //if (_.isEmpty(cancelSpecificAppointment)) return false;
         //if (_.isNil(cancelSpecificAppointment)) return "false cancelSpecificAppointment ";
 
         //Finds corresponding workerTimeslotId 
-        //const currentWorkerTimeslotId = appointmentModel.findWorkerTimeslotId(appointmentId);
-        const currentWorkerTimeslotId = 6;        
-        newStatus = 'available';
+        const currentWorkerTimeslotId = appointmentModel.findWorkerTimeslotId(appointmentId);
+        //const currentWorkerTimeslotId = 6;        
+        //newStatus = 'available';
         // Updates the worker's availability to unavailable for the  timeslot of that specific appointment
-        const updateWorkerAvailability = workerTimeslotModel.updateIndividualWorkerAvailability(currentWorkerTimeslotId, newStatus);
+        //const updateWorkerAvailability = workerTimeslotModel.updateIndividualWorkerAvailability(currentWorkerTimeslotId, newStatus);
         //if (updateWorkerAvailability == false) return "false update worker availability";
 
-        return true;
-        //return currentWorkerTimeslotId;
+        //return true;
+        return currentWorkerTimeslotId;
     } catch (error) {
         console.log('Error occurred in cancelSpecificAppointment method: ', error);
         return false;

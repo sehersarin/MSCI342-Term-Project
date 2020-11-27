@@ -74,15 +74,15 @@ async function findWorkerTimeslotId(appointmentId) {
     const queryCondition = `where appointment_id=${appointmentId}`;
 
 
-    const queryOutput = db.any(`select worker_timeslot_id from ${Tables.appointment} ${queryCondition} ;`);
+    const queryOutput = await db.any(`select worker_timeslot_id from ${Tables.appointment} ${queryCondition} ;`);
     //returns output of [{"worker_timeslot_id": 6}]
     //return queryOutput;
 
     //returns output of []
-    //return _.map(queryOutput, 'worker_timeslot_id');
+    return _.map(queryOutput, 'worker_timeslot_id');
 
     //stub returns 6 
-    return 6;
+    //return 6;
 }
 
 module.exports = {
