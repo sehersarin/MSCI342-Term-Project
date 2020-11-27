@@ -33,7 +33,6 @@ describe('testing cancellation of specific worker appointments', () => {
     test('empty string for the appointmentId', async () => {
         // Arrange
         const appointmentId = '';
-
         const testIsCancelled = false;
 
         // Act

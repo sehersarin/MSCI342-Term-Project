@@ -47,10 +47,6 @@ async function cancelWorkerAppointments(workerId, specificDate) {
     return db.any(`update ${Tables.appointment} set status='${AppointmentStatus.cancelled}' from ${Tables.appointment} a1 inner join ${Tables.workerTimeslot} w1 on a1.worker_timeslot_id = w1.worker_timeslot_id ${queryCondition};`);
 }
 
-
-// This method updates all the worker's appointments to cancelled on a specific date.
-// Note that if the worker does not have any appointments on this date, no rows will be updated (and no error will be thrown).
-
 // Cancels specific appointments/meeting and updates worker availability to available for a worker for the specific timeslot. 
 // Note that appointments/meetings are synonymous, but only appointments will be used in the backend to maintain consistency.
 async function cancelSpecificAppointment(appointmentId) {
