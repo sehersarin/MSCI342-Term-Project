@@ -212,7 +212,7 @@ router.get('/cancel-specific-appointment', async (req, res) => {
 
     if (!_.isNil(error)) res.send(error);
 
-    const isCancelledSuccessfully = await appointmentHandler.cancelSpecificAppointment(appointmentId);
+    const isCancelledSuccessfully =  appointmentHandler.cancelSpecificAppointment(appointmentId);
 
     res.send(isCancelledSuccessfully);
 });

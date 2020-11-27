@@ -57,7 +57,7 @@ async function cancelSpecificAppointment(appointmentId) {
     //how to know if update was successful? 
     const queryCondition = `where appointment_id='${appointmentId}'`;
     // Isolated the query condition to decrease the length of the query line and increase code readability.
-    return await db.any(`update ${Tables.appointment} set status='${AppointmentStatus.cancelled}' ${queryCondition} RETURNING *;`);
+    return await db.any(`update ${Tables.appointment} set status='${AppointmentStatus.cancelled}' ${queryCondition};`);
 }
 
 async function appointmentExists(appointmentId) {
@@ -71,7 +71,7 @@ async function appointmentExists(appointmentId) {
 async function findWorkerTimeslotId(appointmentId) {
     //how to know if update was successful? 
     // Isolated the query condition to decrease the length of the query line and increase code readability.
-    const queryCondition = `where appointment_id=${appointmentId}`;
+    const queryCondition = `where appointment_id= '${appointmentId}'`;
     const queryOutput = await db.any(`select worker_timeslot_id from ${Tables.appointment} ${queryCondition} ;`);
     return _.map(queryOutput, 'worker_timeslot_id');
 }
