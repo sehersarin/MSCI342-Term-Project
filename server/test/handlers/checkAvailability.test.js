@@ -72,7 +72,79 @@ ttest('accept null value for the date parameter', async () => {
     const workerIsAvailable = await workerTimeslotHandler.checkWorkerAvailability(slotId, workerId, status, date);
 
     // Assert
+    expect(workerIsAvailable).toBeDefined();
+});
+
+//TEST 6
+test('rejection of an empty string value for required slotId parameter', async () => {
+    // Arrange
+    const slotId = '';
+    const workerId  = 80000000;
+    const status = available;
+    const date = '2020-10-20';
+    // Act
+    const workerIsAvailable = await workerTimeslotHandler.checkWorkerAvailability(slotId, workerId, status, date);
+
+    // Assert
     expect(workerIsAvailable).toBe(null);
+});
+
+//TEST 7
+ttest('rejection of an empty string value for required workerId parameter', async () => {
+    // Arrange
+    const slotId = 1;
+    const workerId  = '';
+    const status = available;
+    const date = '2020-10-20';
+    // Act
+    const workerIsAvailable = await workerTimeslotHandler.checkWorkerAvailability(slotId, workerId, status, date);
+
+    // Assert
+    expect(workerIsAvailable).toBe(null);
+});
+
+//TEST 8
+ttest('rejection of an empty string value for the status parameter', async () => {
+    // Arrange
+    const slotId = 1;
+    const workerId  = 80000000;
+    const status = '';
+    const date = '2020-10-20';
+    // Act
+    const workerIsAvailable = await workerTimeslotHandler.checkWorkerAvailability(slotId, workerId, status, date);
+
+    // Assert
+    expect(workerIsAvailable).toBe(null);
+});
+
+//TEST 9
+ttest('accept null value for the date parameter', async () => {
+    // Arrange
+    const slotId = 1;
+    const workerId  = 80000000;
+    const status = available;
+    const date = '';
+    // Act
+    const workerIsAvailable = await workerTimeslotHandler.checkWorkerAvailability(slotId, workerId, status, date);
+
+    // Assert
+    expect(workerIsAvailable).toBeDefined();
+});
+
+
+ //TEST 10
+ test('Accept that all valid paramters return the expected values ', async () => {
+    // Arrange
+    const workerId = 8000000;
+    const schoolId = 1;
+    const startTime = '2020-10-19';
+    const endTime = '2020-10-21';
+
+    // Act
+    const workerIsAvailable = await workerTimeslotHandler.checkWorkerAvailability(slotId, workerId, status, date);
+
+    // Assert
+    expect(workerIsAvailable).toBeDefined();
 });
 
 
