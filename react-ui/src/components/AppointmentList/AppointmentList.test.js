@@ -2,12 +2,13 @@ import React from "react";
 import { create } from "react-test-renderer";
 import { render, waitFor, cleanup } from '@testing-library/react';
 import * as axios from 'axios';
+import TestRenderer from 'react-test-renderer';
 
 import AppointmentList from './AppointmentList';
 
 jest.mock('axios');
 
-describe('AppointmentList component', () => {
+describe('rendering of list section of AppointmentList component', () => {
   afterEach(cleanup);
 
   beforeEach(() => {
@@ -200,11 +201,257 @@ describe('AppointmentList component', () => {
 
     // Act
     const { container } = render(<AppointmentList user={workerUser} />);
-    await waitFor(() => expect(axios.get).toHaveBeenCalled())
+    await waitFor(() => expect(axios.get).toHaveBeenCalled());
 
     // Assert
     expect(container.innerHTML.includes("John Doe")).toBe(true);
   });
 
+});
+
+describe('rendering appointment cancellation popups', () => {
+  test('cancel button cannot be clicked when there are no appointments', async () => {
+    // Arrange
+    var isThrown = false;
+    const workerUser = {
+      userType: 'worker',
+      personId: '8000000',
+      accessToken: 'eeJAQr3wEC6CJZROFJTY',
+    };
+
+    // Act
+    try {
+      const testRenderer = TestRenderer.create(<AppointmentList user={workerUser} />);
+      const testInstance = testRenderer.root;
+
+      // Waits for the axios to be called before attempting to find the cancel button.
+      await waitFor(() => expect(axios.get).toHaveBeenCalled());
+      testInstance.findByProps({ className: "cancel-btn" }).props.onClick();
+    } catch (err) {
+      isThrown = true;
+    }
+
+    // Assert
+    expect(isThrown).toBe(true);
+  });
+
+  test('cancel appointment popup not initially shown even if there are appointments', async () => {
+    // Arrange
+    const appointmentDetails = [
+      {
+        appointmentId: 1,
+        student: {
+          firstName: 'John',
+          lastName: 'Doe',
+        },
+        date: '2020-11-05',
+        startTime: '08:00:00',
+        endTime: '08:30:00',
+        status: 'upcoming',
+      },
+      {
+        appointmentId: 3,
+        student: {
+          firstName: 'Jane',
+          lastName: 'Smith',
+        },
+        date: '2020-11-05',
+        startTime: '08:30:00',
+        endTime: '09:00:00',
+        status: 'upcoming',
+      },
+    ];
+
+    const workerUser = {
+      userType: 'worker',
+      personId: '8000000',
+      accessToken: 'eeJAQr3wEC6CJZROFJTY',
+    };
+
+    const resp = { data: appointmentDetails };
+
+    axios.get.mockImplementation(() => Promise.resolve(resp));
+
+    // Act
+    TestRenderer.create(<AppointmentList user={workerUser} />);
+
+    // Waits for the axios to be called to ensure the full appointment list is rendered. 
+    await waitFor(() => expect(axios.get).toHaveBeenCalled());
+
+    // Assert
+    expect(document.body.innerHTML).toEqual(expect.not.stringContaining('<div id="react-confirm-alert">'));
+  });
+
+  test('cancel button can be clicked when there are appointments', async () => {
+    // Arrange
+    const appointmentDetails = [
+      {
+        appointmentId: 1,
+        student: {
+          firstName: 'John',
+          lastName: 'Doe',
+        },
+        date: '2020-11-05',
+        startTime: '08:00:00',
+        endTime: '08:30:00',
+        status: 'upcoming',
+      },
+      {
+        appointmentId: 3,
+        student: {
+          firstName: 'Jane',
+          lastName: 'Smith',
+        },
+        date: '2020-11-05',
+        startTime: '08:30:00',
+        endTime: '09:00:00',
+        status: 'upcoming',
+      },
+    ];
+
+    const workerUser = {
+      userType: 'worker',
+      personId: '8000000',
+      accessToken: 'eeJAQr3wEC6CJZROFJTY',
+    };
+
+    const resp = { data: appointmentDetails };
+
+    axios.get.mockImplementation(() => Promise.resolve(resp));
+
+    // Act
+    const testRenderer = TestRenderer.create(<AppointmentList user={workerUser} />);
+    const testInstance = testRenderer.root;
+
+    // Waits for the axios to be called to ensure the full appointment list is rendered. 
+    await waitFor(() => expect(axios.get).toHaveBeenCalled());
+
+    // Assert
+    expect(testInstance.findAllByProps({ className: "cancel-btn" })).toHaveLength(2);
+  });
+
+  test('clicking of cancel button brings up cancel appointment popup', async () => {
+    // Arrange
+    const appointmentDetails = [
+      {
+        appointmentId: 1,
+        student: {
+          firstName: 'John',
+          lastName: 'Doe',
+        },
+        date: '2020-11-05',
+        startTime: '08:00:00',
+        endTime: '08:30:00',
+        status: 'upcoming',
+      }
+    ];
+
+    const workerUser = {
+      userType: 'worker',
+      personId: '8000000',
+      accessToken: 'eeJAQr3wEC6CJZROFJTY',
+    };
+
+    const resp = { data: appointmentDetails };
+
+    axios.get.mockImplementation(() => Promise.resolve(resp));
+
+    // Act
+    const testRenderer = TestRenderer.create(<AppointmentList user={workerUser} />);
+    const testInstance = testRenderer.root;
+
+    // Waits for the axios to be called before attempting to click the cancel button.
+    await waitFor(() => expect(axios.get).toHaveBeenCalled());
+    testInstance.findByProps({ className: "cancel-btn" }).props.onClick({ target: { id: appointmentDetails[0].appointmentId } });
+
+    // Assert
+    expect(document.body.innerHTML).toContain('<div id="react-confirm-alert">');
+  });
+
+  test('user clicks yes button on the cancel appointment popup', async () => {
+    // Arrange
+    const appointmentDetails = [
+      {
+        appointmentId: 1,
+        student: {
+          firstName: 'John',
+          lastName: 'Doe',
+        },
+        date: '2020-11-05',
+        startTime: '08:00:00',
+        endTime: '08:30:00',
+        status: 'upcoming',
+      }
+    ];
+
+    const workerUser = {
+      userType: 'worker',
+      personId: '8000000',
+      accessToken: 'eeJAQr3wEC6CJZROFJTY',
+    };
+    const resp = { data: appointmentDetails };
+    const submissionMsg = 'The appointment was NOT cancelled. Please try again.';
+
+    axios.get.mockImplementation(() => Promise.resolve(resp));
+    window.alert = jest.fn();
+
+    // Act
+    const testRenderer = TestRenderer.create(<AppointmentList user={workerUser} />);
+    const testInstance = testRenderer.root;
+
+    // Waits for the axios to be called before attempting to click the cancel button.
+    await waitFor(() => expect(axios.get).toHaveBeenCalled());
+    testInstance.findByProps({ className: "cancel-btn" }).props.onClick({ target: { id: appointmentDetails[0].appointmentId } });
+
+    // Mock appending and removing child from the document body to prevent issues with virtual dom interaction before clicking the yes button.
+    document.body.appendChild = jest.fn();
+    document.body.removeChild = jest.fn();
+    document.body.getElementsByClassName("yes-cancel-btn")[0].click();
+
+    // Assert
+    expect(window.alert).toHaveBeenCalledWith(submissionMsg);
+  });
+
+  test('user clicks no button on the cancel appointment popup', async () => {
+    // Arrange
+    const appointmentDetails = [
+      {
+        appointmentId: 1,
+        student: {
+          firstName: 'John',
+          lastName: 'Doe',
+        },
+        date: '2020-11-05',
+        startTime: '08:00:00',
+        endTime: '08:30:00',
+        status: 'upcoming',
+      }
+    ];
+
+    const workerUser = {
+      userType: 'worker',
+      personId: '8000000',
+      accessToken: 'eeJAQr3wEC6CJZROFJTY',
+    };
+    const resp = { data: appointmentDetails };
+
+    axios.get.mockImplementation(() => Promise.resolve(resp));
+
+    // Act
+    const testRenderer = TestRenderer.create(<AppointmentList user={workerUser} />);
+    const testInstance = testRenderer.root;
+
+    // Waits for the axios to be called before attempting to click the cancel button.
+    await waitFor(() => expect(axios.get).toHaveBeenCalled());
+    testInstance.findByProps({ className: "cancel-btn" }).props.onClick({ target: { id: appointmentDetails[0].appointmentId } });
+
+    // Mock appending and removing child from the document body to prevent issues with virtual dom interaction before clicking the no button.
+    document.body.appendChild = jest.fn();
+    document.body.removeChild = jest.fn();
+    document.body.getElementsByClassName("no-cancel-btn")[0].click();
+
+    // Assert
+    expect(document.body.innerHTML).toEqual(expect.not.stringContaining('<h1>Appointment Cancellation Confirmation</h1>'));
+  });
 
 });
