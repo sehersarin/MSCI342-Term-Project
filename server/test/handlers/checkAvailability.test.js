@@ -135,10 +135,10 @@ describe('Test to check valid account creation', () => {
     //TEST 10
     test('Accept that all valid parameters return the expected values ', async () => {
         // Arrange
-        const workerId = 8000000;
-        const schoolId = 1;
-        const startTime = '2020-10-19';
-        const endTime = '2020-10-21';
+        const slotId = 1;
+        const workerId = 80000000;
+        const status = 'available';
+        const date = '2020-10-20';
 
         // Act
         const workerIsAvailable = await workerTimeslotHandler.checkWorkerAvailability(slotId, workerId, status, date);
