@@ -6,6 +6,7 @@ import Title from "../../Title"
 import { Redirect, Route, withRouter, Link, Router } from "react-router-dom";
 import moment from "moment";
 import queryString from "query-string";
+import _ from 'lodash';
 const axios = require("axios").default;
 
 class Check extends React.Component {
@@ -18,6 +19,8 @@ class Check extends React.Component {
       personId: this.props.personId,
       // personId : this.props.personId,
       items: [],
+      schools: [],
+      selectedSchool: "", //hard coded to one as there is only one school at the moment
       startDay: moment(),
       accessToken: "",
       timeslots: "",
@@ -35,10 +38,12 @@ class Check extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleCheckbox = this.handleCheckbox.bind(this);
+    this.handleDropDownChange = this.handleDropDownChange.bind(this);
   }
 
- async componentDidMount() {
-    var params = { accessToken: "XcCa92ZvOnQKZsGtOKOa" };
+  async componentDidMount() {
+    // var params = { accessToken: "XcCa92ZvOnQKZsGtOKOa" };
+    var params = { accessToken: this.props.accessToken };
     await axios
       .get(`/api/possible-timeslots/?${queryString.stringify(params)}`)
       .then((res) => {
@@ -49,12 +54,27 @@ class Check extends React.Component {
         }
         console.log(res.data)
       });
-      let date_ob = new Date();
-      let date = ("0" + date_ob.getDate()).slice(-2); 
-      let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
-      let year = date_ob.getFullYear();     
-      let currentDay = year + "-" + month + "-" + date;
-      document.getElementById("DATE").value = currentDay;
+    let date_ob = new Date();
+    let date = ("0" + date_ob.getDate()).slice(-2);
+    let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+    let year = date_ob.getFullYear();
+    let currentDay = year + "-" + month + "-" + date;
+    document.getElementById("DATE").value = currentDay;
+
+
+    var params2 = { workerId: this.props.personId, accessToken: this.props.accessToken };
+    await axios.get(`/api/get-schools-for-worker/?${queryString.stringify(params2)}`)
+      .then((res) => {
+        if (_.isNil(res.error) && res.data) {
+          this.setState({
+            schools: res.data,
+          });
+          console.log(res.data)
+        } else {
+          console.log("no data is called")
+        }
+      });
+    console.log(this.state.schools)
   }
 
   handleCheckbox = (event) => {
@@ -77,10 +97,14 @@ class Check extends React.Component {
     }));
   }
 
+  handleDropDownChange(event){
+    this.setState({selectedSchool: event.target.value});
+  }
+
   async handleSubmit(event) {
     // submits selected days and assigns recurrenting dates based off boxes checked
     let AvailableDates = [];
-   
+    console.log(this.state.selectedSchool)
     let currentDayNumber = moment(this.state.startDay).day();
     //let DaySelected = false; // variable for if checkboxes are checked or not
 
@@ -96,7 +120,7 @@ class Check extends React.Component {
       busySlots['personId'] = this.state.personId
       for (let i = 1; i <= 7; i++) {
         let startofweek = moment(this.state.startDay).isoWeekday(0); // sets beginning of week to sunday
-        if (this.state.checkedDays.get(String(i*100)) === true) {
+        if (this.state.checkedDays.get(String(i * 100)) === true) {
           //DaySelected = true;
           var AddDayCounter = i;
 
@@ -118,10 +142,10 @@ class Check extends React.Component {
       }
       AvailableDates.push(busySlots);
       console.log(AvailableDates);
-      if(this.state.timeslots ===""){
+      if (this.state.timeslots === "") {
         alert("Please select timeslot(s)")
       }
-      else{
+      else {
         alert("Input is added")
       }
       // if (DaySelected === false) {
@@ -151,26 +175,31 @@ class Check extends React.Component {
 
     return (
       <Container className="Form-container">
-        <Title name="Availability"/><Title/>
+        <Title name="Availability" /><Title />
         <form onSubmit={this.handleSubmit}>
           <Row>
             <Col xs={8} align="center">
               <input type="date" id="DATE" onChange={this.handleChange} min={new Date().toISOString().split('T')[0]} />
               <br />
+              <label for="school" className="SelectSchoolsLabel" > Select School:</label>
+              <select value={this.state.selectedSchool} onChange = {this.handleDropDownChange}>
+                {this.state.schools.map((x)=> <option value = {x.id}>{x} </option> )}
+                <option value="School2">School 2</option>
+              </select>
               <br />
               {this.state.items.map((el) => (
-                  <div>
-                    <label>
-                      <input
-                        type="checkbox"
-                        id={el.slotId}
-                        value={el.slotId}
-                        onChange={this.handleCheckbox}
-                      />
-                      {tConvert(el.startTime) + " to " + tConvert(el.endTime)}
-                    </label>
-                    <br></br>
-                  </div>
+                <div>
+                  <label>
+                    <input
+                      type="checkbox"
+                      id={el.slotId}
+                      value={el.slotId}
+                      onChange={this.handleCheckbox}
+                    />
+                    {tConvert(el.startTime) + " to " + tConvert(el.endTime)}
+                  </label>
+                  <br></br>
+                </div>
               ))}
               {/* {listItems} */}
               <br></br>

@@ -90,7 +90,7 @@ class Dashboard extends Component {
 
                 </Route>
                 <Route path = {`/dashboard/InputWorkerAvailabilitypage`}>
-                  <WorkerInputpage personId ={this.state.personId}/>
+                  <WorkerInputpage personId ={this.state.personId} accessToken={this.state.accessToken}/>
                 </Route>
                 <Route exact path={`${this.props.match.path}`}>
                   <Home userType={userType} personId={personId} accessToken={accessToken} />

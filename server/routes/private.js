@@ -136,8 +136,6 @@ router.get('/appointments', async (req, res) => {
     res.send(appointmentDetails);
 });
 
-
-
 // The method will return all timeslots in the timeslot table 
 //Note that there is an future opportunity to expand functionality of this endpoint to filter the records pulled based on start time or end time of the timeslot 
 router.get('/possible-timeslots', async (req, res) => {
@@ -153,7 +151,9 @@ router.get('/get-schools-for-worker', async (req, res) => {
         workerId: Joi.number().integer().required(),
     })
 
-    const workerId = req.query.workerId;
+    const query = req.query ? req.query : {};
+
+    const workerId = query.workerId;
 
     const { error } = paramSchema.validate({ workerId});
 

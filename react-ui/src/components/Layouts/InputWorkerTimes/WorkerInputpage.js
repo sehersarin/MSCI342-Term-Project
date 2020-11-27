@@ -6,12 +6,20 @@ import { Container, Row, Col } from 'react-grid-system';
 import { Redirect, Route, withRouter } from "react-router-dom";
 import ReactDOM from "react-dom";
 import moment from 'moment';
+import queryString from "query-string";
+import _ from 'lodash';
+const axios = require("axios").default;
 
 class WorkerInputpage extends React.Component {    // this class component would be putting together other components into one page
+    
+   
+    // call school dropdown, pass selected school to check
     render() {
+        /* console.log(this.state.schools) */
          return(
             <div>
-                <Check personId={this.props.personId}/>
+                <Check personId={this.props.personId} accessToken={this.props.accessToken}/>
+
                 {/* { <Container className = "wraper">
                     <label for ="school" className = "SelectSchoolsLabel" > Select School:</label>
                     <select name="school" className ="SelectSchools"  id="school">   

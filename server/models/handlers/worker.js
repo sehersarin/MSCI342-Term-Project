@@ -1,3 +1,4 @@
+const school = require('../db/school');
 const workerModel = require('../db/worker');
 
 // A second query to fetch worker details from the workerIds
@@ -7,8 +8,8 @@ async function getWorkersByWorkerIds(workerIds) {
 };
 
 // A query to fetch schools details from the workerIds
-async function getSchools(workerIds) {
-    const schools = await schoolModel.getSchoolsByWorkerIds(workerIds);
+async function getSchools(workerId) {
+    const schools = await school.getSchoolsByWorkerId(workerId);
     return schools;
 };
 
