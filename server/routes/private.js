@@ -42,6 +42,7 @@ router.post('/book-appointment', async (req, res) => {
     const studentNotes = query.studentNotes ? query.studentNotes : null;
     const workerComments = query.workerComments ? query.workerComments : null;
 
+
     const { error } = paramSchema.validate({ studentId, workerTimeslotId, purpose, studentNotes, workerComments });
 
     if (!_.isNil(error)) res.send(error);
