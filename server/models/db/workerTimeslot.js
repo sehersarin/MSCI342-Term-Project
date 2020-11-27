@@ -15,6 +15,9 @@ async function insertWorkerTimeslot(slotId, schoolId, workerId, status, date) {
     return db.any(`insert into ${Tables.workerTimeslot} (slot_id, school_id, worker_id, status, date) values (${slotId}, ${schoolId}, ${workerId}, ${status ? `'${status}'` : `'${TimeslotStatus.available}'`} , '${date}');`);
 }
 
+async function checkWorkerAvailability(slotId, schoolId, workerId, status, date) {
+
 module.exports = {
     insertWorkerTimeslot,
-} 
+    checkWorkerAvailability
+} }
