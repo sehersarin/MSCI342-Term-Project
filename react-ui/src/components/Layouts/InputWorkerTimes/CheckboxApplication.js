@@ -42,7 +42,6 @@ class Check extends React.Component {
   }
 
   async componentDidMount() {
-    // var params = { accessToken: "XcCa92ZvOnQKZsGtOKOa" };
     var params = { accessToken: this.props.accessToken };
     await axios
       .get(`/api/possible-timeslots/?${queryString.stringify(params)}`)
@@ -73,7 +72,6 @@ class Check extends React.Component {
           console.log("no data is called")
         }
       });
-    console.log(this.state.schools)
   }
 
   handleCheckbox = (event) => {
@@ -103,6 +101,8 @@ class Check extends React.Component {
   async handleSubmit(event) {
     // submits selected days and assigns recurrenting dates based off boxes checked
     let AvailableDates = [];
+    let timeSlots = Object.keys(this.state.timeslots)
+    console.log(timeSlots)
     console.log(this.state.selectedSchool)
     let currentDayNumber = moment(this.state.startDay).day();
     //let DaySelected = false; // variable for if checkboxes are checked or not
@@ -134,16 +134,26 @@ class Check extends React.Component {
             // busySlots[k][this.state.personId][StartingDay.format("DD-MM-YYYY")]= this.state.timeslots
             busySlots[StartingDay.format("DD-MM-YYYY")] = this.state.timeslots
             //busySlots['personId'] = this.state.personId
-            var params = { workerId: this.props.personId, accessToken: this.props.accessToken, date:StartingDay.format("DD-MM-YYYY"),slotId:this.state.timeslots, schoolId:this.state.selectedSchool }
 
-            await axios.get(`/api/add-recurring-schedule/?${queryString.stringify(params)}`)
-            .then(res => {
-                if (_.isNil(res.error) && res.data) { // If no error and the returned response is true.
-                    // Display the appropriate alert box based on whether the appointments were successfully cancelled.
+            for (let l = 0; l < timeSlots.length; l++) {
+              let params = {
+                workerId: this.props.personId,
+                //accessToken: this.props.accessToken, 
+                date: StartingDay.format("DD-MM-YYYY"),
+                slotId: timeSlots[l],
+                schoolId: this.state.selectedSchool,
+                status: ""
+              };
+              console.log(params)
+              // Call the API multiple times to input data into the datebase, 4 weeks of selected dates * number of timeslots selected
+              await axios.get(`/api/add-recurring-schedule/?${queryString.stringify(params)}`)
+                .then(res => {
+                  if (_.isNil(res.error) && res.data) { // If no error and the returned response is true.
+
                     console.log('available date stored in datebase')
-                } else console.log(`nothing has been added to database`);
-            });
-
+                  } else console.log(`error occured when calling the recurring schedule API`);
+                });
+            }
             NextWeek = moment(StartingDay).add(7, "days");
             StartingDay = NextWeek;
           }
@@ -191,9 +201,9 @@ class Check extends React.Component {
               <input type="date" id="DATE" onChange={this.handleChange} min={new Date().toISOString().split('T')[0]} />
               <br />
               <label for="school" className="SelectSchoolsLabel" > Select School:</label>
-              <select value={this.state.selectedSchool} onChange={this.handleDropDownChange}>
+              <select value={this.state.selectedSchool} onChange={this.handleDropDownChange} required>
+                <option value="" disabled selected>Select your schoolID</option>
                 {this.state.schools.map((x) => <option value={x.id}>{x} </option>)}
-                <option value="School2">School 2</option>
               </select>
               <br />
               {this.state.items.map((el) => (

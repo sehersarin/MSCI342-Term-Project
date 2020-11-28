@@ -68,9 +68,9 @@ describe('testing user inputs schoolID ', () => {
 
     test('Initial setup for getting schoolID for the worker', async () => {
         // Arrange
-        const testSchoolId =[1];
-        
-        const testWorkerId = 8000000;
+        const testSchoolId = [1];
+
+        const testWorkerId = 8000001;
 
         // Act
         const schools = await workerHandler.getSchools(testWorkerId);
@@ -125,7 +125,7 @@ describe('testing user inputs schoolID ', () => {
 
         // Assert
         expect(workerSchools).toBe(null);
-    });     
+    });
 
     test('return of error for workerId with no school', async () => {
         //Arrange
@@ -136,5 +136,5 @@ describe('testing user inputs schoolID ', () => {
 
         // Assert
         expect(workerSchools).toBe(null);
-    });  
+    });
 });

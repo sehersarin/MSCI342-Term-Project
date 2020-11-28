@@ -45,11 +45,11 @@ describe('testing parameters for getWorker method', () => {
             type: 'Guidance Counselor'
         };
 
-         // Act
-         const user = await workerModel.getWorker(workerEmail, workerPassword);
+        // Act
+        const user = await workerModel.getWorker(workerEmail, workerPassword);
 
-         // Assert
-         expect(user).toMatchObject(workerUser);
+        // Assert
+        expect(user).toMatchObject(workerUser);
     });
 
 });
