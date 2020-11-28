@@ -24,8 +24,7 @@ class SelectWorkerForm extends Component {
         email: this.props.user.email,
         userType: this.props.user.userType,
         workerId: "Not_Changed!!", // check to see if changed in the URL in the next page
-        schoolId: 1,
-        //schoolId: this.props.user.schoolId,  this doesn't seem to work
+        schoolId: this.props.user.schoolId,  
         studentId: this.props.user.personId, 
         accessToken: this.props.user.accessToken,
         formSubmission: false,
@@ -80,6 +79,7 @@ class SelectWorkerForm extends Component {
 
   render() {
     const { email, studentId, schoolId, userType, workerId, accessToken } = this.state;
+    console.log("this props", this.props);
     //DO NOT CHANGE THE ORDER OF THIS ROUTE
     //the next page reads in information from the URL
     let newRoute= <Route path="/Dashboard/SelectWorker" render={props => ( <Redirect to={`/dashboard/CreateAppointment/${workerId}/${email}/${userType}/${studentId}/${schoolId}/${accessToken}`} Component={CreateAppointment}/>)}></Route> 

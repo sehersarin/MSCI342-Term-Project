@@ -24,7 +24,7 @@ class CreateAppointmentForm extends Component {
       super(props);
       this.state = {
         workerId: window.location.href.slice(50,57), //possible look into referencing by character not index placement
-        schoolId: "1" ,   
+        schoolId: this.props.user.schoolId,   
         studentId: this.props.user.personId, 
         accessToken: this.props.user.accessToken,
         workerTimeslotId: 0, 
@@ -118,7 +118,7 @@ class CreateAppointmentForm extends Component {
   }
   
   render() {
-    //if no avalible times were found
+    console.log("School id", this.state.schoolId);
     if(this.state.availableTimes === ""){
       return(
         <Container className="Form-container">

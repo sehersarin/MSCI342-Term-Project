@@ -28,7 +28,7 @@ class App extends Component {
         <Route path="/login" component={LogIn}>
           {/* <LogIn /> */}
         </Route>
-        <Route exact path="/dashboard/:email/:userType/:firstName/:personId/:accessToken" component={Dashboard}>
+        <Route exact path="/dashboard/:email/:userType/:firstName/:personId/:accessToken/:schoolId" component={Dashboard}>
           {/* removed exact path  for both top and bottom*/}
           {/* <Redirect from="/" to="dashboard/" /> */}
         </Route>

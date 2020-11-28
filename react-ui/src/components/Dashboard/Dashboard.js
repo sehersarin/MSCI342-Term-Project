@@ -58,7 +58,7 @@ class Dashboard extends Component {
               {/* Only display the book appointment form if the user is a student. */}
               {userType === UserTypes.student &&
                  <li>
-                 <Link to={`/dashboard/SelectWorker/${email}/${userType}/${personId}/${accessToken}`}>Book Appointment</Link>
+                 <Link to={`/dashboard/SelectWorker/${email}/${userType}/${personId}/${accessToken}/${schoolId}`}>Book Appointment</Link>
                 </li>
               }
 
