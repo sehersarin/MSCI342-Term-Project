@@ -197,8 +197,21 @@ router.get('/cancel-specific-day', async (req, res) => {
     res.send(isCancelledSuccessfully);
 });
 
-// Temporary stub to cancel a specific appointment that always returns false.
+// Endpoint to cancel a specific appointment.
 router.get('/cancel-specific-appointment', async (req, res) => {
+    // Checks the format of the passed in parameters.
+    const paramSchema = Joi.object({
+        appointmentId: Joi.number().integer().required(),
+    });
+
+    const appointmentId = req.query.appointmentId;
+
+    const { error } = paramSchema.validate({ appointmentId });
+
+    // Returns an error if the parameters are invalid. 
+    if (!_.isNil(error)) res.send(error);
+
+    // Temporarily hardcoded to return false for testing purposes. 
     res.send(false);
 });
 
