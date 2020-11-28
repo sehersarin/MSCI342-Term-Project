@@ -197,5 +197,9 @@ router.get('/cancel-specific-day', async (req, res) => {
     res.send(isCancelledSuccessfully);
 });
 
+// Temporary stub to cancel a specific appointment that always returns false.
+router.get('/cancel-specific-appointment', async (req, res) => {
+    res.send(false);
+});
 
 module.exports = router
