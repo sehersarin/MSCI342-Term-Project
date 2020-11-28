@@ -61,7 +61,6 @@ class Check extends React.Component {
     let currentDay = year + "-" + month + "-" + date;
     document.getElementById("DATE").value = currentDay;
 
-
     var params2 = { workerId: this.props.personId, accessToken: this.props.accessToken };
     await axios.get(`/api/get-schools-for-worker/?${queryString.stringify(params2)}`)
       .then((res) => {
@@ -97,8 +96,8 @@ class Check extends React.Component {
     }));
   }
 
-  handleDropDownChange(event){
-    this.setState({selectedSchool: event.target.value});
+  handleDropDownChange(event) {
+    this.setState({ selectedSchool: event.target.value });
   }
 
   async handleSubmit(event) {
@@ -117,7 +116,7 @@ class Check extends React.Component {
       busySlots[
         this.state.startDay.format("DD-MM-YYYY")
       ] = this.state.timeslots
-      busySlots['personId'] = this.state.personId
+      //busySlots['personId'] = this.state.personId
       for (let i = 1; i <= 7; i++) {
         let startofweek = moment(this.state.startDay).isoWeekday(0); // sets beginning of week to sunday
         if (this.state.checkedDays.get(String(i * 100)) === true) {
@@ -134,7 +133,17 @@ class Check extends React.Component {
           for (let k = 1; k <= 5; k++) {
             // busySlots[k][this.state.personId][StartingDay.format("DD-MM-YYYY")]= this.state.timeslots
             busySlots[StartingDay.format("DD-MM-YYYY")] = this.state.timeslots
-            busySlots['personId'] = this.state.personId
+            //busySlots['personId'] = this.state.personId
+            var params = { workerId: this.props.personId, accessToken: this.props.accessToken, date:StartingDay.format("DD-MM-YYYY"),slotId:this.state.timeslots, schoolId:this.state.selectedSchool }
+
+            await axios.get(`/api/add-recurring-schedule/?${queryString.stringify(params)}`)
+            .then(res => {
+                if (_.isNil(res.error) && res.data) { // If no error and the returned response is true.
+                    // Display the appropriate alert box based on whether the appointments were successfully cancelled.
+                    console.log('available date stored in datebase')
+                } else console.log(`nothing has been added to database`);
+            });
+
             NextWeek = moment(StartingDay).add(7, "days");
             StartingDay = NextWeek;
           }
@@ -182,8 +191,8 @@ class Check extends React.Component {
               <input type="date" id="DATE" onChange={this.handleChange} min={new Date().toISOString().split('T')[0]} />
               <br />
               <label for="school" className="SelectSchoolsLabel" > Select School:</label>
-              <select value={this.state.selectedSchool} onChange = {this.handleDropDownChange}>
-                {this.state.schools.map((x)=> <option value = {x.id}>{x} </option> )}
+              <select value={this.state.selectedSchool} onChange={this.handleDropDownChange}>
+                {this.state.schools.map((x) => <option value={x.id}>{x} </option>)}
                 <option value="School2">School 2</option>
               </select>
               <br />
