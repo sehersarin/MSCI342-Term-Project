@@ -67,7 +67,7 @@ class Check extends React.Component {
           this.setState({
             schools: res.data,
           });
-          console.log(res.data)
+          console.log(this.state.schools)
         } else {
           console.log("no data is called")
         }
@@ -101,7 +101,7 @@ class Check extends React.Component {
   async handleSubmit(event) {
     // submits selected days and assigns recurrenting dates based off boxes checked
     let AvailableDates = [];
-    let timeSlots = Object.keys(this.state.timeslots)
+    let timeSlots = Object.keys(this.state.timeslots) // to get array of slotids only
     console.log(timeSlots)
     console.log(this.state.selectedSchool)
     let currentDayNumber = moment(this.state.startDay).day();
@@ -130,29 +130,31 @@ class Check extends React.Component {
           let StartingDay = startofweek.add(AddDayCounter, "day");
           let NextWeek = "";
 
-          for (let k = 1; k <= 5; k++) {
+           for (let k = 1; k <= 5; k++) {
             // busySlots[k][this.state.personId][StartingDay.format("DD-MM-YYYY")]= this.state.timeslots
             busySlots[StartingDay.format("DD-MM-YYYY")] = this.state.timeslots
             //busySlots['personId'] = this.state.personId
 
-            for (let l = 0; l < timeSlots.length; l++) {
-              let params = {
+           for (let l = 0; l < timeSlots.length; l++) {
+              let workerInput = {
                 workerId: this.props.personId,
-                //accessToken: this.props.accessToken, 
-                date: StartingDay.format("DD-MM-YYYY"),
+                accessToken: this.props.accessToken, 
+                date: StartingDay.toISOString().split('T')[0],
                 slotId: timeSlots[l],
                 schoolId: this.state.selectedSchool,
-                status: ""
               };
-              console.log(params)
               // Call the API multiple times to input data into the datebase, 4 weeks of selected dates * number of timeslots selected
-              await axios.get(`/api/add-recurring-schedule/?${queryString.stringify(params)}`)
+              try {
+              await Promise.all(axios.post(`/api/add-recurring-schedule/?${queryString.stringify(workerInput)}`)
                 .then(res => {
                   if (_.isNil(res.error) && res.data) { // If no error and the returned response is true.
-
                     console.log('available date stored in datebase')
-                  } else console.log(`error occured when calling the recurring schedule API`);
-                });
+                  } else { console.log(`error occured when calling the recurring schedule API`) };
+                }));
+              } 
+              catch (error){
+                console.log(error)
+              }
             }
             NextWeek = moment(StartingDay).add(7, "days");
             StartingDay = NextWeek;
