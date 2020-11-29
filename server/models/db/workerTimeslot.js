@@ -21,7 +21,14 @@ async function updateWorkerAvailability(workerId, specificDate, newStatus) {
     return db.any(`update ${Tables.workerTimeslot} set status='${newStatus}' where date='${specificDate}' and worker_id='${workerId}';`);
 }
 
+//This method updates the worker avaiability table 
+async function updatingTheWorkerAvailability(status){
+    const queryCondition = `where w1.date='${specificDate}' and w1.worker_id='${workerId}'`;
+    return db.any(`update ${Tables.workerTimeslot} set status='${newStatus.unavailable}' where ;`)
+}
 module.exports = {
     insertWorkerTimeslot,
     updateWorkerAvailability,
+    updatingTheWorkerAvailability,
 } 
+
