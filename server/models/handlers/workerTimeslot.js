@@ -10,6 +10,18 @@ async function addWorkerTimeslot(slotId, schoolId, workerId, status, date) {
         return false;
     }
 };
+
+async function updatingTheWorkerAvailability(status){
+    try {
+        await timeslotModel.insertWorkerTimeslot(status);
+        return true;
+    } catch (error) {
+        console.log('Error occurred in updatingTheWorkerAvailability method: ', error);
+        return false;
+    }
+};
+
 module.exports = {
-    addWorkerTimeslot
+    addWorkerTimeslot,
+    updatingTheWorkerAvailability,
 }
