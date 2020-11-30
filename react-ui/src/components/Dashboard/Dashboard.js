@@ -3,7 +3,7 @@ import { withRouter } from "react-router";
 import { Redirect, Switch, Route, Link } from "react-router-dom";
 import "./Dashboard.scss";
 import logo from '../../logo.svg'
-import Profile from "../Layouts/Profile";
+import Selectable from "../Layouts/Profile";
 import Home from "../Layouts/Home";
 import NotFound from "../Layouts/404";
 import SelectWorker from "../Layouts/SelectWorker";
@@ -80,7 +80,7 @@ class Dashboard extends Component {
             <div className="main">
               <Switch>
                 <Route path={`/dashboard/Profile`}>
-                  <Profile name={firstName} />
+                  <Selectable personId= {this.state.personId}/>
                 </Route>
                 <Route path={`/dashboard/CreateAppointment`}>
                   <CreateAppointment name={personId} />
