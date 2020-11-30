@@ -368,7 +368,7 @@ describe('rendering appointment cancellation popups', () => {
     expect(document.body.innerHTML).toContain('<div id="react-confirm-alert">');
   });
 
-  test('user clicks yes button on the cancel appointment popup', async () => {
+  test('user clicks yes button on the cancel appointment popup and api returns true', async () => {
     // Arrange
     const appointmentDetails = [
       {
@@ -389,10 +389,16 @@ describe('rendering appointment cancellation popups', () => {
       personId: '8000000',
       accessToken: 'eeJAQr3wEC6CJZROFJTY',
     };
-    const resp = { data: appointmentDetails };
-    const submissionMsg = "The appointment was NOT cancelled!\r\n\nThis feature is not fully integrated yet, but the ConnectMe team is working hard to finish it. We appreciate your patience!";
+    const appointmentResponse = { data: appointmentDetails };
+    const successCancellationResponse = { data: true };
+    const successMsg = "The appointment has been cancelled!";
 
-    axios.get.mockImplementation(() => Promise.resolve(resp));
+    // Adjusts the api response based on which endpoint was called.
+    axios.get.mockImplementation((url) => {
+      if (url.includes('/api/appointments')) return Promise.resolve(appointmentResponse);
+      else return Promise.resolve(successCancellationResponse);
+    });
+
     window.alert = jest.fn();
 
     // Act
@@ -408,8 +414,117 @@ describe('rendering appointment cancellation popups', () => {
     document.body.removeChild = jest.fn();
     document.body.getElementsByClassName("yes-cancel-btn")[0].click();
 
+    // Waits for the axios to be called before attempting to check that the alert was called.
+    await waitFor(() => expect(axios.get).toHaveBeenCalled());
+
     // Assert
-    expect(window.alert).toHaveBeenCalledWith(submissionMsg);
+    expect(window.alert).toHaveBeenCalledWith(successMsg);
+  });
+
+  test('user clicks yes button on the cancel appointment popup and api returns false', async () => {
+    // Arrange
+    const appointmentDetails = [
+      {
+        appointmentId: 1,
+        student: {
+          firstName: 'John',
+          lastName: 'Doe',
+        },
+        date: '2020-11-05',
+        startTime: '08:00:00',
+        endTime: '08:30:00',
+        status: 'upcoming',
+      }
+    ];
+
+    const workerUser = {
+      userType: 'worker',
+      personId: '8000000',
+      accessToken: 'eeJAQr3wEC6CJZROFJTY',
+    };
+    const appointmentResponse = { data: appointmentDetails };
+    const errorCancellationResponse = { data: false };
+    const errorMsg = "The appointment was NOT cancelled. Please try again.";
+
+    // Adjusts the api response based on which endpoint was called.
+    axios.get.mockImplementation((url) => {
+      if (url.includes('/api/appointments')) return Promise.resolve(appointmentResponse);
+      else return Promise.resolve(errorCancellationResponse);
+    });
+
+    window.alert = jest.fn();
+
+    // Act
+    const testRenderer = TestRenderer.create(<AppointmentList user={workerUser} />);
+    const testInstance = testRenderer.root;
+
+    // Waits for the axios to be called before attempting to click the cancel button.
+    await waitFor(() => expect(axios.get).toHaveBeenCalled());
+    testInstance.findByProps({ className: "cancel-btn" }).props.onClick({ target: { id: appointmentDetails[0].appointmentId } });
+
+    // Mock appending and removing child from the document body to prevent issues with virtual dom interaction before clicking the yes button.
+    document.body.appendChild = jest.fn();
+    document.body.removeChild = jest.fn();
+    document.body.getElementsByClassName("yes-cancel-btn")[0].click();
+
+    // Waits for the axios to be called before attempting to check that the alert was called.
+    await waitFor(() => expect(axios.get).toHaveBeenCalled());
+
+    // Assert
+    expect(window.alert).toHaveBeenCalledWith(errorMsg);
+  });
+
+  test('user clicks yes button on the cancel appointment popup and api has an error', async () => {
+    // Arrange
+    const appointmentDetails = [
+      {
+        appointmentId: 1,
+        student: {
+          firstName: 'John',
+          lastName: 'Doe',
+        },
+        date: '2020-11-05',
+        startTime: '08:00:00',
+        endTime: '08:30:00',
+        status: 'upcoming',
+      }
+    ];
+
+    const workerUser = {
+      userType: 'worker',
+      personId: '8000000',
+      accessToken: 'eeJAQr3wEC6CJZROFJTY',
+    };
+    const appointmentResponse = { data: appointmentDetails };
+    const errorCancellationResponse = { error: "Unknown error occurred." };
+    const errorMsg = "The appointment was NOT cancelled. Please try again.";
+
+    // Adjusts the api response based on which endpoint was called.
+    axios.get.mockImplementation((url) => {
+      if (url.includes('/api/appointments')) return Promise.resolve(appointmentResponse);
+      else return Promise.resolve(errorCancellationResponse);
+    });
+
+    window.alert = jest.fn();
+
+    // Act
+    const testRenderer = TestRenderer.create(<AppointmentList user={workerUser} />);
+    const testInstance = testRenderer.root;
+
+    // Waits for the axios to be called before attempting to click the cancel button.
+    await waitFor(() => expect(axios.get).toHaveBeenCalled());
+    testInstance.findByProps({ className: "cancel-btn" }).props.onClick({ target: { id: appointmentDetails[0].appointmentId } });
+
+    // Mock appending and removing child from the document body to prevent issues with virtual dom interaction before clicking the yes button.
+    document.body.appendChild = jest.fn();
+    document.body.removeChild = jest.fn();
+    document.body.getElementsByClassName("yes-cancel-btn")[0].click();
+
+    // Waits for the axios to be called before attempting to check that the alert was called.
+    await waitFor(() => expect(axios.get).toHaveBeenCalled());
+
+    // Assert
+    expect(window.alert).toHaveBeenCalledWith(errorMsg);
   });
 
   test('user clicks no button on the cancel appointment popup', async () => {
