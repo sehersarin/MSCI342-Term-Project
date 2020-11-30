@@ -9,9 +9,9 @@ import moment from 'moment';
 
 class WorkerInputpage extends React.Component {    // this class component would be putting together other components into one page
     render() {
-        return(
+         return(
             <div>
-                <Check />
+                <Check personId={this.props.personId}/>
                 {/* { <Container className = "wraper">
                     <label for ="school" className = "SelectSchoolsLabel" > Select School:</label>
                     <select name="school" className ="SelectSchools"  id="school">   
