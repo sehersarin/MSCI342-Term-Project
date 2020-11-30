@@ -105,7 +105,7 @@ class Check extends React.Component {
     console.log(timeSlots)
     console.log(this.state.selectedSchool)
     let currentDayNumber = moment(this.state.startDay).day();
-    //let DaySelected = false; // variable for if checkboxes are checked or not
+    let recurringSelected = false; // variable for if checkboxes are checked or not
 
     if (this.state.startDay.format("DD-MM-YYYY") === "Invalid date") {
       alert("No date has been selected, please selected a date");
@@ -120,7 +120,7 @@ class Check extends React.Component {
       for (let i = 1; i <= 7; i++) {
         let startofweek = moment(this.state.startDay).isoWeekday(0); // sets beginning of week to sunday
         if (this.state.checkedDays.get(String(i * 100)) === true) {
-          //DaySelected = true;
+          recurringSelected  = true;
           var AddDayCounter = i;
 
           if (AddDayCounter < currentDayNumber) {
@@ -161,6 +161,31 @@ class Check extends React.Component {
           }
         }
       }
+      if(recurringSelected ===false){// just adding one day with timeslots
+        busySlots[this.state.startDay.format("DD-MM-YYYY")] = this.state.timeslots
+            //busySlots['personId'] = this.state.personId
+           for (let l = 0; l < timeSlots.length; l++) {
+              let workerInput = {
+                workerId: this.props.personId,
+                accessToken: this.props.accessToken, 
+                date: this.state.startDay.toISOString().split('T')[0],
+                slotId: timeSlots[l],
+                schoolId: this.state.selectedSchool,
+              };
+              // Call the API multiple times to input data into the datebase, 1 day * number of timeslots selected
+              try {
+              await Promise.all(axios.post(`/api/add-recurring-schedule/?${queryString.stringify(workerInput)}`)
+                .then(res => {
+                  if (_.isNil(res.error) && res.data) { // If no error and the returned response is true.
+                    console.log('available date stored in datebase')
+                  } else { console.log(`error occured when calling the recurring schedule API`) };
+                }));
+              } 
+              catch (error){
+                console.log(error)
+              }
+            }
+      }
       AvailableDates.push(busySlots);
       console.log(AvailableDates);
       if (this.state.timeslots === "") {
@@ -169,11 +194,7 @@ class Check extends React.Component {
       else {
         alert("Input is added")
       }
-      // if (DaySelected === false) {
-      //   alert("No day has been checked, please selected a day");
-      // } else {
-      //   alert("Days has been selected");
-      // }
+      
       event.preventDefault();
     }
   }
