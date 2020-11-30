@@ -11,9 +11,9 @@ async function addWorkerTimeslot(slotId, schoolId, workerId, status, date) {
     }
 };
 
-async function bookWorkerTimeslot(status){
+async function bookWorkerTimeslot(workerTimeslotId){
     try {
-        await timeslotModel.insertWorkerTimeslot(status);
+        await timeslotModel.bookWorkerTimeslot(workerTimeslotId);
         return true;
     } catch (error) {
         console.log('Error occurred in updatingTheWorkerAvailability method: ', error);
@@ -23,5 +23,5 @@ async function bookWorkerTimeslot(status){
 
 module.exports = {
     addWorkerTimeslot,
-    updatingTheWorkerAvailability,
+    bookWorkerTimeslot,
 }
