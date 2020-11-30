@@ -11,12 +11,12 @@ async function addWorkerTimeslot(slotId, schoolId, workerId, status, date) {
     }
 };
 
-async function bookWorkerTimeslot(workerTimeslotId){
+async function bookWorkerTimeslot(workerTimeslotId) {
     try {
         await timeslotModel.bookWorkerTimeslot(workerTimeslotId);
         return true;
     } catch (error) {
-        console.log('Error occurred in updatingTheWorkerAvailability method: ', error);
+        console.log('Error occurred in bookWorkerTimeslot method: ', error);
         return false;
     }
 };

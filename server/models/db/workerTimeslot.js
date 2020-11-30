@@ -3,7 +3,7 @@ const _ = require('lodash');
 const { db } = require('../../lib/connection');
 
 const Tables = require('../../constants/tables.json');
-const TimeslotStatus  = require('../../constants/timeslotStatus.json');
+const TimeslotStatus = require('../../constants/timeslotStatus.json');
 
 // This method inserts an appointment entry given specific information.
 async function insertWorkerTimeslot(slotId, schoolId, workerId, status, date) {
@@ -22,13 +22,14 @@ async function updateWorkerAvailability(workerId, specificDate, newStatus) {
 }
 
 //This method updates the worker avaiability table 
-async function bookWorkerTimeslot(workerTimeslotId){
+async function bookWorkerTimeslot(workerTimeslotId) {
     const queryCondition = `where worker_timeslot_id ='${workerTimeslotId}'`;
-    return db.any(`update ${Tables.workerTimeslot} set status='${TimeslotStatus.unavailable}' where ;`)
+    const queryOutput = await db.any(`update ${Tables.workerTimeslot} set status='${TimeslotStatus.unavailable}' ${queryCondition} ;`);
+    return true;
 }
 module.exports = {
     insertWorkerTimeslot,
     updateWorkerAvailability,
     bookWorkerTimeslot,
-} 
+}
 
