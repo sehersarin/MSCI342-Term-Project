@@ -11,7 +11,7 @@ async function addWorkerTimeslot(slotId, schoolId, workerId, status, date) {
     }
 };
 
-async function updatingTheWorkerAvailability(status){
+async function bookWorkerTimeslot(status){
     try {
         await timeslotModel.insertWorkerTimeslot(status);
         return true;

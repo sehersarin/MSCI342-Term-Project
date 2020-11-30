@@ -55,6 +55,28 @@ router.post('/book-appointment', async (req, res) => {
 
 });
 
+router.post('/book-appointment-test-worker-timeslot-update', async (req, res) => {
+    // Validate appropriate parameters are passed into the book appointment endpoint.
+    // Verification to make sure appointments are only made for future dates and that the worker is available during that time will be handled by the front end.
+    const paramSchema = Joi.object({
+        workerTimeslotId: Joi.number().integer().required(),
+    });
+
+    const query = req.query ? req.query : {};
+
+    const workerTimeslotId = query.workerTimeslotId ? query.workerTimeslotId : null;
+
+    const { error } = paramSchema.validate({ workerTimeslotId });
+
+    if (!_.isNil(error)) res.send(error);
+
+    // Attempts to insert the appointment into the database.
+    const isSuccessfullyInserted = await workerTimeslotHandler.bookWorkerTimeslot(workerTimeslotId);
+
+    res.send(isSuccessfullyInserted);
+
+});
+
 router.post('/add-recurring-schedule', async (req, res) => {
     // Validate appropriate parameters are passed into add recurring schedule. 
     const paramSchema = Joi.object({
