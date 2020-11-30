@@ -52,6 +52,7 @@ describe('Checkbox component', () => {
     { slotId: 13, startTime: "14:00:00", endTime: "14:30:00" },
     { slotId: 14, startTime: "14:30:00", endTime: "15:00:00" },
     { slotId: 15, startTime: "15:00:00", endTime: "15:30:00" }]
+    //const params = { accessToken: "XcCa92ZvOnQKZsGtOKOa" }
 
     //Act
     const resp = { data: timeslots }
@@ -109,6 +110,7 @@ describe('Checkbox component', () => {
         <Check />
       </BrowserRouter>);
 
+    // const checkbox = getByDisplayValue(dom.container, "1");
     const submit = getByDisplayValue(dom.container, "Add Availability")
 
 
@@ -127,13 +129,14 @@ describe('Checkbox component', () => {
     { slotId: 13, startTime: "14:00:00", endTime: "14:30:00" },
     { slotId: 14, startTime: "14:30:00", endTime: "15:00:00" },
     { slotId: 15, startTime: "15:00:00", endTime: "15:30:00" }]
+    //const params = { accessToken: "XcCa92ZvOnQKZsGtOKOa" }
 
     //Act
     window.alert = jest.fn();
     const resp = { data: timeslots }
     const expectedArg = "Please select timeslot(s)";
     await axios.get.mockImplementation(() => Promise.resolve(resp));
-    
+    // fireEvent.click(checkbox)
     fireEvent.click(submit)
 
 
@@ -163,7 +166,8 @@ describe('Checkbox component', () => {
     { slotId: 13, startTime: "14:00:00", endTime: "14:30:00" },
     { slotId: 14, startTime: "14:30:00", endTime: "15:00:00" },
     { slotId: 15, startTime: "15:00:00", endTime: "15:30:00" }]
-   
+    //const params = { accessToken: "XcCa92ZvOnQKZsGtOKOa" }
+    // const timeslot1 = getByDisplayValue(dom.asFragment(), "1");
     const date = getByDisplayValue(dom.container, "")
     const submit = getByDisplayValue(dom.container, "Add Availability")
 
@@ -203,7 +207,8 @@ describe('Checkbox component', () => {
     { slotId: 13, startTime: "14:00:00", endTime: "14:30:00" },
     { slotId: 14, startTime: "14:30:00", endTime: "15:00:00" },
     { slotId: 15, startTime: "15:00:00", endTime: "15:30:00" }]
-    
+    //const params = { accessToken: "XcCa92ZvOnQKZsGtOKOa" }
+    // const timeslot1 = getByDisplayValue(dom.asFragment(), "1");
     const date = getByDisplayValue(dom.container, "")
     const recurring = getByDisplayValue(dom.container, "100");
     const submit = getByDisplayValue(dom.container, "Add Availability")

@@ -7,8 +7,6 @@ import { Redirect, Route, withRouter, Link, Router } from "react-router-dom";
 import moment from "moment";
 import queryString from "query-string";
 import _ from 'lodash';
-import Dashboard from "../../Dashboard/Dashboard";
-
 const axios = require("axios").default;
 
 class Check extends React.Component {
@@ -22,11 +20,11 @@ class Check extends React.Component {
       // personId : this.props.personId,
       items: [],
       schools: [],
-      selectedSchool: "", 
+      selectedSchool: "", //hard coded to one as there is only one school at the moment
       startDay: moment(),
       accessToken: "",
       timeslots: "",
-      Days: [ // id are in hundreds to avoid conflict with slotid that start with id of 1
+      Days: [
         { id: 100, value: "Monday" },
         { id: 200, value: "Tuesday" },
         { id: 300, value: "Wednesday" },
@@ -37,7 +35,6 @@ class Check extends React.Component {
       ],
       checkedDays: new Map(),
     };
-    //this.baseState = this.state; // store initial state
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleCheckbox = this.handleCheckbox.bind(this);
@@ -75,8 +72,6 @@ class Check extends React.Component {
           console.log("no data is called")
         }
       });
-
-      this.baseState = this.state; // store initial state
   }
 
   handleCheckbox = (event) => {
@@ -148,7 +143,7 @@ class Check extends React.Component {
                 slotId: timeSlots[l],
                 schoolId: this.state.selectedSchool,
               };
-              // Call the API multiple times to input data into the datebase: 4 weeks of selected dates * number of timeslots selected
+              // Call the API multiple times to input data into the datebase, 4 weeks of selected dates * number of timeslots selected
               try {
               await Promise.all(axios.post(`/api/add-recurring-schedule/?${queryString.stringify(workerInput)}`)
                 .then(res => {
@@ -166,7 +161,7 @@ class Check extends React.Component {
           }
         }
       }
-      if(recurringSelected ===false){// just adding one day with timeslots should users not select an recurring checkbox
+      if(recurringSelected ===false){// just adding one day with timeslots
         busySlots[this.state.startDay.format("DD-MM-YYYY")] = this.state.timeslots
             //busySlots['personId'] = this.state.personId
            for (let l = 0; l < timeSlots.length; l++) {
@@ -197,20 +192,14 @@ class Check extends React.Component {
         alert("Please select timeslot(s)")
       }
       else {
-        document.getElementById("SUBMIT").disabled = true;
-        document.getElementById("SUBMIT").value = "Form submitted";
-        alert("Input is added");
-        //timeSlots.length = 0;
-        //AvailableDates.length =0;
-        //console.log(busySlots)
-        //this.setState( this.baseState);//resetting states after first submit
+        alert("Input is added")
       }
+      
       event.preventDefault();
     }
   }
 
   render() {
-   
     function tConvert(time) {
       // Check correct time format and split into components
       time = time
@@ -237,7 +226,7 @@ class Check extends React.Component {
               <label for="school" className="SelectSchoolsLabel" > Select School:</label>
               <select value={this.state.selectedSchool} onChange={this.handleDropDownChange} required>
                 <option value="" disabled selected>Select your schoolID</option>
-                {this.state.schools.map((x) => <option value={x.id *10000}>{x} </option>)} 
+                {this.state.schools.map((x) => <option value={x.id}>{x} </option>)}
               </select>
               <br />
               {this.state.items.map((el) => (
@@ -285,7 +274,6 @@ class Check extends React.Component {
                 className="SubmitButton"
                 type="submit"
                 value="Add Availability"
-                id = "SUBMIT"
               />
             </label>
             <br></br>
