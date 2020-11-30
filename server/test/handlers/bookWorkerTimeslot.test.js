@@ -5,9 +5,6 @@ describe('testing inputting of worker schedule functionality', () => {
         jest.resetModules(); // Clears any cache between tests.
     });
 
-    //cancel specific day -> make sure not on 12-20 
-    //lets choose workertimeslotId  and 7 for our testing 
-    //what tests are we doing? 
     test('valid parameter workerTimeslotId, expecting successful timeslot booking', async () => {
         // Arrange
         const workerTimeslotId = 5;
@@ -15,7 +12,7 @@ describe('testing inputting of worker schedule functionality', () => {
         const timeslotIsBooked = true;
 
         // Act
-        const isCancelledSuccessfully = await workerTimeslotHandler.timeslotModel.bookWorkerTimeslot(workerTimeslotId);
+        const isCancelledSuccessfully = await workerTimeslotHandler.bookWorkerTimeslot(workerTimeslotId);
 
         // Assert
         expect(isCancelledSuccessfully).toBe(timeslotIsBooked);
@@ -28,7 +25,20 @@ describe('testing inputting of worker schedule functionality', () => {
         const timeslotIsBooked = true;
 
         // Act
-        const isCancelledSuccessfully = await workerTimeslotHandler.timeslotModel.bookWorkerTimeslot(workerTimeslotId);
+        const isCancelledSuccessfully = await workerTimeslotHandler.bookWorkerTimeslot(workerTimeslotId);
+
+        // Assert
+        expect(isCancelledSuccessfully).toBe(timeslotIsBooked);
+    });
+
+    test('invalid parameter for  workerTimeslotId, expecting error to be thrown', async () => {
+        // Arrange
+        const workerTimeslotId = 'hello_there_General_Kenobi';
+
+        const timeslotIsBooked = false;
+
+        // Act
+        const isCancelledSuccessfully = await workerTimeslotHandler.bookWorkerTimeslot(workerTimeslotId);
 
         // Assert
         expect(isCancelledSuccessfully).toBe(timeslotIsBooked);
