@@ -22,7 +22,5 @@ async function insertWorkerAccount(firstName, lastName, type, workerId, email, p
     return new Worker(workerData[0]);
 }
 
-module.exports = {
-    getWorker,
-    insertWorkerAccount,
-}
+
+

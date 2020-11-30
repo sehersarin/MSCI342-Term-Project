@@ -1,108 +1,222 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Checkbox component snapshot renders 1`] = `
-<div>
+<div
+  className="Form-container"
+  style={
+    Object {
+      "boxSizing": "border-box",
+      "marginLeft": "auto",
+      "marginRight": "auto",
+      "maxWidth": 1540,
+      "paddingLeft": 15,
+      "paddingRight": 15,
+      "position": "relative",
+    }
+  }
+>
+  <div>
+    <p
+      className="Title-Style"
+    >
+      Availability
+    </p>
+  </div>
+  <div>
+    <p
+      className="Title-Style"
+    />
+  </div>
   <form
-    className="Container"
     onSubmit={[Function]}
   >
-    <h1>
-      Recurring on
-    </h1>
-    <div>
-      <label>
+    <div
+      style={
+        Object {
+          "alignItems": "normal",
+          "display": "flex",
+          "flexGrow": 0,
+          "flexShrink": 0,
+          "flexWrap": "wrap",
+          "justifyContent": "flex-start",
+          "marginLeft": -15,
+          "marginRight": -15,
+        }
+      }
+    >
+      <div
+        align="center"
+        style={
+          Object {
+            "boxSizing": "border-box",
+            "flexBasis": "66.66666666666667%",
+            "flexGrow": 0,
+            "flexShrink": 0,
+            "left": "auto",
+            "marginLeft": "0%",
+            "maxWidth": "66.66666666666667%",
+            "minHeight": 1,
+            "paddingLeft": 15,
+            "paddingRight": 15,
+            "position": "relative",
+            "right": "auto",
+            "width": "66.66666666666667%",
+          }
+        }
+      >
         <input
-          className="DayBox"
+          id="DATE"
           onChange={[Function]}
-          type="checkbox"
-          value={1}
+          type="date"
         />
-         
-        Monday
-      </label>
+        <br />
+        <br />
+        <br />
+        <br />
+        <label />
+      </div>
+      <div
+        style={
+          Object {
+            "background": "rgba(0,0,0,.05)",
+            "boxSizing": "border-box",
+            "flexBasis": "33.333333333333336%",
+            "flexGrow": 0,
+            "flexShrink": 0,
+            "left": "auto",
+            "lineHeight": "32px",
+            "marginLeft": "0%",
+            "maxWidth": "33.333333333333336%",
+            "minHeight": 1,
+            "outline": "1px solid silver",
+            "paddingLeft": 15,
+            "paddingRight": 15,
+            "position": "relative",
+            "right": "auto",
+            "width": "33.333333333333336%",
+          }
+        }
+      >
+        <p>
+          Recurring on:
+        </p>
+        <div>
+          <label>
+            <input
+              className="DayBox"
+              onChange={[Function]}
+              type="checkbox"
+              value={100}
+            />
+             
+            Monday
+          </label>
+        </div>
+        <div>
+          <label>
+            <input
+              className="DayBox"
+              onChange={[Function]}
+              type="checkbox"
+              value={200}
+            />
+             
+            Tuesday
+          </label>
+        </div>
+        <div>
+          <label>
+            <input
+              className="DayBox"
+              onChange={[Function]}
+              type="checkbox"
+              value={300}
+            />
+             
+            Wednesday
+          </label>
+        </div>
+        <div>
+          <label>
+            <input
+              className="DayBox"
+              onChange={[Function]}
+              type="checkbox"
+              value={400}
+            />
+             
+            Thursday
+          </label>
+        </div>
+        <div>
+          <label>
+            <input
+              className="DayBox"
+              onChange={[Function]}
+              type="checkbox"
+              value={500}
+            />
+             
+            Friday
+          </label>
+        </div>
+        <div>
+          <label>
+            <input
+              className="DayBox"
+              onChange={[Function]}
+              type="checkbox"
+              value={600}
+            />
+             
+            Saturday
+          </label>
+        </div>
+        <div>
+          <label>
+            <input
+              className="DayBox"
+              onChange={[Function]}
+              type="checkbox"
+              value={700}
+            />
+             
+            Sunday
+          </label>
+        </div>
+        <br />
+        <br />
+      </div>
     </div>
-    <div>
+    <div
+      align="center"
+    >
       <label>
+        <br />
         <input
-          className="DayBox"
-          onChange={[Function]}
-          type="checkbox"
-          value={2}
+          className="SubmitButton"
+          type="submit"
+          value="Add Availability"
         />
-         
-        Tuesday
       </label>
+      <br />
+      <br />
+      <a
+        className="Signout"
+        href="/Dashboard"
+        onClick={[Function]}
+      >
+        Back to Homepage
+      </a>
     </div>
-    <div>
-      <label>
-        <input
-          className="DayBox"
-          onChange={[Function]}
-          type="checkbox"
-          value={3}
-        />
-         
-        Wednesday
-      </label>
-    </div>
-    <div>
-      <label>
-        <input
-          className="DayBox"
-          onChange={[Function]}
-          type="checkbox"
-          value={4}
-        />
-         
-        Thursday
-      </label>
-    </div>
-    <div>
-      <label>
-        <input
-          className="DayBox"
-          onChange={[Function]}
-          type="checkbox"
-          value={5}
-        />
-         
-        Friday
-      </label>
-    </div>
-    <div>
-      <label>
-        <input
-          className="DayBox"
-          onChange={[Function]}
-          type="checkbox"
-          value={6}
-        />
-         
-        Saturday
-      </label>
-    </div>
-    <div>
-      <label>
-        <input
-          className="DayBox"
-          onChange={[Function]}
-          type="checkbox"
-          value={7}
-        />
-         
-        Sunday
-      </label>
-    </div>
-    <br />
-    <input
-      id="DATE"
-      type="date"
-    />
-    <br />
-    <input
-      type="submit"
-      value="Done"
-    />
   </form>
+  <span
+    style={
+      Object {
+        "clear": "both",
+        "display": "table",
+      }
+    }
+  />
 </div>
 `;

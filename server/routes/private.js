@@ -7,10 +7,14 @@ const router = express.Router();
 const authenticateHandler = require('../models/handlers/authenticate');
 const appointmentHandler = require('../models/handlers/appointment');
 const workerTimeslotHandler = require('../models/handlers/workerTimeslot');
+const timeslotHandler = require('../models/handlers/timeslot');
 const availabilityHandler = require('../models/handlers/availability');
 const schoolHandler = require('../models/handlers/school');
+const workerHandler = require('../models/handlers/worker');
 
-const TimeslotStatus = require('../constants/timeslot-status.json');
+
+const TimeslotStatus  = require('../constants/timeslotStatus.json');
+
 
 // Binds a middleware to check access tokens for all private requests.
 router.use(async function (req, res, next) {
@@ -101,19 +105,19 @@ router.post('/worker-availability', async (req, res) => {
         startTime: Joi.date().iso(),
         endTime: Joi.date().iso().greater(Joi.ref('startTime'))
     });
-
+        
     const query = req.query ? req.query : {};
 
     const workerId = query.workerId ? query.workerId : null;
     const schoolId = query.schoolId ? query.schoolId : null;
-    const startTime = query.startTime ? query.startTime : null;
-    const endTime = query.endTime ? query.endTime : null;
+    const startTime = query.startTime;
+    const endTime = query.endTime;
 
     const { error } = paramSchema.validate({ workerId, schoolId, startTime, endTime });
 
     if (!_.isNil(error)) res.send(error);
 
-    const availableTimes = await availabilityHandler.getWorkerAvailability(workerId, schoolId, startTime, endTime);
+    const availableTimes = await availabilityHandler.getAvailabilityDetails(workerId, schoolId, startTime, endTime);
 
     res.send(availableTimes);
 
@@ -148,11 +152,13 @@ router.get('/appointments', async (req, res) => {
 });
 
 
-//Returns all possible timeslots
-// Returns all the appointments/meetings for a given student or worker.
-// Note that appointments/meetings are synonymous, but only appointments will be used in the backend to maintain consistency.
+
+// The method will return all timeslots in the timeslot table 
+//Note that there is an future opportunity to expand functionality of this endpoint to filter the records pulled based on start time or end time of the timeslot 
 router.get('/possible-timeslots', async (req, res) => {
-    timeslots = await workerTimeslotHandler.getPossibleTimeslots();
+
+    
+    const timeslots = await timeslotHandler.getPossibleTimeslots();
 
     res.send(timeslots);
 });
@@ -175,10 +181,54 @@ router.post('/get-workers-for-school', async (req, res) => {
 
     if (!_.isNil(error)) res.send(error);
 
-    // Attempts to fetch all workers for a specific school 
+    // Attempts to fetch all worker ids  for a specific school 
     const workerIds = await schoolHandler.getWorkerIdsForSchool(schoolId);
+    const workerObjects = await workerHandler.getWorkersByWorkerIds(workerIds);
+    res.send(workerObjects);
+});
 
-    res.send(workerIds);
+// Cancels all the appointments/meetings and updates worker availability to unavailable for a worker for a specific day.
+// Note that appointments/meetings are synonymous, but only appointments will be used in the backend to maintain consistency.
+router.get('/cancel-specific-day', async (req, res) => {
+    const paramSchema = Joi.object({
+        workerId: Joi.number().integer().required(),
+        specificDate: Joi.date().iso().required(),
+        
+        // Following potential query parameters are commented out to be revisited in a future story. 
+        // startTime: Joi.date().iso().required(),
+        // endTime: Joi.date().iso().greater(Joi.ref('startTime')) // Checks to ensure that endDate > startDate is specified.
+    })
+
+    const query = req.query ? req.query : {};
+
+    const workerId = query.workerId;
+    const specificDate = query.specificDate;
+
+    const { error } = paramSchema.validate({ workerId, specificDate });
+
+    if (!_.isNil(error)) res.send(error);
+
+    const isCancelledSuccessfully = await appointmentHandler.cancelWorkerAppointments(workerId, specificDate);
+
+    res.send(isCancelledSuccessfully);
+});
+
+// Endpoint to cancel a specific appointment.
+router.get('/cancel-specific-appointment', async (req, res) => {
+    // Checks the format of the passed in parameters.
+    const paramSchema = Joi.object({
+        appointmentId: Joi.number().integer().required(),
+    });
+
+    const appointmentId = req.query.appointmentId;
+
+    const { error } = paramSchema.validate({ appointmentId });
+
+    // Returns an error if the parameters are invalid. 
+    if (!_.isNil(error)) res.send(error);
+
+    // Temporarily hardcoded to return false for testing purposes. 
+    res.send(false);
 });
 
 module.exports = router
