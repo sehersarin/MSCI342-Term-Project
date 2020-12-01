@@ -3,6 +3,5 @@
     "student": "Student", 
     "worker": "Service_Worker",
     "workerTimeslot": "Worker_Timeslot",
-    "timeslot": "Timeslot",
-    "workerSchool": "Service_Worker_School"
+    "timeslot": "Timeslot"
 }

@@ -3,7 +3,7 @@ import { Container, Row, Col } from 'react-grid-system';
 import { Redirect, Route, withRouter } from "react-router-dom";
 import Title from "./Title"
 import "./CreateAppointmentForm.scss"
-//import dashboard from "./Layouts/Dashboard"
+// import dashboard from "./Layouts/Dashboard"
 import { Link } from 'react-router-dom';
 
 import queryString from 'query-string'
@@ -18,7 +18,7 @@ class CreateAppointmentForm extends Component {
       super(props);
       this.state = {
         workerId: 8000000, // taken from Amy's test for the api
-        schoolId: this.props.schoolId,       //will need to implement a page before this to pass these values through
+        schoolId: 1,       //will need to implement a page before this to pass these values through
         studentId: 0, // check with Melissa if already stored in props
         workerTimeslotId : 0, 
         purpose: "", // Max 300 => input size is 300
@@ -73,6 +73,13 @@ class CreateAppointmentForm extends Component {
   //add an else if statement for successful form submissiom but unsuccessful appointment submission (api backend)
   //have the user redo the book appointment process
   render() {
+    if (this.state.successfulAppointment && this.state.formSubmission)
+      return (
+        <div>
+          Success!
+        </div>
+      );
+    else
       return (
           <Container className="Form-container">
              <Title name= "Book Appointment. (Still needs to be implemented)"></Title>
@@ -128,17 +135,33 @@ class CreateAppointmentForm extends Component {
                   </label>
               </form> 
               <br></br>
-              <div>
-
-              <Link to="/dashboard">Home</Link>
-
-              </div>
-              </Col>
+             <Link to="/successfulappointmentbooking" className="Signout">Continue to next page</Link>         
+             </Col>
             </Row>
           </Container>
         );
   }
 
+  /*
+  componentDidMount() {
+    <div>
+      Success!
+    </div>
+    let workerId = this.state.workerId;
+    let schoolId = this.state.workerId;
+
+    var params = {workerId: workerId, schoolId: schoolId}
+
+    axios.post(`/api/worker-availability?${queryString.stringify(params)}`)
+    .then(res => {
+    console.log(res.data);
+    let availableTimeArray = res.data;
+    this.setState({
+      availableTime: availableTimeArray
+    });
+  });
+}
+*/
 }
   
   export default CreateAppointmentForm;

@@ -22,6 +22,7 @@ async function insertWorkerAccount(firstName, lastName, type, workerId, email, p
     return new Worker(workerData[0]);
 }
 
+<<<<<<< HEAD
 //This method returns the first name, last name and other information about the worker 
 async function getWorkersByWorkerIds(workerIds) {
     if (_.isNil(workerIds)) return null;
@@ -33,4 +34,9 @@ module.exports = {
     getWorker,
     insertWorkerAccount,
     getWorkersByWorkerIds
+=======
+module.exports = {
+    getWorker,
+    insertWorkerAccount,
+>>>>>>> parent of 2763ebf... Merge branch 'master' into S15-T1-Determine-if-worker-is-available-during-workerTimeslotId
 }
