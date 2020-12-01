@@ -10,6 +10,11 @@ async function addWorkerTimeslot(slotId, schoolId, workerId, status, date) {
         return false;
     }
 };
+async function checkWorkerAvailability(workerTimeslotId) {
+    return timeslotModel.checkWorkerAvailability(workerTimeslotId);
+};
+
 module.exports = {
-    addWorkerTimeslot
+    addWorkerTimeslot,
+    checkWorkerAvailability,
 }
