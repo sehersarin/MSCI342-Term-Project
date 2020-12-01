@@ -15,8 +15,6 @@ async function createUserAccount(firstName, lastName, type, studentId, email, pa
     const token = await uidgen.generate();
     const accessToken = token.substring(0, 20);
 
-
-
     if (userType == UserTypes.student) {
         const student = await studentModel.insertStudentAccount(firstName, lastName, studentId, email, password, phone, schoolId, accessToken);
         if (!_.isNil(student)) return student;
@@ -29,7 +27,6 @@ async function createUserAccount(firstName, lastName, type, studentId, email, pa
         return null;
     }
 }
-
 
 //export the createUserAccount
 module.exports = {
