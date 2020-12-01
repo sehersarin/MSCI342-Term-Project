@@ -36,10 +36,6 @@ router.post('/book-appointment', async (req, res) => {
         purpose: Joi.string().max(300).required(),
         studentNotes: Joi.string().allow(null).max(300),
         workerComments: Joi.string().allow(null).max(300),
-        slotId: Joi.number().integer().required(),
-        workerId: Joi.number().integer().required(),
-        status: Joi.string().max(30).required(),
-        date: Joi.date().iso().required() 
 
     });
 
