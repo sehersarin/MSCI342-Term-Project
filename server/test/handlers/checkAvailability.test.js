@@ -1,150 +1,69 @@
 const workerTimeslotHandler = require('../../models/handlers/workerTimeslot');
 
-describe('Test to check valid account creation', () => {
+describe('Test to check expected returns of checkAvailability functionality ', () => {
     beforeEach(() => {
         jest.resetModules();
     });
 
     ///TEST 1
-    test('rejection of null parameters', async () => {
+    test('rejection of null workerTimeslotId', async () => {
         // Arrange
         // No test variables need to be initialized.
-        const slotId = null;
-        const workerId = null;
-        const status = null;
-        const date = '2020-10-20';
+        const workerTimeslotId = null;
+
         // Act
-        const workerIsAvailable = await workerTimeslotHandler.checkWorkerAvailability(slotId, workerId, status, date);
+        const workerIsAvailable = await workerTimeslotHandler.checkWorkerAvailability(workerTimeslotId);
 
         // Assert
-        expect(workerIsAvailable).toBe(null);
-    });
-    //TEST 2
-    test('rejection of null value for required slotId parameter', async () => {
-        // Arrange
-        const slotId = null;
-        const workerId = 80000000;
-        const status = available;
-        const date = '2020-10-20';
-        // Act
-        const workerIsAvailable = await workerTimeslotHandler.checkWorkerAvailability(slotId, workerId, status, date);
-
-        // Assert
-        expect(workerIsAvailable).toBe(null);
-    });
-
-    //TEST 3
-    ttest('rejection of null value for required workerId parameter', async () => {
-        // Arrange
-        const slotId = 1;
-        const workerId = null;
-        const status = available;
-        const date = '2020-10-20';
-        // Act
-        const workerIsAvailable = await workerTimeslotHandler.checkWorkerAvailability(slotId, workerId, status, date);
-
-        // Assert
-        expect(workerIsAvailable).toBe(null);
-    });
-
-    //TEST 4
-    ttest('rejection of null value for the status parameter', async () => {
-        // Arrange
-        const slotId = 1;
-        const workerId = 80000000;
-        const status = null;
-        const date = '2020-10-20';
-        // Act
-        const workerIsAvailable = await workerTimeslotHandler.checkWorkerAvailability(slotId, workerId, status, date);
-
-        // Assert
-        expect(workerIsAvailable).toBe(null);
-    });
-
-    //TEST 5
-    ttest('accept null value for the date parameter', async () => {
-        // Arrange
-        const slotId = 1;
-        const workerId = 80000000;
-        const status = available;
-        const date = null;
-        // Act
-        const workerIsAvailable = await workerTimeslotHandler.checkWorkerAvailability(slotId, workerId, status, date);
-
-        // Assert
-        expect(workerIsAvailable).toBeDefined();
+        expect(workerIsAvailable).toBe(false);
     });
 
     //TEST 6
-    test('rejection of an empty string value for required slotId parameter', async () => {
+    test('rejection of an empty string value for workerTimeslotId', async () => {
         // Arrange
-        const slotId = '';
-        const workerId = 80000000;
-        const status = available;
-        const date = '2020-10-20';
+        const workerTimeslotId = '';
+
         // Act
-        const workerIsAvailable = await workerTimeslotHandler.checkWorkerAvailability(slotId, workerId, status, date);
+        const workerIsAvailable = await workerTimeslotHandler.checkWorkerAvailability(workerTimeslotId);
 
         // Assert
-        expect(workerIsAvailable).toBe(null);
+        expect(workerIsAvailable).toBe(false);
     });
 
-    //TEST 7
-    ttest('rejection of an empty string value for required workerId parameter', async () => {
+    //TEST 6
+    test('rejection of an filled string value for workerTimeslotId', async () => {
         // Arrange
-        const slotId = 1;
-        const workerId = '';
-        const status = available;
-        const date = '2020-10-20';
+        const workerTimeslotId = 'good_day_sire';
+
         // Act
-        const workerIsAvailable = await workerTimeslotHandler.checkWorkerAvailability(slotId, workerId, status, date);
+        const workerIsAvailable = await workerTimeslotHandler.checkWorkerAvailability(workerTimeslotId);
 
         // Assert
-        expect(workerIsAvailable).toBe(null);
+        expect(workerIsAvailable).toBe(false);
     });
-
-    //TEST 8
-    ttest('rejection of an empty string value for the status parameter', async () => {
+    
+    //TEST 6
+    test('check valid workerTimeslotId for true return ', async () => {
         // Arrange
-        const slotId = 1;
-        const workerId = 80000000;
-        const status = '';
-        const date = '2020-10-20';
+        const workerTimeslotId = 5;
+
         // Act
-        const workerIsAvailable = await workerTimeslotHandler.checkWorkerAvailability(slotId, workerId, status, date);
+        const workerIsAvailable = await workerTimeslotHandler.checkWorkerAvailability(workerTimeslotId);
 
         // Assert
-        expect(workerIsAvailable).toBe(null);
+        expect(workerIsAvailable).toBe(false);
     });
-
-    //TEST 9
-    ttest('accept null value for the date parameter', async () => {
-        // Arrange
-        const slotId = 1;
-        const workerId = 80000000;
-        const status = available;
-        const date = '';
-        // Act
-        const workerIsAvailable = await workerTimeslotHandler.checkWorkerAvailability(slotId, workerId, status, date);
-
-        // Assert
-        expect(workerIsAvailable).toBeDefined();
-    });
-
 
     //TEST 10
-    test('Accept that all valid parameters return the expected values ', async () => {
+    test('check valid workerTimeslotId for false return ', async () => {
         // Arrange
-        const slotId = 1;
-        const workerId = 80000000;
-        const status = 'available';
-        const date = '2020-10-20';
+        const workerTimeslotId = 7;
 
         // Act
-        const workerIsAvailable = await workerTimeslotHandler.checkWorkerAvailability(slotId, workerId, status, date);
+        const workerIsAvailable = await workerTimeslotHandler.checkWorkerAvailability(workerTimeslotId);
 
         // Assert
-        expect(workerIsAvailable).toBeDefined();
+        expect(workerIsAvailable).toBe(null);
     });
 
 
