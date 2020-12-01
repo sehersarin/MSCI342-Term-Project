@@ -82,7 +82,7 @@ class logInForm extends Component {
     }
     return (
       <Container className="Form-container">
-        <Title name="Log In."></Title>
+        <Title name="Log In"></Title>
         <Row>
           <Col sm={12} align="center">
             <form onSubmit={this.login}  /*   className = "LogInForm"  */  >
