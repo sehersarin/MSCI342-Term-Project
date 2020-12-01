@@ -6,6 +6,7 @@ import Title from "../../Title"
 import { Redirect, Route, withRouter, Link, Router } from "react-router-dom";
 import moment from "moment";
 import queryString from "query-string";
+import _ from 'lodash';
 const axios = require("axios").default;
 
 class Check extends React.Component {
@@ -18,6 +19,8 @@ class Check extends React.Component {
       personId: this.props.personId,
       // personId : this.props.personId,
       items: [],
+      schools: [],
+      selectedSchool: "",
       startDay: moment(),
       accessToken: "",
       timeslots: "",
@@ -35,10 +38,11 @@ class Check extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleCheckbox = this.handleCheckbox.bind(this);
+    this.handleDropDownChange = this.handleDropDownChange.bind(this);
   }
 
- async componentDidMount() {
-    var params = { accessToken: "XcCa92ZvOnQKZsGtOKOa" };
+  async componentDidMount() {
+    var params = { accessToken: this.props.accessToken };
     await axios
       .get(`/api/possible-timeslots/?${queryString.stringify(params)}`)
       .then((res) => {
@@ -49,12 +53,26 @@ class Check extends React.Component {
         }
         console.log(res.data)
       });
-      let date_ob = new Date();
-      let date = ("0" + date_ob.getDate()).slice(-2); 
-      let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
-      let year = date_ob.getFullYear();     
-      let currentDay = year + "-" + month + "-" + date;
-      document.getElementById("DATE").value = currentDay;
+    let date_ob = new Date();
+    let date = ("0" + date_ob.getDate()).slice(-2);
+    let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+    let year = date_ob.getFullYear();
+    let currentDay = year + "-" + month + "-" + date;
+    document.getElementById("DATE").value = currentDay;
+
+    var params2 = { workerId: this.props.personId, accessToken: this.props.accessToken };
+    console.log(params2)
+    await axios.get(`/api/get-schools-for-worker/?${queryString.stringify(params2)}`)
+      .then((res) => {
+        if (_.isNil(res.error) && res.data) {
+          this.setState({
+            schools: res.data,
+          });
+          console.log(this.state.schools)
+        } else {
+          console.log("no data is called")
+        }
+      });
   }
 
   handleCheckbox = (event) => {
@@ -77,12 +95,18 @@ class Check extends React.Component {
     }));
   }
 
-  handleSubmit(event) {
+  handleDropDownChange(event) {
+    this.setState({ selectedSchool: event.target.value });
+  }
+
+  async handleSubmit(event) {
     // submits selected days and assigns recurrenting dates based off boxes checked
     let AvailableDates = [];
-   
+    let timeSlots = Object.keys(this.state.timeslots) // to get array of slotids only
+    console.log(timeSlots)
+    console.log(this.state.selectedSchool)
     let currentDayNumber = moment(this.state.startDay).day();
-    //let DaySelected = false; // variable for if checkboxes are checked or not
+    let recurringSelected = false; // variable for if checkboxes are checked or not
 
     if (this.state.startDay.format("DD-MM-YYYY") === "Invalid date") {
       alert("No date has been selected, please selected a date");
@@ -93,11 +117,11 @@ class Check extends React.Component {
       busySlots[
         this.state.startDay.format("DD-MM-YYYY")
       ] = this.state.timeslots
-      busySlots['personId'] = this.state.personId
+      //busySlots['personId'] = this.state.personId
       for (let i = 1; i <= 7; i++) {
         let startofweek = moment(this.state.startDay).isoWeekday(0); // sets beginning of week to sunday
-        if (this.state.checkedDays.get(String(i*100)) === true) {
-          //DaySelected = true;
+        if (this.state.checkedDays.get(String(i * 100)) === true) {
+          recurringSelected  = true;
           var AddDayCounter = i;
 
           if (AddDayCounter < currentDayNumber) {
@@ -107,28 +131,73 @@ class Check extends React.Component {
           let StartingDay = startofweek.add(AddDayCounter, "day");
           let NextWeek = "";
 
-          for (let k = 1; k <= 5; k++) {
+           for (let k = 1; k <= 5; k++) {
             // busySlots[k][this.state.personId][StartingDay.format("DD-MM-YYYY")]= this.state.timeslots
             busySlots[StartingDay.format("DD-MM-YYYY")] = this.state.timeslots
-            busySlots['personId'] = this.state.personId
+            //busySlots['personId'] = this.state.personId
+
+           for (let l = 0; l < timeSlots.length; l++) {
+              let workerInput = {
+                workerId: this.props.personId,
+                accessToken: this.props.accessToken, 
+                date: StartingDay.toISOString().split('T')[0],
+                slotId: timeSlots[l],
+                schoolId: this.state.selectedSchool,
+              };
+              // Call the API multiple times to input data into the datebase, 4 weeks of selected dates * number of timeslots selected
+              try {
+              await Promise.all(axios.post(`/api/add-recurring-schedule/?${queryString.stringify(workerInput)}`)
+                .then(res => {
+                  if (_.isNil(res.error) && res.data) { // If no error and the returned response is true.
+                    console.log('available date stored in datebase')
+                  } else { console.log(`error occured when calling the recurring schedule API`) };
+                }));
+              } 
+              catch (error){
+                console.log(error)
+              }
+            }
             NextWeek = moment(StartingDay).add(7, "days");
             StartingDay = NextWeek;
           }
         }
       }
+      if(recurringSelected ===false){// just adding one day with timeslots
+        busySlots[this.state.startDay.format("DD-MM-YYYY")] = this.state.timeslots
+            //busySlots['personId'] = this.state.personId
+           for (let l = 0; l < timeSlots.length; l++) {
+              let workerInput = {
+                workerId: this.props.personId,
+                accessToken: this.props.accessToken, 
+                date: this.state.startDay.toISOString().split('T')[0],
+                slotId: timeSlots[l],
+                schoolId: this.state.selectedSchool,
+              };
+              // Call the API multiple times to input data into the datebase, 1 day * number of timeslots selected
+              try {
+              await Promise.all(axios.post(`/api/add-recurring-schedule/?${queryString.stringify(workerInput)}`)
+                .then(res => {
+                  if (_.isNil(res.error) && res.data) { // If no error and the returned response is true.
+                    console.log('available date stored in datebase')
+                  } else { console.log(`error occured when calling the recurring schedule API`) };
+                }));
+              } 
+              catch (error){
+                console.log(error)
+              }
+            }
+      }
       AvailableDates.push(busySlots);
       console.log(AvailableDates);
-      if(this.state.timeslots ===""){
+      if (this.state.timeslots === "") {
         alert("Please select timeslot(s)")
       }
-      else{
+      else {
+        document.getElementById("SUBMIT").disabled = true;
+        document.getElementById("SUBMIT").value = "Form submitted";
         alert("Input is added")
       }
-      // if (DaySelected === false) {
-      //   alert("No day has been checked, please selected a day");
-      // } else {
-      //   alert("Days has been selected");
-      // }
+      
       event.preventDefault();
     }
   }
@@ -151,26 +220,31 @@ class Check extends React.Component {
 
     return (
       <Container className="Form-container">
-        <Title name="Availability"/><Title/>
+        <Title name="Availability" /><Title />
         <form onSubmit={this.handleSubmit}>
           <Row>
             <Col xs={8} align="center">
-              <input type="date" id="DATE" onChange={this.handleChange} />
+              <input type="date" id="DATE" onChange={this.handleChange} min={new Date().toISOString().split('T')[0]} />
               <br />
+              <label for="school" className="SelectSchoolsLabel" > Select School:</label>
+              <select value={this.state.selectedSchool} onChange={this.handleDropDownChange} required>
+                <option value="" disabled selected>Select your schoolID</option>
+                {this.state.schools.map((x) => <option value={x.id}>{x} </option>)}
+              </select>
               <br />
               {this.state.items.map((el) => (
-                  <div>
-                    <label>
-                      <input
-                        type="checkbox"
-                        id={el.slotId}
-                        value={el.slotId}
-                        onChange={this.handleCheckbox}
-                      />
-                      {tConvert(el.startTime) + " to " + tConvert(el.endTime)}
-                    </label>
-                    <br></br>
-                  </div>
+                <div>
+                  <label>
+                    <input
+                      type="checkbox"
+                      id={el.slotId}
+                      value={el.slotId}
+                      onChange={this.handleCheckbox}
+                    />
+                    {tConvert(el.startTime) + " to " + tConvert(el.endTime)}
+                  </label>
+                  <br></br>
+                </div>
               ))}
               {/* {listItems} */}
               <br></br>
@@ -203,6 +277,7 @@ class Check extends React.Component {
                 className="SubmitButton"
                 type="submit"
                 value="Add Availability"
+                id = "SUBMIT"
               />
             </label>
             <br></br>

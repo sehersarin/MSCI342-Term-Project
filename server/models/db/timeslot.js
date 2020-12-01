@@ -9,7 +9,7 @@ const Timeslot = require('../data/Timeslot');
 // The method will return all timeslots in the timeslot table  
 async function getPossibleTimeslots() {
     const timeslotDetails = await db.any(`select * from ${Tables.timeslot} ;`);
-    return _.map(timeslotDetails, timeslot => new Timeslot(timeslot));;
+    return _.map(timeslotDetails, timeslot => new Timeslot(timeslot));
 }
 
 module.exports = {
