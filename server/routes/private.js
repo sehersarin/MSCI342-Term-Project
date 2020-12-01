@@ -48,11 +48,38 @@ router.post('/book-appointment', async (req, res) => {
 
     if (!_.isNil(error)) res.send(error);
 
+    // Checks worker timeslot status, either available or unavailable)
+
+    const workerIsAvailable = await workerTimeslotHandler.checkWorkerAvailability(workerTimeslotId);
+
+    If(workerIsAvailable = true); {
+        //continue to insert the appointment
+
+        const isSuccessfullyInserted = await appointmentHandler.bookAppointment(studentId, workerTimeslotId, purpose, studentNotes, workerComments);
+
+        res.send(isSuccessfullyInserted);
+    }
+
+});
+
+router.post('/book-appointment-test-check-avail', async (req, res) => {
+    // Validate appropriate parameters are passed into the book appointment endpoint.
+    // Verification to make sure appointments are only made for future dates and that the worker is available during that time will be handled by the front end.
+    const paramSchema = Joi.object({
+        workerTimeslotId: Joi.number().integer().required(),
+    });
+
+    const query = req.query ? req.query : {};
+    const workerTimeslotId = query.workerTimeslotId ? query.workerTimeslotId : null;
+    const { error } = paramSchema.validate({ workerTimeslotId });
+
+    if (!_.isNil(error)) res.send(error);
+
     // Attempts to insert the appointment into the database.
-    const isSuccessfullyInserted = await appointmentHandler.bookAppointment(studentId, workerTimeslotId, purpose, studentNotes, workerComments);
 
-    res.send(isSuccessfullyInserted);
+    const workerIsAvailable = await workerTimeslotHandler.checkWorkerAvailability(workerTimeslotId);
 
+    res.send(workerIsAvailable);
 });
 
 router.post('/add-recurring-schedule', async (req, res) => {
