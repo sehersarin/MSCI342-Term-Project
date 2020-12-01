@@ -51,31 +51,27 @@ async function cancelWorkerAppointments(workerId, specificDate) {
 async function cancelSpecificAppointment(appointmentId) {
     // If this method is somehow called without specifying values for the required parameters, false is returned.
     if (_.isNil(appointmentId)) return false;
-    if (!_.isNumber(appointmentId)) return false; 
-
     try {
+        const queryOutput = await appointmentModel.returnAppointment(appointmentId);
         //Check if appt exists
-        const doesAppointmentExist = await appointmentModel.appointmentExists(appointmentId);
-        if (doesAppointmentExist == false) return false;
-
-        //low priority, check if appt is not cancelled 
-
+        const studentId = _.map(queryOutput, 'student_id');
+        if (_.isEmpty(studentId)) return false;
+        
         // Cancels specific appointment.
         const cancelSpecificAppointment = await appointmentModel.cancelSpecificAppointment(appointmentId);
-        //if (_.isEmpty(cancelSpecificAppointment)) return false;
-        //if (_.isNil(cancelSpecificAppointment)) return "false cancelSpecificAppointment ";
 
         //Finds corresponding workerTimeslotId 
-        const currentWorkerTimeslotId = await appointmentModel.findWorkerTimeslotId(appointmentId);
+        const currentWorkerTimeslotId = _.map(queryOutput, 'worker_timeslot_id');
         const newStatus = TimeslotStatus.available;
         // Updates the worker's availability to unavailable for the  timeslot of that specific appointment
         const updateWorkerAvailability = await workerTimeslotModel.updateIndividualWorkerAvailability(currentWorkerTimeslotId, newStatus);
-        //if (updateWorkerAvailability == false) return "false update worker availability";
+
         return true;
     } catch (error) {
         console.log('Error occurred in cancelSpecificAppointment method: ', error);
         return false;
     }
+
 }
 
 module.exports = {
