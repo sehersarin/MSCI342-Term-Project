@@ -22,9 +22,6 @@ async function updateWorkerAvailability(workerId, specificDate, newStatus) {
 }
 
 async function checkWorkerAvailability(workerTimeslotId) {
-    if (_.isNil(workerTimeslotId)) return false;
-
-    //query
     //Selects all from workerTimeslot table 
     const queryStatement = `select * from ${Tables.workerTimeslot}  where worker_timeslot_id = ${workerTimeslotId}`;
     const queryOutput = await db.any(queryStatement);
