@@ -197,25 +197,22 @@ router.get('/cancel-specific-day', async (req, res) => {
     res.send(isCancelledSuccessfully);
 });
 
-// Cancels specific appointments/meeting and updates worker availability to available for a worker for the specific timeslot. 
-// Note that appointments/meetings are synonymous, but only appointments will be used in the backend to maintain consistency.
+// Endpoint to cancel a specific appointment.
 router.get('/cancel-specific-appointment', async (req, res) => {
+    // Checks the format of the passed in parameters.
     const paramSchema = Joi.object({
         appointmentId: Joi.number().integer().required(),
-    })
+    });
 
-    const query = req.query ? req.query : {};
-
-    const appointmentId = query.appointmentId;
+    const appointmentId = req.query.appointmentId;
 
     const { error } = paramSchema.validate({ appointmentId });
 
+    // Returns an error if the parameters are invalid. 
     if (!_.isNil(error)) res.send(error);
 
-    const isApptCancelledSuccessfully =  await appointmentHandler.cancelSpecificAppointment(appointmentId);
-
-    res.send(isApptCancelledSuccessfully);
+    // Temporarily hardcoded to return false for testing purposes. 
+    res.send(false);
 });
-
 
 module.exports = router
