@@ -23,10 +23,10 @@ async function checkWorkerAvailability(slotId, workerId, status, date) {
 
     try {
         //Selects the status of the given worker_id at the given slot_id
-        var queryStatement = `select ${status} from ${Tables.workerTimeslot}  where worker_id = ${workerId} and slot_id = ${slotId}`;
-
+        //var queryStatement = `select ${status} from ${Tables.workerTimeslot}  where worker_id = ${workerId} and slot_id = ${slotId}`;
+        var queryStatement = `select ${status} from ${Tables.workerTimeslot}  where worker_timeslot_id = ${workerTimeslotId}`; 
         //Only adds date if the user specified the date.
-        if (date) queryStatement += ` and date = ${date}`;
+        //if (date) queryStatement += ` and date = ${date}`;
 
         const isAvailable = await db.any(queryStatement);
         //The queryStatement returns null if the status is empty
@@ -36,7 +36,7 @@ async function checkWorkerAvailability(slotId, workerId, status, date) {
         else
         return _.map(isAvailable, workerTimeslot => new WorkerTimeslot(workerTimeslot));
 //async function updateWorkerAvailability(workerId, specificDate, newStatus) {
-//return db.any(`update ${Tables.workerTimeslot} set status='${newStatus}' where date='${specificDate}' and worker_id='${workerId}';`);
+return db.any(`update ${Tables.workerTimeslot} set status='${newStatus}' where date='${specificDate}' and worker_id='${workerId}';`);
 
     } catch (err) {
         console.log('Error occurred in ', err);
@@ -53,6 +53,6 @@ async function checkWorkerAvailability(slotId, workerId, status, date) {
 module.exports = {
     insertWorkerTimeslot,
     checkWorkerAvailability,
-    updateWorkerAvailability,
+   // updateWorkerAvailability,
 
-} }
+} //}
