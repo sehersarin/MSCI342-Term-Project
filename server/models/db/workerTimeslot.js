@@ -18,19 +18,14 @@ async function insertWorkerTimeslot(slotId, schoolId, workerId, status, date) {
 
 async function checkWorkerAvailability(workerTimeslotId) {
     try {
-        //query 
-
-        //Selects the status of the given worker_id at the given slot_id
-        //var queryStatement = `select ${status} from ${Tables.workerTimeslot}  where worker_id = ${workerId} and slot_id = ${slotId}`;
+        //query
+        //Selects all from workerTimeslot table 
         const queryStatement = `select * from ${Tables.workerTimeslot}  where worker_timeslot_id = ${workerTimeslotId}`;
-        //Only adds date if the user specified the date.
-        //if (date) queryStatement += ` and date = ${date}`;
         const isAvailable = await db.any(queryStatement);
-        return isAvailable;
         //check if workertimeSlot is present 
-
+        if (_.isEmpty(isAvailable)) return false;
         //check if available 
-
+        
         //return true
 
         //The queryStatement returns null if the status is empty

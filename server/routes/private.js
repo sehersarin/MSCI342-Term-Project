@@ -74,7 +74,7 @@ router.post('/book-appointment-test-check-avail', async (req, res) => {
 
     const query = req.query ? req.query : {};
     const workerTimeslotId = query.workerTimeslotId ? query.workerTimeslotId : null;
-    const { error } = paramSchema.validate({ studentId, workerTimeslotId, purpose, studentNotes, workerComments });
+    const { error } = paramSchema.validate({  workerTimeslotId });
 
     if (!_.isNil(error)) res.send(error);
 
