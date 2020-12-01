@@ -43,11 +43,7 @@ router.get('/create-user', async (req, res) => {
         schoolId: Joi.number().positive().integer(),
         userType: Joi.string().min(1).valid('student', 'worker'),
         type: Joi.string(),
-<<<<<<< HEAD
         specialization: Joi.string(),//verify options
-=======
-        specialization: Joi.string().valid('social worker', 'guidance councellor'),//verify options
->>>>>>> parent of 2763ebf... Merge branch 'master' into S15-T1-Determine-if-worker-is-available-during-workerTimeslotId
     }).xor('studentId', 'workerId') // Either the studentId or the workerId must be specified (they both cannot be specified).
         .xor('schoolId', 'specialization'); // Either the schoolId or the specialization must be specified (they both cannot be specified).  
 

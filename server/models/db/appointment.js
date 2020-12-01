@@ -38,7 +38,17 @@ async function getAppointmentDetails(studentId, workerId, status) {
     return _.map(appointments, appointment => new AppointmentDetails(appointment));
 }
 
+// This method updates all the worker's appointments to cancelled on a specific date.
+// Note that if the worker does not have any appointments on this date, no rows will be updated (and no error will be thrown).
+async function cancelWorkerAppointments(workerId, specificDate) {
+    // Isolated the query condition to decrease the length of the query line and increase code readability.
+    const queryCondition = `where w1.date='${specificDate}' and w1.worker_id='${workerId}'`;
+
+    return db.any(`update ${Tables.appointment} set status='${AppointmentStatus.cancelled}' from ${Tables.appointment} a1 inner join ${Tables.workerTimeslot} w1 on a1.worker_timeslot_id = w1.worker_timeslot_id ${queryCondition};`);
+}
+
 module.exports = {
     insertAppointment,
     getAppointmentDetails,
+    cancelWorkerAppointments,
 } 

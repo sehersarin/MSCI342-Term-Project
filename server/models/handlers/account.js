@@ -15,7 +15,6 @@ async function createUserAccount(firstName, lastName, type, studentId, email, pa
     const token = await uidgen.generate();
     const accessToken = token.substring(0, 20);
 
-<<<<<<< HEAD
     if (userType == UserTypes.student) {
         const student = await studentModel.insertStudentAccount(firstName, lastName, studentId, email, password, phone, schoolId, accessToken);
         if (!_.isNil(student)) return student;
@@ -28,25 +27,6 @@ async function createUserAccount(firstName, lastName, type, studentId, email, pa
         return null;
     }
 }
-=======
-    try {
-        if (userType == UserTypes.student) {
-            const student = await studentModel.insertStudentAccount(firstName, lastName, studentId, email, password, phone, schoolId, accessToken);
-            if (!_.isNil(student)) return student;
-        } else if (userType == UserTypes.worker) {
-            // Searches the worker table to see if a student account exists for the given data.
-            const worker = await workerModel.insertWorkerAccount(firstName, lastName, type, workerId, email, password, phone, specialization, accessToken);
-            if (!_.isNil(worker)) return worker;
-        } else {
-            // If the userType is neither a student nor a worker, then return null.
-            return null;
-        }
-    } catch(err) {
-        console.log('Error occurred in createUserAccount method', err);
-        return null;
-    }
-};
->>>>>>> parent of 2763ebf... Merge branch 'master' into S15-T1-Determine-if-worker-is-available-during-workerTimeslotId
 
 //export the createUserAccount
 module.exports = {

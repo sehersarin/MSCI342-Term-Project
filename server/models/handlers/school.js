@@ -1,8 +1,10 @@
-// Create stub which returns an array of Worker ID's given an input of school ID or school Name
+const schoolModel = require('../db/school');
+
 async function getWorkerIdsForSchool(schoolId) {
-      var workerIds = [8000000, 8000001, 8000002, 8000003];
-      return workerIds;
+      return schoolModel.getWorkerIdsForSchool(schoolId);
 };
+
+
 module.exports = {
       getWorkerIdsForSchool,
 }
