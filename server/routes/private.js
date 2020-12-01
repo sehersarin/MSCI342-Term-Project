@@ -15,8 +15,6 @@ const timeslotHandler = require('../models/handlers/timeslot');
 
 const TimeslotStatus = require('../constants/timeslotStatus.json');
 
-const TimeslotStatus = require('../constants/timeslot-status.json');
-
 // Binds a middleware to check access tokens for all private requests.
 router.use(async function (req, res, next) {
     const isValid = await authenticateHandler.isAccessTokenValid(req.query.accessToken);
