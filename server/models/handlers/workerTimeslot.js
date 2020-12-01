@@ -13,6 +13,7 @@ async function addWorkerTimeslot(slotId, schoolId, workerId, status, date) {
 };
 async function checkWorkerAvailability(workerTimeslotId) {
     if (_.isNil(workerTimeslotId)) return false;
+    if (!_.isNumber(workerTimeslotId)) return false;
     return timeslotModel.checkWorkerAvailability(workerTimeslotId);
 };
 

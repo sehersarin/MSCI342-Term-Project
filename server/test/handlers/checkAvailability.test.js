@@ -66,6 +66,15 @@ describe('Test to check expected returns of checkAvailability functionality ', (
         expect(workerIsAvailable).toBe(false);
     });
 
+    //TEST 6
+    test('check invalid workerTimeslotId parameter ', async () => {
+        // Arrange
+        const workerTimeslhellotId = 483;
 
+        // Act
+        const workerIsAvailable = await workerTimeslotHandler.checkWorkerAvailability(workerTimeslhellotId);
 
+        // Assert
+        expect(workerIsAvailable).toBe(false);
+    });
 });
