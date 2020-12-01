@@ -13,7 +13,7 @@ const schoolHandler = require('../models/handlers/school');
 const workerHandler = require('../models/handlers/worker');
 
 
-const TimeslotStatus  = require('../constants/timeslotStatus.json');
+const TimeslotStatus = require('../constants/timeslotStatus.json');
 
 
 // Binds a middleware to check access tokens for all private requests.
@@ -52,17 +52,17 @@ router.post('/book-appointment', async (req, res) => {
 
     if (!_.isNil(error)) res.send(error);
 
-    // Attempts to insert the appointment into the database.
+    // Checks worker timeslot status, either available or unavailable)
 
     const workerIsAvailable = await workerTimeslotHandler.checkWorkerAvailability(workerTimeslotId);
 
-    //If(workerIsAvailable = true); {
+    If(workerIsAvailable = true); {
         //continue to insert the appointment
 
-        //const isSuccessfullyInserted = await appointmentHandler.bookAppointment(studentId, workerTimeslotId, purpose, studentNotes, workerComments);
+        const isSuccessfullyInserted = await appointmentHandler.bookAppointment(studentId, workerTimeslotId, purpose, studentNotes, workerComments);
 
-        res.send(workerIsAvailable);
-    //}
+        res.send(isSuccessfullyInserted);
+    }
 });
 
 router.post('/book-appointment-test-check-avail', async (req, res) => {
@@ -74,7 +74,7 @@ router.post('/book-appointment-test-check-avail', async (req, res) => {
 
     const query = req.query ? req.query : {};
     const workerTimeslotId = query.workerTimeslotId ? query.workerTimeslotId : null;
-    const { error } = paramSchema.validate({  workerTimeslotId });
+    const { error } = paramSchema.validate({ workerTimeslotId });
 
     if (!_.isNil(error)) res.send(error);
 
@@ -82,13 +82,7 @@ router.post('/book-appointment-test-check-avail', async (req, res) => {
 
     const workerIsAvailable = await workerTimeslotHandler.checkWorkerAvailability(workerTimeslotId);
 
-    //If(workerIsAvailable = true); {
-        //continue to insert the appointment
-
-        //const isSuccessfullyInserted = await appointmentHandler.bookAppointment(studentId, workerTimeslotId, purpose, studentNotes, workerComments);
-
     res.send(workerIsAvailable);
-    //}
 });
 
 router.post('/add-recurring-schedule', async (req, res) => {
@@ -127,7 +121,7 @@ router.post('/worker-availability', async (req, res) => {
         startTime: Joi.date().iso(),
         endTime: Joi.date().iso().greater(Joi.ref('startTime'))
     });
-        
+
     const query = req.query ? req.query : {};
 
     const workerId = query.workerId ? query.workerId : null;
@@ -179,7 +173,7 @@ router.get('/appointments', async (req, res) => {
 //Note that there is an future opportunity to expand functionality of this endpoint to filter the records pulled based on start time or end time of the timeslot 
 router.get('/possible-timeslots', async (req, res) => {
 
-    
+
     const timeslots = await timeslotHandler.getPossibleTimeslots();
 
     res.send(timeslots);
@@ -215,7 +209,7 @@ router.get('/cancel-specific-day', async (req, res) => {
     const paramSchema = Joi.object({
         workerId: Joi.number().integer().required(),
         specificDate: Joi.date().iso().required(),
-        
+
         // Following potential query parameters are commented out to be revisited in a future story. 
         // startTime: Joi.date().iso().required(),
         // endTime: Joi.date().iso().greater(Joi.ref('startTime')) // Checks to ensure that endDate > startDate is specified.

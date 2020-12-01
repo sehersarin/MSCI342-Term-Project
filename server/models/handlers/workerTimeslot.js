@@ -13,12 +13,6 @@ async function addWorkerTimeslot(slotId, schoolId, workerId, status, date) {
 };
 
 async function checkWorkerAvailability(workerTimeslotId) {
-    
-
-    //do I need to check if worker credentials are valid?
-    //if (_.isNil(status)) {
-    //    return null;
-    //}
     return timeslotModel.checkWorkerAvailability(workerTimeslotId);
 };
 

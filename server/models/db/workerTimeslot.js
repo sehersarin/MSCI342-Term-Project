@@ -17,27 +17,19 @@ async function insertWorkerTimeslot(slotId, schoolId, workerId, status, date) {
 
 
 async function checkWorkerAvailability(workerTimeslotId) {
+    if (_.isNil(workerTimeslotId)) return false;
     try {
         //query
         //Selects all from workerTimeslot table 
         const queryStatement = `select * from ${Tables.workerTimeslot}  where worker_timeslot_id = ${workerTimeslotId}`;
-        const isAvailable = await db.any(queryStatement);
+        const queryOutput = await db.any(queryStatement);
         //check if workertimeSlot is present 
-        if (_.isEmpty(isAvailable)) return false;
+        if (_.isEmpty(queryOutput)) return false;
         //check if available 
-        
-        //return true
+        const currentStatus = _.map(queryOutput, 'status');
+        if (currentStatus == 'available') return true; 
+        return false;
 
-        //The queryStatement returns null if the status is empty
-        /*
-        if (_.isEmpty(isAvailable)) return null;
-        //if status is 'available', return true
-        else if (_.isEqual(available)) return true;
-        else
-            return _.map(isAvailable, workerTimeslot => new WorkerTimeslot(workerTimeslot));
-        //async function updateWorkerAvailability(workerId, specificDate, newStatus) {
-        return db.any(`update ${Tables.workerTimeslot} set status='${newStatus}' where date='${specificDate}' and worker_id='${workerId}';`);
-        */
     } catch (err) {
         console.log('Error occurred in ', err);
         return null;
