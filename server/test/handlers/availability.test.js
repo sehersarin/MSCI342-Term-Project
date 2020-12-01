@@ -5,184 +5,39 @@ describe('testing fetching of worker availability functionality', () => {
         jest.resetModules();
     });
 
-    //TEST 1
-    test('rejection of null parameters', async () => {
-        // Arrange
-        // No test variables need to be initialized.
-        const workerId = null;
-        const schoolId = null;
-        const startTime = null;
-        const endTime = '2020-10-20';
-        // Act
-        const availableTimes = await availabilityHandler.getAvailabilityDetails(workerId, schoolId, startTime, endTime);
-
-        // Assert
-        expect(availableTimes).toBe(null);
-    });
-
-    //TEST 2
-    test('rejection of null value for required workerId parameter', async () => {
-        // Arrange
-        const workerId = null;
-        const schoolId = 1;
-        const startTime = '2020-10-19';
-        const endTime = '2020-10-20';
-
-        // Act
-        const availableTimes = await availabilityHandler.getAvailabilityDetails(workerId, schoolId, startTime, endTime);
-
-        // Assert
-        expect(availableTimes).toBe(null);
-    });
-
-    //TEST 3
-    test('Allows for a null value for SchoolId parameter', async () => {
-        // Arrange
-        const workerId = 8000000;
-        const schoolId = null;
-        const startTime = '2020-10-19';
-        const endTime = '2020-10-20';
-
-        // Act
-        const availableTimes = await availabilityHandler.getAvailabilityDetails(workerId, schoolId, startTime, endTime);
-
-        // Assert
-        expect(availableTimes).toBeDefined();
-    });
-
-    //TEST 4
-    test('Allows for a null value for startTime parameter', async () => {
+    test('initial setup of worker availability fetching', async() => {
         // Arrange
         const workerId = 8000000;
         const schoolId = 1;
-        const startTime = null;
+        const startTime = '2020-10-20';
         const endTime = '2020-10-20';
 
-        // Act
-        const availableTimes = await availabilityHandler.getAvailabilityDetails(workerId, schoolId, startTime, endTime);
-
-        // Assert
-        expect(availableTimes).toBeDefined();
-    });
-
-    //TEST 5
-    test('Allows for a null value for required endTime parameter', async () => {
-        // Arrange
-        const workerId = 8000000;
-        const schoolId = 1;
-        const startTime = '2020-10-19';
-        const endTime = null;
-
-        // Act
-        const availableTimes = await availabilityHandler.getAvailabilityDetails(workerId, schoolId, startTime, endTime);
-
-        // Assert
-        expect(availableTimes).toBeDefined();
-    });
-
-    //TEST 6
-    test('rejection of empty string value for required workerId parameter', async () => {
-        // Arrange
-        const workerId = '';
-        const schoolId = 1;
-        const startTime = '2020-10-19';
-        const endTime = '2020-10-20';
+        const testAvailableTimes = [
+            {
+                workerTimeslotId: 1,
+                startTime: '08:00:00', 
+                endTime: '08:30:00',
+                date: '2020-10-20'
+            },
+            {
+                workerTimeslotId: 2,
+                startTime: '08:30:00', 
+                endTime: '09:00:00',
+                date: '2020-10-20'
+            },
+            {
+                workerTimeslotId: 3,
+                startTime: '09:00:00', 
+                endTime: '09:30:00',
+                date: '2020-10-20'
+            }
+        ];
 
         // Act
-        const availableTimes = await availabilityHandler.getAvailabilityDetails(workerId, schoolId, startTime, endTime);
+        const availableTimes = await availabilityHandler.getWorkerAvailability(workerId, schoolId, startTime, endTime);
 
         // Assert
-        expect(availableTimes).toBe(null);
+        expect(availableTimes).toMatchObject(testAvailableTimes);
     });
-
-    //TEST 7
-    test('Allows for an empty string value for the schoolId parameter', async () => {
-        // Arrange
-        const workerId = 8000000;
-        const schoolId = '';
-        const startTime = '2020-10-19';
-        const endTime = '2020-10-20';
-
-        // Act
-        const availableTimes = await availabilityHandler.getAvailabilityDetails(workerId, schoolId, startTime, endTime);
-
-        // Assert
-        expect(availableTimes).toBeDefined();
-    });
-
-    //TEST 8
-    test('Allows for an empty string value for startTime parameter', async () => {
-        // Arrange
-        const workerId = 8000000;
-        const schoolId = 1;
-        const startTime = '';
-        const endTime = '2020-10-20';
-
-        // Act
-        const availableTimes = await availabilityHandler.getAvailabilityDetails(workerId, schoolId, startTime, endTime);
-
-        // Assert
-        expect(availableTimes).toBeDefined();
-    });
-
-    //TEST 9
-    test('Allows for an empty string value for the endTime parameter', async () => {
-        // Arrange
-        const workerId = 8000000;
-        const schoolId = 1;
-        const startTime = '2020-10-19';
-        const endTime = '';
-
-        // Act
-        const availableTimes = await availabilityHandler.getAvailabilityDetails(workerId, schoolId, startTime, endTime);
-
-        // Assert
-        expect(availableTimes).toBeDefined();
-    });
-
-     //TEST 10
-     test('Accept that all valid paramters return the expected values ', async () => {
-        // Arrange
-        const workerId = 8000000;
-        const schoolId = 1;
-        const startTime = '2020-10-19';
-        const endTime = '2020-10-21';
-
-        // Act
-        const availableTimes = await availabilityHandler.getAvailabilityDetails(workerId, schoolId, startTime, endTime);
-
-        // Assert
-        expect(availableTimes).toBeDefined();
-    });
-
-    //TEST 11
-test('Accept that all valid paramters but no availible timeslots exist for the specified date range returns null ', async () => {
-    // Arrange
-    const workerId = 8000000;
-    const schoolId = 1;
-    const startTime = '2020-10-15';
-    const endTime = '2020-10-16';
-
-    // Act
-    const availableTimes = await availabilityHandler.getAvailabilityDetails(workerId, schoolId, startTime, endTime);
-
-    // Assert
-    expect(availableTimes).toBe(null);
-});
-
-   //TEST 12
-   test('The case where the specified endTime is earlier than the endTime returns null ', async () => {
-    // Arrange
-    const workerId = 8000000;
-    const schoolId = 1;
-    const startTime = '2020-10-16';
-    const endTime = '2020-10-15';
-
-    // Act
-    const availableTimes = await availabilityHandler.getAvailabilityDetails(workerId, schoolId, startTime, endTime);
-
-    // Assert
-    expect(availableTimes).toBe(null);
-});
 
 })

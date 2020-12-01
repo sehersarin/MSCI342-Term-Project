@@ -1,16 +1,29 @@
-const _ = require('lodash');
-const availabilityModel = require('../db/availability');
-
 // Gets the time availabilities for a specific worker for a specific school.
-async function getAvailabilityDetails(workerId, schoolId, startDate, endDate) {
-    // Worker credentials do not need to be checked as the getAvailabilityDetails method will return an error if the worker credentials are invalid.
-    if (_.isNil(workerId)) {
-        return null;
-    }
+async function getWorkerAvailability(workerId, schoolId, startTime, endTime) {
+    const sampleAvailableTimes = [
+        {
+            workerTimeslotId: 1,
+            startTime: '08:00:00', 
+            endTime: '08:30:00',
+            date: '2020-10-20'
+        },
+        {
+            workerTimeslotId: 2,
+            startTime: '08:30:00', 
+            endTime: '09:00:00',
+            date: '2020-10-20'
+        },
+        {
+            workerTimeslotId: 3,
+            startTime: '09:00:00', 
+            endTime: '09:30:00',
+            date: '2020-10-20'
+        }
+    ];
 
-    return availabilityModel.getAvailabilityDetails(workerId, schoolId, startDate, endDate);
-}
+    return sampleAvailableTimes;
+};
 
 module.exports = {
-    getAvailabilityDetails,
+    getWorkerAvailability,
 }

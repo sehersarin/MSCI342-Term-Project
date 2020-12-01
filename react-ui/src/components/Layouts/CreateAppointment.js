@@ -7,7 +7,7 @@ class CreateAppointment extends Component {
     return (
       <Fragment>
         {/* <Header/> */}
-        <CreateAppointmentForm user={this.props}/>
+        <CreateAppointmentForm/>
       </Fragment>
     );
   }

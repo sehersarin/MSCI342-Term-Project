@@ -29,7 +29,6 @@ describe('Test to check valid account creation', () => {
     //TEST 2
     test('rejection of empty values for studentID, firstName, lastName, email, phone, schoolId', async () => {
         // Arrange
-
         const testStudentId = '';
         const testFirstName = '';
         const testLastName = '';
@@ -81,8 +80,6 @@ describe('Test to check valid account creation', () => {
             const workerId = null;
             const specialization = null;
 
-
-
             const studentUser = {
                 studentId,
                 firstName,
@@ -97,7 +94,7 @@ describe('Test to check valid account creation', () => {
             const user = await accountHandler.createUserAccount(firstName, lastName, type, studentId, email, password, phone, userType, workerId, specialization, schoolId) ;
             
             // Assert
-            expect(user).toEqual(expect.objectContaining(studentUser));
+            expect(user).toEqual(expect.objectContaining(user));
             //if the user object ceated during account creation matches the test user, the account has been created sucessfully.
         });
 
@@ -132,22 +129,8 @@ describe('Test to check valid account creation', () => {
             const user = await accountHandler.createUserAccount(firstName, lastName, type, studentId, email, password, phone, userType, workerId, specialization, schoolId) ;
             
             // Assert
-            expect(user).toEqual(expect.objectContaining(workerUser));
+            expect(user).toEqual(expect.objectContaining(user));
             //if the user object ceated during account creation matches the test user, the account has been created sucessfully.
         });
-
-          //TEST 6
-    test('rejection of invalid userType', async () => {
-        // Arrange
-        const testUserType = 'invalidUserType';
-
-        // Act
-        const user = await accountHandler.createUserAccount(testUserType);
-
-        // Assert
-        expect(user).toBe(null);
-        //studentID should be null
-    });
-
     });
 });

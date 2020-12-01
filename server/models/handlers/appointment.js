@@ -1,10 +1,8 @@
 const _ = require('lodash');
 
 const appointmentModel = require('../db/appointment');
-const workerTimeslotModel = require('../db/workerTimeslot');
 
 const AppointmentStatus = require('../../constants/appointmentStatus.json');
-const TimeslotStatus = require('../../constants/timeslotStatus.json');
 
 // Adds an appointment to the database and returns true upon successful completion.
 async function bookAppointment(studentId, workerTimeslotId, purpose, studentNotes, workerComments) {
@@ -26,30 +24,7 @@ async function getAppointmentDetails(studentId, workerId, status) {
     return appointmentModel.getAppointmentDetails(studentId, workerId, status);
 }
 
-// Attempts to cancel all the worker appointments and updates their availability to unavailable for the entire day.
-// Returns true if the worker appointments and their times were successfully updated and false if error encountered.
-async function cancelWorkerAppointments(workerId, specificDate) {
-    // If this method is somehow called without specifying values for the required parameters, false is returned.
-    if (_.isNil(workerId) || _.isNil(specificDate)) return false;
-
-    try {
-        // Updates the worker's availability to unavailable for the entire day.
-        const updateWorkerAvailability = workerTimeslotModel.updateWorkerAvailability(workerId, specificDate, TimeslotStatus.unavailable);
-        // Cancels all of the worker's appointments on that day.
-        const cancelWorkerAppointments = appointmentModel.cancelWorkerAppointments(workerId, specificDate);
-
-        // Leverage Promise chain to complete both requests asynchronously and decrease execution time.
-        await Promise.all([updateWorkerAvailability, cancelWorkerAppointments]);
-
-        return true;
-    } catch (error) {
-        console.log('Error occurred in cancelWorkerAppointments method: ', error);
-        return false;
-    }
-}
-
 module.exports = {
     bookAppointment,
     getAppointmentDetails,
-    cancelWorkerAppointments,
 }
