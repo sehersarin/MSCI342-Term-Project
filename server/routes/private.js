@@ -58,7 +58,7 @@ router.post('/book-appointment', async (req, res) => {
 
     // Attempts to insert the appointment into the database.
 
-    const workerIsAvailable = await workerTimeslotHandler.checkWorkerAvailability(slotId, workerId, status, date);
+    const workerIsAvailable = await workerTimeslotHandler.checkWorkerAvailability(workerTimeslotId);
 
     If(workerIsAvailable = true); {
         //continue to insert the appointment
