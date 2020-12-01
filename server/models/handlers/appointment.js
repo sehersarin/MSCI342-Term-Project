@@ -67,7 +67,7 @@ async function cancelSpecificAppointment(appointmentId) {
 
         //Finds corresponding workerTimeslotId 
         const currentWorkerTimeslotId = await appointmentModel.findWorkerTimeslotId(appointmentId);
-        newStatus = 'available';
+        const newStatus = TimeslotStatus.available;
         // Updates the worker's availability to unavailable for the  timeslot of that specific appointment
         const updateWorkerAvailability = await workerTimeslotModel.updateIndividualWorkerAvailability(currentWorkerTimeslotId, newStatus);
         //if (updateWorkerAvailability == false) return "false update worker availability";
