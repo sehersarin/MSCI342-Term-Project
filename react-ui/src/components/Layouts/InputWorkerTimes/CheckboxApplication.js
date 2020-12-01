@@ -20,7 +20,7 @@ class Check extends React.Component {
       // personId : this.props.personId,
       items: [],
       schools: [],
-      selectedSchool: "", //hard coded to one as there is only one school at the moment
+      selectedSchool: "",
       startDay: moment(),
       accessToken: "",
       timeslots: "",
@@ -61,6 +61,7 @@ class Check extends React.Component {
     document.getElementById("DATE").value = currentDay;
 
     var params2 = { workerId: this.props.personId, accessToken: this.props.accessToken };
+    console.log(params2)
     await axios.get(`/api/get-schools-for-worker/?${queryString.stringify(params2)}`)
       .then((res) => {
         if (_.isNil(res.error) && res.data) {
@@ -192,6 +193,8 @@ class Check extends React.Component {
         alert("Please select timeslot(s)")
       }
       else {
+        document.getElementById("SUBMIT").disabled = true;
+        document.getElementById("SUBMIT").value = "Form submitted";
         alert("Input is added")
       }
       
@@ -274,6 +277,7 @@ class Check extends React.Component {
                 className="SubmitButton"
                 type="submit"
                 value="Add Availability"
+                id = "SUBMIT"
               />
             </label>
             <br></br>
