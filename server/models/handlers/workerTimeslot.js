@@ -15,12 +15,12 @@ async function addWorkerTimeslot(slotId, schoolId, workerId, status, date) {
 };
 
 
-async function checkWorkerAvailability(slotId, workerId, status, date) {
+async function checkWorkerAvailability(workerId, status) {
     //do I need to check if worker credentials are valid?
     if (_.isNil(status)) {
         return null;
     }
-    return checkWorkerAvailabilityModel.checkWorkerAvailability(slotId, workerId, status, date);
+    return checkWorkerAvailabilityModel.checkWorkerAvailability(workerId, status);
 }
 
 
