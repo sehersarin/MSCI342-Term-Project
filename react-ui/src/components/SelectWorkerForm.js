@@ -23,7 +23,7 @@ class SelectWorkerForm extends Component {
         submit:false,
         email: this.props.user.email,
         userType: this.props.user.userType,
-        workerId: "Not_Changed!!", // check to see if changed in the URL in the next page
+        workerId: "",
         schoolId: this.props.user.schoolId,  
         studentId: this.props.user.personId, 
         accessToken: this.props.user.accessToken,
