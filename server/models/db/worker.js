@@ -1,5 +1,5 @@
 const { db } = require('../../lib/connection');
-
+const _ = require('lodash');
 const userModel = require('../db/user');
 
 const Worker = require('../data/Worker');
