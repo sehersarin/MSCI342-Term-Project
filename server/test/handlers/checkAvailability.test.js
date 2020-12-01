@@ -18,7 +18,7 @@ describe('Test to check expected returns of checkAvailability functionality ', (
         expect(workerIsAvailable).toBe(false);
     });
 
-    //TEST 6
+    //TEST 2
     test('rejection of an empty string value for workerTimeslotId', async () => {
         // Arrange
         const workerTimeslotId = '';
@@ -30,7 +30,7 @@ describe('Test to check expected returns of checkAvailability functionality ', (
         expect(workerIsAvailable).toBe(false);
     });
 
-    //TEST 6
+    //TEST 3
     test('rejection of an filled string value for workerTimeslotId', async () => {
         // Arrange
         const workerTimeslotId = 'good_day_sire';
@@ -42,7 +42,7 @@ describe('Test to check expected returns of checkAvailability functionality ', (
         expect(workerIsAvailable).toBe(false);
     });
     
-    //TEST 6
+    //TEST 4
     test('check valid workerTimeslotId for true return ', async () => {
         // Arrange
         const workerTimeslotId = 6;
@@ -54,10 +54,10 @@ describe('Test to check expected returns of checkAvailability functionality ', (
         expect(workerIsAvailable).toBe(true);
     });
 
-    //TEST 10
+    //TEST 5
     test('check valid workerTimeslotId for false return ', async () => {
         // Arrange
-        const workerTimeslotId = 23;
+        const workerTimeslotId = 5;
 
         // Act
         const workerIsAvailable = await workerTimeslotHandler.checkWorkerAvailability(workerTimeslotId);
