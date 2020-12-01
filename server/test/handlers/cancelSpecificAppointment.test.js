@@ -82,6 +82,12 @@ describe('testing cancellation of specific worker appointments', () => {
     });
     //Due to database structure, there will never be a worker timeslot id input into this method that is non-existent and therefore testing cases are complete at this point
 
+});
+
+describe('testing individual worker timeslot status update', () => {
+    beforeEach(() => {
+        jest.resetModules();
+    });
     test('1 test individual worker timeslot status update ', async () => {
         // Arrange
         const workerTimeslotId = 23;
