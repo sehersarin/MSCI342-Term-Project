@@ -19,7 +19,7 @@ async function insertWorkerTimeslot(slotId, schoolId, workerId, status, date) {
 }
 
 
-async function checkWorkerAvailability(slotId, workerId, status, date) {
+async function checkWorkerAvailability(workerTimeslotId) {
 
     try {
         //Selects the status of the given worker_id at the given slot_id
