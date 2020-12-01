@@ -45,25 +45,25 @@ describe('Test to check expected returns of checkAvailability functionality ', (
     //TEST 6
     test('check valid workerTimeslotId for true return ', async () => {
         // Arrange
-        const workerTimeslotId = 5;
+        const workerTimeslotId = 6;
+
+        // Act
+        const workerIsAvailable = await workerTimeslotHandler.checkWorkerAvailability(workerTimeslotId);
+
+        // Assert
+        expect(workerIsAvailable).toBe(true);
+    });
+
+    //TEST 10
+    test('check valid workerTimeslotId for false return ', async () => {
+        // Arrange
+        const workerTimeslotId = 23;
 
         // Act
         const workerIsAvailable = await workerTimeslotHandler.checkWorkerAvailability(workerTimeslotId);
 
         // Assert
         expect(workerIsAvailable).toBe(false);
-    });
-
-    //TEST 10
-    test('check valid workerTimeslotId for false return ', async () => {
-        // Arrange
-        const workerTimeslotId = 7;
-
-        // Act
-        const workerIsAvailable = await workerTimeslotHandler.checkWorkerAvailability(workerTimeslotId);
-
-        // Assert
-        expect(workerIsAvailable).toBe(null);
     });
 
 
