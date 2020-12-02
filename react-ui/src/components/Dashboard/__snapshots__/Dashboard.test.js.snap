@@ -26,14 +26,6 @@ Array [
             Home
           </a>
         </li>
-        <li>
-          <a
-            href="/dashboard/Profile/undefined"
-            onClick={[Function]}
-          >
-            Profile
-          </a>
-        </li>
         <li
           className="push-right"
         >
