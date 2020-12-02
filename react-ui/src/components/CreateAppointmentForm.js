@@ -122,7 +122,7 @@ class CreateAppointmentForm extends Component {
     if(this.state.availableTimes === ""){
       return(
         <Container className="Form-container">
-             <Title name= "There are no avalible times for this worker, sorry"></Title>
+             <Title name= "There are no available times for this worker, sorry"></Title>
             <Row>
              <Col sm={12} align="center">
                   
