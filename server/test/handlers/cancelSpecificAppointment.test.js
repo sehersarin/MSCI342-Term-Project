@@ -88,7 +88,7 @@ describe('testing individual worker timeslot status update', () => {
     beforeEach(() => {
         jest.resetModules();
     });
-    test('1 test individual worker timeslot status update ', async () => {
+    test('test individual worker timeslot status update ', async () => {
         // Arrange
         const workerTimeslotId = 23;
         const newStatus = 'available';
