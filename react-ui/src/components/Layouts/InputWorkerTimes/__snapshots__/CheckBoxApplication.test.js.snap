@@ -66,10 +66,30 @@ exports[`Checkbox component snapshot renders 1`] = `
       >
         <input
           id="DATE"
+          min="2020-12-02"
           onChange={[Function]}
           type="date"
         />
         <br />
+        <label
+          className="SelectSchoolsLabel"
+          for="school"
+        >
+           Select School:
+        </label>
+        <select
+          onChange={[Function]}
+          required={true}
+          value=""
+        >
+          <option
+            disabled={true}
+            selected={true}
+            value=""
+          >
+            Select your schoolID
+          </option>
+        </select>
         <br />
         <br />
         <br />
@@ -195,6 +215,7 @@ exports[`Checkbox component snapshot renders 1`] = `
         <br />
         <input
           className="SubmitButton"
+          id="SUBMIT"
           type="submit"
           value="Add Availability"
         />
