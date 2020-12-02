@@ -58,7 +58,6 @@ describe('testing cancellation of specific worker appointments', () => {
     test('invalid number value for the appointmentId', async () => {
         // Arrange
         const appointmentId = 37;
-
         const testIsCancelled = false;
 
         // Act
@@ -71,7 +70,6 @@ describe('testing cancellation of specific worker appointments', () => {
     test('valid parameters for appointmentId', async () => {
         // Arrange
         const appointmentId = 38;
-
         const testIsCancelled = true;
 
         // Act
@@ -92,7 +90,6 @@ describe('testing individual worker timeslot status update', () => {
         // Arrange
         const workerTimeslotId = 23;
         const newStatus = 'available';
-
         const updatedSuccessfully = true;
 
         // Act
@@ -106,7 +103,6 @@ describe('testing individual worker timeslot status update', () => {
         // Arrange
         const workerTimeslotId = 'hello';
         const newStatus = 'available';
-
         const updatedSuccessfully = false;
 
         // Act
