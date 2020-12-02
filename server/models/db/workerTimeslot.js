@@ -29,8 +29,8 @@ async function checkWorkerAvailability(workerTimeslotId) {
     if (_.isEmpty(queryOutput)) return false;
     //check if available 
     const currentStatus = _.map(queryOutput, 'status'); 
-    if (_.includes(currentStatus, TimeslotStatus.available)) return true;
-    return false;
+    return _.includes(currentStatus, TimeslotStatus.available).
+
 }
 module.exports = {
     insertWorkerTimeslot,
