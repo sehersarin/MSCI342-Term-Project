@@ -29,7 +29,7 @@ async function checkWorkerAvailability(workerTimeslotId) {
     if (_.isEmpty(queryOutput)) return false;
     //check if available 
     const currentStatus = _.map(queryOutput, 'status');
-    if (currentStatus == 'available') return true;
+    if (currentStatus == TimeslotStatus.available) return true;
     return false;
 }
 module.exports = {
