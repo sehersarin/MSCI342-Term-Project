@@ -1,4 +1,4 @@
-const workerTimeslot = require('../../models/db/workerTimeslot');
+const workerTimeslotModel = require('../../models/db/workerTimeslot');
 const appointmentHandler = require('../../models/handlers/appointment');
 const workerTimeslotHandler = require('../../models/handlers/workerTimeslot');
 
@@ -93,7 +93,7 @@ describe('testing individual worker timeslot status update', () => {
         const updatedSuccessfully = true;
 
         // Act
-        const isUpdated = await workerTimeslotHandler.updateIndividualWorkerAvailability(workerTimeslotId, newStatus);
+        const isUpdated = await workerTimeslotModel.updateIndividualWorkerAvailability(workerTimeslotId, newStatus);
 
         // Assert
         expect(isUpdated).toBe(updatedSuccessfully);
@@ -106,7 +106,7 @@ describe('testing individual worker timeslot status update', () => {
         const updatedSuccessfully = false;
 
         // Act
-        const isUpdated = await workerTimeslotHandler.updateIndividualWorkerAvailability(workerTimeslotId, newStatus);
+        const isUpdated = await workerTimeslotModel.updateIndividualWorkerAvailability(workerTimeslotId, newStatus);
 
         // Assert
         expect(isUpdated).toBe(updatedSuccessfully);
