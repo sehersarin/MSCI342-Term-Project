@@ -52,7 +52,7 @@ router.post('/book-appointment', async (req, res) => {
 
     const workerIsAvailable = await workerTimeslotHandler.checkWorkerAvailability(workerTimeslotId);
 
-    If(workerIsAvailable = true); {
+    If(workerIsAvailable == true); {
         //continue to insert the appointment
 
         const isSuccessfullyInserted = await appointmentHandler.bookAppointment(studentId, workerTimeslotId, purpose, studentNotes, workerComments);
