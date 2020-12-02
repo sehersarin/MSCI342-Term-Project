@@ -22,7 +22,13 @@ async function updateWorkerAvailability(workerId, specificDate, newStatus) {
 }
 
 async function updateIndividualWorkerAvailability( workerTimeslotId, newStatus) {
-    return db.any(`update ${Tables.workerTimeslot} set status='${newStatus}' where worker_timeslot_id='${workerTimeslotId}';`);
+    try {
+        await db.any(`update ${Tables.workerTimeslot} set status='${newStatus}' where worker_timeslot_id='${workerTimeslotId}';`);
+        return true;
+    } catch (error) {
+        console.log('Error occurred in updateIndividualWorkerAvailability method: ', error);
+        return false;
+    }
 }
 
 module.exports = {
