@@ -5,6 +5,19 @@ The overall problem the team aims to address is the non-confidentiality and inef
 
 The link to access the system on a web browser: https://connectme-msci342.herokuapp.com/ 
 
+### Implemented Functionality
+- Login 
+- Signup 
+- Service Worker Schedule Input
+- View Service Worker Available Times
+- Service Worker Appointment Cancellation
+- Update Service Worker Schedule Upon Appointment Cancellations
+- Service Worker & Students Can View Appointment Descriptions
+- Students Can Book Appointments
+- Student Meeting Cancellation
+
+*Frontend and Backend tests have been setup and developed for all stories.
+
 ## Front-end Code File Structure
 1. components folder contain reusable components, and a Layouts folder for the layout of each page
 2. App.js contains the routing work at the basic level -you can nest routing within your components or Layouts page 

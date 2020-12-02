@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Dashboard Snapshot snapshot renders 1`] = `
+Array [
+  <header>
+    <div
+      className="column left"
+    >
+      <img
+        alt="logo"
+        className="App-logo"
+        src="logo.svg"
+      />
+    </div>
+    <div
+      className="column right"
+    >
+      <ul
+        className="topnav"
+      >
+        <li>
+          <a
+            href="/dashboard"
+            onClick={[Function]}
+          >
+            Home
+          </a>
+        </li>
+        <li>
+          <a
+            href="/dashboard/Profile/undefined"
+            onClick={[Function]}
+          >
+            Profile
+          </a>
+        </li>
+        <li
+          className="push-right"
+        >
+          <button
+            href="#"
+            onClick={[Function]}
+          >
+            Sign Out
+          </button>
+        </li>
+      </ul>
+    </div>
+  </header>,
+  <div>
+    <main
+      role="main"
+    >
+      <div
+        className="main"
+      >
+        <div>
+          <p
+            className="Title-Style"
+          >
+            Welcome
+          </p>
+        </div>
+        <h3>
+          No Upcoming Appointments!
+        </h3>
+      </div>
+    </main>
+  </div>,
+]
+`;
