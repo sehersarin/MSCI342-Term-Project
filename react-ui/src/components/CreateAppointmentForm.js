@@ -207,7 +207,7 @@ class CreateAppointmentForm extends Component {
                       </label>
                     <br></br>
                   <div>
-                     ({300 - this.state.reason.length} Characters lefts)
+                     ({300 - this.state.reason.length} Characters left)
                   </div>
                   <br></br>
               <form onSubmit={this.handleSubmit}> 
