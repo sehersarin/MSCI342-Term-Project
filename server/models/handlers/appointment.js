@@ -54,14 +54,15 @@ async function cancelSpecificAppointment(appointmentId) {
     try {
         //query for appointmentArray
         const appointmentArray = await appointmentModel.getAppointment(appointmentId);
-        //Check if appt exists
-        if (_.isEmpty(appointmentArray)) return false;
+        //Check if appt exists by checking a specific element within appointmentArray
+        const studentId = _.map(appointmentArray, 'student_id');
+        if (_.isEmpty(studentId)) return false;
         
         // Cancels specific appointment.
         const cancelSpecificAppointment = await appointmentModel.cancelSpecificAppointment(appointmentId);
 
         //Finds corresponding workerTimeslotId 
-        const currentWorkerTimeslotId = _.map(queryOutput, 'worker_timeslot_id');
+        const currentWorkerTimeslotId = _.map(appointmentArray, 'worker_timeslot_id');
         const newStatus = TimeslotStatus.available;
         // Updates the worker's availability to available for the  timeslot of that specific appointment
         const updateWorkerAvailability = await workerTimeslotModel.updateIndividualWorkerAvailability(currentWorkerTimeslotId, newStatus);

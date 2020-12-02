@@ -69,7 +69,7 @@ describe('testing cancellation of specific worker appointments', () => {
 
     test('valid parameters for appointmentId', async () => {
         // Arrange
-        const appointmentId = 38;
+        const appointmentId = 40;
         const testIsCancelled = true;
 
         // Act
