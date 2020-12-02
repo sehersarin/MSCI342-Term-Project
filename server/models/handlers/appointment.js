@@ -52,10 +52,10 @@ async function cancelSpecificAppointment(appointmentId) {
     // If this method is somehow called without specifying values for the required parameters, false is returned.
     if (_.isNil(appointmentId)) return false;
     try {
-        const queryOutput = await appointmentModel.getAppointment(appointmentId);
+        //query for appointmentArray
+        const appointmentArray = await appointmentModel.getAppointment(appointmentId);
         //Check if appt exists
-        //const studentId = _.map(queryOutput, 'student_id');
-        if (_.isEmpty(queryOutput)) return false;
+        if (_.isEmpty(appointmentArray)) return false;
         
         // Cancels specific appointment.
         const cancelSpecificAppointment = await appointmentModel.cancelSpecificAppointment(appointmentId);
