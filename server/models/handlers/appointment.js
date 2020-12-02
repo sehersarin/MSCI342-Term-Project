@@ -54,8 +54,8 @@ async function cancelSpecificAppointment(appointmentId) {
     try {
         const queryOutput = await appointmentModel.getAppointment(appointmentId);
         //Check if appt exists
-        const studentId = _.map(queryOutput, 'student_id');
-        if (_.isEmpty(studentId)) return false;
+        //const studentId = _.map(queryOutput, 'student_id');
+        if (_.isEmpty(queryOutput)) return false;
         
         // Cancels specific appointment.
         const cancelSpecificAppointment = await appointmentModel.cancelSpecificAppointment(appointmentId);
