@@ -22,19 +22,19 @@ async function updateWorkerAvailability(workerId, specificDate, newStatus) {
 }
 
 async function checkWorkerAvailability(workerTimeslotId) {
-    try{
-    //Selects all from workerTimeslot table 
-    const queryStatement = `select * from ${Tables.workerTimeslot}  where worker_timeslot_id = ${workerTimeslotId}`;
-    const queryOutput = await db.any(queryStatement);
-    //check if workertimeSlot is present 
-    if (_.isEmpty(queryOutput)) return false;
-    //check if available 
-    const currentStatus = _.map(queryOutput, 'status');
-    return _.includes(currentStatus, TimeslotStatus.available);
-} catch (err) {
-    console.log('error occured in checkWorkerAvailability', err);
-    return false;
-}
+    try {
+        //Selects all from workerTimeslot table 
+        const queryStatement = `select * from ${Tables.workerTimeslot}  where worker_timeslot_id = ${workerTimeslotId}`;
+        const queryOutput = await db.any(queryStatement);
+        //check if workertimeSlot is present 
+        if (_.isEmpty(queryOutput)) return false;
+        //check if available 
+        const currentStatus = _.map(queryOutput, 'status');
+        return _.includes(currentStatus, TimeslotStatus.available);
+    } catch (err) {
+        console.log('error occured in checkWorkerAvailability', err);
+        return false;
+    }
 }
 module.exports = {
     insertWorkerTimeslot,
