@@ -239,8 +239,9 @@ router.get('/cancel-specific-appointment', async (req, res) => {
     // Returns an error if the parameters are invalid. 
     if (!_.isNil(error)) res.send(error);
 
-    // Temporarily hardcoded to return false for testing purposes. 
-    res.send(false);
+    const isApptCancelledSuccessfully =  await appointmentHandler.cancelSpecificAppointment(appointmentId);
+
+    res.send(isApptCancelledSuccessfully);
 });
 
 module.exports = router

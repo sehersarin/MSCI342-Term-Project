@@ -48,8 +48,36 @@ async function cancelWorkerAppointments(workerId, specificDate) {
     }
 }
 
+async function cancelSpecificAppointment(appointmentId) {
+    // If this method is somehow called without specifying values for the required parameters, false is returned.
+    if (_.isNil(appointmentId)) return false;
+    try {
+        //query for appointmentArray
+        const appointmentArray = await appointmentModel.getAppointment(appointmentId);
+        //Check if appt exists by checking a specific element within appointmentArray
+        const studentId = _.map(appointmentArray, 'student_id');
+        if (_.isEmpty(studentId)) return false;
+        
+        // Cancels specific appointment.
+        const cancelSpecificAppointment = await appointmentModel.cancelSpecificAppointment(appointmentId);
+
+        //Finds corresponding workerTimeslotId 
+        const currentWorkerTimeslotId = _.map(appointmentArray, 'worker_timeslot_id');
+        const newStatus = TimeslotStatus.available;
+        // Updates the worker's availability to available for the  timeslot of that specific appointment
+        const updateWorkerAvailability = await workerTimeslotModel.updateIndividualWorkerAvailability(currentWorkerTimeslotId, newStatus);
+
+        return true;
+    } catch (error) {
+        console.log('Error occurred in cancelSpecificAppointment method: ', error);
+        return false;
+    }
+
+}
+
 module.exports = {
     bookAppointment,
     getAppointmentDetails,
     cancelWorkerAppointments,
+    cancelSpecificAppointment,
 }

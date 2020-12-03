@@ -67,7 +67,7 @@ describe('Test to check expected returns of checkAvailability functionality ', (
 
     test('Rejection of a non-existent value for the required `workerTimeslotId` parameter', async () => {
         // Arrange
-        const workerTimeslotId = 5;
+        const workerTimeslotId = 677;
 
         // Act
         const workerIsAvailable = await workerTimeslotHandler.checkWorkerAvailability(workerTimeslotId);
