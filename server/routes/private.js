@@ -156,7 +156,7 @@ router.get('/possible-timeslots', async (req, res) => {
 });
 
 router.get('/get-schools-for-worker', async (req, res) => {
-
+    
     const paramSchema = Joi.object({
         workerId: Joi.number().integer().required(),
     })
@@ -165,7 +165,7 @@ router.get('/get-schools-for-worker', async (req, res) => {
 
     const workerId = query.workerId;
 
-    const { error } = paramSchema.validate({ workerId });
+    const { error } = paramSchema.validate({ workerId});
 
     if (!_.isNil(error)) res.send(error);
 
