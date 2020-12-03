@@ -49,20 +49,20 @@ router.post('/book-appointment', async (req, res) => {
     if (!_.isNil(error)) res.send(error);
 
     // Checks worker timeslot status, either available or unavailable)
-
     const workerIsAvailable = await workerTimeslotHandler.checkWorkerAvailability(workerTimeslotId);
-
-    if (workerIsAvailable) {//continue to insert the appointment
-        //Change timeslot status to unavailable
-        const isSuccessfullyBooked = await workerTimeslotHandler.bookWorkerTimeslot(workerTimeslotId);
+    //Change timeslot status to unavailable
+    const isSuccessfullyBooked = await workerTimeslotHandler.bookWorkerTimeslot(workerTimeslotId);
+    
+    //If and only if both variables are true, is an appointment booked. 
+    if (workerIsAvailable == true && isSuccessfullyBooked == true){
         //Book appointment
         const isSuccessfullyInserted = await appointmentHandler.bookAppointment(studentId, workerTimeslotId, purpose, studentNotes, workerComments);
         //Return isSuccessfullyInserted, most likely true barring any errors 
         res.send(isSuccessfullyInserted);
-    } else {
+    }
+    else {
         res.send(false);
     };
-
 });
 
 router.post('/add-recurring-schedule', async (req, res) => {
