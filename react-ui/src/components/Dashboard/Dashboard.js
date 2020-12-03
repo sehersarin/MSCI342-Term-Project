@@ -3,7 +3,7 @@ import { withRouter } from "react-router";
 import { Redirect, Switch, Route, Link } from "react-router-dom";
 import "./Dashboard.scss";
 import logo from '../../logo.svg'
-import Profile from "../Layouts/Profile";
+import Selectable from "../Layouts/Availability";
 import Home from "../Layouts/Home";
 import NotFound from "../Layouts/404";
 import SelectWorker from "../Layouts/SelectWorker";
@@ -21,6 +21,7 @@ class Dashboard extends Component {
       firstName: this.props.match.params.name,
       personId: this.props.match.params.personId,
       accessToken: this.props.match.params.accessToken,
+      schoolId: this.props.match.params.schoolId
     };
   }
 
@@ -36,8 +37,8 @@ class Dashboard extends Component {
     if (this.state.isLogout) return <Redirect to="/login" />;
 
     // Else it will display the appropriate header based on the user type.
-    const { email, firstName, personId, userType, accessToken } = this.state;
-    console.log(this.state.personId)
+    const { email, firstName, personId, userType, accessToken, schoolId} = this.state;
+    console.log(this.state.personId, this.state.schoolId)
     return (
       <Fragment>
         <header className={userType}>
@@ -51,21 +52,19 @@ class Dashboard extends Component {
                 <Link to={`/dashboard`}>Home</Link>
               </li>
              
-              <li>
-                <Link to={`/dashboard/Profile/${email}`}>Profile</Link>
-              </li>
+             
               {/* Only display the book appointment form if the user is a student. */}
               {userType === UserTypes.student &&
                  <li>
-                 <Link to={`/dashboard/SelectWorker/${email}`}>Book Appointment</Link>
+                 <Link to={`/dashboard/SelectWorker/${email}/${userType}/${personId}/${accessToken}/${schoolId}`}>Book Appointment</Link>
                 </li>
               }
 
                 {/* Only display the book appointment form if the user is a worker. */}
                 {userType === UserTypes.worker &&
                 <li>
-                  <Link to={`/dashboard/InputWorkerAvailabilitypage/${email}`}>Add Availability</Link>
-                </li>
+                <Link to={`/dashboard/Availability/${email}`}>Availability</Link>
+              </li>
               }
 
               <li className="push-right">
@@ -79,21 +78,20 @@ class Dashboard extends Component {
           <main role="main">
             <div className="main">
               <Switch>
-                <Route path={`/dashboard/Profile`}>
-                  <Profile name={firstName} />
+                <Route path={`/dashboard/Availability`}>
+                  <Selectable personId= {this.state.personId}/>
                 </Route>
                 <Route path={`/dashboard/CreateAppointment`}>
-                  <CreateAppointment name={personId} />
+                  <CreateAppointment email={this.state.email} userType={userType} personId={personId} accessToken={accessToken} schoolId={schoolId}/>
                 </Route>
                 <Route path={`/dashboard/SelectWorker`}>
-                  <SelectWorker email={this.state.email}/>
-
+                  <SelectWorker email={this.state.email} userType={userType} personId={personId} accessToken={accessToken} schoolId={schoolId}/>
                 </Route>
                 <Route path = {`/dashboard/InputWorkerAvailabilitypage`}>
-                  <WorkerInputpage personId ={this.state.personId}/>
+                  <WorkerInputpage personId ={this.state.personId} accessToken={this.state.accessToken} schoolId={schoolId}/>
                 </Route>
                 <Route exact path={`${this.props.match.path}`}>
-                  <Home userType={userType} personId={personId} accessToken={accessToken} />
+                  <Home userType={userType} personId={personId} accessToken={accessToken} schoolId={schoolId}/>
                 </Route>
                 <Route path="*">
                   <NotFound />

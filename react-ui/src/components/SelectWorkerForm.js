@@ -1,17 +1,19 @@
 import React, {Component} from "react";
 import { Container, Row, Col } from 'react-grid-system';
-import { Redirect, Route, withRouter } from "react-router-dom";
+import { Redirect, Route, Switch, Link, withRouter } from "react-router-dom";
 import Title from "./Title"
-import "./CreateAppointmentForm.scss"
+import "./SelectWorkerForm.scss"
 // import dashboard from "./Layouts/Dashboard"
-import { Link } from 'react-router-dom';
 
 import queryString from 'query-string'
 import CreateAppointment from "./Layouts/CreateAppointment"
-const axios = require('axios').default;
+import _ from 'lodash'
 
-//This class is for students to sign up for appointments 
-//students or support workers may access this page from the dashboard then fill in the following information 
+
+const axios = require('axios').default;
+var moment = require('moment');
+
+//This class is for students to choose a worker to sign up for appointments with
 
 class SelectWorkerForm extends Component {
     constructor(props) {
@@ -19,97 +21,127 @@ class SelectWorkerForm extends Component {
      // email = this.props.email
       this.state = {
         submit:false,
-        email: this.props.email,
-        workerId: "", // taken from Amy's test for the api
-        schoolId: 1,       //will need to implement a page before this to pass these values through
-        studentId: 0, // check with Melissa if already stored in props
-        workerTimeslotId : 0, 
-        purpose: "", // Max 300 => input size is 300
-        successfulAppointment: false,
+        email: this.props.user.email,
+        userType: this.props.user.userType,
+        workerId: "",
+        schoolId: this.props.user.schoolId,  
+        studentId: this.props.user.personId, 
+        accessToken: this.props.user.accessToken,
         formSubmission: false,
-        availableTime : []
+        formSelection: false,
+        WorkerIds: [],
       };
       this.handleFormChange = this.handleFormChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleCheckbox = event => {
-    let name = event.target.name;
-    this.setState({
-      workerTimeslotId: name
-    });
-    console.log('name', name);
-  };
-
   handleFormChange = event => {
     let val = event.target.value;
-    let stateName = event.target.name;
+    let workerId = event.target.name;
     this.setState({
-      stateName: val
+      workerId: val,
+      formSelection: true
     });
-    console.log(stateName, val);
+    console.log(workerId, val);
   };
 
-  handleSubmit(e) {
-    this.setState({
-      submit: true
-    });
-  }
-  //add an else if statement for successful form submissiom but unsuccessful appointment submission (api backend)
-  //have the user redo the book appointment process
-  render() {
-    let newRoute= <Route path="/Dashboard/SelectWorker" render={props => ( <Redirect to={`/dashboard/CreateAppointment/${this.state.email}/${this.schoolId}`} Component={CreateAppointment}/>)}></Route> 
-
-    if(this.state.submit){
-      return newRoute;
+  handleSubmit(event) {
+    if(this.state.formSelection === false){
+      alert("Please Select a Worker");
+      event.preventDefault();
     }
-    console.log(this.state.email);
-      return (
-          <Container className="Form-container">
-             <Title name= "Select A Service Worker. (Still needs to be implemented)"></Title>
+    else{
+    this.setState({
+      formSubmission: true
+    });
+    }
+  }
+
+
+  componentDidMount() {
+    var params = { schoolId: this.state.schoolId, accessToken: this.state.accessToken };
+
+    axios.post(`/api/get-workers-for-school/?${queryString.stringify(params)}`)
+      .then(res => {
+        // Only stores the worker data if no error occured and the data is not null.
+        // Else, shows no workers and logs the error.
+        if (_.isNil(res.error) && !_.isNil(res.data)) {
+          console.log(res.data);
+          this.setState({
+            WorkerIds: res.data,
+          });
+        } else {
+          console.log('Error occurred when mounting the WorkerList for school ', res.error);
+        }
+      });
+  }
+
+
+  render() {
+    const { email, studentId, schoolId, userType, workerId, accessToken } = this.state;
+    console.log("this props", this.props);
+    //DO NOT CHANGE THE ORDER OF THIS ROUTE
+    //the next page reads in information from the URL
+    let newRoute= <Route path="/Dashboard/SelectWorker" render={props => ( <Redirect to={`/dashboard/CreateAppointment/${workerId}/${email}/${userType}/${studentId}/${schoolId}/${accessToken}`} Component={CreateAppointment}/>)}></Route> 
+    if(this.state.WorkerIds == ""){
+      return(
+        <Container className="WorkerSelectForm-container">
+             <Title name= "Sorry, no service workers for your school were found"></Title>
             <Row>
              <Col sm={12} align="center">
-             <form onSubmit={this.handleSubmit}> 
-                  <label>
-                  <input type="checkbox" id="workerID" name="workerID" value="1" onChange={this.handleCheckbox}/>
-                  </label>
-                  <label>
-                  <div>
-                  Worker 1
-                  </div> 
-                  </label>
-
-                  <label>
-                  <input type="checkbox" id="workerID" name="workerID" value="2" onChange={this.handleCheckbox}/>
-                  </label>
-                  <label>
-                  <div>
-                  Worker 2
-                  </div> 
-                  </label>
-                  <label>
-                  <input type="checkbox" id="workerID" name="workerID" value="3" onChange={this.handleCheckbox}/>
-                  </label>
-                  <label>
-                  <div>
-                  Worker 3
-                  </div> 
-                  </label>
-                  <br></br>
-                  <br></br>
-                  <label>
-                  <input
-                  className ="SubmitButton" 
-                  type="submit" 
-                  value="Submit!" />
-                  </label>
-              </form> 
+                  
               <br></br>
-              <Link to={`/dashboard/CreateAppointment/${this.state.email}/${this.schoolId}`}>Create Appointment</Link>      
+              <div>
+
+              <Link to="/dashboard">Home</Link>
+
+              </div>
+              </Col>
+            </Row>
+          </Container>
+      );
+    }
+    else{
+    if(this.state.formSubmission){
+        return newRoute;
+    }
+    else{
+      return(
+
+          <Container className="WorkerSelectForm-container">
+             <Title name= "Select A Service Worker"></Title>
+            <Row>
+             <Col sm={12} align="center">
+                  {this.state.WorkerIds.map((item) => (
+                  <div className= "workerTile">
+                      <label className="worker-name">
+                        <div>
+                        <input className="SelectionButton"
+                          name="choice"
+                          type="radio"
+                          value={item.workerId}
+                          onChange={this.handleFormChange}
+                        />{" "}
+                        {item.firstName} {item.lastName}</div>
+                        <br></br>
+                        <div className="type">{item.type}</div>
+                        <div className="specialization">{item.specialization}</div>
+                      </label>
+                    </div>
+                  ))}
+
+                  <form onSubmit={this.handleSubmit}> 
+                  <input
+                  className ="SubmitWorkerButton" 
+                  type="submit" 
+                  value="Next"/> 
+                </form>
+             <br></br>   
              </Col>
             </Row>
           </Container>
         );
-  }
+  }}
 }
-  export default SelectWorkerForm ;
+}
+export default SelectWorkerForm ;

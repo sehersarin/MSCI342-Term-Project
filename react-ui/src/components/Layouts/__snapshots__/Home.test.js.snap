@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home Snapshot snapshot renders 1`] = `
+Array [
+  <div>
+    <p
+      className="Title-Style"
+    >
+      Welcome
+    </p>
+  </div>,
+  <h3>
+    No Upcoming Appointments!
+  </h3>,
+]
+`;

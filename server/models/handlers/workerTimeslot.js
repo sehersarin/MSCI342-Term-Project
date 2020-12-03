@@ -1,4 +1,5 @@
 const timeslotModel = require('../db/workerTimeslot');
+const _ = require('lodash');
 
 // Adds a timeslot into the database and returns true upon successful completion. 
 async function addWorkerTimeslot(slotId, schoolId, workerId, status, date) {
@@ -19,9 +20,15 @@ async function bookWorkerTimeslot(workerTimeslotId) {
         console.log('Error occurred in bookWorkerTimeslot method: ', error);
         return false;
     }
-};
+}
+
+async function checkWorkerAvailability(workerTimeslotId) {
+    if (_.isNil(workerTimeslotId)) return false;
+    return timeslotModel.checkWorkerAvailability(workerTimeslotId);
+}
 
 module.exports = {
     addWorkerTimeslot,
     bookWorkerTimeslot,
+    checkWorkerAvailability,
 }

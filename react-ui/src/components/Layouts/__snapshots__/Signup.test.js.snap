@@ -1,0 +1,290 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Signup Snapshot snapshot renders 1`] = `
+Array [
+  <header
+    className="App-header-blue"
+  >
+    <img
+      alt="logo"
+      className="App-logo"
+      src="logo.svg"
+    />
+  </header>,
+  <div
+    className="Form-container"
+    style={
+      Object {
+        "boxSizing": "border-box",
+        "marginLeft": "auto",
+        "marginRight": "auto",
+        "maxWidth": 1540,
+        "paddingLeft": 15,
+        "paddingRight": 15,
+        "position": "relative",
+      }
+    }
+  >
+    <div>
+      <p
+        className="Title-Style"
+      >
+        Sign Up
+      </p>
+    </div>
+    <div
+      style={
+        Object {
+          "alignItems": "normal",
+          "display": "flex",
+          "flexGrow": 0,
+          "flexShrink": 0,
+          "flexWrap": "wrap",
+          "justifyContent": "flex-start",
+          "marginLeft": -15,
+          "marginRight": -15,
+        }
+      }
+    >
+      <div
+        align="center"
+        style={
+          Object {
+            "boxSizing": "border-box",
+            "flexBasis": "100%",
+            "flexGrow": 0,
+            "flexShrink": 0,
+            "left": "auto",
+            "marginLeft": "0%",
+            "maxWidth": "100%",
+            "minHeight": 1,
+            "paddingLeft": 15,
+            "paddingRight": 15,
+            "position": "relative",
+            "right": "auto",
+            "width": "100%",
+          }
+        }
+      >
+        <form
+          onSubmit={[Function]}
+        >
+          <label>
+            <input
+              className="InputFields"
+              name="firstName"
+              onChange={[Function]}
+              placeholder="Enter First Name*"
+              required="required"
+              size="40"
+              type="text"
+            />
+          </label>
+          <br />
+          <label>
+            <input
+              className="InputFields"
+              name="lastName"
+              onChange={[Function]}
+              placeholder="Enter Last Name*"
+              required="required"
+              size="40"
+              type="text"
+            />
+          </label>
+          <br />
+          <br />
+          <label
+            className="Title-Style2"
+            for="userType"
+          >
+             Select User Role*: 
+          </label>
+          <select
+            className="InputFields3"
+            id="type"
+            name="userType"
+            required={true}
+          >
+            <option
+              value="student"
+            >
+              Student
+            </option>
+            <option
+              value="worker1"
+            >
+              Worker
+            </option>
+          </select>
+          <br />
+          <br />
+          <label
+            className="Title-Style2"
+            for="workerType"
+          >
+             Select Worker Type* (or N/A otherwise): 
+          </label>
+          <br />
+          <select
+            className="InputFields2"
+            id="type"
+            name="workerType"
+            required={true}
+          >
+            <option
+              value="student"
+            >
+              Social Worker
+            </option>
+            <option
+              value="worker1"
+            >
+              Guidance Counselor
+            </option>
+            <option
+              value="other"
+            >
+              Other
+            </option>
+            <option
+              value="other"
+            >
+              N/A
+            </option>
+          </select>
+          <br />
+          <label>
+            <input
+              className="InputFields"
+              name="optionalType"
+              onChange={[Function]}
+              placeholder="Enter Worker Type, If 'Other'"
+              type="text"
+            />
+          </label>
+          <br />
+          <br />
+          <label
+            className="Title-Style2"
+            for="specialization"
+          >
+             Select Worker Specialization* (or N/A): 
+          </label>
+          <br />
+          <select
+            className="InputFields2"
+            id="type"
+            name="specialization"
+            required={true}
+          >
+            <option
+              value="student"
+            >
+              Masters in Social Work
+            </option>
+            <option
+              value="worker1"
+            >
+              Psychologist
+            </option>
+            <option
+              value="other"
+            >
+              Other
+            </option>
+            <option
+              value="other"
+            >
+              N/A
+            </option>
+          </select>
+          <br />
+          <label>
+            <input
+              className="InputFields"
+              name="optionalSpecialization"
+              onChange={[Function]}
+              placeholder="Enter Specialization, If 'Other'"
+              type="text"
+            />
+          </label>
+          <br />
+          <label>
+            <input
+              className="InputFields"
+              name="personId"
+              onChange={[Function]}
+              placeholder="Enter Student or Worker ID*"
+              required="required"
+              type="text"
+            />
+          </label>
+          <br />
+          <label>
+            <input
+              className="InputFields"
+              name="email"
+              onChange={[Function]}
+              placeholder="Enter Email Address*"
+              required="required"
+              size="320"
+              type="text"
+            />
+          </label>
+          <br />
+          <label>
+            <input
+              className="InputFields"
+              name="phone"
+              onChange={[Function]}
+              placeholder="Enter Phone Number"
+              size="20"
+              type="text"
+            />
+          </label>
+          <br />
+          <label>
+            <input
+              className="InputFields"
+              name="password"
+              onChange={[Function]}
+              placeholder="Enter Password*"
+              required="required"
+              size="40"
+              type="password"
+            />
+          </label>
+          <br />
+          <p
+            className="Title-Style3"
+          >
+             All fields marked with * are required
+          </p>
+          <input
+            className="SubmitButton"
+            type="submit"
+            value="Submit!"
+          />
+        </form>
+        <br />
+        <a
+          className="Signout"
+          href="/login"
+          onClick={[Function]}
+        >
+          I already have an account
+        </a>
+      </div>
+    </div>
+    <span
+      style={
+        Object {
+          "clear": "both",
+          "display": "table",
+        }
+      }
+    />
+  </div>,
+]
+`;

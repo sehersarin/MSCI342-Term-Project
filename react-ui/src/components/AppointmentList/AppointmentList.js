@@ -44,7 +44,13 @@ export default class AppointmentList extends Component {
       });
   }
 
-  async cancelAppointment(event) {
+  cancelAppointment(event) {
+    // Stores the required parameters in an object to be passed to the api.
+    const params = {
+      accessToken: this.props.user.accessToken,
+      appointmentId: event.target.id
+    };
+
     // Customizes the content in the cancel appointment popup.
     const options = {
       title: 'Appointment Cancellation Confirmation',
@@ -54,22 +60,17 @@ export default class AppointmentList extends Component {
           label: 'Yes',
           className: "yes-cancel-btn",
           onClick: () => {
-            alert("The appointment was NOT cancelled!\r\n\nThis feature is not fully integrated yet, but the ConnectMe team is working hard to finish it. We appreciate your patience!");
-
-            /* TO DO: UNCOMMENT LOGIC ONCE INTEGRATE WITH API.
-             // Stores whether the appointment was successfully cancelled in a variable. 
-            const isSuccessfullyCancelled = false;
-            // Stores the specific appointmentId as a variable for API call. 
-            const appointmentId = event.target.id;
-
-            // TO DO: Call the API to cancel the appointment
-            console.log('cancelAppointment', appointmentId);
-
-            // Display a success message if the appointment is successfully cancelled.
-            if (isSuccessfullyCancelled) alert('The appointment has been cancelled!');
-            // Else, let's the user know that the appointment was not cancelled successfully.
-            else alert('The appointment was NOT cancelled. Please try again.');
-            */
+            // Calls the api to cancel the appointment which returns true if the appointment was successfully cancelled and false otherwise. 
+            axios.get(`/api/cancel-specific-appointment/?${queryString.stringify(params)}`)
+              .then(res => {
+                // Display a success message if the appointment is successfully cancelled without any errors.
+                if (_.isNil(res.error) && res.data) {
+                  alert('The appointment has been cancelled!');
+                } else { // Else, let's the user know that the appointment was not cancelled successfully.
+                  alert('The appointment was NOT cancelled. Please try again.');
+                  console.log('Error occurred when calling the cancel appointment api: ', res.error);
+                }
+              });
           }
         },
         {

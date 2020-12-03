@@ -14,7 +14,7 @@ import { Redirect, Route, withRouter, Link } from "react-router-dom";
 jest.mock('axios');
 
 
-describe('SignupForm component', () => {
+describe('LoginForm component', () => {
   afterEach(cleanup);
 
   beforeEach(() => {

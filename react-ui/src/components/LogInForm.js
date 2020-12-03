@@ -19,6 +19,7 @@ class logInForm extends Component {
       firstName: "",
       personId: "",
       accessToken: "",
+      schoolId: "",
       loginParams: {
         email: "",
         password: "",
@@ -58,6 +59,7 @@ class logInForm extends Component {
               firstName: res.data.firstName,
               personId: res.data.workerId || res.data.studentId,
               accessToken: res.data.accessToken,
+              schoolId: res.data.schoolId,
               islogged: true
             })
             // localStorage.setItem("token", "T");
@@ -73,14 +75,14 @@ class logInForm extends Component {
 
   render() {
     // TO DO: Find a better way to pass the params
-    let newRoute = <Route exact path="/login" render={props => (<Redirect to={`/dashboard/${this.state.loginParams.email}/${this.state.userType}/${this.state.firstName}/${this.state.personId}/${this.state.accessToken}`} Component={Dashboard} />)}></Route>
+    let newRoute = <Route exact path="/login" render={props => (<Redirect to={`/dashboard/${this.state.loginParams.email}/${this.state.userType}/${this.state.firstName}/${this.state.personId}/${this.state.accessToken}/${this.state.schoolId}`} Component={Dashboard} />)}></Route>
 
     if (this.state.islogged) {
       return newRoute;
     }
     return (
       <Container className="Form-container">
-        <Title name="Log In."></Title>
+        <Title name="Log In"></Title>
         <Row>
           <Col sm={12} align="center">
             <form onSubmit={this.login}  /*   className = "LogInForm"  */  >
