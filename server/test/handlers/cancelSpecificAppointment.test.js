@@ -88,7 +88,7 @@ describe('testing individual worker timeslot status update', () => {
     });
     test('test individual worker timeslot status update ', async () => {
         // Arrange
-        const workerTimeslotId = 23;
+        const workerTimeslotId = 12;
         const newStatus = 'available';
         const updatedSuccessfully = true;
 
