@@ -70,7 +70,7 @@ exports[`Profile Snapshot snapshot renders 1`] = `
       <div>
         (
         300
-         Characters lefts)
+         Characters left)
       </div>
       <br />
       <form
