@@ -12,7 +12,7 @@ const availabilityHandler = require('../models/handlers/availability');
 const schoolHandler = require('../models/handlers/school');
 const workerHandler = require('../models/handlers/worker');
 
-const TimeslotStatus  = require('../constants/timeslotStatus.json');
+const TimeslotStatus = require('../constants/timeslotStatus.json');
 
 // Binds a middleware to check access tokens for all private requests.
 router.use(async function (req, res, next) {
@@ -48,10 +48,21 @@ router.post('/book-appointment', async (req, res) => {
 
     if (!_.isNil(error)) res.send(error);
 
-    // Attempts to insert the appointment into the database.
-    const isSuccessfullyInserted = await appointmentHandler.bookAppointment(studentId, workerTimeslotId, purpose, studentNotes, workerComments);
+    // Checks worker timeslot status, either available or unavailable)
 
-    res.send(isSuccessfullyInserted);
+    const workerIsAvailable = await workerTimeslotHandler.checkWorkerAvailability(workerTimeslotId);
+
+    if (workerIsAvailable) {
+        //continue to insert the appointment
+
+        //Change timeslot status to unavailable
+
+        const isSuccessfullyInserted = await appointmentHandler.bookAppointment(studentId, workerTimeslotId, purpose, studentNotes, workerComments);
+
+        res.send(isSuccessfullyInserted);//true
+    } else {
+        res.send(false);
+    };
 
 });
 
@@ -90,7 +101,7 @@ router.post('/worker-availability', async (req, res) => {
         startTime: Joi.date().iso(),
         endTime: Joi.date().iso().greater(Joi.ref('startTime'))
     });
-        
+
     const query = req.query ? req.query : {};
 
     const workerId = query.workerId ? query.workerId : null;
@@ -139,7 +150,7 @@ router.get('/appointments', async (req, res) => {
 // The method will return all timeslots in the timeslot table 
 //Note that there is an future opportunity to expand functionality of this endpoint to filter the records pulled based on start time or end time of the timeslot 
 router.get('/possible-timeslots', async (req, res) => {
-    
+
     const timeslots = await timeslotHandler.getPossibleTimeslots();
 
     res.send(timeslots);
@@ -195,7 +206,7 @@ router.get('/cancel-specific-day', async (req, res) => {
     const paramSchema = Joi.object({
         workerId: Joi.number().integer().required(),
         specificDate: Joi.date().iso().required(),
-        
+
         // Following potential query parameters are commented out to be revisited in a future story. 
         // startTime: Joi.date().iso().required(),
         // endTime: Joi.date().iso().greater(Joi.ref('startTime')) // Checks to ensure that endDate > startDate is specified.

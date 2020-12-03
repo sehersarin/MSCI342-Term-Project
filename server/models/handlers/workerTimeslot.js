@@ -1,4 +1,5 @@
 const timeslotModel = require('../db/workerTimeslot');
+const _ = require('lodash');
 
 // Adds a timeslot into the database and returns true upon successful completion. 
 async function addWorkerTimeslot(slotId, schoolId, workerId, status, date) {

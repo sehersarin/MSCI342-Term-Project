@@ -66,7 +66,7 @@ exports[`Checkbox component snapshot renders 1`] = `
       >
         <input
           id="DATE"
-          min="2020-12-02"
+          min="2020-12-03"
           onChange={[Function]}
           type="date"
         />

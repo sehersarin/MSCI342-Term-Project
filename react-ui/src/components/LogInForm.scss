@@ -1,3 +1,4 @@
+@import "./Common/ColorSchema.scss";
 
 .Form-container{
    padding: 50px;
@@ -18,7 +19,7 @@
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 15px 0 rgba(0,0,0,0.15);
 }
 .Form-container .SubmitButton{
-    background-color:#FF5454;
+    background-color: $login-signup-button-colour;
     color:black;
     border:none;
     margin-top:4px;

@@ -121,7 +121,7 @@ render() {
 
     return (
         <Container className="Form-container">
-           <Title name= "Sign Up."></Title>
+           <Title name= "Sign Up"></Title>
           <Row>
            <Col sm={12} align="center">
            <form onSubmit={this.signup}>
