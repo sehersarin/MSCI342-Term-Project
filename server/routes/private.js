@@ -52,14 +52,13 @@ router.post('/book-appointment', async (req, res) => {
 
     const workerIsAvailable = await workerTimeslotHandler.checkWorkerAvailability(workerTimeslotId);
 
-    if (workerIsAvailable) {
-        //continue to insert the appointment
-
+    if (workerIsAvailable) {//continue to insert the appointment
         //Change timeslot status to unavailable
-
+        const isSuccessfullyBooked = await workerTimeslotHandler.bookWorkerTimeslot(workerTimeslotId);
+        //Book appointment
         const isSuccessfullyInserted = await appointmentHandler.bookAppointment(studentId, workerTimeslotId, purpose, studentNotes, workerComments);
-
-        res.send(isSuccessfullyInserted);//true
+        //Return isSuccessfullyInserted, most likely true barring any errors 
+        res.send(isSuccessfullyInserted);
     } else {
         res.send(false);
     };
@@ -157,7 +156,7 @@ router.get('/possible-timeslots', async (req, res) => {
 });
 
 router.get('/get-schools-for-worker', async (req, res) => {
-    
+
     const paramSchema = Joi.object({
         workerId: Joi.number().integer().required(),
     })
@@ -166,7 +165,7 @@ router.get('/get-schools-for-worker', async (req, res) => {
 
     const workerId = query.workerId;
 
-    const { error } = paramSchema.validate({ workerId});
+    const { error } = paramSchema.validate({ workerId });
 
     if (!_.isNil(error)) res.send(error);
 
