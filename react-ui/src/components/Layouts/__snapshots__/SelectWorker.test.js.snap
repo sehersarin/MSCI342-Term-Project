@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Profile Snapshot snapshot renders 1`] = `
+<div
+  className="WorkerSelectForm-container"
+  style={
+    Object {
+      "boxSizing": "border-box",
+      "marginLeft": "auto",
+      "marginRight": "auto",
+      "maxWidth": 1540,
+      "paddingLeft": 15,
+      "paddingRight": 15,
+      "position": "relative",
+    }
+  }
+>
+  <div>
+    <p
+      className="Title-Style"
+    >
+      Sorry, no service workers for your school were found
+    </p>
+  </div>
+  <div
+    style={
+      Object {
+        "alignItems": "normal",
+        "display": "flex",
+        "flexGrow": 0,
+        "flexShrink": 0,
+        "flexWrap": "wrap",
+        "justifyContent": "flex-start",
+        "marginLeft": -15,
+        "marginRight": -15,
+      }
+    }
+  >
+    <div
+      align="center"
+      style={
+        Object {
+          "boxSizing": "border-box",
+          "flexBasis": "100%",
+          "flexGrow": 0,
+          "flexShrink": 0,
+          "left": "auto",
+          "marginLeft": "0%",
+          "maxWidth": "100%",
+          "minHeight": 1,
+          "paddingLeft": 15,
+          "paddingRight": 15,
+          "position": "relative",
+          "right": "auto",
+          "width": "100%",
+        }
+      }
+    >
+      <br />
+      <div>
+        <a
+          href="/dashboard"
+          onClick={[Function]}
+        >
+          Home
+        </a>
+      </div>
+    </div>
+  </div>
+  <span
+    style={
+      Object {
+        "clear": "both",
+        "display": "table",
+      }
+    }
+  />
+</div>
+`;
