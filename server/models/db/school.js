@@ -22,6 +22,23 @@ async function getWorkerIdsForSchool(schoolId) {
         return null;
     }
 }
+
+// This method returns the corresponding schools given worker ID. If the worker ID is incorrect, it will return null. 
+async function getSchoolsByWorkerId(workerId) {
+    try {
+        //Query to receive school id from Service Worker School Table
+        const schoolIds = await db.any(`select school_id from ${Tables.workerSchool} where worker_id='${workerId}';`);
+        
+        if (_.isEmpty(schoolIds)) return null;
+        return _.map(schoolIds, 'school_id');
+
+    } catch (err) {
+        console.log('Error occurred in ', err);
+        return null;
+    }
+}
+
 module.exports = {
     getWorkerIdsForSchool,
+    getSchoolsByWorkerId,
 }

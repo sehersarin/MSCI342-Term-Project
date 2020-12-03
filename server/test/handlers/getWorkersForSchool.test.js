@@ -65,6 +65,20 @@ describe('testing user inputs schoolID ', () => {
         expect(workerObjects).toMatchObject(testWorkerObjects);
     });
 
+
+    test('Initial setup for getting schoolID for the worker', async () => {
+        // Arrange
+        const testSchoolId = [1];
+
+        const testWorkerId = 8000001;
+
+        // Act
+        const schools = await workerHandler.getSchools(testWorkerId);
+
+        // Assert
+        expect(schools).toStrictEqual(testSchoolId);
+    });
+
     //The following tests are for endpoint testing for the logic of the code 
     test('return of null for schoolId with no corresponding workers', async () => {
         //Arrange
@@ -100,5 +114,27 @@ describe('testing user inputs schoolID ', () => {
 
         // Assert
         expect(workerObjects).toBe(null);
+    });
+
+    test('return of error for invalid workerId parameter', async () => {
+        //Arrange
+        const testWorkerId = null;
+
+        // Act
+        const workerSchools = await workerHandler.getSchools(testWorkerId);
+
+        // Assert
+        expect(workerSchools).toBe(null);
+    });
+
+    test('return of error for workerId with no school', async () => {
+        //Arrange
+        const testWorkerId = 8000004;
+
+        // Act
+        const workerSchools = await workerHandler.getSchools(testWorkerId);
+
+        // Assert
+        expect(workerSchools).toBe(null);
     });
 });
