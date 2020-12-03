@@ -11,24 +11,12 @@ async function addWorkerTimeslot(slotId, schoolId, workerId, status, date) {
         return false;
     }
 };
-
-async function bookWorkerTimeslot(workerTimeslotId) {
-    try {
-        await timeslotModel.bookWorkerTimeslot(workerTimeslotId);
-        return true;
-    } catch (error) {
-        console.log('Error occurred in bookWorkerTimeslot method: ', error);
-        return false;
-    }
-}
-
 async function checkWorkerAvailability(workerTimeslotId) {
     if (_.isNil(workerTimeslotId)) return false;
     return timeslotModel.checkWorkerAvailability(workerTimeslotId);
-}
+};
 
 module.exports = {
     addWorkerTimeslot,
-    bookWorkerTimeslot,
     checkWorkerAvailability,
 }
