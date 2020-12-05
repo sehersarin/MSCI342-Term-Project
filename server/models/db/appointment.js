@@ -47,8 +47,25 @@ async function cancelWorkerAppointments(workerId, specificDate) {
     return db.any(`update ${Tables.appointment} set status='${AppointmentStatus.cancelled}' from ${Tables.appointment} a1 inner join ${Tables.workerTimeslot} w1 on a1.worker_timeslot_id = w1.worker_timeslot_id ${queryCondition};`);
 }
 
+// Cancels specific appointments/meeting and updates worker availability to available for a worker for the specific timeslot. 
+// Note that appointments/meetings are synonymous, but only appointments will be used in the backend to maintain consistency.
+async function cancelSpecificAppointment(appointmentId) {
+    const queryCondition = `where appointment_id='${appointmentId}'`;
+    // Isolated the query condition to decrease the length of the query line and increase code readability.
+    return await db.any(`update ${Tables.appointment} set status='${AppointmentStatus.cancelled}' ${queryCondition};`);
+}
+
+async function getAppointment(appointmentId) {
+    // Isolated the query condition to decrease the length of the query line and increase code readability.
+    const queryCondition = `where appointment_id= '${appointmentId}'`;
+    const queryOutput = await db.any(`select * from ${Tables.appointment} ${queryCondition} ;`);
+    return queryOutput;
+}
+
 module.exports = {
     insertAppointment,
     getAppointmentDetails,
     cancelWorkerAppointments,
+    cancelSpecificAppointment,
+    getAppointment,
 } 

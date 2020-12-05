@@ -21,6 +21,22 @@ async function updateWorkerAvailability(workerId, specificDate, newStatus) {
     return db.any(`update ${Tables.workerTimeslot} set status='${newStatus}' where date='${specificDate}' and worker_id='${workerId}';`);
 }
 
+async function updateIndividualWorkerAvailability( workerTimeslotId, newStatus) {
+    try {
+        await db.any(`update ${Tables.workerTimeslot} set status='${newStatus}' where worker_timeslot_id='${workerTimeslotId}';`);
+        return true;
+    } catch (error) {
+        console.log('Error occurred in updateIndividualWorkerAvailability method: ', error);
+        return false;
+    }
+}
+//This method updates the worker avaiability table 
+async function bookWorkerTimeslot(workerTimeslotId) {
+    const queryCondition = `where worker_timeslot_id ='${workerTimeslotId}'`;
+    const queryOutput = await db.any(`update ${Tables.workerTimeslot} set status='${TimeslotStatus.unavailable}' ${queryCondition} ;`);
+    return true;
+}
+
 async function checkWorkerAvailability(workerTimeslotId) {
     try {
         //Selects all from workerTimeslot table 
@@ -36,8 +52,12 @@ async function checkWorkerAvailability(workerTimeslotId) {
         return false;
     }
 }
+
 module.exports = {
     insertWorkerTimeslot,
     checkWorkerAvailability,
     updateWorkerAvailability,
-} 
+    updateIndividualWorkerAvailability,
+    bookWorkerTimeslot,
+}
+
