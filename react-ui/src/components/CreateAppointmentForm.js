@@ -101,7 +101,6 @@ class CreateAppointmentForm extends Component {
 
   componentDidMount() {
     var params = { workerId: this.state.workerId, schoolId: this.state.schoolId, startTime: this.state.startDate, endTime: this.state.endDate, accessToken: this.state.accessToken };
-    console.log(params); 
     axios.post(`/api/worker-availability/?${queryString.stringify(params)}`)
       .then(res => {
         // Only stores the worker data if no error occured and the data is not null.
@@ -118,7 +117,7 @@ class CreateAppointmentForm extends Component {
   }
   
   render() {
-    console.log("School id", this.state.schoolId);
+    console.log("Worker ID is: ",This.state.workerId);
     if(this.state.availableTimes === ""){
       return(
         <Container className="Form-container">
