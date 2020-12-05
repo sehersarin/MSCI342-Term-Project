@@ -23,7 +23,7 @@ class CreateAppointmentForm extends Component {
     constructor(props) {
       super(props);
       this.state = {
-        workerId: window.location.href.slice(window.location.href.search("CreateAppointment")+18,window.location.href.search("CreateAppointment")+25), //possible look into referencing by character not index placement
+        workerId: window.location.href.slice((window.location.href.search("CreateAppointment")+36),(window.location.href.search("CreateAppointment")+43)), //possible look into referencing by character not index placement
         schoolId: this.props.user.schoolId,   
         studentId: this.props.user.personId, 
         accessToken: this.props.user.accessToken,
