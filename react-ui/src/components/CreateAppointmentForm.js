@@ -23,7 +23,7 @@ class CreateAppointmentForm extends Component {
     constructor(props) {
       super(props);
       this.state = {
-        workerId: window.location.href.slice(50,57), //possible look into referencing by character not index placement
+        workerId: window.location.href.slice(window.location.href.search("CreateAppointment")+18,window.location.href.search("CreateAppointment")+25), //possible look into referencing by character not index placement
         schoolId: this.props.user.schoolId,   
         studentId: this.props.user.personId, 
         accessToken: this.props.user.accessToken,
@@ -101,7 +101,6 @@ class CreateAppointmentForm extends Component {
 
   componentDidMount() {
     var params = { workerId: this.state.workerId, schoolId: this.state.schoolId, startTime: this.state.startDate, endTime: this.state.endDate, accessToken: this.state.accessToken };
-    console.log(params); 
     axios.post(`/api/worker-availability/?${queryString.stringify(params)}`)
       .then(res => {
         // Only stores the worker data if no error occured and the data is not null.
@@ -118,7 +117,7 @@ class CreateAppointmentForm extends Component {
   }
   
   render() {
-    console.log("School id", this.state.schoolId);
+    console.log("Worker ID is: ",this.state.workerId);
     if(this.state.availableTimes === ""){
       return(
         <Container className="Form-container">
